@@ -1,0 +1,3 @@
+# AutoConfigurations
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.giffing.wicket.spring.boot.starter.WicketAutoConfiguration
+
