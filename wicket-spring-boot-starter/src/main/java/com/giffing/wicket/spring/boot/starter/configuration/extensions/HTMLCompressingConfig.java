@@ -22,7 +22,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  */
 @Component
 @ConditionalOnClass(value = org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory.class)
-public class HTMLCompressorConfig implements WicketApplicationInitConfiguration {
+public class HTMLCompressingConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
 	private WicketProperties wicketProperties;
