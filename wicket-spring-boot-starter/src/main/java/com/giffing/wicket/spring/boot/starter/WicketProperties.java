@@ -8,21 +8,7 @@ public class WicketProperties {
 
 	private RuntimeConfigurationType configurationType = RuntimeConfigurationType.DEVELOPMENT;
 
-	/**
-	 * Indicates if the HTML compression should be enabled. It is only enable if a
-	 * HTML compression library is present.
-	 */
-	private boolean compressHTMLEnabled = true;
-
 	private boolean statelessCheckerEnabled = false;
-
-	public boolean getCompressHTMLEnabled() {
-		return compressHTMLEnabled;
-	}
-
-	public void setCompressHTMLEnabled(boolean compressHTMLEnabled) {
-		this.compressHTMLEnabled = compressHTMLEnabled;
-	}
 
 	public RuntimeConfigurationType getConfigurationType() {
 		return configurationType;

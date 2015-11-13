@@ -10,7 +10,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
 import com.giffing.wicket.spring.boot.starter.web.WebInitializer;
 
 @Configuration
-@EnableConfigurationProperties(WicketProperties.class)
+@EnableConfigurationProperties({ WicketProperties.class })
 @ConditionalOnWebApplication
 @Import({ WebInitializer.class, WebSecurityConfig.class })
 @ComponentScan(basePackageClasses = WicketApplicationInitConfiguration.class)

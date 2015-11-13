@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
@@ -48,8 +47,6 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
-
-		new AnnotatedMountScanner().scanPackage(this.getClass().getPackage().getName()).mount(this);
 
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());
