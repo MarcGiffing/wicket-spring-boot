@@ -5,6 +5,8 @@ import java.lang.reflect.Method;
 import java.util.Map.Entry;
 
 import org.apache.wicket.protocol.http.WebApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -34,7 +36,9 @@ import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 @ConditionalOnClass(value = org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory.class)
 @EnableConfigurationProperties({ HTMLCompressingProperties.class })
 public class HTMLCompressingConfig implements WicketApplicationInitConfiguration {
-
+	
+	private Logger logger = LoggerFactory.getLogger(HTMLCompressingConfig.class);
+	
 	@Autowired
 	private HTMLCompressingProperties props;
 
@@ -42,15 +46,16 @@ public class HTMLCompressingConfig implements WicketApplicationInitConfiguration
 	public void init(WebApplication webApplication) {
 		HtmlCompressor compressor = new HtmlCompressor();
 		for(Entry<String, Boolean> entrySet : props.getProperties().entrySet()){
-			Method method;
+			Method method = null;
+			String capitalizedKey = StringUtils.capitalize(entrySet.getKey());
+			String methodname = "set" + capitalizedKey;
 			try {
-				String capitalizedKey = StringUtils.capitalize(entrySet.getKey());
-				method = compressor.getClass().getMethod("set" + capitalizedKey, boolean.class);
+				method = compressor.getClass().getMethod(methodname, boolean.class);
 				method.setAccessible(true);
-			} catch (NoSuchMethodException e) {
-				throw new IllegalStateException(e);
+				ReflectionUtils.invokeMethod(method, compressor, entrySet.getValue());
+			} catch (Exception e) {
+				logger.warn("failed to invoke method: {} with value {}. Exception: {}", methodname, entrySet.getValue(), e.getMessage());
 			}
-			ReflectionUtils.invokeMethod(method, compressor, entrySet.getValue());
 		}
 		webApplication.getMarkupSettings().setMarkupFactory(new HtmlCompressingMarkupFactory(compressor));
 	}
