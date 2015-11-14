@@ -2,12 +2,14 @@ wicket:
   configuration-type: development
   wicketstuff:
     htmlcompressor:
-      enabled: false
+      enabled: false #HTML compression is disabled on development
       features:
         compressCSS: false
     annotationscan:
       enabled: true
   devutils:
+    statelesschecker:
+      enabled: true
     interceptor:
       enable-live-sessions-page: true
     diskstorebrowser:
