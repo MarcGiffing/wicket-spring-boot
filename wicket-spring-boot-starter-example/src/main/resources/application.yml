@@ -1,8 +1,12 @@
 wicket:
-  configuration-type: deployment
+  configuration-type: development
   wicketstuff:
     htmlcompressor:
       features:
         compressCSS: true
     annotationscan:
+      enabled: true
+
+  devutils:
+    diskstorebrowser:
       enabled: true
