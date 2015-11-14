@@ -9,6 +9,17 @@ import org.springframework.stereotype.Component;
 
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
 
+/**
+ * Enables the bean validation support if the following condition matches
+ * 
+ * 1. The {@link BeanValidationConfiguration} class is in the classpath.
+ * side note: Bean validation required an validation implementation like hibernate validator. 
+ * 
+ * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
+ * 
+ * @author Marcs
+ *
+ */
 @Component
 @ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)
