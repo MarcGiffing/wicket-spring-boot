@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils.statelesschacker;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils.statelesschacker;
 
 import org.apache.wicket.devutils.stateless.StatelessChecker;
 import org.apache.wicket.protocol.http.WebApplication;
