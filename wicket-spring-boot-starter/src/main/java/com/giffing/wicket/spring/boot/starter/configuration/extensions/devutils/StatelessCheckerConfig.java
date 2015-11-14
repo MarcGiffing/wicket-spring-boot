@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.statelesschecker;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils;
 
 import org.apache.wicket.devutils.stateless.StatelessChecker;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -23,7 +23,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  *
  */
 @Component
-@ConditionalOnProperty(prefix = "wicket.statelesschecker", value = "enabled")
+@ConditionalOnProperty(prefix = "wicket.devutils.statelesschecker", value = "enabled")
 @ConditionalOnClass(value = org.apache.wicket.devutils.stateless.StatelessChecker.class)
 @EnableConfigurationProperties({ StatelessCheckerProperties.class })
 public class StatelessCheckerConfig implements WicketApplicationInitConfiguration {

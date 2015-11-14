@@ -6,6 +6,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "wicket")
 public class WicketProperties {
 
+	/**
+	 * Defines the configuration startup mode. It uses Wickets
+	 * {@link RuntimeConfigurationType}
+	 */
 	private RuntimeConfigurationType configurationType = RuntimeConfigurationType.DEVELOPMENT;
 
 	public RuntimeConfigurationType getConfigurationType() {

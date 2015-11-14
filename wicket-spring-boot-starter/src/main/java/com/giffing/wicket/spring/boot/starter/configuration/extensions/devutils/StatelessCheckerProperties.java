@@ -1,8 +1,8 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.statelesschecker;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.statelesschecker")
+@ConfigurationProperties(prefix = "wicket.devutils.statelesschecker")
 public class StatelessCheckerProperties {
 
 	private boolean enabled = false;
