@@ -10,7 +10,7 @@ public class WicketProperties {
 	 * Defines the configuration startup mode. It uses Wickets
 	 * {@link RuntimeConfigurationType}
 	 */
-	private RuntimeConfigurationType configurationType = RuntimeConfigurationType.DEVELOPMENT;
+	private RuntimeConfigurationType configurationType = RuntimeConfigurationType.DEPLOYMENT;
 
 	public RuntimeConfigurationType getConfigurationType() {
 		return configurationType;
