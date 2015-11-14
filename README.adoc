@@ -1,3 +1,5 @@
-# wicket-spring-boot
+= Wicket autoconfiguration with Spring Boot
 
-HINT: test
+IMPORTANT: test
+
+NOTE: some text here
