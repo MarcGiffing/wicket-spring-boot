@@ -11,6 +11,16 @@ import org.springframework.stereotype.Component;
 
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
 
+/**
+ * Mounts the {@link DiskStoreBrowserPage} if the following condition matches
+ * 
+ * 1. The {@link DiskStoreBrowserPage} is in the classpath
+ * 
+ * 2. The disk store browser page is enabled in the property (default=false)
+ * 
+ * @author Marc Giffing
+ *
+ */
 @Component
 @ConditionalOnProperty(prefix = "wicket.devutils.diskstorebrowser", value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = org.apache.wicket.devutils.diskstore.DiskStoreBrowserPage.class)
