@@ -1,9 +1,11 @@
 package com.giffing.wicket.spring.boot.starter.pages;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.Size;
 
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
+import org.apache.wicket.bean.validation.PropertyValidator;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
@@ -33,7 +35,8 @@ public class LoginPage extends WebPage {
 	private class LoginForm extends Form<Void> {
 
 		private String username;
-
+		
+		@Size(min=5)
 		private String password;
 
 		public LoginForm(String id) {
@@ -41,7 +44,7 @@ public class LoginPage extends WebPage {
 			setModel(new CompoundPropertyModel(this));
 			add(new FeedbackPanel("feedback"));
 			add(new RequiredTextField<String>("username"));
-			add(new PasswordTextField("password"));
+			add(new PasswordTextField("password").add(new PropertyValidator<String>()));
 		}
 
 		@Override
