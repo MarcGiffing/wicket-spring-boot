@@ -11,6 +11,16 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 
+/**
+ * Enables webjars support if the following two condition matches:
+ * 
+ * 1. The {@link WicketWebjars} is in the classpath.
+ * 
+ * 2. The property wicket.webjars.enabled is true (default = true)
+ * 
+ * @author Marc Giffing
+ *
+ */
 @Component
 @ConditionalOnProperty(prefix = "wicket.webjars", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = de.agilecoders.wicket.webjars.WicketWebjars.class)
