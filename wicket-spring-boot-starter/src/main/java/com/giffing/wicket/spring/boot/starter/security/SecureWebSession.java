@@ -21,8 +21,9 @@ public class SecureWebSession extends AuthenticatedWebSession {
 	private static final long serialVersionUID = 1L;
 
 	private static final String SPRING_SECURITY_CONTEXT_KEY = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
-
-	private HttpSession httpSession;
+	
+	//TODO I've got an error that the HttpSession is not serializable. On an interim basis marked as transient
+	private transient HttpSession httpSession;
 
 	@SpringBean(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
