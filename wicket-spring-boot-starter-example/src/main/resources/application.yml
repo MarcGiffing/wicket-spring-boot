@@ -1,0 +1,8 @@
+wicket:
+  configuration-type: deployment
+  wicketstuff:
+    htmlcompressor:
+      features:
+        compressCSS: true
+    annotationscan:
+      enabled: true

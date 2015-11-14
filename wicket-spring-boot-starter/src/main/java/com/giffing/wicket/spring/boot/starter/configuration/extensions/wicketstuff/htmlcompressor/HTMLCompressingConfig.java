@@ -45,7 +45,12 @@ public class HTMLCompressingConfig implements WicketApplicationInitConfiguration
 	@Override
 	public void init(WebApplication webApplication) {
 		HtmlCompressor compressor = new HtmlCompressor();
-		for(Entry<String, Boolean> entrySet : props.getProperties().entrySet()){
+		setFeatureConfiguration(compressor);
+		webApplication.getMarkupSettings().setMarkupFactory(new HtmlCompressingMarkupFactory(compressor));
+	}
+
+	private void setFeatureConfiguration(HtmlCompressor compressor) {
+		for(Entry<String, Boolean> entrySet : props.getFeatures().entrySet()){
 			Method method = null;
 			String capitalizedKey = StringUtils.capitalize(entrySet.getKey());
 			String methodname = "set" + capitalizedKey;
@@ -57,6 +62,5 @@ public class HTMLCompressingConfig implements WicketApplicationInitConfiguration
 				logger.warn("failed to invoke method: {} with value {}. Exception: {}", methodname, entrySet.getValue(), e.getMessage());
 			}
 		}
-		webApplication.getMarkupSettings().setMarkupFactory(new HtmlCompressingMarkupFactory(compressor));
 	}
 }

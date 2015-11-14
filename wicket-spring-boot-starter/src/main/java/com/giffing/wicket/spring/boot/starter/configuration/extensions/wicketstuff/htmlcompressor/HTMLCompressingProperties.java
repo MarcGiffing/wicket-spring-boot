@@ -19,9 +19,15 @@ public class HTMLCompressingProperties {
 	private boolean enabled = true;
 	
 	/**
-	 * Additional native properties to set on the {@link HtmlCompressor} provider.
+	 * Sets additional features of the {@link HtmlCompressor} class. It uses
+	 * reflection to set boolean properties on public methods.
+	 * 
+	 * You can for example use compressCSS->true to invoke the public method setCompressCSS(true).
+	 * 
+	 * The main goal is to provide an API independent solution to configure the {@link HtmlCompressor}.
+	 * API changes can be handled over configuration changes 
 	 */
-	private Map<String, Boolean> properties = new HashMap<String, Boolean>();
+	private Map<String, Boolean> features = new HashMap<String, Boolean>();
 
 	public boolean isEnabled() {
 		return enabled;
@@ -31,12 +37,14 @@ public class HTMLCompressingProperties {
 		this.enabled = enabled;
 	}
 
-	public Map<String, Boolean> getProperties() {
-		return properties;
+	public Map<String, Boolean> getFeatures() {
+		return features;
 	}
 
-	public void setProperties(Map<String, Boolean> properties) {
-		this.properties = properties;
+	public void setFeatures(Map<String, Boolean> features) {
+		this.features = features;
 	}
+
+
 
 }
