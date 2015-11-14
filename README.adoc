@@ -1,0 +1,5 @@
+= Wicket autoconfiguration with Spring Boot
+
+IMPORTANT: test
+
+NOTE: some text here
