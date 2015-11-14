@@ -75,6 +75,12 @@
 				<version>${wicket.version}</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>de.agilecoders.wicket.webjars</groupId>
+				<artifactId>wicket-webjars</artifactId>
+				<version>0.5.3</version>
+				<scope>provieded</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
