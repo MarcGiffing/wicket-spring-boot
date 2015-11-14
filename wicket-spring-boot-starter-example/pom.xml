@@ -23,6 +23,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-annotation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-htmlcompressor</artifactId>
 		</dependency>
 		<dependency>
@@ -33,6 +37,11 @@
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-bean-validation</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
