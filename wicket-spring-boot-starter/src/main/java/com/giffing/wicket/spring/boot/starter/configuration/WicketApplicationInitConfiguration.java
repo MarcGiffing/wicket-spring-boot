@@ -24,5 +24,4 @@ public interface WicketApplicationInitConfiguration {
 	 *          the current {@link WebApplication}
 	 */
 	void init(WebApplication webApplication);
-
 }
