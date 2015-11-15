@@ -12,8 +12,9 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
 /**
  * Enables the bean validation support if the following condition matches
  * 
- * 1. The {@link BeanValidationConfiguration} class is in the classpath.
- * side note: Bean validation required an validation implementation like hibernate validator. 
+ * 1. The {@link BeanValidationConfiguration} class is in the classpath. side
+ * note: Bean validation required an validation implementation like hibernate
+ * validator.
  * 
  * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
  * 
@@ -24,11 +25,11 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
 @ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)
 @EnableConfigurationProperties({ BeanValidationProperties.class })
-public class BeanValidationConfig implements WicketApplicationInitConfiguration{
+public class BeanValidationConfig implements WicketApplicationInitConfiguration {
 
 	@Override
 	public void init(WebApplication webApplication) {
 		new BeanValidationConfiguration().configure(webApplication);
 	}
-	
+
 }
