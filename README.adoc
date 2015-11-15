@@ -7,15 +7,13 @@ extension with an reasonable default value which can be overridden over property
 This project detects classes in external dependencies and tries to configure
 it in a reasonable way.
 
-:toc:
-toc::[]
+:toc: macro
 
 == Getting started
 
 To get started you have to create a new Maven (or another preferred dependency/build-management tool)
 and add the *wicket-spring-boot-starter* dependency to your configuration. This dependency is
 responsibly to configure you application in a default way.  
-
 
 [source,xml]
 ----
@@ -51,6 +49,116 @@ Wicket application with a simple Login Page. As in every Wicket Application you 
 WicketBootWebApplication as usual. You can change the Login/Home-Page or the *init()* Method to 
 register other extensions. 
 
+== How does it work?
+
+To fully understand how Spring Boots http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[autconfiguration] and in general Spring Boot works you should read
+the excellent http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[documentation] from this fantastic http://projects.spring.io/spring-boot/[project].
+
+As an an example we will look to the AnnotatedMountScanner configuration. The https://github.com/wicketstuff/core/tree/master/annotation[annotated mount scanner] is an project which supports
+bookmarkable URLs configured by annotations an WebPage classes. If you have this @MountPath("login") annotation on a 
+WebPage then the Page is mounted to http://localhost/login.
+
+In this project each configuration is sepreated in two classes to configure this particular feature/extension. The extension
+consists of a property and a configuration class.
+
+The property class holds properties to configure the specific feature. In the AnnotatedMountScannerProperties class we
+found two properties:
+
+[source,java]
+----
+@ConfigurationProperties(prefix = "wicket.wicketstuff.annotationscan")
+public class AnnotatedMountScannerProperties {
+
+  /**
+   * @see AnnotatedMountScannerConfig
+   */
+  private boolean enabled = true;
+
+  /**
+   * An alternative package name for scanning for mount path if the
+   * WicketApplication should not used as the root scan package
+   */
+  private String packagename;
+}
+----
+
+This properties are imported in the BeanValidationConfig two access ... DESCRIPTION
+
+[source,java]
+----
+/**
+ * Enables the bean validation support if the following condition matches
+ * 
+ * 1. The {@link BeanValidationConfiguration} class is in the classpath. side
+ * note: Bean validation required an validation implementation like hibernate
+ * validator.
+ * 
+ * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
+ * 
+ * @author Marc Giffing
+ *
+ */
+@Component
+@ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
+@ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)
+@EnableConfigurationProperties({ BeanValidationProperties.class })
+public class BeanValidationConfig implements WicketApplicationInitConfiguration {
+  @Override
+  public void init(WebApplication webApplication) {
+    new BeanValidationConfiguration().configure(webApplication);
+  }
+}
+----
+
+DESCRIPTION HOW THE WicketApplicationInitConfiguration WILL BE USED
+
+[source,java]
+----
+public class WicketBootWebApplication extends AuthenticatedWebApplication {
+  @Autowired(required = false)
+  private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
+  @Override
+  protected void init() {
+    super.init();
+    for (WicketApplicationInitConfiguration configuration : configurations) {
+      configuration.init(this);
+    }
+  }
+}
+----
+
+=== Spring profile configuration
+
+The Wicket Spring Boot Starter project ships with a default development configuration.
+It can be activated by activating the 'development' Spring profile in the main class or over
+external JVM/Maven arguments.
+
+The default configuration can be overridden with a custom property file. See Spring Boots reference documentation http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config[here].
+
+include::wicket-spring-boot-starter/src/main/resources/application-development.yml[]
+[source,yml]
+----
+wicket:
+  configuration-type: development
+  wicketstuff:
+    htmlcompressor:
+      enabled: false #HTML compression is disabled on development
+      features:
+        compressCSS: false
+    annotationscan:
+      enabled: true
+  devutils:
+    statelesschecker:
+      enabled: true
+    interceptor:
+      enable-live-sessions-page: true
+    diskstorebrowser:
+      enabled: true
+----
+
+
+
+
 == Extensions
 
 The following section describes the current autoconfigurations and there
@@ -67,4 +175,4 @@ required dependencies.
 
 NOTE: some text here
 
-== How does it work?
+
