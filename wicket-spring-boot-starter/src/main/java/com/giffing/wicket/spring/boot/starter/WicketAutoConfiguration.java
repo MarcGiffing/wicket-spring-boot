@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.giffing.wicket.spring.boot.starter.configuration.CustomAnnotationBeanNameGenerator;
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.web.WebInitializer;
 
@@ -13,7 +14,7 @@ import com.giffing.wicket.spring.boot.starter.web.WebInitializer;
 @EnableConfigurationProperties({ WicketProperties.class })
 @ConditionalOnWebApplication
 @Import({ WebInitializer.class, WebSecurityConfig.class })
-@ComponentScan(basePackageClasses = WicketApplicationInitConfiguration.class)
+@ComponentScan(basePackageClasses = WicketApplicationInitConfiguration.class, nameGenerator=CustomAnnotationBeanNameGenerator.class)
 public class WicketAutoConfiguration {
 
 }
