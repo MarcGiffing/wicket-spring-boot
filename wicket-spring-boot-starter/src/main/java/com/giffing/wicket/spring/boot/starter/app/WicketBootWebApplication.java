@@ -3,6 +3,8 @@ package com.giffing.wicket.spring.boot.starter.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.Servlet;
+
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -13,7 +15,10 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
@@ -69,4 +74,23 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 	public RuntimeConfigurationType getConfigurationType() {
 		return wicketProperties.getConfigurationType();
 	}
+	
+	/*
+	 * fixes multipart form sumbit
+	 */
+	@Bean
+	Servlet dispatcherServlet(){
+		return new DispatcherServlet();
+	}
+	
+	@Bean
+	ServletRegistrationBean servletRegistrationBean(){
+		ServletRegistrationBean reg = new ServletRegistrationBean();
+		reg.setServlet(dispatcherServlet());
+		reg.addUrlMappings("/**");
+		return reg;
+	}
+	/*
+	 * end of multipart form submit fix
+	 */
 }
