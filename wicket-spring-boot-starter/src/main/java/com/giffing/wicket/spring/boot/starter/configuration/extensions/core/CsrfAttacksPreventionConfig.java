@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core;
 
-import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
