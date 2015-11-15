@@ -1,5 +1,70 @@
 = Wicket autoconfiguration with Spring Boot
 
-IMPORTANT: test
+This project (should) makes it easy to create Wicket projects with a minimum
+of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
+extension with an reasonable default value which can be overridden over property files.
+
+This project detects classes in external dependencies and tries to configure
+it in a reasonable way.
+
+:toc:
+toc::[]
+
+== Getting started
+
+To get started you have to create a new Maven (or another preferred dependency/build-management tool)
+and add the *wicket-spring-boot-starter* dependency to your configuration. This dependency is
+responsibly to configure you application in a default way.  
+
+
+[source,xml]
+---
+<dependency>
+	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
+	<artifactId>wicket-spring-boot-starter</artifactId>
+	<version>${project.version}</version>
+</dependency>
+---
+
+Beside the Maven dependency configuration we need the following steps to do
+
+. Create a class (e.g. WicketApplication) with a main method
+. Annotate the class with @WicketSpringBootApplication
+. Extend this class with WicketBootWebApplication
+. Use the SpringApplicationBuilder to run the WicketApplication class
+
+
+[source,java]
+----
+@WicketSpringBootApplication
+public class WicketApplication extends WicketBootWebApplication {
+  public static void main(String[] args) throws Exception {
+    new SpringApplicationBuilder()
+      .sources(WicketApplication.class)
+      .run(args);
+  }
+}
+----
+
+Thats all! When you execute the main method you will get a fully working and configured 
+Wicket application with a simple Login Page. As in every Wicket Application you can override the 
+WicketBootWebApplication as usual. You can change the Login/Home-Page or the *init()* Method to 
+register other extensions. 
+
+== Extensions
+
+The following section describes the current autoconfigurations and there
+required dependencies.
+
+=== Bean validation
+=== Core - Prevention of CSRF Attacks 
+=== Devutils - diskstorebrowser
+=== Devutils - inspector
+=== Devutils - statelesschecker
+=== Webjars
+=== Wicketstuff - annotationscan
+=== Wicketstuff - htmlcompressor
 
 NOTE: some text here
+
+== How does it work?
