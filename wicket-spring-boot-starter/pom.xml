@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket.webjars</groupId>
 			<artifactId>wicket-webjars</artifactId>
-			<scope>provieded</scope>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
