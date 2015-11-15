@@ -18,13 +18,13 @@ responsibly to configure you application in a default way.
 
 
 [source,xml]
----
+----
 <dependency>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
----
+----
 
 Beside the Maven dependency configuration we need the following steps to do
 
