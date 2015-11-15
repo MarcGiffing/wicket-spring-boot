@@ -7,8 +7,7 @@ extension with an reasonable default value which can be overridden over property
 This project detects classes in external dependencies and tries to configure
 it in a reasonable way.
 
-:toc:
-toc::[]
+:toc: macro
 
 == Getting started
 
