@@ -17,7 +17,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * 
  * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
  * 
- * @author Marcs
+ * @author Marc Giffing
  *
  */
 @Component
