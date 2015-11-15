@@ -15,6 +15,10 @@ To get started you have to create a new Maven (or another preferred dependency/b
 and add the *wicket-spring-boot-starter* dependency to your configuration. This dependency is
 responsibly to configure you application in a default way.  
 
+[source,yml]
+----
+include::wicket-spring-boot-starter/src/main/resources/application-development.yml[]
+----
 
 [source,xml]
 ----
