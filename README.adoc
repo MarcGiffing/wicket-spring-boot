@@ -12,8 +12,7 @@ it in a reasonable way.
 == Getting started
 
 To get started you have to create a new Maven (or another preferred dependency/build-management tool)
-and add the *wicket-spring-boot-starter* dependency to your configuration. This dependency is
-responsibly to configure you application in a default way.  
+and add the *wicket-spring-boot-starter* dependency to your configuration. 
 
 [source,xml]
 ----
@@ -24,12 +23,16 @@ responsibly to configure you application in a default way.
 </dependency>
 ----
 
+This dependency is responsibly to configure you application in a default way.  
+
+
+
 Beside the Maven dependency configuration we need the following steps to do
 
 . Create a class (e.g. WicketApplication) with a main method
 . Annotate the class with @WicketSpringBootApplication
 . Extend this class with WicketBootWebApplication
-. Use the SpringApplicationBuilder to run the WicketApplication class
+. Use the SpringApplicationBuilder to run the WicketApplication class you've created
 
 
 [source,java]
@@ -45,20 +48,20 @@ public class WicketApplication extends WicketBootWebApplication {
 ----
 
 Thats all! When you execute the main method you will get a fully working and configured 
-Wicket application with a simple Login Page. As in every Wicket Application you can override the 
-WicketBootWebApplication as usual. You can change the Login/Home-Page or the *init()* Method to 
+Wicket application with a simple login and home Page. As in every Wicket Application you can override the 
+WicketBootWebApplication as usual. You can change the login/home page or the *init()* method to 
 register other extensions. 
 
 == How does it work?
 
-To fully understand how Spring Boots http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[autconfiguration] and in general Spring Boot works you should read
+To fully understand how http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[Spring Boots autconfiguration] and in general Spring Boot works you should read
 the excellent http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[documentation] from this fantastic http://projects.spring.io/spring-boot/[project].
 
 As an an example we will look to the AnnotatedMountScanner configuration. The https://github.com/wicketstuff/core/tree/master/annotation[annotated mount scanner] is an project which supports
-bookmarkable URLs configured by annotations an WebPage classes. If you have this @MountPath("login") annotation on a 
-WebPage then the Page is mounted to http://localhost/login.
+bookmarkable URLs configured by annotations on WebPage classes. If you have this '@MountPath("login")' annotation on a 
+WebPage then the Page is mounted to 'http://localhost/login'.
 
-In this project each configuration is sepreated in two classes to configure this particular feature/extension. The extension
+In this project each configuration is separated in two classes to configure this particular feature/extension. The extension
 consists of a property and a configuration class.
 
 The property class holds properties to configure the specific feature. In the AnnotatedMountScannerProperties class we
@@ -95,8 +98,6 @@ This properties are imported in the BeanValidationConfig two access ... DESCRIPT
  * 
  * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
  * 
- * @author Marc Giffing
- *
  */
 @Component
 @ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
@@ -172,7 +173,7 @@ required dependencies.
 === Webjars
 === Wicketstuff - annotationscan
 === Wicketstuff - htmlcompressor
+=== Wicket-Source
 
-NOTE: some text here
 
 
