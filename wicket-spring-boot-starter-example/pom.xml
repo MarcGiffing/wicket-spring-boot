@@ -9,8 +9,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-
-
+	
+	<name>Spring boot starter example</name>
+	<description>
+		An example project which uses the wicket-spring-boot-starter autoconfiguration project
+	</description>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>

@@ -5,7 +5,19 @@
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
+	
+	<name>Wicket Spring Boot Starter Parent</name>
+	<description>
+		This project (should) makes it easy to create 
+		Wicket projects with a minimum of configuration effort. 
+		Is uses Spring Boot to autoconfigure Wickets core and extension 
+		with an reasonable default value which can be overridden 
+		over property files.
+		
+		This parent project holds default configuration for the underlying 
+		sub modules 
+	</description>
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -13,6 +25,27 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
+	<url>https://github.com/MarcGiffing/wicket-spring-boot</url>
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/MarcGiffing/wicket-spring-boot/</url>
+	</scm>
+	
+	<developers>
+		<developer>
+			<id>mgiffing</id>
+			<name>Marc Giffing</name>
+			<roles>
+				<role>Project lead</role>
+			</roles>
+		</developer>
+	</developers>
+		
 	<modules>
 		<module>wicket-spring-boot-starter</module>
 		<module>wicket-spring-boot-starter-example</module>

@@ -10,6 +10,11 @@
 		<relativePath>..</relativePath>
 	</parent>
 
+	<name>Wicket Spring Boot Starter</name>
+	<description>
+	  
+	</description>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
