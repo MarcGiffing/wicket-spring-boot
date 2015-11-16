@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "wicket.wicketsource")
 public class WicketSourceProperties {
 
-	private boolean enabled = true;
+	private boolean enabled = false;
 
 	public boolean isEnabled() {
 		return enabled;
