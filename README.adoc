@@ -1,15 +1,3 @@
-.Gettysburg Address 
-[[gettysburg]] 
-[quote, Abraham Lincoln, Address delivered at the dedication of the Cemetery at Gettysburg]     
-____
-Four score and seven years ago our fathers brought forth
-on this continent a new nation...
-
-Now we are engaged in a great civil war, testing whether
-that nation, or any nation so conceived and so dedicated,
-can long endure. ...
-____
-
 = Wicket autoconfiguration with Spring Boot
 
 This project (should) makes it easy to create Wicket projects with a minimum
