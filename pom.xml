@@ -81,6 +81,12 @@
 				<version>0.5.3</version>
 				<scope>provided</scope>
 			</dependency>
+			<dependency>
+				<groupId>net.ftlines.wicket-source</groupId>
+				<artifactId>wicket-source</artifactId>
+				<version>7.0.0</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
