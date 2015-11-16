@@ -165,15 +165,136 @@ wicket:
 The following section describes the current autoconfigurations and there
 required dependencies.
 
+=== General
+
+[source,properties]
+----
+wicket.configurationType=development # development/deployment(default)
+----
+
 === Bean validation
-=== Core - Prevention of CSRF Attacks 
-=== Devutils - diskstorebrowser
-=== Devutils - inspector
-=== Devutils - statelesschecker
+
+[source,properties]
+----
+wicket.beanvalidation.enabled=true
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.wicket</groupId>
+  <artifactId>wicket-bean-validation</artifactId>
+</dependency>
+----
+
+
+=== Core - Prevention of CSRF Attacks
+
+[source,properties]
+----
+wicket.core.csrf.enabled=true
+----
+
+
 === Webjars
+
+[source,xml]
+----
+<dependency>
+  <groupId>de.agilecoders.wicket.webjars</groupId>
+  <artifactId>wicket-webjars</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.webjars.enabled=true
+----
+
 === Wicketstuff - annotationscan
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-annotation</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.wicketstuff.annotationscan.enabled=true
+wicket.wicketstuff.annotationscan.packagename=
+----
+
 === Wicketstuff - htmlcompressor
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-htmlcompressor</artifactId>
+</dependency>
+<dependency>
+  <groupId>com.yahoo.platform.yui</groupId>
+  <artifactId>yuicompressor</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.wicketstuff.htmlcompressor.enabled=true
+wicket.wicketstuff.htmlcompressor.features.*=
+----
+
+=== Devutils
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.wicket</groupId>
+  <artifactId>wicket-devutils</artifactId>
+</dependency>
+----
+
+==== Devutils - diskstorebrowser
+
+[source,properties]
+----
+wicket.devutils.diskstorebrowser.enabled=false
+wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
+----
+
+
+==== Devutils - inspector
+
+[source,properties]
+----
+wicket.devutils.diskstorebrowser.enabled=false
+wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
+----
+
+==== Devutils - statelesschecker
+
+[source,properties]
+----
+wicket.devutils.interceptor.enableLiveSessionsPage=false
+wicket.devutils.interceptor.liveSessionPageMount=devutils/inspector/live-session-page
+----
+
 === Wicket-Source
 
+[source,xml]
+----
+<dependency>
+  <groupId>net.ftlines.wicket-source</groupId>
+  <artifactId>wicket-source</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.wicketsource.enabled=false
+----
 
 
