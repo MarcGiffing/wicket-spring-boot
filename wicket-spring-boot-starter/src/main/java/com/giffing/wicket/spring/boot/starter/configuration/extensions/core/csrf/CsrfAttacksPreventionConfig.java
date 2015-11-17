@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.core;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.csrf;
 
 import org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener;
 import org.apache.wicket.protocol.http.WebApplication;

@@ -141,13 +141,14 @@ include::wicket-spring-boot-starter/src/main/resources/application-development.y
 ----
 wicket:
   configuration-type: development
+  core:
+    debugsettings:
+      enabled: true
   wicketstuff:
     htmlcompressor:
-      enabled: false #HTML compression is disabled on development
+      enabled: false
       features:
         compressCSS: false
-    annotationscan:
-      enabled: true
   devutils:
     statelesschecker:
       enabled: true
@@ -155,6 +156,8 @@ wicket:
       enable-live-sessions-page: true
     diskstorebrowser:
       enabled: true
+  wicketsource:
+    enabled: true
 ----
 
 
@@ -180,6 +183,19 @@ required dependencies.
 [source,properties]
 ----
 wicket.configurationType=development # development/deployment(default)
+
+----
+
+=== General - debugsettings
+
+[source,properties]
+----
+wicket.core.debugsettings.enabled=true
+wicket.core.debugsettings.developmentUtilitiesEnabled=true
+wicket.core.debugsettings.ajaxDebugModeEnabled=false
+wicket.core.debugsettings.componentUseCheck=false
+wicket.core.debugsettings.outputMarkupContainerClassName=false
+wicket.core.debugsettings.componentPathAttributeName=
 ----
 
 [[extension-beanvalidation]]

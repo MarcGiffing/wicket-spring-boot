@@ -1,5 +1,8 @@
 wicket:
   configuration-type: development
+  core:
+    debugsettings:
+      enabled: true
   wicketstuff:
     htmlcompressor:
       enabled: false
