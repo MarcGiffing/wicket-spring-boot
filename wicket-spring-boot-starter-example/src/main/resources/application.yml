@@ -1,0 +1,5 @@
+server:
+  session:
+    persistent: true
+    store-dir: ${java.io.tmpdir}\wicket-spring-boot-session\
+      

@@ -1,7 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.security;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -16,21 +15,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
-public class SecureWebSession extends AuthenticatedWebSession {
+public class SecureWebSession extends AuthenticatedWebSession implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private static final String SPRING_SECURITY_CONTEXT_KEY = HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 	
-	//TODO I've got an error that the HttpSession is not serializable. On an interim basis marked as transient
-	private transient HttpSession httpSession;
 
 	@SpringBean(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
 
 	public SecureWebSession(Request request) {
 		super(request);
-		this.httpSession = ((HttpServletRequest) request.getContainerRequest()).getSession();
 		Injector.get().inject(this);
 	}
 
@@ -41,7 +37,7 @@ public class SecureWebSession extends AuthenticatedWebSession {
 				new UsernamePasswordAuthenticationToken(username, password));
 			if (auth.isAuthenticated()) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
-				httpSession.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+				setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
 				return true;
 			}
 			return false;

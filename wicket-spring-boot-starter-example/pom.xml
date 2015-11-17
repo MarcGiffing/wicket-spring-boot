@@ -9,12 +9,12 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
-	
+
 	<name>Spring boot starter example</name>
 	<description>
 		An example project which uses the wicket-spring-boot-starter autoconfiguration project
 	</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
@@ -34,10 +34,6 @@
 			<artifactId>wicketstuff-htmlcompressor</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-devutils</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
 		</dependency>
@@ -49,12 +45,35 @@
 			<groupId>de.agilecoders.wicket.webjars</groupId>
 			<artifactId>wicket-webjars</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>net.ftlines.wicket-source</groupId>
-			<artifactId>wicket-source</artifactId>
-		</dependency>
+
 
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>development</spring.profiles.active>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-devtools</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-devutils</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>net.ftlines.wicket-source</groupId>
+					<artifactId>wicket-source</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
