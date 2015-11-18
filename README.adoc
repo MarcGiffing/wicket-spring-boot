@@ -173,6 +173,8 @@ required dependencies.
 * <<extension-webjars>>
 * <<extension-wicketstuff-htmlcompressor>>
 * <<extension-wicketstuff-annotationscan>>
+* <<extension-wicketstuff-serializer-fast2>>
+* <<extension-wicketstuff-serializer-kryo2>>
 * <<extension-devutils-diskstorebrowser>>
 * <<extension-devutils-inspector>>
 * <<extension-devutils-statelesschecker>>
@@ -275,6 +277,41 @@ wicket.wicketstuff.annotationscan.packagename=
 wicket.wicketstuff.htmlcompressor.enabled=true
 wicket.wicketstuff.htmlcompressor.features.*=
 ----
+
+[[extension-wicketstuff-serializer-fast2]]
+=== Wicketstuff - serializer-fast2
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-serializer-fast2</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.wicketstuff.serializer.fast2.enabled=true
+----
+
+[[extension-wicketstuff-serializer-kryo2]]
+=== Wicketstuff - serializer-kryo2
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-serializer-kryo2</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.wicketstuff.serializer.fast2.enabled=true
+----
+
+
+
 
 [[extension-devutils]]
 === Devutils
