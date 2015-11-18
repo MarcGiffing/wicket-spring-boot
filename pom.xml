@@ -5,7 +5,7 @@
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
+
 	<name>Wicket Spring Boot Starter Parent</name>
 	<description>
 		This project (should) makes it easy to create 
@@ -17,7 +17,7 @@
 		This parent project holds default configuration for the underlying 
 		sub modules 
 	</description>
-	
+
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -35,7 +35,7 @@
 	<scm>
 		<url>https://github.com/MarcGiffing/wicket-spring-boot/</url>
 	</scm>
-	
+
 	<developers>
 		<developer>
 			<id>mgiffing</id>
@@ -45,7 +45,7 @@
 			</roles>
 		</developer>
 	</developers>
-		
+
 	<modules>
 		<module>wicket-spring-boot-starter</module>
 		<module>wicket-spring-boot-starter-example</module>
@@ -119,6 +119,16 @@
 				<artifactId>wicket-source</artifactId>
 				<version>7.0.0</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-serializer-kryo2</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-serializer-fast2</artifactId>
+				<version>${wicket.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

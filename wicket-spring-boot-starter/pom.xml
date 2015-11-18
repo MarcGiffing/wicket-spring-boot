@@ -83,6 +83,16 @@
 			<artifactId>wicket-source</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-serializer-kryo2</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-serializer-fast2</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
 
