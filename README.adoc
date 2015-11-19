@@ -52,6 +52,7 @@ Wicket application with a simple login and home Page. As in every Wicket Applica
 WicketBootWebApplication as usual. You can change the login/home page or the *init()* method to 
 register other extensions. 
 
+[[how_does_it_work]]
 == How does it work?
 
 To fully understand how http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[Spring Boots autconfiguration] and in general Spring Boot works you should read
@@ -165,47 +166,57 @@ wicket:
 
 == Extensions
 
-The following section describes the current autoconfigurations and there
-required dependencies.
+The following section describes the current extensions and there
+required dependencies. An extension is a custom labeling in this project
+which is used to auto-configure a specific part of an Wicket application. An extension
+may require an external dependency or is using core features. See section
+<<how_does_it_work>> to get a deeper knowledge.
 
-* <<extension-beanvalidation>>
-* <<extension-core-csrf-prevention>>
-* <<extension-webjars>>
-* <<extension-wicketstuff-htmlcompressor>>
-* <<extension-wicketstuff-annotationscan>>
-* <<extension-wicketstuff-serializer-fast2>>
-* <<extension-wicketstuff-serializer-kryo2>>
-* <<extension-devutils-diskstorebrowser>>
-* <<extension-devutils-inspector>>
-* <<extension-devutils-statelesschecker>>
-* <<extension-wicketsource>>
+* <<extension-general>>
+** DEPLOYMENT-CONFIGURATIONS
+*** <<extension-beanvalidation>>
+*** <<extension-core-csrf-prevention>>
+*** <<extension-webjars>>
+*** <<extension-wicketstuff-htmlcompressor>>
+*** <<extension-wicketstuff-annotationscan>>
+*** <<extension-wicketstuff-serializer-fast2>>
+*** <<extension-wicketstuff-serializer-kryo2>>
+** DEVELOPMENT-CONFIGURATIONS
+*** <<extension-general-debugsettings>>
+*** <<extension-devutils-diskstorebrowser>>
+*** <<extension-devutils-inspector>>
+*** <<extension-devutils-statelesschecker>>
+*** <<extension-wicketsource>>
 
+[[extension-general]]
 === General
+
+Wicket can be started in DEVELOPMENT and DEPLOYMENT mode. You can change the
+configuration type over the following property configuration. The given property
+is automatically mapped to Wickets ConfigurationType enumeration. 
+ 
 
 [source,properties]
 ----
 wicket.configurationType=development # development/deployment(default)
-
 ----
-
-=== General - debugsettings
-
-[source,properties]
-----
-wicket.core.debugsettings.enabled=true
-wicket.core.debugsettings.developmentUtilitiesEnabled=true
-wicket.core.debugsettings.ajaxDebugModeEnabled=false
-wicket.core.debugsettings.componentUseCheck=false
-wicket.core.debugsettings.outputMarkupContainerClassName=false
-wicket.core.debugsettings.componentPathAttributeName=
-----
+If you insert e.g. developmentx you will get a startup error:
+[listing]
+Field error in object 'wicket' on field 'configurationType': rejected value [developmentx]; codes [typeMismatch.wicket.configurationType
 
 [[extension-beanvalidation]]
 === Bean validation
 
+Wicket support for JSR 303 Bean validation.
+See Wickets user guide 
+https://ci.apache.org/projects/wicket/guide/7.x/guide/single.html[Validation with JSR 303]
+
+To enable Wickets bean validation you have to add the *wicket-bean-validation* dependency to your
+project. It will automatically configured and can be used in the project.
+
 [source,properties]
 ----
-wicket.beanvalidation.enabled=true
+wicket.beanvalidation.enabled=true # enabled by default if bean validation project is present
 ----
 
 [source,xml]
@@ -219,13 +230,23 @@ wicket.beanvalidation.enabled=true
 [[extension-core-csrf-prevention]]
 === Core - Prevention of CSRF Attacks
 
+
+
 [source,properties]
 ----
 wicket.core.csrf.enabled=true
+#TODO: There are some configuration options which should be added
 ----
 
 [[extension-webjars]]
 === Webjars
+
+https://github.com/l0rdn1kk0n/wicket-webjars
+
+[source,properties]
+----
+wicket.webjars.enabled=true
+----
 
 [source,xml]
 ----
@@ -235,13 +256,10 @@ wicket.core.csrf.enabled=true
 </dependency>
 ----
 
-[source,properties]
-----
-wicket.webjars.enabled=true
-----
-
 [[extension-wicketstuff-annotationscan]]
 === Wicketstuff - annotationscan
+
+Use wicketstuff-annotation to use Java Annotations and class path searching to mount your Wicket pages.
 
 [source,xml]
 ----
@@ -310,7 +328,20 @@ wicket.wicketstuff.serializer.fast2.enabled=true
 wicket.wicketstuff.serializer.fast2.enabled=true
 ----
 
+[[extension-general-debugsettings]]
+=== General - debugsettings
 
+Wicket provides some debug settings which could be 
+
+[source,properties]
+----
+wicket.core.debugsettings.enabled=true
+wicket.core.debugsettings.developmentUtilitiesEnabled=true # Enables all of the panels and pages, etc, from wicket-devutils package.
+wicket.core.debugsettings.ajaxDebugModeEnabled=false # if true: wicket-ajax-debug.js is added to header
+wicket.core.debugsettings.componentUseCheck=true
+wicket.core.debugsettings.outputMarkupContainerClassName=false
+wicket.core.debugsettings.componentPathAttributeName=
+----
 
 
 [[extension-devutils]]
