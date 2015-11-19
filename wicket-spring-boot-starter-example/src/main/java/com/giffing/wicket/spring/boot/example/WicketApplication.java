@@ -7,11 +7,11 @@ import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplicatio
 
 @WicketSpringBootApplication
 public class WicketApplication extends WicketBootWebApplication {
-
+	
 	public static void main(String[] args) throws Exception {
 		new SpringApplicationBuilder()
 			.sources(WicketApplication.class)
 			.run(args);
 	}
-
+	
 }
