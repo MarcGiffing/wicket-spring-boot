@@ -1,7 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.security;
 
-import java.io.Serializable;
-
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;
@@ -15,7 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
-public class SecureWebSession extends AuthenticatedWebSession implements Serializable {
+public class SecureWebSession extends AuthenticatedWebSession {
 
 	private static final long serialVersionUID = 1L;
 
