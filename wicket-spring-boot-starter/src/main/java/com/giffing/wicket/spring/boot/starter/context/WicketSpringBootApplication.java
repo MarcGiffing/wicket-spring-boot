@@ -9,6 +9,15 @@ import java.lang.annotation.Target;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
+
+/**
+ * Annotation to simplify the configuration effort by clients.
+ * The client {@link WicketBootWebApplication} should be marked with this
+ * annotation to support enable Spring Boots auto configuration
+ * 
+ * @author Marc Giffing
+ */
 @SpringBootApplication
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

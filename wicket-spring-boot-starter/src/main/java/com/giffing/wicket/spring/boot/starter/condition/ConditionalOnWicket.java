@@ -8,6 +8,14 @@ import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Conditional;
 
+/**
+ * Conditional annotation to pre-check if an extension should be picked for autoconfiguration. 
+ * 
+ * You can define the major Wicket version on which the extension
+ * should or should not be executed.
+ * 
+ * @author Marc Giffing
+ */
 @Target({ ElementType.TYPE, ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

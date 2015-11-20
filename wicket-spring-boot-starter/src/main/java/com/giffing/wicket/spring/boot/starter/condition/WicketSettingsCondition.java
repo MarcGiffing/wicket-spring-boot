@@ -11,18 +11,19 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 
 import com.giffing.wicket.spring.boot.starter.condition.ConditionalOnWicket.Range;
 
-
+/**
+ * Retrieves the current major Wicket Version from the classpath and matches it against
+ * the given conditional value in the {@link ConditionalOnWicket} annotation.
+ * 
+ * @author Marc Giffing
+ *
+ */
 public class WicketSettingsCondition extends SpringBootCondition {
 
 	@Override
 	public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
 		String implVersion = null;
-		Package pkg = FrameworkSettings.class.getPackage();
-		if (pkg != null)
-		{
-			implVersion = pkg.getImplementationVersion();
-		}
-		String wicketVersion = Strings.isEmpty(implVersion) ? "0" : implVersion;
+		String wicketVersion = retrieveWicketVersion(implVersion);
 		
 		Map<String, Object> attributes = metadata
 				.getAnnotationAttributes(ConditionalOnWicket.class.getName());
@@ -32,7 +33,7 @@ public class WicketSettingsCondition extends SpringBootCondition {
 		int majorWicketVersion = Integer.valueOf(splittedWicketVersion[0]);
 		return getMatchOutcome(range, majorWicketVersion, expectedVersion);
 	}
-	
+
 	protected ConditionOutcome getMatchOutcome(Range range, int runningVersion,
 			int expectedVersion) {
 		boolean match = matches(range, expectedVersion, runningVersion);
@@ -60,6 +61,16 @@ public class WicketSettingsCondition extends SpringBootCondition {
 		}else {
 			return "Wicket version does not match current: " + runningVersion + " " + range + " expected: " +  expectedVersion;
 		}
+	}
+	
+	private String retrieveWicketVersion(String implVersion) {
+		Package pkg = FrameworkSettings.class.getPackage();
+		if (pkg != null)
+		{
+			implVersion = pkg.getImplementationVersion();
+		}
+		String wicketVersion = Strings.isEmpty(implVersion) ? "0" : implVersion;
+		return wicketVersion;
 	}
 
 }
