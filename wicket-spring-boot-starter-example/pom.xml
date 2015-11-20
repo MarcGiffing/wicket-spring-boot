@@ -49,7 +49,6 @@
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-fast2</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<profiles>
