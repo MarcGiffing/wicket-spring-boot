@@ -23,12 +23,12 @@ import org.springframework.context.annotation.Conditional;
 public @interface ConditionalOnWicket {
 	
 	/**
-	 * The major java version to check with the current value 
+	 * @return The major java version to check with the current value 
 	 */
 	int value();
 	
 	/**
-	 * Defines how the given major version should be checked with the current version
+	 * @return Defines how the given major version should be checked with the current version
 	 */
 	Range range() default Range.EQUALS_OR_HIGHER;
 

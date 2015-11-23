@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.htmlcompressor;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map.Entry;
 
@@ -17,7 +16,6 @@ import org.springframework.util.StringUtils;
 import org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory;
 
 import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
-import com.googlecode.htmlcompressor.compressor.Compressor;
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
 /**
@@ -25,7 +23,7 @@ import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
  * 
  * 1. The {@link HtmlCompressingMarkupFactory} class is present
  * 
- * 2. The {@link WicketStuffProperties}.compressHTMLEnabled is set to true
+ * 2. The {@link HTMLCompressingProperties}.compressHTMLEnabled is set to true
  * (default is true).
  * 
  * @author Marc Giffing
