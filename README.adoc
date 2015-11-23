@@ -4,6 +4,8 @@ This project (should) makes it easy to create Wicket projects with a minimum
 of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
 extension with an reasonable default value which can be overridden over property files.
 
+Springs autowiring support and Spring Security are defaultly configured.  
+
 This project detects classes in external dependencies and tries to configure
 it in a reasonable way.
 
