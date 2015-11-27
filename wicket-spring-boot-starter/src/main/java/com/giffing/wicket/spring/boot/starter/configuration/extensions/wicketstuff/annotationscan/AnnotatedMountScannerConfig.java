@@ -21,7 +21,7 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 
 	@Override
 	public void init(WebApplication webApplication) {
-		String packagename = this.getClass().getPackage().getName();
+		String packagename = webApplication.getClass().getPackage().getName();
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
 		}
