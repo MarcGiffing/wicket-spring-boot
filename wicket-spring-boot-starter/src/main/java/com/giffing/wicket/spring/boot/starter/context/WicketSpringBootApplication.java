@@ -17,6 +17,8 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
  * annotation to support enable Spring Boots auto configuration
  * 
  * @author Marc Giffing
+ * 
+ * TODO - move to context project?
  */
 @SpringBootApplication
 @Target(ElementType.TYPE)
