@@ -4,9 +4,9 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 import net.ftlines.wicketsource.WicketSource;
 
@@ -20,7 +20,7 @@ import net.ftlines.wicketsource.WicketSource;
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.wicketsource", value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = net.ftlines.wicketsource.WicketSource.class)
 @EnableConfigurationProperties({ WicketSourceProperties.class })

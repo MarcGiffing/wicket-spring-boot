@@ -1,15 +1,14 @@
-package com.giffing.wicket.spring.boot.starter.condition;
+package com.giffing.wicket.spring.boot.context.condition;
 
 import java.util.Map;
 
 import org.apache.wicket.settings.FrameworkSettings;
-import org.apache.wicket.util.string.Strings;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-import com.giffing.wicket.spring.boot.starter.condition.ConditionalOnWicket.Range;
+import com.giffing.wicket.spring.boot.context.condition.ConditionalOnWicket.Range;
 
 /**
  * Retrieves the current major Wicket Version from the classpath and matches it against
@@ -64,13 +63,21 @@ public class WicketSettingsCondition extends SpringBootCondition {
 	}
 	
 	private String retrieveWicketVersion(String implVersion) {
+		
 		Package pkg = FrameworkSettings.class.getPackage();
 		if (pkg != null)
 		{
 			implVersion = pkg.getImplementationVersion();
 		}
-		String wicketVersion = Strings.isEmpty(implVersion) ? "0" : implVersion;
+		String wicketVersion = isEmpty(implVersion) ? "0" : implVersion;
 		return wicketVersion;
+	}
+	
+	private boolean isEmpty(String stringToCheck){
+		if(stringToCheck == null || stringToCheck.length() == 0){
+			return true;
+		}
+		return false;
 	}
 
 }

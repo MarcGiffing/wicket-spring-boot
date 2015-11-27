@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 /**
  * Enables the bean validation support if the following condition matches
@@ -21,6 +22,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * @author Marc Giffing
  *
  */
+@ApplicationInitExtension
 @Component
 @ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)

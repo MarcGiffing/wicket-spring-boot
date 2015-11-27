@@ -3,6 +3,8 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils
 import org.apache.wicket.devutils.diskstore.DiskStoreBrowserPage;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+
 @ConfigurationProperties(prefix = "wicket.devutils.diskstorebrowser")
 public class DiskStoreBrowserProperties {
 	

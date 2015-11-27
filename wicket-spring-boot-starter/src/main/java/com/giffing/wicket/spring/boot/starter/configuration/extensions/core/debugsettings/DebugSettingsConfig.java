@@ -5,11 +5,11 @@ import org.apache.wicket.settings.DebugSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = DebugSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ DebugSettingsProperties.class })
 public class DebugSettingsConfig implements WicketApplicationInitConfiguration {

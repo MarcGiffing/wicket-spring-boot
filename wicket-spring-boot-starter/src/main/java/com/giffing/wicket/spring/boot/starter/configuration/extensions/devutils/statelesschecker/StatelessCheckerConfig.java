@@ -5,10 +5,10 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
 
 /**
  * Enables the states checker from the Wicket devutils. Its only enabled if the
@@ -22,7 +22,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.devutils.statelesschecker", value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = org.apache.wicket.devutils.stateless.StatelessChecker.class)
 @EnableConfigurationProperties({ StatelessCheckerProperties.class })

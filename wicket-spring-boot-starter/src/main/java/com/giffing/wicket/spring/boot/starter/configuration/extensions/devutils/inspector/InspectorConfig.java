@@ -5,9 +5,9 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 /**
  * Mounts pages from the devutils inspector package. Currently only the
@@ -21,7 +21,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnClass(value = { org.apache.wicket.devutils.inspector.LiveSessionsPage.class, })
 @EnableConfigurationProperties({ InspectorProperties.class })
 public class InspectorConfig implements WicketApplicationInitConfiguration {

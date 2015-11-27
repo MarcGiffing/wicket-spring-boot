@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.condition;
+package com.giffing.wicket.spring.boot.context.condition;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

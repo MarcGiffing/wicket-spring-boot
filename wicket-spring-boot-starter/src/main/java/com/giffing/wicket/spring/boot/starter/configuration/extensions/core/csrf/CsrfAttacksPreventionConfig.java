@@ -5,9 +5,9 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 
 /**
@@ -23,7 +23,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener.class)
 @EnableConfigurationProperties({ CsrfAttacksPreventionProperties.class })

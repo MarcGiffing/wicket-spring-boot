@@ -4,7 +4,6 @@ import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WicketApplication.class)
 @WebAppConfiguration
-@Ignore
 public class WicketApplicationTest {
 
 	private WicketTester tester;
@@ -45,6 +43,7 @@ public class WicketApplicationTest {
 		tester.assertNoErrorMessage();
 		tester.assertRenderedPage(HomePage.class);
 	}
+	
 	@Test
 	public void assert_login_logout_test(){
 		//start and render the test page

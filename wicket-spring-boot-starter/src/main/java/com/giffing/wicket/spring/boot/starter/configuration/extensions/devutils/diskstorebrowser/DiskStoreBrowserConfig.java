@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 /**
  * Mounts the {@link DiskStoreBrowserPage} if the following condition matches
@@ -21,7 +21,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationIni
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.devutils.diskstorebrowser", value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = org.apache.wicket.devutils.diskstore.DiskStoreBrowserPage.class)
 @EnableConfigurationProperties({ DiskStoreBrowserProperties.class })

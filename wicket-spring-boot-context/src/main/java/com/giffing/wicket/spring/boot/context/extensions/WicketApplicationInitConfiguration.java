@@ -1,13 +1,11 @@
-package com.giffing.wicket.spring.boot.starter.configuration;
+package com.giffing.wicket.spring.boot.context.extensions;
 
 import org.apache.wicket.protocol.http.WebApplication;
-
-import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 
 /**
  * To provide custom modification of the init Method of Wickets {@link WebApplication}
  * class. An extension class should implement this interface. All classes implementing
- * this interface are injected in the {@link WicketBootWebApplication} as a list and on
+ * this interface are injected in Wickets starter WicketBootWebApplication class as a list and on
  * each implementation the init method is called with the current {@link WebApplication}.
  * 
  * Every Spring Bean regardless to the package location which implements this interface

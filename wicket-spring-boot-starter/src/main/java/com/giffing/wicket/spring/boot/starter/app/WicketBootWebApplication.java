@@ -18,9 +18,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.pages.HomePage;
 import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;

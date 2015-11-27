@@ -10,12 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 import org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
 /**
@@ -29,7 +29,7 @@ import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
  * @author Marc Giffing
  *
  */
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.wicketstuff.htmlcompressor", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory.class)
 @EnableConfigurationProperties({ HTMLCompressingProperties.class })

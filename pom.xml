@@ -52,6 +52,7 @@
 	<modules>
 		<module>wicket-spring-boot-starter</module>
 		<module>wicket-spring-boot-starter-example</module>
+		<module>wicket-spring-boot-starter-context</module>
 	</modules>
 
 	<properties>
@@ -62,6 +63,11 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>com.giffing.wicket.spring.boot.starter</groupId>
+				<artifactId>wicket-spring-boot-context</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
 				<artifactId>wicket-core</artifactId>

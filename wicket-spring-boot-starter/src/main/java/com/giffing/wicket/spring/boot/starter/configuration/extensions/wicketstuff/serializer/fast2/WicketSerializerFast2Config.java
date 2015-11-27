@@ -6,13 +6,13 @@ import org.apache.wicket.serialize.java.JavaSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.exception.extension.ExtensionMisconfigurationException;
 
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.wicketstuff.serializer.fast2", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer.class)
 @EnableConfigurationProperties({ WicketSerializerFast2Properties.class })

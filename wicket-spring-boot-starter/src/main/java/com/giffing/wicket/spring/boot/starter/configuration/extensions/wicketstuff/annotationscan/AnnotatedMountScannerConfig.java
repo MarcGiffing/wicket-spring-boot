@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
-import com.giffing.wicket.spring.boot.starter.configuration.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
+import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
-@Component
+@ApplicationInitExtension
 @ConditionalOnProperty(prefix = "wicket.wicketstuff.annotationscan", value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.annotation.scan.AnnotatedMountScanner.class)
 @EnableConfigurationProperties({ AnnotatedMountScannerProperties.class })
