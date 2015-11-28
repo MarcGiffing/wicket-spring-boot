@@ -201,7 +201,8 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 
 [source,properties]
 ----
-wicket.configurationType=development # development/deployment(default)
+wicket.configuration-type=development # development/deployment(default)
+wicket.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
 ----
 If you insert e.g. developmentx you will get a startup error:
 [listing]
