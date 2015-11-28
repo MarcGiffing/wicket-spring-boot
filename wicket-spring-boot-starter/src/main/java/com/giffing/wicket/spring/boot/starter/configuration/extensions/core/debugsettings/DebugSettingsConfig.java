@@ -9,6 +9,14 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
+/**
+ * Enables debug settings if the following condition matches.
+ * 
+ * 1. The property {@link DebugSettingsProperties#PROPERTY_PREFIX}.enabled has to be true (default = false)
+ *
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DebugSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ DebugSettingsProperties.class })

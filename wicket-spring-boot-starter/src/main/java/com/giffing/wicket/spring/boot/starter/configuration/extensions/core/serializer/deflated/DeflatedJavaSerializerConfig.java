@@ -11,6 +11,15 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.exception.extension.ExtensionMisconfigurationException;
 
+
+/**
+ * Enables the deflated java serializer if the following condition matches.
+ * 
+ * 1. The property {@link DeflatedJavaSerializerProperties#PROPERTY_PREFIX}.enabled has to be true (default = false)
+ *
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DeflatedJavaSerializerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ DeflatedJavaSerializerProperties.class })
