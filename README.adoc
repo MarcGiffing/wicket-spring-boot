@@ -181,6 +181,7 @@ may require an external dependency or is using core features. See section
 *** <<extension-webjars>>
 *** <<extension-wicketstuff-htmlcompressor>>
 *** <<extension-wicketstuff-annotationscan>>
+*** <<extension-core-serializer-deflated>>
 *** <<extension-wicketstuff-serializer-fast2>>
 *** <<extension-wicketstuff-serializer-kryo2>>
 ** DEVELOPMENT-CONFIGURATIONS
@@ -296,6 +297,14 @@ wicket.wicketstuff.annotationscan.packagename=
 ----
 wicket.wicketstuff.htmlcompressor.enabled=true
 wicket.wicketstuff.htmlcompressor.features.*=
+----
+
+[[extension-core-serializer-deflated]]
+=== Core - serializer-deflated
+
+[source,properties]
+----
+wicket.core.serializer.deflated.enabled=false # has to be explicit enabled. deflates the outputstream, reducing page store size by up to a factor 8 at a price of about 2-20ms
 ----
 
 [[extension-wicketstuff-serializer-fast2]]

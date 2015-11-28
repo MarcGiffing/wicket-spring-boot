@@ -21,7 +21,7 @@ public class WicketSerializerFast2Config implements WicketApplicationInitConfigu
 	@Override
 	public void init(WebApplication webApplication) {
 		ISerializer currentSerializer = webApplication.getFrameworkSettings().getSerializer();
-		if (currentSerializer instanceof JavaSerializer) {
+		if (currentSerializer.getClass().equals(JavaSerializer.class)) {
 			webApplication.getFrameworkSettings().setSerializer(new Fast2WicketSerializer());
 		} else {
 			throw new ExtensionMisconfigurationException("Fast2Config: There is already another serializer configured " + currentSerializer);
