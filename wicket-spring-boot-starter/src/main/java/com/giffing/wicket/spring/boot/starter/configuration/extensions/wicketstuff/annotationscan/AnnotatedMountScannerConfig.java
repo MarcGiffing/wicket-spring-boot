@@ -10,6 +10,23 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
+/**
+ * Auto configuration for the {@link AnnotatedMountScanner}.
+ * 
+ * It uses the user defined {@link WebApplication} as the default package scan
+ * root directory.
+ * 
+ * Enables annotate mount scanner if the following two condition matches:
+ * 
+ * 1. The {@link AnnotatedMountScanner} is in the classpath.
+ * 
+ * 2. The property {@link AnnotatedMountScannerProperties#PROPERTY_PREFIX}
+ * .enabled is true (default = true)
+ * 
+ * 
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.annotation.scan.AnnotatedMountScanner.class)
