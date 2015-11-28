@@ -2,8 +2,10 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.webjars;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.webjars")
+@ConfigurationProperties(prefix = WebjarsProperties.PROPERTY_PREFIX)
 public class WebjarsProperties {
+	
+	public static final String PROPERTY_PREFIX = "wicket.webjars";
 	
 	/**
 	 * Enables webjars support

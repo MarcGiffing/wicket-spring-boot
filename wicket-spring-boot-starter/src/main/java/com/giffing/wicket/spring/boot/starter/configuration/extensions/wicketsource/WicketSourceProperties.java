@@ -2,9 +2,11 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketso
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.wicketsource")
+@ConfigurationProperties(prefix = WicketSourceProperties.PROPERTY_PREFIX)
 public class WicketSourceProperties {
 
+	public static final String PROPERTY_PREFIX = "wicket.wicketsource";
+	
 	private boolean enabled = false;
 
 	public boolean isEnabled() {

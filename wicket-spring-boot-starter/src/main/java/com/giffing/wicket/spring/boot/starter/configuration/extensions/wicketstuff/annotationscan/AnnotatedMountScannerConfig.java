@@ -11,7 +11,7 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.wicketstuff.annotationscan", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.annotation.scan.AnnotatedMountScanner.class)
 @EnableConfigurationProperties({ AnnotatedMountScannerProperties.class })
 public class AnnotatedMountScannerConfig implements WicketApplicationInitConfiguration {

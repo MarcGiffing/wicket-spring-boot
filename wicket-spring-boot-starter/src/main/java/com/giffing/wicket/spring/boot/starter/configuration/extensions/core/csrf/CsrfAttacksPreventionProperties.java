@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX)
 public class CsrfAttacksPreventionProperties {
 	
-	public static  final String PROPERTY_PREFIX = "wicket.core.csrf";
+	public static final String PROPERTY_PREFIX = "wicket.core.csrf";
 	
 	/**
 	 * Enables Wickets CSRF protection

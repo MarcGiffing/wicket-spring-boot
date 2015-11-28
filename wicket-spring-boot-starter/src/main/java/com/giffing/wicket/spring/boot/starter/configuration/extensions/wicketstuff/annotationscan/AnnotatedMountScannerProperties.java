@@ -2,9 +2,11 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketst
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.wicketstuff.annotationscan")
+@ConfigurationProperties(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX)
 public class AnnotatedMountScannerProperties {
 
+	public static final String PROPERTY_PREFIX = "wicket.wicketstuff.annotationscan";
+	
 	/**
 	 * @see AnnotatedMountScannerConfig
 	 */

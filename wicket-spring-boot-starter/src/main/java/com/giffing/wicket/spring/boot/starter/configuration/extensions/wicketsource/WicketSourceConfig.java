@@ -21,7 +21,7 @@ import net.ftlines.wicketsource.WicketSource;
  *
  */
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.wicketsource", value = "enabled", matchIfMissing = false)
+@ConditionalOnProperty(prefix = WicketSourceProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = net.ftlines.wicketsource.WicketSource.class)
 @EnableConfigurationProperties({ WicketSourceProperties.class })
 public class WicketSourceConfig implements WicketApplicationInitConfiguration{

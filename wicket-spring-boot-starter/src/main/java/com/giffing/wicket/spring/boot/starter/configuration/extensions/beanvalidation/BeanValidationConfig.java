@@ -24,7 +24,7 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
  */
 @ApplicationInitExtension
 @Component
-@ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = BeanValidationProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)
 @EnableConfigurationProperties({ BeanValidationProperties.class })
 public class BeanValidationConfig implements WicketApplicationInitConfiguration {

@@ -30,7 +30,7 @@ import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
  *
  */
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.wicketstuff.htmlcompressor", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = HTMLCompressingProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory.class)
 @EnableConfigurationProperties({ HTMLCompressingProperties.class })
 public class HTMLCompressingConfig implements WicketApplicationInitConfiguration {

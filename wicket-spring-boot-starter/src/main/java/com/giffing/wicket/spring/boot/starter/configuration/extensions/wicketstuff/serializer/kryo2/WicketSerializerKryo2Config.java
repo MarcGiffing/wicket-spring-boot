@@ -13,7 +13,7 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.starter.exception.extension.ExtensionMisconfigurationException;
 
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.wicketstuff.serializer.kryo2", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = WicketSerializerKryo2Properties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.pageserializer.kryo2.KryoSerializer.class)
 @EnableConfigurationProperties({ WicketSerializerKryo2Properties.class })
 public class WicketSerializerKryo2Config implements WicketApplicationInitConfiguration {

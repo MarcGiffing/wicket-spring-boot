@@ -7,9 +7,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
-@ConfigurationProperties(prefix = "wicket.wicketstuff.htmlcompressor")
+@ConfigurationProperties(prefix = HTMLCompressingProperties.PROPERTY_PREFIX)
 public class HTMLCompressingProperties {
 
+	public static final String PROPERTY_PREFIX = "wicket.wicketstuff.htmlcompressor";
+	
 	/**
 	 * Indicates if the HTML compression should be enabled. It is only enable if a
 	 * HTML compression library is present.

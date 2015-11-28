@@ -2,9 +2,11 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.beanvali
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.beanvalidation")
+@ConfigurationProperties(prefix = BeanValidationProperties.PROPERTY_PREFIX)
 public class BeanValidationProperties {
 
+	public static final String PROPERTY_PREFIX = "wicket.beanvalidation";
+	
 	/**
 	 * Enables or disables the bean validation
 	 */

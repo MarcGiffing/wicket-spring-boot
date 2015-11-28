@@ -23,7 +23,7 @@ import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
  *
  */
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.webjars", value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = WebjarsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = de.agilecoders.wicket.webjars.WicketWebjars.class)
 @EnableConfigurationProperties({ WebjarsProperties.class })
 //TODO only added for explanation purpose - could maybe deleted if we want to support Wicket prior 7

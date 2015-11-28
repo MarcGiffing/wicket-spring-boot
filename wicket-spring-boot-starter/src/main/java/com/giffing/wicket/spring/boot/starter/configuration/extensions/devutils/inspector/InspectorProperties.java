@@ -3,8 +3,10 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.devutils
 import org.apache.wicket.devutils.inspector.LiveSessionsPage;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "wicket.devutils.interceptor")
+@ConfigurationProperties(prefix = InspectorProperties.PROPERTY_PREFIX)
 public class InspectorProperties {
+	
+	public static final String PROPERTY_PREFIX = "wicket.devutils.diskstorebrowser";
 	
 	/**
 	 * Enables or disabled the mounting of the {@link LiveSessionsPage}.

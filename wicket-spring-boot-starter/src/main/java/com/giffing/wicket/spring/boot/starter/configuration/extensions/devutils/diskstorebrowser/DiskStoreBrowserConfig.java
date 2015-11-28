@@ -22,7 +22,7 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
  *
  */
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = "wicket.devutils.diskstorebrowser", value = "enabled", matchIfMissing = false)
+@ConditionalOnProperty(prefix = DiskStoreBrowserProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = org.apache.wicket.devutils.diskstore.DiskStoreBrowserPage.class)
 @EnableConfigurationProperties({ DiskStoreBrowserProperties.class })
 public class DiskStoreBrowserConfig implements WicketApplicationInitConfiguration {

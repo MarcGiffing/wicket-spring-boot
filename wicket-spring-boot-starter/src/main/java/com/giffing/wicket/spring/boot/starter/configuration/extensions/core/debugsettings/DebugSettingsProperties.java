@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(DebugSettingsProperties.PROPERTY_PREFIX)
 public class DebugSettingsProperties {
 
-	public static  final String PROPERTY_PREFIX = "wicket.core.debugsettings";
+	public static final String PROPERTY_PREFIX = "wicket.core.debugsettings";
 	
 	/**
 	 * Toggle debug settings

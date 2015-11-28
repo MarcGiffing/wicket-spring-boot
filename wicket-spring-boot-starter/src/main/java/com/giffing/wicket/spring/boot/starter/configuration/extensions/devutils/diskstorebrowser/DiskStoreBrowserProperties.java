@@ -5,8 +5,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 
-@ConfigurationProperties(prefix = "wicket.devutils.diskstorebrowser")
+@ConfigurationProperties(prefix = DiskStoreBrowserProperties.PROPERTY_PREFIX)
 public class DiskStoreBrowserProperties {
+	
+	public static final String PROPERTY_PREFIX = "wicket.devutils.diskstorebrowser";
 	
 	/**
 	 * If enabled the {@link DiskStoreBrowserPage} should be mounted test page.

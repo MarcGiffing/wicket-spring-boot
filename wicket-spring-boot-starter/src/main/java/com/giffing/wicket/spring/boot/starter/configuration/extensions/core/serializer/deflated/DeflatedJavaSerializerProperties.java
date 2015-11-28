@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(DeflatedJavaSerializerProperties.PROPERTY_PREFIX)
 public class DeflatedJavaSerializerProperties {
 
-	public static  final String PROPERTY_PREFIX = "wicket.core.serializer.deflated";
+	public static final String PROPERTY_PREFIX = "wicket.core.serializer.deflated";
 	
 	/**
 	 * Toggle debug settings
