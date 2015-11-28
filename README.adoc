@@ -1,5 +1,7 @@
 = Wicket autoconfiguration with Spring Boot
 
+NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
+
 This project (should) makes it easy to create Wicket projects with a minimum
 of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
 extension with an reasonable default value which can be overridden over property files.
