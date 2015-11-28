@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = InspectorProperties.PROPERTY_PREFIX)
 public class InspectorProperties {
 	
-	public static final String PROPERTY_PREFIX = "wicket.devutils.diskstorebrowser";
+	public static final String PROPERTY_PREFIX = "wicket.devutils.interceptor";
 	
 	/**
 	 * Enables or disabled the mounting of the {@link LiveSessionsPage}.
