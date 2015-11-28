@@ -16,10 +16,12 @@
 	</description>
 
 	<dependencies>
+		<!-- Internal dependnecies -->
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 			<artifactId>wicket-spring-boot-context</artifactId>
 		</dependency>
+		<!-- Spring dependencies -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -39,6 +41,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 		<!-- Wicket dependencies -->
 		<dependency>
@@ -57,6 +60,7 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-spring</artifactId>
 		</dependency>
+		<!-- Wicketstuff Dependencies -->
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotation</artifactId>
@@ -68,26 +72,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-devutils</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-bean-validation</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>de.agilecoders.wicket.webjars</groupId>
-			<artifactId>wicket-webjars</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>net.ftlines.wicket-source</groupId>
-			<artifactId>wicket-source</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-kryo2</artifactId>
 			<scope>provided</scope>
@@ -95,6 +79,28 @@
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-fast2</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-bean-validation</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Other wicket dependnecies deploymend -->
+		<dependency>
+			<groupId>de.agilecoders.wicket.webjars</groupId>
+			<artifactId>wicket-webjars</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Other wicket dependnecies development -->
+		<dependency>
+			<groupId>net.ftlines.wicket-source</groupId>
+			<artifactId>wicket-source</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-devutils</artifactId>
 			<scope>provided</scope>
 		</dependency>
 
