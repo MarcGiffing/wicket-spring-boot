@@ -131,6 +131,37 @@
 				<version>0.5.3</version>
 				<scope>provided</scope>
 			</dependency>
+			<!-- Wicket datastore dependencies -->
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-datastore-common</artifactId>
+				<version>${wicket.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-datastore-cassandra</artifactId>
+				<version>${wicket.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-datastore-hazelcast</artifactId>
+				<version>${wicket.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-datastore-memcached</artifactId>
+				<version>${wicket.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-datastore-redis</artifactId>
+				<version>${wicket.version}</version>
+				<scope>provided</scope>
+			</dependency>
 			<!-- Wicket development dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>

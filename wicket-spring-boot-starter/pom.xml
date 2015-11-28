@@ -87,6 +87,27 @@
 			<artifactId>wicket-webjars</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Wicket datastore dependencies -->
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-datastore-cassandra</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-datastore-hazelcast</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-datastore-memcached</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-datastore-redis</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Other wicket dependnecies development -->
 		<dependency>
 			<groupId>net.ftlines.wicket-source</groupId>
@@ -103,6 +124,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 	</dependencies>
 
