@@ -390,7 +390,7 @@ wicket.datastore.cassandra.session-unit=megabytes
 ----
 
 [[extension-datastore-hazelcast]]
-===Datastore hazelcast
+=== Datastore hazelcast
 
 [source,properties]
 ----
@@ -412,7 +412,7 @@ wicket.datastore.hazelcast.session-unit=megabytes
 ----
 
 [[extension--datastore-memcached]]
-===Datastore memcached
+=== Datastore memcached
 
 [source,properties]
 ----
@@ -435,7 +435,7 @@ wicket.datastore.memcached.shutdown-timeout-unit=minutes
 ----
 
 [[extension--datastore-redis]]
-===Datastore redis
+=== Datastore redis
 
 [source,properties]
 ----
