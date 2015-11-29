@@ -186,6 +186,11 @@ may require an external dependency or is using core features. See section
 *** <<extension-core-serializer-deflated>>
 *** <<extension-wicketstuff-serializer-fast2>>
 *** <<extension-wicketstuff-serializer-kryo2>>
+*** <<extension-datastore-cassandra>>
+*** <<extension-datastore-hazelcast>>
+*** <<extension-datastore-memcached>>
+*** <<extension-datastore-redis>>
+
 ** DEVELOPMENT-CONFIGURATIONS
 *** <<extension-general-debugsettings>>
 *** <<extension-devutils-diskstorebrowser>>
@@ -321,6 +326,7 @@ wicket.core.serializer.deflated.enabled=false # has to be explicit enabled. defl
 </dependency>
 ----
 
+
 [source,properties]
 ----
 wicket.wicketstuff.serializer.fast2.enabled=true
@@ -355,6 +361,100 @@ wicket.core.debugsettings.ajaxDebugModeEnabled=false # if true: wicket-ajax-debu
 wicket.core.debugsettings.componentUseCheck=true
 wicket.core.debugsettings.outputMarkupContainerClassName=false
 wicket.core.debugsettings.componentPathAttributeName=
+----
+
+[[extension-datastore]]
+== Datastore
+
+[[extension-datastore-cassandra]]
+=== Datastore cassandra
+
+[source,properties]
+----
+wicket.datastore.cassandra.enabled=true
+wicket.datastore.cassandra.contact-points= #comma-separated list 
+wicket.datastore.cassandra.table-name=pagestore
+wicket.datastore.cassandra.keyspace-name=wicket
+wicket.datastore.cassandra.record-ttl=30
+wicket.datastore.cassandra.record-ttl-unit=minutes
+wicket.datastore.cassandra.session-size=2
+wicket.datastore.cassandra.session-unit=megabytes
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-datastore-cassandra</artifactId>
+</dependency>
+----
+
+[[extension-datastore-hazelcast]]
+===Datastore hazelcast
+
+[source,properties]
+----
+wicket.datastore.hazelcast.enabled=true
+wicket.datastore.hazelcast.session-size=2L 
+wicket.datastore.hazelcast.session-unit=megabytes
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-datastore-hazelcast</artifactId>
+</dependency>
+<dependency>
+  <groupId>com.hazelcast</groupId>
+  <artifactId>hazelcast</artifactId>
+</dependency>
+----
+
+[[extension--datastore-memcached]]
+===Datastore memcached
+
+[source,properties]
+----
+wicket.datastore.memcached.enabled=true
+wicket.datastore.memcached.session-size=2L 
+wicket.datastore.memcached.session-unit=megabytes
+wicket.datastore.memcached.expiration-time=30
+wicket.datastore.memcached.port=11211
+wicket.datastore.memcached.server-names=
+wicket.datastore.memcached.shutdown-timeout=30
+wicket.datastore.memcached.shutdown-timeout-unit=minutes
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-datastore-memcached</artifactId>
+</dependency>
+----
+
+[[extension--datastore-redis]]
+===Datastore redis
+
+[source,properties]
+----
+wicket.datastore.redis.enabled=true
+wicket.datastore.redis.session-size=2L 
+wicket.datastore.redis.session-unit=megabytes
+wicket.datastore.redis.expiration-time=30
+wicket.datastore.redis.port=11211
+wicket.datastore.redis.server-names=
+wicket.datastore.redis.shutdown-timeout=30
+wicket.datastore.redis.shutdown-timeout-unit=minutes
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-datastore-redis</artifactId>
+</dependency>
 ----
 
 
