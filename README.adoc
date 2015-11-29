@@ -411,7 +411,7 @@ wicket.datastore.hazelcast.session-unit=megabytes
 </dependency>
 ----
 
-[[extension--datastore-memcached]]
+[[extension-datastore-memcached]]
 === Datastore memcached
 
 [source,properties]
@@ -434,7 +434,7 @@ wicket.datastore.memcached.shutdown-timeout-unit=minutes
 </dependency>
 ----
 
-[[extension--datastore-redis]]
+[[extension-datastore-redis]]
 === Datastore redis
 
 [source,properties]
