@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
+import org.wicketstuff.annotation.mount.MountPath;
 
 /**
  * Default login page.
@@ -19,6 +20,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
  * @author Marc Giffing
  *
  */
+@MountPath("bootLoginPage")
 public class LoginPage extends WebPage {
 
 	public LoginPage(PageParameters parameters) {

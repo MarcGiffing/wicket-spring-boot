@@ -7,6 +7,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.model.Model;
+import org.wicketstuff.annotation.mount.MountPath;
 
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 
@@ -17,6 +18,7 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
  * @author Marc Giffing
  *
  */
+@MountPath("bootHomePage")
 @AuthorizeInstantiation("ROLE_USER")
 public class HomePage extends WebPage {
 
