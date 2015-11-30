@@ -9,6 +9,7 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 
 /**
  * Auto configuration for the {@link AnnotatedMountScanner}.
@@ -42,8 +43,12 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
 		}
-
+		
+		String homepagePackage = webApplication.getHomePage().getPackage().getName();
+		webApplication.mountPage("bootLoginPage", LoginPage.class);
+		new AnnotatedMountScanner().scanPackage(homepagePackage).mount(webApplication);
 		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);
+		
 	}
 
 }
