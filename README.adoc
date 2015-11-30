@@ -4,18 +4,28 @@ NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
 This project (should) makes it easy to create Wicket projects with a minimum
 of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
-extension with an reasonable default value which can be overridden over property files.
+its extension with an reasonable default value which can be overridden over property files.
 
-Springs autowiring support and Spring Security are defaultly configured.  
+The detailed description of the autoconfiguration support can be read in the <<extension>> section.
 
-This project detects classes in external dependencies and tries to configure
-it in a reasonable way.
+Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
+[source,java]
+----
+getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+---- 
+
+Also Spring Security is automatically configured. You get a default login page and a default home page.
+These pages can be overridden as usual like in any WicketApplication.
+[source,java]
+----
+getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
+----
 
 :toc: macro
 
 == Getting started
 
-To get started you have to create a new Maven (or another preferred dependency/build-management tool)
+To get started you have to create a new Maven Project (or another preferred dependency/build-management tool)
 and add the *wicket-spring-boot-starter* dependency to your configuration. 
 
 [source,xml]
@@ -23,13 +33,8 @@ and add the *wicket-spring-boot-starter* dependency to your configuration.
 <dependency>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter</artifactId>
-	<version>${project.version}</version>
 </dependency>
 ----
-
-This dependency is responsibly to configure you application in a default way.  
-
-
 
 Beside the Maven dependency configuration we need the following steps to do
 
@@ -52,18 +57,19 @@ public class WicketApplication extends WicketBootWebApplication {
 ----
 
 Thats all! When you execute the main method you will get a fully working and configured 
-Wicket application with a simple login and home Page. As in every Wicket Application you can override the 
-WicketBootWebApplication as usual. You can change the login/home page or the *init()* method to 
-register other extensions. 
+Wicket application with a simple login and home Page. An embedded Tomcat is automatically started.
+As in every Wicket application you can override the WicketBootWebApplication as usual. 
+You can change the login/home page or the *init()* method to register other extensions. 
 
 [[how_does_it_work]]
 == How does it work?
 
-To fully understand how http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[Spring Boots autconfiguration] and in general Spring Boot works you should read
-the excellent http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[documentation] from this fantastic http://projects.spring.io/spring-boot/[project].
+To fully understand how http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration[Spring Boots autconfiguration] 
+and in general Spring Boot works you should read the excellent 
+http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/[documentation] from this fantastic http://projects.spring.io/spring-boot/[project].
 
-As an an example we will look to the AnnotatedMountScanner configuration. The https://github.com/wicketstuff/core/tree/master/annotation[annotated mount scanner] is an project which supports
-bookmarkable URLs configured by annotations on WebPage classes. If you have this '@MountPath("login")' annotation on a 
+As an an example we will look to the AnnotatedMountScanner configuration. The https://github.com/wicketstuff/core/wiki/Annotation[annotated mount scanner] 
+is an project which supports bookmarkable URLs configured by annotations on WebPage classes. If you have this '@MountPath("login")' annotation on a 
 WebPage then the Page is mounted to 'http://localhost/login'.
 
 In this project each configuration is separated in two classes to configure this particular feature/extension. The extension
@@ -74,49 +80,68 @@ found two properties:
 
 [source,java]
 ----
-@ConfigurationProperties(prefix = "wicket.wicketstuff.annotationscan")
+@ConfigurationProperties(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX)
 public class AnnotatedMountScannerProperties {
+	public static final String PROPERTY_PREFIX = "wicket.wicketstuff.annotationscan";
+	/**
+	 * @see AnnotatedMountScannerConfig
+	 */
+	private boolean enabled = true;
 
-  /**
-   * @see AnnotatedMountScannerConfig
-   */
-  private boolean enabled = true;
-
-  /**
-   * An alternative package name for scanning for mount path if the
-   * WicketApplication should not used as the root scan package
-   */
-  private String packagename;
-}
+	/**
+	 * An alternative package name for scanning for mount path if the
+	 * WicketApplication should not used as the root scan package
+	 */
+	private String packagename;
 ----
 
-This properties are imported in the BeanValidationConfig two access ... DESCRIPTION
+This property file can be imported in the configuration class AnnotatedMountScannerConfig.
 
 [source,java]
 ----
 /**
- * Enables the bean validation support if the following condition matches
+ * Auto configuration for the {@link AnnotatedMountScanner}.
  * 
- * 1. The {@link BeanValidationConfiguration} class is in the classpath. side
- * note: Bean validation required an validation implementation like hibernate
- * validator.
+ * It uses the user defined {@link WebApplication} as the default package scan
+ * root directory.
  * 
- * 2. The property wicket.beanvalidation.enabled has to be true (default = true)
+ * Enables annotate mount scanner if the following two condition matches:
  * 
+ * 1. The {@link AnnotatedMountScanner} is in the classpath.
+ * 
+ * 2. The property {@link AnnotatedMountScannerProperties#PROPERTY_PREFIX}
+ * .enabled is true (default = true)
+ * 
+ * 
+ * @author Marc Giffing
+ *
  */
-@Component
-@ConditionalOnProperty(prefix = "wicket.beanvalidation", value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(value = org.apache.wicket.bean.validation.BeanValidationConfiguration.class)
-@EnableConfigurationProperties({ BeanValidationProperties.class })
-public class BeanValidationConfig implements WicketApplicationInitConfiguration {
-  @Override
-  public void init(WebApplication webApplication) {
-    new BeanValidationConfiguration().configure(webApplication);
-  }
+@ApplicationInitExtension
+@ConditionalOnProperty(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
+@ConditionalOnClass(value = org.wicketstuff.annotation.scan.AnnotatedMountScanner.class)
+@EnableConfigurationProperties({ AnnotatedMountScannerProperties.class })
+public class AnnotatedMountScannerConfig implements WicketApplicationInitConfiguration {
+
+	@Autowired
+	private AnnotatedMountScannerProperties prop;
+
+	@Override
+	public void init(WebApplication webApplication) {
+		String packagename = webApplication.getClass().getPackage().getName();
+		if (prop.getPackagename() != null) {
+			packagename = prop.getPackagename();
+		}
+		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);
+	}
 }
 ----
 
-DESCRIPTION HOW THE WicketApplicationInitConfiguration WILL BE USED
+If all conditions on the AnnotatedMountScannerConfig matches the configuration class is configured as
+a spring bean. All Spring beans which implements the interface WicketApplicationInitConfiguration will
+be injected as a list in the default WicketBootWebApplication class.  
+
+In the WicketBootWebApplication class we iterate in Wickets init method over the list and call on each the
+init method to configure the application.
 
 [source,java]
 ----
@@ -165,9 +190,30 @@ wicket:
     enabled: true
 ----
 
+[[custom-conditions]]
+== Custom conditions
 
+This section lists custom conditional configuration like Spring Boot one. 
 
+=== @ConditionalOnWicket
 
+With the ConditionOnWicket annotation you can check that configuration classes only apply
+on a specific Wicket major version. If some functionality is only available on Wicket 7 
+you can use this annotation.
+
+[source,xml]
+----
+@ApplicationInitExtension
+@ConditionalOnWicket(value=7, range=Range.EQUALS_OR_HIGHER)
+public ConditionalConfig implements WicketApplicationInitConfiguration{
+	@Override
+	public void init(WebApplication webApplication) {
+		// configuration option which only apply to Wickets major version 7 or higher
+	}
+}
+----
+
+[[extension]]
 == Extensions
 
 The following section describes the current extensions and there
@@ -272,6 +318,8 @@ wicket.webjars.enabled=true
 
 Use wicketstuff-annotation to use Java Annotations and class path searching to mount your Wicket pages.
 
+See https://github.com/wicketstuff/core/wiki/Annotation[documentation]
+
 [source,xml]
 ----
 <dependency>
@@ -288,6 +336,8 @@ wicket.wicketstuff.annotationscan.packagename=
 
 [[extension-wicketstuff-htmlcompressor]]
 === Wicketstuff - htmlcompressor
+
+See https://github.com/wicketstuff/core/wiki/Htmlcompressor[documentation]
 
 [source,xml]
 ----
@@ -318,6 +368,8 @@ wicket.core.serializer.deflated.enabled=false # has to be explicit enabled. defl
 [[extension-wicketstuff-serializer-fast2]]
 === Wicketstuff - serializer-fast2
 
+See https://github.com/wicketstuff/core/wiki/FastSerializer2[documentation]
+
 [source,xml]
 ----
 <dependency>
@@ -334,6 +386,8 @@ wicket.wicketstuff.serializer.fast2.enabled=true
 
 [[extension-wicketstuff-serializer-kryo2]]
 === Wicketstuff - serializer-kryo2
+
+See https://github.com/wicketstuff/core/wiki/Kryo-Serializer[documentation]
 
 [source,xml]
 ----
@@ -365,6 +419,8 @@ wicket.core.debugsettings.componentPathAttributeName=
 
 [[extension-datastore]]
 == Datastore
+
+See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
 
 [[extension-datastore-cassandra]]
 === Datastore cassandra
@@ -498,6 +554,8 @@ wicket.devutils.interceptor.liveSessionPageMount=devutils/inspector/live-session
 
 [[extension-wicketsource]]
 === Wicket-Source
+
+See https://github.com/42Lines/wicket-source/wiki[documentation]
 
 [source,xml]
 ----
