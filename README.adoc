@@ -193,7 +193,7 @@ wicket:
 [[custom-conditions]]
 == Custom conditions
 
-This section lists custom conditional configuration like Spring Boot one. 
+This section lists custom conditional configuration like Spring Boot ones. 
 
 === @ConditionalOnWicket
 
@@ -201,7 +201,7 @@ With the ConditionOnWicket annotation you can check that configuration classes o
 on a specific Wicket major version. If some functionality is only available on Wicket 7 
 you can use this annotation.
 
-[source,xml]
+[source,java]
 ----
 @ApplicationInitExtension
 @ConditionalOnWicket(value=7, range=Range.EQUALS_OR_HIGHER)
