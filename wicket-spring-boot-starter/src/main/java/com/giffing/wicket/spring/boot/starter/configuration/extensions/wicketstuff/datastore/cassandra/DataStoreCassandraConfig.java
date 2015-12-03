@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfigurati
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 import org.wicketstuff.datastores.cassandra.CassandraDataStore;
 import org.wicketstuff.datastores.cassandra.CassandraSettings;
 import org.wicketstuff.datastores.cassandra.ICassandraSettings;
@@ -20,16 +19,13 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.TypeParser;
 
 /**
- * Auto configuration for the {@link AnnotatedMountScanner}.
+ * Data store auto configuration for the cassandra database
  * 
- * It uses the user defined {@link WebApplication} as the default package scan
- * root directory.
+ * Enables cassandra data store if the following two condition matches:
  * 
- * Enables annotate mount scanner if the following two condition matches:
+ * 1. The "com.datastax.driver.core.Session" is in the classpath.
  * 
- * 1. The {@link AnnotatedMountScanner} is in the classpath.
- * 
- * 2. The property {@link DataStoreCassandraProperties#PROPERTY_PREFIX} .enabled
+ * 2. The property {@link DataStoreCassandraProperties#PROPERTY_PREFIX}.enabled
  * is true (default = true)
  * 
  * 

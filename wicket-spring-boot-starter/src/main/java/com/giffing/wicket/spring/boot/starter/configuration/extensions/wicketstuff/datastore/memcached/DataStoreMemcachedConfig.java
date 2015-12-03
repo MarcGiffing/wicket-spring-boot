@@ -22,6 +22,20 @@ import com.giffing.wicket.spring.boot.starter.exception.WicketSpringBootExceptio
 import net.spy.memcached.MemcachedClient;
 
 
+/**
+ * Data store auto configuration for the memcached database
+ * 
+ * Enables memcached data store if the following two condition matches:
+ * 
+ * 1. The {@link MemcachedClient} is in the classpath.
+ * 
+ * 2. The property {@link DataStoreMemcachedProperties#PROPERTY_PREFIX}.enabled
+ * is true (default = true)
+ * 
+ * 
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreMemcachedProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(MemcachedClient.class)

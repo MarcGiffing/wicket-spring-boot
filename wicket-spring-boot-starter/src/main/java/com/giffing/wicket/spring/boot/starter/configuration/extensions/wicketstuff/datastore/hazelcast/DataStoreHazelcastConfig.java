@@ -17,7 +17,20 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.TypeParser;
 import com.hazelcast.core.HazelcastInstance;
 
-
+/**
+ * Data store auto configuration for the hazelcast database
+ * 
+ * Enables hazelcast data store if the following two condition matches:
+ * 
+ * 1. The {@link HazelcastInstance} is in the classpath.
+ * 
+ * 2. The property {@link DataStoreHazelcastProperties#PROPERTY_PREFIX}.enabled
+ * is true (default = true)
+ * 
+ * 
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHazelcastProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(HazelcastInstance.class)

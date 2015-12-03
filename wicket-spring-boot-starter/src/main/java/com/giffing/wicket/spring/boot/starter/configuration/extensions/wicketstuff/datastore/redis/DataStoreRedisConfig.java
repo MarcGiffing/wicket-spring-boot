@@ -20,7 +20,20 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstu
 
 import redis.clients.jedis.Jedis;
 
-
+/**
+ * Data store auto configuration for the redis database
+ * 
+ * Enables redis data store if the following two condition matches:
+ * 
+ * 1. The {@link Jedis} is in the classpath.
+ * 
+ * 2. The property {@link DataStoreRedisProperties#PROPERTY_PREFIX}.enabled
+ * is true (default = true)
+ * 
+ * 
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreRedisProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(Jedis.class)
