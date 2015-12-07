@@ -29,7 +29,25 @@ public class HTMLCompressingProperties {
 	 * The main goal is to provide an API independent solution to configure the {@link HtmlCompressor}.
 	 * API changes can be handled over configuration changes 
 	 */
-	private Map<String, Boolean> features = new HashMap<String, Boolean>();
+	private Map<String, Boolean> features = new HashMap<String, Boolean>(){{
+        put("removeComments", Boolean.TRUE);
+		put("removeMultiSpaces", Boolean.TRUE);
+        put("removeIntertagSpaces", Boolean.TRUE);
+        put("removeQuotes", Boolean.TRUE);
+        put("compressJavaScript", Boolean.TRUE);
+        put("compressCss", Boolean.TRUE);
+        put("simpleDoctype", Boolean.TRUE);
+        put("removeScriptAttributes", Boolean.FALSE);
+        put("removeStyleAttributes", Boolean.FALSE);
+        put("removeLinkAttributes", Boolean.FALSE);
+        put("removeFormAttributes", Boolean.FALSE);
+        put("removeInputAttributes", Boolean.FALSE);
+        put("simpleBooleanAttributes", Boolean.FALSE);
+        put("removeJavaScriptProtocol", Boolean.FALSE);
+        put("removeHttpProtocol", Boolean.FALSE);
+        put("removeHttpsProtocol", Boolean.FALSE);
+        put("preserveLineBreaks", Boolean.FALSE);
+    }};
 
 	public boolean isEnabled() {
 		return enabled;
