@@ -178,7 +178,23 @@ wicket:
     htmlcompressor:
       enabled: false
       features:
-        compressCSS: false
+        removeComments: false
+        removeMultiSpaces: false
+        removeIntertagSpaces: false
+        removeQuotes: false
+        compressJavaScript: false
+        compressCss: false
+        simpleDoctype: false
+        removeScriptAttributes: false
+        removeStyleAttributes: false
+        removeLinkAttributes: false
+        removeFormAttributes: false
+        removeInputAttributes: false
+        simpleBooleanAttributes: false
+        removeJavaScriptProtocol: false
+        removeHttpProtocol: false
+        removeHttpsProtocol: false
+        preserveLineBreaks: false
   devutils:
     statelesschecker:
       enabled: true
