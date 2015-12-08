@@ -26,9 +26,6 @@ public class StoreSettingsProperties {
 	
 	private Integer inmemoryCacheSize;
 	
-	private Integer maxSizePerSession;
-	
-
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -67,14 +64,6 @@ public class StoreSettingsProperties {
 
 	public void setInmemoryCacheSize(Integer inmemoryCacheSize) {
 		this.inmemoryCacheSize = inmemoryCacheSize;
-	}
-
-	public Integer getMaxSizePerSession() {
-		return maxSizePerSession;
-	}
-
-	public void setMaxSizePerSession(Integer maxSizePerSession) {
-		this.maxSizePerSession = maxSizePerSession;
 	}
 
 	public Long getSessionSize() {
