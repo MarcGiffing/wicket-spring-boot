@@ -8,11 +8,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * To be independent from Springs annotation this annotation was introduced which is
- * a replacement for the {@link Component} annotation. 
+ * To be independent from Springs annotation this annotation was introduced
+ * which is a replacement for the {@link Component} annotation.
  * 
  * In future you may introduce different configuration options.
  * 
@@ -24,8 +25,14 @@ import org.springframework.stereotype.Component;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
+@Order(ApplicationInitExtension.DEFAULT_PRECEDENCE)
 public @interface ApplicationInitExtension {
 
-	String value() default "";
+	int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
 	
+	int DEFAULT_PRECEDENCE = Integer.MAX_VALUE / 2;
+
+	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
+
+	String value() default "";
 }
