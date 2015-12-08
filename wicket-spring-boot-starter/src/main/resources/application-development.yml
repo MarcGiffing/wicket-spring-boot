@@ -3,6 +3,8 @@ wicket:
   core:
     debugsettings:
       enabled: true
+      component-use-check: true
+      development-utilities-enabled: true
   wicketstuff:
     htmlcompressor:
       enabled: false
