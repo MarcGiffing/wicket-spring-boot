@@ -272,6 +272,8 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 ----
 wicket.configuration-type=development # development/deployment(default)
 wicket.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
+
+wicket.core.requestmapper.cryptmapper.enabled=false # URL encryption support
 ----
 If you insert e.g. developmentx you will get a startup error:
 [listing]
