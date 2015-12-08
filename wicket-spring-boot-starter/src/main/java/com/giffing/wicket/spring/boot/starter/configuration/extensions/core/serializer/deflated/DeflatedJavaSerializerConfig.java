@@ -7,9 +7,9 @@ import org.apache.wicket.serialize.java.JavaSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+import com.giffing.wicket.spring.boot.context.exceptions.extensions.ExtensionMisconfigurationException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.exception.extension.ExtensionMisconfigurationException;
 
 
 /**

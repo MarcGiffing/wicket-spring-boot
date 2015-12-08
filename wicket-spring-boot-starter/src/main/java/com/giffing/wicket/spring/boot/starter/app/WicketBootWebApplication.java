@@ -65,7 +65,7 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 	@Override
 	protected void init() {
 		super.init();
-
+	    
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
 		
@@ -75,7 +75,7 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 			logger.info("init-config: " + configuration.getClass().getName());
 			configuration.init(this);
 		}
-
+		
 	}
 	
 	@Override

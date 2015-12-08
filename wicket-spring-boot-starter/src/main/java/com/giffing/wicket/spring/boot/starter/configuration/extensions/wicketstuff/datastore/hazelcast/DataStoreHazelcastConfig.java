@@ -14,7 +14,7 @@ import org.wicketstuff.datastores.hazelcast.HazelcastDataStore;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.TypeParser;
+import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
 import com.hazelcast.core.HazelcastInstance;
 
 /**

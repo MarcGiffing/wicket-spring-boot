@@ -16,7 +16,7 @@ import org.wicketstuff.datastores.common.SessionQuotaManagingDataStore;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.TypeParser;
+import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
 
 /**
  * Data store auto configuration for the cassandra database

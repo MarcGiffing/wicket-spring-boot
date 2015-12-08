@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.exception;
+package com.giffing.wicket.spring.boot.context.exceptions;
 
 /**
  * General extension from which all exception should extend

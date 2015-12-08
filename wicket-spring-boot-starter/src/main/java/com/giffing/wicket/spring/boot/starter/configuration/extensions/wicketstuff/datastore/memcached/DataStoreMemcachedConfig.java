@@ -14,10 +14,10 @@ import org.wicketstuff.datastores.memcached.IMemcachedSettings;
 import org.wicketstuff.datastores.memcached.MemcachedDataStore;
 import org.wicketstuff.datastores.memcached.MemcachedSettings;
 
+import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.TypeParser;
-import com.giffing.wicket.spring.boot.starter.exception.WicketSpringBootException;
+import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
 
 import net.spy.memcached.MemcachedClient;
 

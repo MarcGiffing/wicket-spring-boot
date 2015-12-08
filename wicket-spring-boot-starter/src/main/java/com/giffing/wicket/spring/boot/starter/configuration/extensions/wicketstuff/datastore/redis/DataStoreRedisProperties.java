@@ -2,8 +2,8 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketst
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.DurationUnit;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore.SessionUnit;
+import com.giffing.wicket.spring.boot.context.extensions.types.DurationUnit;
+import com.giffing.wicket.spring.boot.context.extensions.types.SessionUnit;
 
 @ConfigurationProperties(prefix = DataStoreRedisProperties.PROPERTY_PREFIX)
 public class DataStoreRedisProperties {

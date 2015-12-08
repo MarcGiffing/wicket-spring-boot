@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer;
 
+import com.giffing.wicket.spring.boot.context.exceptions.extensions.ExtensionMisconfigurationException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.exception.extension.ExtensionMisconfigurationException;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = WicketSerializerFast2Properties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)

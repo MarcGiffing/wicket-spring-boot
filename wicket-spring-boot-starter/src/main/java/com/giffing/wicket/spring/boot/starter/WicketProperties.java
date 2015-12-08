@@ -14,7 +14,7 @@ public class WicketProperties {
 	private RuntimeConfigurationType configurationType = RuntimeConfigurationType.DEPLOYMENT;
 	
 	private RenderStrategy renderStrategy = RenderStrategy.REDIRECT_TO_BUFFER;
-
+	
 	public RuntimeConfigurationType getConfigurationType() {
 		return configurationType;
 	}

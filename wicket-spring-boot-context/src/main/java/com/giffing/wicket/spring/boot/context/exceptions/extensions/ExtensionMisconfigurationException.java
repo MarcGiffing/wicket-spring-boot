@@ -1,6 +1,6 @@
-package com.giffing.wicket.spring.boot.starter.exception.extension;
+package com.giffing.wicket.spring.boot.context.exceptions.extensions;
 
-import com.giffing.wicket.spring.boot.starter.exception.WicketSpringBootException;
+import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
 
 /**
  * This exception should be thrown if a extension misconfiguration is detected.

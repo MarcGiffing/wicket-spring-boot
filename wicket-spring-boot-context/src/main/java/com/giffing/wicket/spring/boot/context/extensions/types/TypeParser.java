@@ -1,9 +1,9 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.wicketstuff.datastore;
+package com.giffing.wicket.spring.boot.context.extensions.types;
 
 import org.apache.wicket.util.lang.Bytes;
 import org.apache.wicket.util.time.Duration;
 
-import com.giffing.wicket.spring.boot.starter.exception.WicketSpringBootException;
+import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
 
 public class TypeParser {
 
