@@ -274,6 +274,16 @@ wicket.configuration-type=development # development/deployment(default)
 wicket.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
 
 wicket.core.requestmapper.cryptmapper.enabled=false # URL encryption support
+
+wicket.core.storesettings.enabled=false # enables custom store settings
+wicket.core.storesettings.session-size=2
+wicket.core.storesettings.session-unit=megabytes
+wicket.core.storesettings.asynchronous= # overrides wickets default value only when set
+wicket.core.storesettings.asynchronous-queue-capacity= # overrides wickets default value only when set
+wicket.core.storesettings.file-store-folder= # overrides wickets default value only when set
+wicket.core.storesettings.inmemory-cache-size= # overrides wickets default value only when set
+	
+	private Integer maxSizePerSession;
 ----
 If you insert e.g. developmentx you will get a startup error:
 [listing]
