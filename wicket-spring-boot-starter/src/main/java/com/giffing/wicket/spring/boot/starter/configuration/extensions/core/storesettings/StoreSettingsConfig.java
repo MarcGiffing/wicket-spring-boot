@@ -3,9 +3,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.sto
 import java.io.File;
 
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.session.ISessionStore;
 import org.apache.wicket.settings.StoreSettings;
-import org.apache.wicket.util.IProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

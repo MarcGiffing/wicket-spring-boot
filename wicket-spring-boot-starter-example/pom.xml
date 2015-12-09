@@ -36,6 +36,7 @@
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-bean-validation</artifactId>
@@ -48,17 +49,10 @@
 			<groupId>de.agilecoders.wicket.webjars</groupId>
 			<artifactId>wicket-webjars</artifactId>
 		</dependency>
+		 
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-fast2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-datastore-hazelcast</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.hazelcast</groupId>
-			<artifactId>hazelcast</artifactId>
 		</dependency>
 		<!-- Test dependencies -->
 		<dependency>
@@ -89,10 +83,12 @@
 					<groupId>org.apache.wicket</groupId>
 					<artifactId>wicket-devutils</artifactId>
 				</dependency>
+				<!-- 
 				<dependency>
 					<groupId>net.ftlines.wicket-source</groupId>
 					<artifactId>wicket-source</artifactId>
 				</dependency>
+				 -->
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-web</artifactId>

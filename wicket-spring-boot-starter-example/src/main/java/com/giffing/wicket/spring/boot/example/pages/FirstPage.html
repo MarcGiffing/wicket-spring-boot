@@ -3,6 +3,26 @@
 
 <body>
 	First-Page!
+	
+	<span wicket:id="feedback" />
+	
+	<form wicket:id="form">
+		<br/>
+			<label wicket:for="text">Erster Text</label>
+			<input wicket:id="text" />
+		<br/>
+			<label wicket:for="text2">Zweiter Text</label>
+			<input wicket:id="text2" />
+		<br/>
+		
+		<span wicket:id="text3" >
+			<input wicket:id="text3"></input>
+		</span>
+		
+		<input type="submit" />
+	</form>
+	<a wicket:id="secondPage">Second</a>
+	
 </body>
 
 </html>

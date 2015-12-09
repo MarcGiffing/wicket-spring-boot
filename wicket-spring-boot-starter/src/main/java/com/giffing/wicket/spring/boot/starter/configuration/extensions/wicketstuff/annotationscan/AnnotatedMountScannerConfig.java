@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.core.annotation.Order;
+import org.wicketstuff.annotation.scan.AnnotatedMountList;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
@@ -32,6 +34,7 @@ import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 @ConditionalOnProperty(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.annotation.scan.AnnotatedMountScanner.class)
 @EnableConfigurationProperties({ AnnotatedMountScannerProperties.class })
+@Order(ApplicationInitExtension.DEFAULT_PRECEDENCE + 50)
 public class AnnotatedMountScannerConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
@@ -48,7 +51,6 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 		webApplication.mountPage("bootLoginPage", LoginPage.class);
 		new AnnotatedMountScanner().scanPackage(homepagePackage).mount(webApplication);
 		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);
-		
 	}
 
 }

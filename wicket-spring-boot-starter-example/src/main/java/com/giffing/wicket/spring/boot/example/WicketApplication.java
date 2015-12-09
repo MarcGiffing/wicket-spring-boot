@@ -13,5 +13,5 @@ public class WicketApplication extends WicketBootWebApplication {
 			.sources(WicketApplication.class)
 			.run(args);
 	}
-	
+
 }
