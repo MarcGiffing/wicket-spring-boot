@@ -4,7 +4,6 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.wicketstuff.annotation.mount.MountPath;
 
-@MountPath("/second-page")
 public class SecondPage extends WebPage{
 
 	public SecondPage(){
