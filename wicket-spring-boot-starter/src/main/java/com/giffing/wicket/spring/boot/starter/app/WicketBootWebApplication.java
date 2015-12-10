@@ -71,6 +71,10 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 		
 		getRequestCycleSettings().setRenderStrategy(wicketProperties.getRenderStrategy());
 		
+		if(wicketProperties.getDefaultMarkupEncoding() != null){
+			getMarkupSettings().setDefaultMarkupEncoding(wicketProperties.getDefaultMarkupEncoding());
+		}
+		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());
 			configuration.init(this);

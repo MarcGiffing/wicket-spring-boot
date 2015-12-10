@@ -15,6 +15,8 @@ public class WicketProperties {
 	
 	private RenderStrategy renderStrategy = RenderStrategy.REDIRECT_TO_BUFFER;
 	
+	private String defaultMarkupEncoding = "UTF-8";
+	
 	public RuntimeConfigurationType getConfigurationType() {
 		return configurationType;
 	}
@@ -29,6 +31,14 @@ public class WicketProperties {
 
 	public void setRenderStrategy(RenderStrategy renderStrategy) {
 		this.renderStrategy = renderStrategy;
+	}
+
+	public String getDefaultMarkupEncoding() {
+		return defaultMarkupEncoding;
+	}
+
+	public void setDefaultMarkupEncoding(String defaultMarkupEncoding) {
+		this.defaultMarkupEncoding = defaultMarkupEncoding;
 	}
 
 }

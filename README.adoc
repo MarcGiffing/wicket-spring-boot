@@ -272,8 +272,10 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 ----
 wicket.configuration-type=development # development/deployment(default)
 wicket.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
+wicket.default-markup-encoding=UTF-8 # if null it uses the system default 
 
 wicket.core.requestmapper.cryptmapper.enabled=false # URL encryption support
+
 
 wicket.core.storesettings.enabled=false # enables custom store settings
 wicket.core.storesettings.session-size=2
