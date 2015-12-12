@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.html.form;
+package com.giffing.wicket.spring.boot.example.web.html.form;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,7 +9,7 @@ import org.apache.wicket.util.io.IClusterable;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
-import com.giffing.wicket.spring.boot.example.behavior.ValidationMsgBehavior;
+import com.giffing.wicket.spring.boot.example.web.behavior.ValidationMsgBehavior;
 
 public class ValidationFormVisitor<T, R> implements IVisitor<Component, R>, IClusterable {
 

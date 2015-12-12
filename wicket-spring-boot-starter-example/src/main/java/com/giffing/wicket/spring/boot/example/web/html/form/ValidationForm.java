@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.html.form;
+package com.giffing.wicket.spring.boot.example.web.html.form;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;

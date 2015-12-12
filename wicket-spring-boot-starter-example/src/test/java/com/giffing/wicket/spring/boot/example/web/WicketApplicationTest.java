@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example;
+package com.giffing.wicket.spring.boot.example.web;
 
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.util.tester.FormTester;

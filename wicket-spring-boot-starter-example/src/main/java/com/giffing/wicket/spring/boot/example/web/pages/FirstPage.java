@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.pages;
+package com.giffing.wicket.spring.boot.example.web.pages;
 
 import org.apache.wicket.feedback.DefaultCleanupFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebPage;
@@ -10,14 +10,14 @@ import org.apache.wicket.util.io.IClusterable;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import com.giffing.wicket.spring.boot.example.html.border.BaseBorder;
-import com.giffing.wicket.spring.boot.example.html.form.ValidationForm;
+import com.giffing.wicket.spring.boot.example.web.html.border.BaseBorder;
+import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 
 @MountPath("first-page")
 public class FirstPage extends WebPage {
 	
 	private static final long serialVersionUID = 1L;
-
+	
 	public class MyModel implements IClusterable{
 		public String text;
 		public String text2;
@@ -32,5 +32,7 @@ public class FirstPage extends WebPage {
 		queue(new BaseBorder<String>(getString("text3"), new RequiredTextField<String>("text3")));
 		queue(new BookmarkablePageLink<String>("secondPage", SecondPage.class));
 	}
+
+
 
 }

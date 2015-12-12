@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example;
+package com.giffing.wicket.spring.boot.example.web;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 

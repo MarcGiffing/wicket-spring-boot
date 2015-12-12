@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.html.border;
+package com.giffing.wicket.spring.boot.example.web.html.border;
 
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.border.Border;
