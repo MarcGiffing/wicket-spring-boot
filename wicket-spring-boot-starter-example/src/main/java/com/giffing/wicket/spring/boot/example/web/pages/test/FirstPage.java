@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.web.pages;
+package com.giffing.wicket.spring.boot.example.web.pages.test;
 
 import org.apache.wicket.feedback.DefaultCleanupFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebPage;
