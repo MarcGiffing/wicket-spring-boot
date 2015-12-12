@@ -12,6 +12,15 @@ import com.giffing.wicket.spring.boot.example.model.Customer_;
 
 public class CustomerSpecs {
 
+	public static Specification<Customer> hasId(final Long id) {
+		 return new Specification<Customer>() {
+		      public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query,
+		            CriteriaBuilder builder) {
+		         return builder.equal(root.get(Customer_.id), id);
+		      }
+		    };
+	}
+	
 	public static Specification<Customer> hasUsername(final String username) {
 	    return new Specification<Customer>() {
 	      public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query,
@@ -20,5 +29,7 @@ public class CustomerSpecs {
 	      }
 	    };
 	  }
+
+	
 	
 }

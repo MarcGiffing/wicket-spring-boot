@@ -27,14 +27,12 @@ public abstract class DefaultDataProvider<T, S extends FilterService<T, F>, F ex
 		//TODO quick and dirty check again 
 		long page = first / count;
 		List<T> customers = getFilterService().findAll(page, count, this.getFilter());
-		System.out.println(customers);
 		return customers.iterator();
 	}
 
 	@Override
 	public long size() {
 		long count = getFilterService().count(this.getFilter());
-		System.out.println("count: " + count);
 		return count;
 	}
 

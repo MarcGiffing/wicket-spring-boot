@@ -1,6 +1,8 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers.model;
 
 import org.apache.wicket.injection.Injector;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
@@ -13,15 +15,15 @@ public class CustomerDataProvider extends DefaultDataProvider<Customer, Customer
 	@SpringBean
 	private CustomerRepositoryService customerRepositoryService;
 	
-	private CustomerFilter customerFilter;
+	private IModel<CustomerFilter> customerFilterModel;
 
 	public CustomerDataProvider(){
-		customerFilter = new CustomerFilter();
+		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		Injector.get().inject(this);
 	}
 	
-	public CustomerDataProvider(CustomerFilter customerFilter){
-		this.customerFilter = customerFilter;
+	public CustomerDataProvider(IModel<CustomerFilter> customerFilterModel){
+		this.customerFilterModel = customerFilterModel;
 		Injector.get().inject(this);
 	}
 	
@@ -32,7 +34,7 @@ public class CustomerDataProvider extends DefaultDataProvider<Customer, Customer
 
 	@Override
 	public CustomerFilter getFilter() {
-		return customerFilter;
+		return customerFilterModel.getObject();
 	}
 
 

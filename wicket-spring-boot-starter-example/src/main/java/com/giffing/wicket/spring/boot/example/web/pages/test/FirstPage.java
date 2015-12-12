@@ -3,6 +3,7 @@ package com.giffing.wicket.spring.boot.example.web.pages.test;
 import org.apache.wicket.feedback.DefaultCleanupFeedbackMessageFilter;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -10,7 +11,7 @@ import org.apache.wicket.util.io.IClusterable;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 
-import com.giffing.wicket.spring.boot.example.web.html.border.BaseBorder;
+import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 
 @MountPath("first-page")
@@ -29,7 +30,7 @@ public class FirstPage extends WebPage {
 		queue(new ValidationForm<>("form", new CompoundPropertyModel<>(new MyModel())));
 		queue(new RequiredTextField<String>("text"));
 		queue(new RequiredTextField<String>("text2").add(StringValidator.exactLength(5)));
-		queue(new BaseBorder<String>(getString("text3"), new RequiredTextField<String>("text3")));
+		queue(new LabledFormBroder<>(getString("text3"), new TextField<String>("text3").add(StringValidator.minimumLength(3))));
 		queue(new BookmarkablePageLink<String>("secondPage", SecondPage.class));
 	}
 

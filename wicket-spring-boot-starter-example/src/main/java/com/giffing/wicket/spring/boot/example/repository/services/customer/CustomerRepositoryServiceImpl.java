@@ -40,17 +40,12 @@ public class CustomerRepositoryServiceImpl implements CustomerRepositoryService 
 		return customerRepository.count(filter(filter));
 	}
 	
-	boolean isNotEmpty(String toCheck){
-		if(toCheck != null && toCheck.length() > 0){
-			return true;
-		}
-		
-		return false;
-	}
-	
-	
 	private Specification<Customer> filter(CustomerFilter filter) {
 		List<Specification<Customer>> specs = new ArrayList<>();
+		
+		if(filter.getId() != null){
+			specs.add(CustomerSpecs.hasId(filter.getId()));
+		}
 		
 		if(isNotEmpty(filter.getUsername())){
 			specs.add(CustomerSpecs.hasUsername(filter.getUsername()));
@@ -66,6 +61,14 @@ public class CustomerRepositoryServiceImpl implements CustomerRepositoryService 
 		}
 		
 		return spec;
+	}
+	
+	boolean isNotEmpty(String toCheck){
+		if(toCheck != null && toCheck.length() > 0){
+			return true;
+		}
+		
+		return false;
 	}
 
 

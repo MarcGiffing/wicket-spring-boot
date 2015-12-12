@@ -4,16 +4,31 @@
 </head>
 
 <body>
-<table cellspacing="0" class="rows">
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-    </tr>
-    <tr wicket:id="rows">
-        <td><span wicket:id="id">[actions]</span></td>
-        <td><span wicket:id="username">[contactid]</span> </td>
-    </tr>
-</table>
+<wicket:extend>
+	
+	<h1>Customer list</h1>
+	<hr/>
+	<form wicket:id="form" class="form">
+		<div wicket:id="idBorder">
+			<input type="text" wicket:id="id"></input>
+		</div>	
+		<div wicket:id="usernameBorder">
+			<input type="text" wicket:id="username"></input>
+		</div>
+		<input type="submit" text="Search"/>
+	</form>
+	<hr/>
+	<table class="table table-striped table-condensed table-hover">
+	    <tr>
+	        <th>Id</th>
+	        <th>Name</th>
+	    </tr>
+	    <tr wicket:id="rows">
+	        <td><span wicket:id="id">[actions]</span></td>
+	        <td><span wicket:id="username">[contactid]</span> </td>
+	    </tr>
+	</table>
+</wicket:extend>
 </body>
 
 </html>
