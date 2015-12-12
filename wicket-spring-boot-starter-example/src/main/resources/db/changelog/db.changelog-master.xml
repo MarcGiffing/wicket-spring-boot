@@ -22,13 +22,28 @@
         	</column>
         </createTable>
         
-        <insert tableName="customer">
-        	<column name="username">first_user</column>
+         <insert tableName="customer">
+        	<column name="username">3_third_user</column>
         	<column name="password">123</column>
         </insert>
         
         <insert tableName="customer">
-        	<column name="username">second_user</column>
+        	<column name="username">2_second_user</column>
+        	<column name="password">123</column>
+        </insert>
+        
+         <insert tableName="customer">
+        	<column name="username">5_fifth_user</column>
+        	<column name="password">123</column>
+        </insert>
+        
+         <insert tableName="customer">
+        	<column name="username">4_fourth_user</column>
+        	<column name="password">123</column>
+        </insert>
+        
+        <insert tableName="customer">
+        	<column name="username">1_first_user</column>
         	<column name="password">123</column>
         </insert>
         
