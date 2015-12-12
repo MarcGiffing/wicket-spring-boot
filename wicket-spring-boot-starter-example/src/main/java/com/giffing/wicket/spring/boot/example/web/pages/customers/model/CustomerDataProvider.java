@@ -1,7 +1,5 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers.model;
 
-import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
-import org.apache.wicket.extensions.markup.html.repeater.util.SingleSortState;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;

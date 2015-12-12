@@ -1,7 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.html.border;
 
 import org.apache.wicket.AttributeModifier;
-import org.apache.wicket.behavior.AttributeAppender;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.border.Border;
 import org.apache.wicket.markup.html.form.FormComponent;
