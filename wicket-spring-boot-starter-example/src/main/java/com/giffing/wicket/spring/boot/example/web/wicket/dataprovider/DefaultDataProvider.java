@@ -28,14 +28,13 @@ public abstract class DefaultDataProvider<MODEL, SERVICE extends FilterService<M
 
 	@Override
 	public Iterator<? extends MODEL> iterator(long first, long count) {
-		//TODO quick and dirty check again 
 		if(singleSortState.getSort() != null){
 			Sort property = (Sort) singleSortState.getSort().getProperty();
 			boolean ascending = singleSortState.getSort().isAscending();
-			System.out.println(property + " " + ascending);
 			getFilter().setSort(property, ascending);
 			
 		}
+		//TODO quick and dirty check again 
 		long page = first / count;
 		List<MODEL> customers = getFilterService().findAll(page, count, this.getFilter());
 		return customers.iterator();
