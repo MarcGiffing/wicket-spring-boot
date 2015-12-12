@@ -1,3 +1,9 @@
+wicket:
+  core:
+    resourcesettings:
+      packageresourceguard:
+        pattern:
+          - +*.map
 server:
   compression:
     enabled: true
