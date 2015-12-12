@@ -16,12 +16,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
+import com.giffing.wicket.spring.boot.example.repository.services.DefaultRepositoryService;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.specs.CustomerSpecs;
 
 @Component
 @Transactional(readOnly=true)
-public class CustomerRepositoryServiceImpl implements CustomerRepositoryService {
+public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Customer, CustomerFilter> implements CustomerRepositoryService {
 
 	private CustomerRepository customerRepository;
 
@@ -33,12 +34,7 @@ public class CustomerRepositoryServiceImpl implements CustomerRepositoryService 
 	
 	@Override
 	public List<Customer> findAll(Long page, Long count, CustomerFilter filter) {
-		Sort sort = null;
-		if(filter.sort() != null){
-			Direction direction = filter.isAscending() ? Direction.ASC : Direction.DESC;
-			sort = new Sort(direction, filter.sort().getSortName());
-		}
-		Pageable pageable = new PageRequest(page.intValue(), count.intValue(), sort );
+		Pageable pageable = new PageRequest(page.intValue(), count.intValue(), getSort(filter));
 		return customerRepository.findAll(filter(filter), pageable).getContent();
 	}
 
