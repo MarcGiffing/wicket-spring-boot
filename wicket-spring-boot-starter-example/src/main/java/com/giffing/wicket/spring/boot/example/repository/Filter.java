@@ -6,4 +6,8 @@ public interface Filter extends Serializable {
 	
 	Sort sort();
 	
+	boolean isAscending();
+	
+	void setSort(Sort sort, boolean ascending);
+	
 }

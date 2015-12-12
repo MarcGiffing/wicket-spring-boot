@@ -3,30 +3,41 @@ package com.giffing.wicket.spring.boot.example.web.wicket.dataprovider;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.wicket.markup.repeater.data.IDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.util.SingleSortState;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
+import com.giffing.wicket.spring.boot.example.repository.Sort;
 
-public abstract class DefaultDataProvider<T, S extends FilterService<T, F>, F extends Filter> implements IDataProvider<T>{
+public abstract class DefaultDataProvider<MODEL, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>{
 	
+	public abstract SERVICE getFilterService();
 	
-	public abstract S getFilterService();
+	public abstract FILTER_MODEL getFilter();
 	
-	public abstract F getFilter();
+	private SingleSortState<SORT> singleSortState = new SingleSortState<>();
 	
 	@Override
 	public void detach() {
 	}
 
 	@Override
-	public Iterator<? extends T> iterator(long first, long count) {
+	public Iterator<? extends MODEL> iterator(long first, long count) {
 		//TODO quick and dirty check again 
+		if(singleSortState.getSort() != null){
+			Sort property = (Sort) singleSortState.getSort().getProperty();
+			boolean ascending = singleSortState.getSort().isAscending();
+			System.out.println(property + " " + ascending);
+			getFilter().setSort(property, ascending);
+			
+		}
 		long page = first / count;
-		List<T> customers = getFilterService().findAll(page, count, this.getFilter());
+		List<MODEL> customers = getFilterService().findAll(page, count, this.getFilter());
 		return customers.iterator();
 	}
 
@@ -37,14 +48,19 @@ public abstract class DefaultDataProvider<T, S extends FilterService<T, F>, F ex
 	}
 
 	@Override
-	public IModel<T> model(T object) {
-		return new CompoundPropertyModel<>(new LoadableDetachableModel<T>() {
+	public IModel<MODEL> model(MODEL object) {
+		return new CompoundPropertyModel<>(new LoadableDetachableModel<MODEL>() {
 
 			@Override
-			protected T load() {
+			protected MODEL load() {
 				return object;
 			}
 		});
+	}
+	
+	@Override
+	public ISortState<SORT> getSortState() {
+		return singleSortState;
 	}
 
 }

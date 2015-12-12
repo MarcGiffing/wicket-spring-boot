@@ -1,9 +1,8 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer.filter;
 
-import com.giffing.wicket.spring.boot.example.repository.Filter;
-import com.giffing.wicket.spring.boot.example.repository.Sort;
+import com.giffing.wicket.spring.boot.example.repository.DefaultFilter;
 
-public class CustomerFilter implements Filter {
+public class CustomerFilter extends DefaultFilter {
 	
 	private Long id;
 	
@@ -15,11 +14,6 @@ public class CustomerFilter implements Filter {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@Override
-	public Sort sort() {
-		return new CustomerSort();
 	}
 
 	public Long getId() {

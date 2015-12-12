@@ -8,6 +8,8 @@ import javax.inject.Inject;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
@@ -31,7 +33,12 @@ public class CustomerRepositoryServiceImpl implements CustomerRepositoryService 
 	
 	@Override
 	public List<Customer> findAll(Long page, Long count, CustomerFilter filter) {
-		Pageable pageable = new PageRequest(page.intValue(), count.intValue());
+		Sort sort = null;
+		if(filter.sort() != null){
+			Direction direction = filter.isAscending() ? Direction.ASC : Direction.DESC;
+			sort = new Sort(direction, filter.sort().getSortName());
+		}
+		Pageable pageable = new PageRequest(page.intValue(), count.intValue(), sort );
 		return customerRepository.findAll(filter(filter), pageable).getContent();
 	}
 
