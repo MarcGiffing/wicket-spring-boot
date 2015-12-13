@@ -20,7 +20,7 @@ public abstract class DefaultDataProvider<MODEL, SERVICE extends FilterService<M
 	
 	public abstract FILTER_MODEL getFilter();
 	
-	private SingleSortState<SORT> singleSortState = new SingleSortState<>();
+	private SingleSortState<SORT> singleSortState = new SingleSortState<SORT>();
 	
 	@Override
 	public void detach() {

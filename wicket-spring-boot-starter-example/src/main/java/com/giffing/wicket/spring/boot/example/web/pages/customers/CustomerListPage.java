@@ -33,12 +33,13 @@ public class CustomerListPage extends BasePage {
 	
 	public CustomerListPage() {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
+		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 		
 		queue(new ValidationForm<CustomerFilter>("form", customerFilterModel));
 		queue(new LabledFormBroder<>(getString("id"), new TextField<Long>("id")));
 		queue(new LabledFormBroder<>(getString("username"), new TextField<String>("username").add(StringValidator.maximumLength(12))));
 		
-		DataView<Customer> dataView = new DataView<Customer>("rows", new CustomerDataProvider(customerFilterModel)) {
+		DataView<Customer> dataView = new DataView<Customer>("rows", customerDataProvider) {
 
 		  @Override
 		  protected void populateItem(Item<Customer> item) {
@@ -49,13 +50,14 @@ public class CustomerListPage extends BasePage {
 		queue(dataView);
 		
 		List<IColumn<Customer, CustomerSort>> columns = new ArrayList<>();
-		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID, CustomerSort.ID.getSortName()){
-			
-		});
+		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID, CustomerSort.ID.getSortName()));
 		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Username"), CustomerSort.USERNAME, CustomerSort.USERNAME.getSortName()));
-		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns , new CustomerDataProvider(customerFilterModel), 10){
+		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns , customerDataProvider, 10){
+		
 		};
 		queue(dataTable);
+
+		
 	}
 	
 }
