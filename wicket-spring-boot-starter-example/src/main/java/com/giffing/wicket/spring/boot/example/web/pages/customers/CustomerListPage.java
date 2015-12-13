@@ -9,6 +9,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataT
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
@@ -37,8 +38,38 @@ public class CustomerListPage extends BasePage {
 		
 		queue(new ValidationForm<CustomerFilter>("form", customerFilterModel));
 		queue(new LabledFormBroder<>(getString("id"), new TextField<Long>("id")));
-		queue(new LabledFormBroder<>(getString("username"), new TextField<String>("username").add(StringValidator.maximumLength(12))));
+		queue(new LabledFormBroder<>(getString("username"), new TextField<String>("usernameLike").add(StringValidator.minimumLength(4))));
+		queue(cancelButton());
+		customerDataView(customerDataProvider);
+		customerDataTable(customerDataProvider);
 		
+	}
+
+	private Button cancelButton() {
+		Button cancelButton = new Button("cancel"){
+
+			@Override
+			public void onSubmit() {
+				customerFilterModel.setObject(new CustomerFilter());
+				getForm().clearInput();
+			}
+			
+		};
+		cancelButton.setDefaultFormProcessing(false);
+		return cancelButton;
+	}
+	
+	private void customerDataTable(CustomerDataProvider customerDataProvider) {
+		List<IColumn<Customer, CustomerSort>> columns = new ArrayList<>();
+		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID, "id"));
+		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Username"), CustomerSort.USERNAME, "username"));
+		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns , customerDataProvider, 10){
+		
+		};
+		queue(dataTable);
+	}
+
+	private void customerDataView(CustomerDataProvider customerDataProvider) {
 		DataView<Customer> dataView = new DataView<Customer>("rows", customerDataProvider) {
 
 		  @Override
@@ -48,16 +79,8 @@ public class CustomerListPage extends BasePage {
 		  }
 		};
 		queue(dataView);
-		
-		List<IColumn<Customer, CustomerSort>> columns = new ArrayList<>();
-		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID, CustomerSort.ID.getSortName()));
-		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Username"), CustomerSort.USERNAME, CustomerSort.USERNAME.getSortName()));
-		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns , customerDataProvider, 10){
-		
-		};
-		queue(dataTable);
-
-		
 	}
+
+	
 	
 }

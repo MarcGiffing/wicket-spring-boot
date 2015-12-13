@@ -52,6 +52,10 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 			specs.add(CustomerSpecs.hasUsername(filter.getUsername()));
 		}
 		
+		if(isNotEmpty(filter.getUsernameLike())){
+			specs.add(CustomerSpecs.hasUsernameLike(filter.getUsernameLike()));
+		}
+		
 		Specifications<Customer> spec = null;
 		for (Specification<Customer> specification : specs) {
 			if(spec == null){

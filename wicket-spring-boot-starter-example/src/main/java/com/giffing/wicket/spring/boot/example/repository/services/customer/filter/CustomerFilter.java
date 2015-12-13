@@ -6,15 +6,15 @@ public class CustomerFilter extends DefaultFilter {
 	
 	private Long id;
 	
+	/**
+	 * Filtering for the exact user name
+	 */
 	private String username;
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
+	/**
+	 * Filtering by lowercase username with wildcards at the start and the end.
+	 */
+	private String usernameLike;
 
 	public Long getId() {
 		return id;
@@ -22,6 +22,22 @@ public class CustomerFilter extends DefaultFilter {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUsernameLike() {
+		return usernameLike;
+	}
+
+	public void setUsernameLike(String usernameLike) {
+		this.usernameLike = usernameLike;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

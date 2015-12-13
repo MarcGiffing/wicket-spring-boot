@@ -25,7 +25,16 @@ public class CustomerSpecs {
 	    return new Specification<Customer>() {
 	      public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query,
 	            CriteriaBuilder builder) {
-	         return builder.like(builder.lower(root.get(Customer_.username)), username.toLowerCase());
+	         return builder.equal(builder.lower(root.get(Customer_.username)), username.toLowerCase());
+	      }
+	    };
+	  }
+	
+	public static Specification<Customer> hasUsernameLike(final String username) {
+	    return new Specification<Customer>() {
+	      public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query,
+	            CriteriaBuilder builder) {
+	         return builder.like(builder.lower(root.get(Customer_.username)), "%" + username.toLowerCase() + "%");
 	      }
 	    };
 	  }
