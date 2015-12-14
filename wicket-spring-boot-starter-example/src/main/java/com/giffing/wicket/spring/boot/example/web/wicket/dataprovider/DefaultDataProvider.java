@@ -10,11 +10,12 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import com.giffing.wicket.spring.boot.example.repository.Domain;
 import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
 
-public abstract class DefaultDataProvider<MODEL, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>{
+public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>{
 	
 	public abstract SERVICE getFilterService();
 	
@@ -48,11 +49,12 @@ public abstract class DefaultDataProvider<MODEL, SERVICE extends FilterService<M
 
 	@Override
 	public IModel<MODEL> model(MODEL object) {
-		return new CompoundPropertyModel<>(new LoadableDetachableModel<MODEL>() {
+		Long id = object.getId();
+		return new CompoundPropertyModel<>(new LoadableDetachableModel<MODEL>(object) {
 
 			@Override
 			protected MODEL load() {
-				return object;
+				return getFilterService().findById(id);
 			}
 		});
 	}

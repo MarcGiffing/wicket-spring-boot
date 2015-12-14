@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.giffing.wicket.spring.boot.example.repository.Domain;
+
 @Entity
-public class Customer implements Serializable {
+public class Customer implements Domain, Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)

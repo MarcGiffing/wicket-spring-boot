@@ -29,7 +29,6 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 		this.customerRepository = customerRepository;
 	}
 	
-	
 	@Override
 	public List<Customer> findAll(Long page, Long count, CustomerFilter filter) {
 		Pageable pageable = new PageRequest(page.intValue(), count.intValue(), getSort(filter));
@@ -74,6 +73,12 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 		}
 		
 		return false;
+	}
+
+
+	@Override
+	public Customer findById(Long id) {
+		return customerRepository.findOne(id);
 	}
 
 
