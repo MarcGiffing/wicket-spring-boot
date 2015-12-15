@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.IFilterStateLocator;
 import org.apache.wicket.extensions.markup.html.repeater.util.SingleSortState;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
@@ -14,12 +15,15 @@ import com.giffing.wicket.spring.boot.example.repository.Domain;
 import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
+import com.google.common.base.Objects.ToStringHelper;
 
-public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>{
+public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>, IFilterStateLocator<FILTER_MODEL>{
 	
 	public abstract SERVICE getFilterService();
 	
 	public abstract FILTER_MODEL getFilter();
+	
+	public abstract void setFilter(FILTER_MODEL filterModel);
 	
 	private SingleSortState<SORT> singleSortState = new SingleSortState<SORT>();
 	
@@ -33,7 +37,6 @@ public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends 
 			Sort property = (Sort) singleSortState.getSort().getProperty();
 			boolean ascending = singleSortState.getSort().isAscending();
 			getFilter().setSort(property, ascending);
-			
 		}
 		//TODO quick and dirty check again 
 		long page = first / count;
@@ -62,6 +65,16 @@ public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends 
 	@Override
 	public ISortState<SORT> getSortState() {
 		return singleSortState;
+	}
+
+	@Override
+	public FILTER_MODEL getFilterState() {
+		return getFilter();
+	}
+
+	@Override
+	public void setFilterState(FILTER_MODEL state) {
+		setFilter(state);
 	}
 
 }

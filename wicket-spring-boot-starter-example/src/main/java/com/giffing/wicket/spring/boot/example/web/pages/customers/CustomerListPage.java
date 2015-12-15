@@ -8,6 +8,9 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterToolbar;
+import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.TextFilteredPropertyColumn;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.TextField;
@@ -16,6 +19,7 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
 
@@ -36,7 +40,7 @@ public class CustomerListPage extends BasePage {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 		
-		queue(new ValidationForm<CustomerFilter>("form", customerFilterModel));
+		queue( new ValidationForm<CustomerFilter>("form", customerFilterModel));
 		queue(new LabledFormBroder<>(getString("id"), new TextField<Long>("id")));
 		queue(new LabledFormBroder<>(getString("username"), new TextField<String>("usernameLike").add(StringValidator.minimumLength(4))));
 		queue(cancelButton());
@@ -60,12 +64,26 @@ public class CustomerListPage extends BasePage {
 	}
 	
 	private void customerDataTable(CustomerDataProvider customerDataProvider) {
+		
+		FilterForm<CustomerFilter> filterForm = new FilterForm<CustomerFilter>("filterForm", customerDataProvider);
+		queue(filterForm);
+		
 		List<IColumn<Customer, CustomerSort>> columns = new ArrayList<>();
 		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID, "id"));
-		columns.add(new PropertyColumn<Customer, CustomerSort>(Model.of("Username"), CustomerSort.USERNAME, "username"));
+		columns.add(new TextFilteredPropertyColumn<Customer, CustomerFilter, CustomerSort>(Model.of("Username"), CustomerSort.USERNAME , "username"){
+
+			@Override
+			protected IModel<CustomerFilter> getFilterModel(FilterForm<?> form) {
+				return new PropertyModel<>(form.getModel(), "usernameLike");
+			}
+			
+		});
+		
 		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns , customerDataProvider, 10){
 		
 		};
+		FilterToolbar filterToolbar = new FilterToolbar(dataTable, filterForm);
+		dataTable.addTopToolbar(filterToolbar);
 		queue(dataTable);
 	}
 
