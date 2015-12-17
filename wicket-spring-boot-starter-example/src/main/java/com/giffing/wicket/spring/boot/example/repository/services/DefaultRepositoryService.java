@@ -13,7 +13,7 @@ public abstract class DefaultRepositoryService<MODEL, FILTER extends Filter> imp
 		Sort sort = null;
 		if(filter.sort() != null){
 			Direction direction = filter.isAscending() ? Direction.ASC : Direction.DESC;
-			sort = new Sort(direction, filter.sort().getSortName());
+			sort = new Sort(direction, filter.sort().getFieldName());
 		}
 		return sort;
 	}

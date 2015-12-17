@@ -9,11 +9,28 @@
 	<h1>Customer list</h1>
 	<hr/>
 	<form wicket:id="form" class="form">
-		<div wicket:id="idBorder">
-			<input type="text" wicket:id="id"></input>
-		</div>	
-		<div wicket:id="usernameLikeBorder">
-			<input type="text" wicket:id="usernameLike"></input>
+		<div class="row">
+			<div class="col-xs-2 col-md-3">
+				<div wicket:id="idBorder">
+					<input type="text" wicket:id="id"></input>
+				</div>	
+				<div wicket:id="usernameLikeBorder">
+					<input type="text" wicket:id="usernameLike"></input>
+				</div>
+			</div>
+			<div class="col-xs-2 col-md-3">
+				<div wicket:id="firstnameLikeBorder">
+					<input type="text" wicket:id="firstnameLike"></input>
+				</div>
+				<div wicket:id="lastnameLikeBorder">
+					<input type="text" wicket:id="lastnameLike"></input>
+				</div>
+			</div>
+			<div class="col-xs-2 col-md-2">
+				<div wicket:id="activeBorder">
+					<input type="checkbox" wicket:id="active"></input>
+				</div>
+			</div>
 		</div>
 		<button type="submit">Search</button>
 		<button type="submit" wicket:id="cancel">Cancel</button>

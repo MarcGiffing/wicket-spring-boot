@@ -40,7 +40,6 @@ public class CustomerDataProvider extends DefaultDataProvider<Customer, Customer
 
 	@Override
 	public void setFilter(CustomerFilter filterModel) {
-		System.out.println("set " + filterModel.getUsername() + " " + filterModel.getUsernameLike());
 		customerFilterModel.setObject(filterModel);
 	}
 
