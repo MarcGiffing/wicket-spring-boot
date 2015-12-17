@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
@@ -29,6 +30,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
+import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
@@ -137,19 +139,11 @@ public class CustomerListPage extends BasePage {
 			public Component getFilter(String componentId, FilterForm<?> form) {
 				return new AbstractCheckBoxFilter(componentId, new PropertyModel<>(form.getModel(), "active"), form);
 			}
-			
+
 			@Override
-			public IModel<?> getDataModel(IModel<Customer> rowModel) {
-				// TODO Auto-generated method stub
-				IModel<?> dataModel = super.getDataModel(rowModel);
-				boolean active = (boolean)dataModel.getObject();
-				IModel result = null;
-				if(active){
-					result = new ResourceModel("yes");
-				} else {
-					result = new ResourceModel("no");
-				}
-				return result;
+			public void populateItem(Item<ICellPopulator<Customer>> item, String componentId,
+					IModel<Customer> rowModel) {
+				item.add(new YesNoLabel(componentId, (IModel<Boolean>)getDataModel(rowModel)));
 			}
 			
 		});
