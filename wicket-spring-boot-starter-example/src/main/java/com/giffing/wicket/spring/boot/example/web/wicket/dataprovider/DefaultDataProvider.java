@@ -15,7 +15,6 @@ import com.giffing.wicket.spring.boot.example.repository.Domain;
 import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
-import com.google.common.base.Objects.ToStringHelper;
 
 public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>, IFilterStateLocator<FILTER_MODEL>{
 	
@@ -25,7 +24,7 @@ public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends 
 	
 	public abstract void setFilter(FILTER_MODEL filterModel);
 	
-	private SingleSortState<SORT> singleSortState = new SingleSortState<SORT>();
+	private SingleSortState<SORT> singleSortState = new SingleSortState<>();
 	
 	@Override
 	public void detach() {
