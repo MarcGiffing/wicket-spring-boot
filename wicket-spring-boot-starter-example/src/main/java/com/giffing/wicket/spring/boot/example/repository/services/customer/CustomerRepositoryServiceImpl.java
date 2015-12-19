@@ -4,7 +4,14 @@ package com.giffing.wicket.spring.boot.example.repository.services.customer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
+import com.giffing.wicket.spring.boot.example.model.Customer_;
 import com.giffing.wicket.spring.boot.example.repository.services.DefaultRepositoryService;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.specs.CustomerSpecs;
@@ -24,6 +32,9 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 
 	private CustomerRepository customerRepository;
 
+	@Resource
+	private EntityManager em;
+	
 	@Inject
 	public CustomerRepositoryServiceImpl(CustomerRepository customerRepository){
 		this.customerRepository = customerRepository;
@@ -97,6 +108,23 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 	@Transactional(readOnly=false)
 	public void delete(Long id) {
 		customerRepository.delete(id);
+	}
+
+	@Override
+	public List<String> findUsernames(int count, String usernamePart) {
+		
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<String> query = builder.createQuery(String.class);
+		Root<Customer> customerRoot = query.from(Customer.class);
+		
+		query = query.select(customerRoot.get(Customer_.username));
+		
+		Predicate predicate = CustomerSpecs.hasUsernameLike(usernamePart).toPredicate(customerRoot, query, builder);
+		query = query.where(predicate);
+		
+		TypedQuery<String> createQuery = em.createQuery(query);
+		createQuery.setMaxResults(count);
+		return createQuery.getResultList();
 	}
 
 

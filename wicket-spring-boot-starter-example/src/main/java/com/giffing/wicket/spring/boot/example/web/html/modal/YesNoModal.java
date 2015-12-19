@@ -2,6 +2,7 @@ package com.giffing.wicket.spring.boot.example.web.html.modal;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.model.Model;
 
 public abstract class YesNoModal extends ModalWindow {
 
@@ -12,6 +13,7 @@ public abstract class YesNoModal extends ModalWindow {
 		setInitialHeight(200);
 		setInitialWidth(400);
 		setAutoSize(false);
+		setTitle(Model.of("Are you sure?"));
 		String contentId = getContentId();
 		YesNoPanel yesNoPanel = new YesNoPanel(contentId){
 

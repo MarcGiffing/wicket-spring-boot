@@ -35,7 +35,6 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.Custo
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.ActionPanel;
-import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstractActionItemLink;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstrractActionItem;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.links.ActionItemLink;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno.YesNoLink;
@@ -43,7 +42,6 @@ import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
-import com.giffing.wicket.spring.boot.example.web.html.modal.YesNoModal;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractTextFieldFilter;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
@@ -66,9 +64,9 @@ public class CustomerListPage extends BasePage {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 
-		queue(new ValidationForm<CustomerFilter>("form", customerFilterModel));
-		queue(new LabledFormBroder<>(getString("id"), new TextField<Long>("id")));
-		queue(new LabledFormBroder<>(getString("username"), new UsernameSearchTextField<String>("usernameLike")));
+		queue(new ValidationForm<>("form", customerFilterModel));
+		queue(new LabledFormBroder<>(getString("id"), new TextField<>("id")));
+		queue(new LabledFormBroder<>(getString("username"), new UsernameSearchTextField("usernameLike")));
 		queue(new LabledFormBroder<>(getString("firstname"), new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3))));
 		queue(new LabledFormBroder<>(getString("lastname"), new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3))));
 		queue(new LabledFormBroder<>(getString("active"), new CheckBox("active")));
@@ -115,7 +113,7 @@ public class CustomerListPage extends BasePage {
 	}
 
 	private PropertyColumn<Customer, CustomerSort> idColumn() {
-		return new PropertyColumn<Customer, CustomerSort>(Model.of("Id"), CustomerSort.ID,
+		return new PropertyColumn<>(Model.of("Id"), CustomerSort.ID,
 				CustomerSort.ID.getFieldName());
 	}
 	
@@ -130,7 +128,7 @@ public class CustomerListPage extends BasePage {
 
 					@Override
 					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new UsernameSearchTextField<String>(componentId, model);
+						return new UsernameSearchTextField(componentId, model);
 					}
 
 				};
@@ -150,7 +148,7 @@ public class CustomerListPage extends BasePage {
 
 					@Override
 					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new TextField<String>(componentId, model);
+						return new TextField<>(componentId, model);
 					}
 
 				};
@@ -170,7 +168,7 @@ public class CustomerListPage extends BasePage {
 
 					@Override
 					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new TextField<String>(componentId, model);
+						return new TextField<>(componentId, model);
 					}
 
 				};
