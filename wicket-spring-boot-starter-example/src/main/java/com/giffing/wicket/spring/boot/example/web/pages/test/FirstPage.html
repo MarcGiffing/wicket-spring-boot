@@ -1,12 +1,11 @@
-<html>
+<html xmlns:wicket="http://wicket.apache.org">
 <head>
-
+	<title>First page</title>
 </head>
-
 <body>
 	First-Page!
 	
-	<span wicket:id="feedback" />
+	<div wicket:id="feedback"></div>
 	
 	<form wicket:id="form">
 		<br/>
@@ -17,8 +16,8 @@
 			<input wicket:id="text2" />
 		<br/>
 		
-		<span wicket:id="text3" >
-			<input wicket:id="text3"></input>
+		<span wicket:id="text3Border" >
+			<input wicket:id="text3"/>
 		</span>
 		
 		<input type="submit" />
