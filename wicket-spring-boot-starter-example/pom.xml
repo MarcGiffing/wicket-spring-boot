@@ -76,6 +76,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- To provide the annotation processor in the IDE's classpath -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+			<version>5.0.5.Final</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<profiles>
