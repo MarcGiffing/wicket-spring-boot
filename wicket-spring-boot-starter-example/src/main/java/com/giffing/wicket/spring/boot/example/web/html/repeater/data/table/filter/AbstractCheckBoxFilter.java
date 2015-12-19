@@ -1,7 +1,5 @@
-package com.giffing.wicket.spring.boot.example.web.pages.customers.filter;
+package com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter;
 
-import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.AbstractFilter;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.markup.html.form.CheckBox;

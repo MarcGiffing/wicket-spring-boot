@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer.filter;
 
+import com.giffing.wicket.spring.boot.example.model.Customer_;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
 
 public enum CustomerSort implements Sort{

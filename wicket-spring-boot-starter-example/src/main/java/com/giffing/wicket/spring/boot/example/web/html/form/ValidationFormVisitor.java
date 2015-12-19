@@ -9,7 +9,7 @@ import org.apache.wicket.util.io.IClusterable;
 import org.apache.wicket.util.visit.IVisit;
 import org.apache.wicket.util.visit.IVisitor;
 
-import com.giffing.wicket.spring.boot.example.web.behavior.ValidationMsgBehavior;
+import com.giffing.wicket.spring.boot.example.web.html.border.behavior.ValidationMsgBehavior;
 
 public class ValidationFormVisitor<T, R> implements IVisitor<Component, R>, IClusterable {
 

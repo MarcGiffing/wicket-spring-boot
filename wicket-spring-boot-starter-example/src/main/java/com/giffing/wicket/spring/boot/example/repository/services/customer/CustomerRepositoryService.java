@@ -6,4 +6,6 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.filte
 
 public interface CustomerRepositoryService extends FilterService<Customer, CustomerFilter>{
 
+	void delete(Long id);
+
 }

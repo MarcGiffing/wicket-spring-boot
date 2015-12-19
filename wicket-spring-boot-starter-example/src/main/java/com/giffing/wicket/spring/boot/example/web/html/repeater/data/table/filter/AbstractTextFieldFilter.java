@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.web.pages.customers.filter;
+package com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.AbstractFilter;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;

@@ -93,6 +93,12 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 		return customerRepository.findOne(id);
 	}
 
+	@Override
+	@Transactional(readOnly=false)
+	public void delete(Long id) {
+		customerRepository.delete(id);
+	}
+
 
 	
 }

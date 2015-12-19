@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.example.web.behavior;
+package com.giffing.wicket.spring.boot.example.web.html.border.behavior;
 
 
 import org.apache.wicket.Component;

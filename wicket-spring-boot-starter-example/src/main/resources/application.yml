@@ -3,15 +3,13 @@ wicket:
     resourcesettings:
       packageresourceguard:
         pattern:
-          - +*.map
+        - +*.map
 server:
   compression:
     enabled: true
 spring:
   jpa:
     hibernate:
-      ddl-auto: none  
+      ddl-auto: none
 liquibase:
   change-log: classpath:/db/changelog/db.changelog-master.xml
-   
- 
