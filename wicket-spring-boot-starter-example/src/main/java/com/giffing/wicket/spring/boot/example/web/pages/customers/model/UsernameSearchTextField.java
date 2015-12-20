@@ -20,12 +20,12 @@ public class UsernameSearchTextField extends AutoCompleteTextField {
 	private CustomerRepositoryService service;
 	
 	public UsernameSearchTextField(String id) {
-		super(id, new AutoCompleteSettings().setMinInputLength(MINIMUM_INPUT_LENGTH));
+		super(id, settings());
 		initComponent();
 	}
 
 	public UsernameSearchTextField(String componentId, IModel<String> model) {
-		super(componentId, model);
+		super(componentId, model, settings());
 		initComponent();
 	}
 
@@ -40,6 +40,10 @@ public class UsernameSearchTextField extends AutoCompleteTextField {
 			result = service.findUsernames(10, username);
 		}
 		return result.iterator();
+	}
+	
+	private static AutoCompleteSettings settings(){
+		return new AutoCompleteSettings().setMinInputLength(MINIMUM_INPUT_LENGTH);
 	}
 
 }

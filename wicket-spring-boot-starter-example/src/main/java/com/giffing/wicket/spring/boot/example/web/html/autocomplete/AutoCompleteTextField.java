@@ -9,12 +9,16 @@ import org.apache.wicket.request.resource.CssResourceReference;
 public abstract class AutoCompleteTextField
 		extends org.apache.wicket.extensions.ajax.markup.html.autocomplete.AutoCompleteTextField<String> {
 
-	public AutoCompleteTextField(String id, AutoCompleteSettings setMinInputLength) {
-		super(id, setMinInputLength);
+	public AutoCompleteTextField(String id, AutoCompleteSettings settings) {
+		super(id, settings);
 	}
 
-	public AutoCompleteTextField(String componentId, IModel<String> model) {
-		super(componentId, model);
+	public AutoCompleteTextField(String id, IModel<String> model) {
+		super(id, model);
+	}
+
+	public AutoCompleteTextField(String id, IModel<String> model, AutoCompleteSettings settings) {
+		super(id, model, settings);
 	}
 
 	@Override
