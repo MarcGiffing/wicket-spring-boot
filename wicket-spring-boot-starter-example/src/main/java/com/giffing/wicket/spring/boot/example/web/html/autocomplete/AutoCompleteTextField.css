@@ -1,0 +1,15 @@
+div.wicket-aa {
+    background-color:white;
+    border:1px solid #2387C4;
+    color:black;
+}
+div.wicket-aa ul {
+   list-style-image:none;
+   list-style-position:outside;
+   list-style-type:none;
+   margin:0pt;
+   padding:5px;
+}
+div.wicket-aa ul li.selected {
+    background-color:#2387C4;
+}
