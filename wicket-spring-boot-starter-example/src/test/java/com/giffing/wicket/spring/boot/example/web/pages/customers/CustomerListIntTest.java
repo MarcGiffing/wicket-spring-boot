@@ -55,7 +55,7 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 		DataTable<Customer, CustomerSort> dataTable = (DataTable) getTester().getComponentFromLastRenderedPage("filterForm:table");
 		assertThat(dataTable.getItemCount(), equalTo(5L));
 		
-		getTester().clickLink(getTableCell(5, 6) + "items:2:item:link");
+		getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
 		getTester().assertComponent("defaultModal", YesNoModal.class);
 		getTester().clickLink("defaultModal:content:yes", true);
 		
