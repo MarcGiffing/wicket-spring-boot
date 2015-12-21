@@ -19,7 +19,7 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
  *
  */
 @MountPath("bootHomePage")
-@AuthorizeInstantiation("ROLE_USER")
+@AuthorizeInstantiation("USER")
 public class HomePage extends WebPage {
 
 	private static final long serialVersionUID = 1L;
