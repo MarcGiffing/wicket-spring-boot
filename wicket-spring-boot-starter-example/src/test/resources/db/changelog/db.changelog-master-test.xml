@@ -1,0 +1,54 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+   http://www.liquibase.org/xml/ns/dbchangelog 
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+	<include file="/db/changelog/init.xml"/>
+
+	<changeSet id="init-testdata" author="mgiffing">
+		<insert tableName="customer">
+			<column name="username">frodo</column>
+			<column name="password">123</column>
+			<column name="firstname">Frodo</column>
+			<column name="lastname">Beutlin</column>
+			<column name="active">true</column>
+		</insert>
+
+		<insert tableName="customer">
+			<column name="username">bilbo</column>
+			<column name="password">123</column>
+			<column name="firstname">Bilbo</column>
+			<column name="lastname">Beutlin</column>
+			<column name="active">false</column>
+		</insert>
+
+
+		<insert tableName="customer">
+			<column name="username">adalgrim</column>
+			<column name="password">123</column>
+			<column name="firstname">Adalgrim</column>
+			<column name="lastname">Tuk</column>
+			<column name="active">true</column>
+		</insert>
+
+		<insert tableName="customer">
+			<column name="username">bodo</column>
+			<column name="password">123</column>
+			<column name="firstname">Bodo</column>
+			<column name="lastname">Stolzfuß</column>
+			<column name="active">false</column>
+		</insert>
+
+		<insert tableName="customer">
+			<column name="username">tuk</column>
+			<column name="password">123</column>
+			<column name="firstname">Ferdibrand</column>
+			<column name="lastname">Tuk</column>
+			<column name="active">true</column>
+		</insert>
+
+	</changeSet>
+
+</databaseChangeLog>
