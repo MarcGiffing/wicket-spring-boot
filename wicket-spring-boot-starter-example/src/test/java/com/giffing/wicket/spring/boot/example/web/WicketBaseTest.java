@@ -21,8 +21,8 @@ import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 /**
- * Test class for initialize Wicket & Spring Boot only in the web package.
- * All external spring beans have to be mocked. 
+ * Test class for initialize Wicket & Spring Boot only in the web package. All
+ * external spring beans have to be mocked.
  * 
  * @author Marc Giffing
  *
@@ -36,8 +36,8 @@ public class WicketBaseTest {
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "admin";
 
-	private WicketTester tester;
-	
+	private static WicketTester tester;
+
 	@Autowired
 	private WicketWebApplicationConfig wicketApplication;
 
@@ -47,15 +47,17 @@ public class WicketBaseTest {
 	public void setUp() {
 		applicationContextMock = new ApplicationContextMock();
 		applicationContextMock.putBean("authenticationManager", new AuthenticationManager() {
-
+			
 			@Override
 			public Authentication authenticate(Authentication arg0) throws AuthenticationException {
 				return new TestingAuthenticationToken(USERNAME, PASSWORD, "USER", "ADMIN");
 			}
 		});
 		ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
-		tester = new WicketTester(wicketApplication);
-		login(USERNAME, PASSWORD);
+		if (tester == null) {
+			tester = new WicketTester(wicketApplication);
+			login(USERNAME, PASSWORD);
+		}
 	}
 
 	private void login(String username, String password) {

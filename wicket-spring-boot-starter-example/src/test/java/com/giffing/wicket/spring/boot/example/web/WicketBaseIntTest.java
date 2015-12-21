@@ -31,15 +31,17 @@ public class WicketBaseIntTest {
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "admin";
 
-	private WicketTester tester;
+	private static WicketTester tester;
 	
 	@Autowired
 	private WicketWebApplicationConfig wicketApplication;
 
 	@Before
 	public void setUp() {
-		tester = new WicketTester(wicketApplication);
-		login(USERNAME, PASSWORD);
+		if(tester == null){
+			tester = new WicketTester(wicketApplication);
+			login(USERNAME, PASSWORD);
+		}
 	}
 
 	private void login(String username, String password) {

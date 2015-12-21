@@ -47,7 +47,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	
 	
 	@Test
-	@DirtiesContext
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void assert_start_customer_list_page(){
 		getTester().startPage(CustomerListPage.class);
@@ -70,7 +69,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_click_customer_edit_page(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
@@ -81,7 +79,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_click_customer_create_page(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
