@@ -6,27 +6,47 @@
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
 
-	<changeSet author="mgiffing" id="1">
-		<createTable tableName="customer">
-			<column name="id" type="bigint" autoIncrement="true">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
+	<changeSet id="init-testdata" author="mgiffing">
+		<insert tableName="customer">
+			<column name="username">frodo</column>
+			<column name="password">123</column>
+			<column name="firstname">Frodo</column>
+			<column name="lastname">Beutlin</column>
+			<column name="active">true</column>
+		</insert>
 
-			<column name="username" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
+		<insert tableName="customer">
+			<column name="username">bilbo</column>
+			<column name="password">123</column>
+			<column name="firstname">Bilbo</column>
+			<column name="lastname">Beutlin</column>
+			<column name="active">false</column>
+		</insert>
 
-			<column name="password" type="VARCHAR(255)">
-				<constraints nullable="false" />
-			</column>
 
-			<column name="firstname" type="VARCHAR(255)" />
+		<insert tableName="customer">
+			<column name="username">adalgrim</column>
+			<column name="password">123</column>
+			<column name="firstname">Adalgrim</column>
+			<column name="lastname">Tuk</column>
+			<column name="active">true</column>
+		</insert>
 
-			<column name="lastname" type="VARCHAR(255)" />
-			<column name="active" type="BOOLEAN">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
+		<insert tableName="customer">
+			<column name="username">bodo</column>
+			<column name="password">123</column>
+			<column name="firstname">Bodo</column>
+			<column name="lastname">Stolzfuß</column>
+			<column name="active">false</column>
+		</insert>
+
+		<insert tableName="customer">
+			<column name="username">tuk</column>
+			<column name="password">123</column>
+			<column name="firstname">Ferdibrand</column>
+			<column name="lastname">Tuk</column>
+			<column name="active">true</column>
+		</insert>
 
 	</changeSet>
 
