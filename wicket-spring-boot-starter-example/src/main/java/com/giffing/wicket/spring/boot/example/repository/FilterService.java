@@ -2,12 +2,12 @@ package com.giffing.wicket.spring.boot.example.repository;
 
 import java.util.List;
 
-public interface FilterService<T, F extends Filter> {
+public interface FilterService<MODEL, ID, FILTER_MODEL extends Filter> {
 	
-	T findById(Long object);
+	MODEL findById(ID id);
 	
-	List<T> findAll(Long page, Long count, F filter);
+	List<MODEL> findAll(Long page, Long count, FILTER_MODEL filter);
 	
-	long count(F filter);
+	long count(FILTER_MODEL filter);
 	
 }

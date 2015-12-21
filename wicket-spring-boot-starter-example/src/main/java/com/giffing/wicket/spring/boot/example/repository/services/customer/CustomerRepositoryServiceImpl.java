@@ -28,7 +28,7 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.specs
 
 @Component
 @Transactional(readOnly=true)
-public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Customer, CustomerFilter> implements CustomerRepositoryService {
+public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Customer, Long, CustomerFilter> implements CustomerRepositoryService {
 
 	private CustomerRepository customerRepository;
 

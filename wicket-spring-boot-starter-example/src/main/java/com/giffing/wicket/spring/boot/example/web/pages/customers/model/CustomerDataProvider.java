@@ -11,7 +11,7 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.filte
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.wicket.dataprovider.DefaultDataProvider;
 
-public class CustomerDataProvider extends DefaultDataProvider<Customer, CustomerRepositoryService, CustomerFilter, CustomerSort>{
+public class CustomerDataProvider extends DefaultDataProvider<Customer, Long, CustomerFilter, CustomerSort, CustomerRepositoryService>{
 	
 	@SpringBean
 	private CustomerRepositoryService customerRepositoryService;

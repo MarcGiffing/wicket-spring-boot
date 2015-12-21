@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import com.giffing.wicket.spring.boot.example.repository.Domain;
 
 @Entity
-public class Customer implements Domain, Serializable {
+public class Customer implements Domain<Long>, Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -26,6 +26,7 @@ public class Customer implements Domain, Serializable {
 	
 	private boolean active;
 	
+	@Override
 	public Long getId() {
 		return id;
 	}

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Sort.Direction;
 import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 
-public abstract class DefaultRepositoryService<MODEL, FILTER extends Filter> implements FilterService<MODEL, FILTER>{
+public abstract class DefaultRepositoryService<MODEL, ID, FILTER extends Filter> implements FilterService<MODEL, ID, FILTER>{
 
 	
 	public Sort getSort(FILTER filter) {

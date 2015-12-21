@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.example.repository;
 
-public interface Domain {
+public interface Domain<ID> {
 
-	Long getId();
+	ID getId();
 	
 }

@@ -16,7 +16,7 @@ import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
 
-public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends FilterService<MODEL, FILTER_MODEL>, FILTER_MODEL extends Filter, SORT> implements ISortableDataProvider<MODEL, SORT>, IFilterStateLocator<FILTER_MODEL>{
+public abstract class DefaultDataProvider<MODEL extends Domain<ID>, ID, FILTER_MODEL extends Filter, SORT, SERVICE extends FilterService<MODEL, ID, FILTER_MODEL>> implements ISortableDataProvider<MODEL, SORT>, IFilterStateLocator<FILTER_MODEL>{
 	
 	public abstract SERVICE getFilterService();
 	
@@ -51,7 +51,7 @@ public abstract class DefaultDataProvider<MODEL extends Domain, SERVICE extends 
 
 	@Override
 	public IModel<MODEL> model(MODEL object) {
-		Long id = object.getId();
+		ID id = object.getId();
 		return new CompoundPropertyModel<>(new LoadableDetachableModel<MODEL>(object) {
 
 			@Override
