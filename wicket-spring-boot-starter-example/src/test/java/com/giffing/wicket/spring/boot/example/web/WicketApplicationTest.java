@@ -29,7 +29,7 @@ public class WicketApplicationTest {
 	@Before
 	public void setUp(){
 		tester = new WicketTester(wicketApplication);
-		login("user", "user");
+		login("admin", "admin");
 		
 	}
 	private void login(String username, String password) {

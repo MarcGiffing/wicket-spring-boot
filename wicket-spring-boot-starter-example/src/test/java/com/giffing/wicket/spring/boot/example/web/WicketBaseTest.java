@@ -4,6 +4,7 @@ import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -19,36 +20,47 @@ import com.giffing.wicket.spring.boot.starter.pages.HomePage;
 import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
+/**
+ * Test class for initialize Wicket & Spring Boot only in the web package.
+ * All external spring beans have to be mocked. 
+ * 
+ * @author Marc Giffing
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WicketWebApplicationConfig.class)
 @WebAppConfiguration
+@Ignore
 public class WicketBaseTest {
+
+	private static final String USERNAME = "admin";
+	private static final String PASSWORD = "admin";
 
 	private WicketTester tester;
 	
 	@Autowired
 	private WicketWebApplicationConfig wicketApplication;
-	
-	 private ApplicationContextMock applicationContextMock;
-	
+
+	private ApplicationContextMock applicationContextMock;
+
 	@Before
-	public void setUp(){
+	public void setUp() {
 		applicationContextMock = new ApplicationContextMock();
 		applicationContextMock.putBean("authenticationManager", new AuthenticationManager() {
-			
+
 			@Override
 			public Authentication authenticate(Authentication arg0) throws AuthenticationException {
-				return new TestingAuthenticationToken("admin", "admin", "USER", "ADMIN");
+				return new TestingAuthenticationToken(USERNAME, PASSWORD, "USER", "ADMIN");
 			}
 		});
 		ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
 		tester = new WicketTester(wicketApplication);
-
-		login("admin", "admin");
+		login(USERNAME, PASSWORD);
 	}
+
 	private void login(String username, String password) {
 		SecureWebSession session = (SecureWebSession) tester.getSession();
-		session.signOut();  
+		session.signOut();
 		tester.startPage(LoginPage.class);
 		FormTester formTester = tester.newFormTester("loginForm");
 		formTester.setValue("username", username);
@@ -57,14 +69,17 @@ public class WicketBaseTest {
 		tester.assertNoErrorMessage();
 		tester.assertRenderedPage(HomePage.class);
 	}
+
 	public WicketTester getTester() {
 		return tester;
 	}
+
 	public WicketWebApplicationConfig getWicketApplication() {
 		return wicketApplication;
 	}
+
 	public ApplicationContextMock getApplicationContextMock() {
 		return applicationContextMock;
 	}
-	
+
 }
