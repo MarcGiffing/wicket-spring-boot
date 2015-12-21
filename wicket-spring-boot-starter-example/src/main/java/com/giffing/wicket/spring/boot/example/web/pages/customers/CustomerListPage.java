@@ -64,7 +64,9 @@ public class CustomerListPage extends BasePage {
 	public CustomerListPage() {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
-
+		
+		queue(new BookmarkablePageLink<Customer>("create", CustomerCreatePage.class));
+		
 		queue(new ValidationForm<>("form", customerFilterModel));
 		queue(new LabledFormBroder<>(getString("id"), new TextField<>("id")));
 		UsernameSearchTextField usernameTextField = new UsernameSearchTextField("usernameLike");
@@ -206,9 +208,6 @@ public class CustomerListPage extends BasePage {
 			public void populateItem(Item<ICellPopulator<Customer>> cellItem, String componentId,
 					IModel<Customer> rowModel) {
 				List<AbstrractActionItem> abstractItems = new ArrayList<>();
-				
-				abstractItems.add(new ActionItemLink(Model.of("create"), IconType.CREATE,
-						new BookmarkablePageLink<Customer>("link", CustomerCreatePage.class)));
 				
 				abstractItems.add(new ActionItemLink(Model.of("edit"), IconType.EDIT,
 						new BookmarkablePageLink<Customer>("link", CustomerEditPage.class)));

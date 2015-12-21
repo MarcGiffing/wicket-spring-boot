@@ -127,6 +127,17 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 		return createQuery.getResultList();
 	}
 
+	@Override
+	@Transactional(readOnly=false)
+	public Customer save(Customer customer) {
+		return customerRepository.save(customer);
+	}
+
+	@Override
+	public boolean usernameExists(String username) {
+		return customerRepository.countByUsernameIgnoreCase(username) >= 1;
+	}
+
 
 	
 }

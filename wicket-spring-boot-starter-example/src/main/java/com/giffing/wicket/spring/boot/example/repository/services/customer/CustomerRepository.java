@@ -10,6 +10,9 @@ import com.giffing.wicket.spring.boot.example.model.Customer;
 
 public interface CustomerRepository extends CrudRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {
 	
+	@Override
 	List<Customer> findAll(Specification<Customer> specs);
+
+	int countByUsernameIgnoreCase(String username);
 	
 }

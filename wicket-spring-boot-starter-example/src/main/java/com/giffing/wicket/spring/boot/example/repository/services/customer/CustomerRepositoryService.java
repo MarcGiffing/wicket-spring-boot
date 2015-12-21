@@ -12,4 +12,12 @@ public interface CustomerRepositoryService extends FilterService<Customer, Long,
 
 	List<String> findUsernames(int count, String usernamePart);
 
+	Customer save(Customer customer);
+
+	/**
+	 * @param username
+	 * @return true if the username already exists
+	 */
+	boolean usernameExists(String username);
+
 }

@@ -79,27 +79,17 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	public void assert_click_customer_create_page(){
-		getTester().startPage(CustomerListPage.class);
-		getTester().assertRenderedPage(CustomerListPage.class);
-		
-		getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
-		getTester().assertRenderedPage(CustomerCreatePage.class);
-	}
-	
-	@Test
 	@DirtiesContext
 	public void assert_delete_customer_method_called_once(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
 		
-		getTester().clickLink(getTableCell(5, 6) + "items:2:item:link");
+		getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
 		getTester().assertComponent("defaultModal", YesNoModal.class);
 		getTester().clickLink("defaultModal:content:yes", true);
 		
 		verify(repository, times(1)).delete(Mockito.anyLong());
 		verify(repository, times(1)).delete(5L);
-		
 		
 	}
 	
