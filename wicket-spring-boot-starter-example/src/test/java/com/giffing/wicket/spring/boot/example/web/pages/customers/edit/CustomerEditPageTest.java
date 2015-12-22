@@ -51,7 +51,14 @@ public class CustomerEditPageTest extends WicketBaseTest {
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "9548");
 		getTester().startPage(CustomerEditPage.class, params);
 		getTester().assertRenderedPage(CustomerListPage.class);
+		
+		
 		getTester().assertErrorMessages("Customer not found 9548");
+		//TODO how to get a resource from a page which can't be accessed cause of redirect.
+//		Localizer localizer = getTester().getApplication().getResourceSettings()
+//                .getLocalizer();
+//		
+//		getTester().assertErrorMessages(MessageFormat.format(localizer.getString("customer.not-found", getTester().getLastRenderedPage()), "9548"));
 	}
 	
 	@Test
@@ -92,7 +99,7 @@ public class CustomerEditPageTest extends WicketBaseTest {
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "3");
 		getTester().startPage(CustomerEditPage.class, params);
-		
+
 		FormTester formTester = getTester().newFormTester("form");
 		formTester.setValue(borderPath("firstname"), "the-new-firstname");
 		formTester.submit("submit");
