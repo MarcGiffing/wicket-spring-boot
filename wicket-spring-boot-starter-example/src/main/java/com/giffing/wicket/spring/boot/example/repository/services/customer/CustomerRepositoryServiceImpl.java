@@ -138,6 +138,11 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 		return customerRepository.countByUsernameIgnoreCase(username) >= 1;
 	}
 
+	@Override
+	public Customer findByUsername(String username) {
+		return customerRepository.findByUsernameIgnoreCase(username);
+	}
+
 
 	
 }

@@ -13,6 +13,8 @@ public interface CustomerRepositoryService extends FilterService<Customer, Long,
 	List<String> findUsernames(int count, String usernamePart);
 
 	Customer save(Customer customer);
+	
+	Customer findByUsername(String username);
 
 	/**
 	 * @param username

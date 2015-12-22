@@ -9,6 +9,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.markup.repeater.Item;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.Rollback;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
@@ -26,6 +27,7 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 	private CustomerRepositoryService service;
 	
 	@Test
+	@DirtiesContext
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void assert_start_customer_list_page(){
 		getTester().startPage(CustomerListPage.class);
@@ -48,6 +50,7 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 	}
 	
 	@Test
+	@DirtiesContext
 	public void assert_delete_customer_method_called_once(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);

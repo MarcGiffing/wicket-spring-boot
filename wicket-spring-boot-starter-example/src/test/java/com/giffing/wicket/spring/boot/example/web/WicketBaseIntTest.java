@@ -7,6 +7,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -16,8 +17,8 @@ import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 /**
- * Test class for initialize Wicket & Spring Boot only in the web package.
- * All external spring beans have to be mocked. 
+ * Test class for initialize Wicket & Spring Boot only in the web package. All
+ * external spring beans have to be mocked.
  * 
  * @author Marc Giffing
  *
@@ -26,22 +27,21 @@ import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 @SpringApplicationConfiguration(classes = WicketApplication.class)
 @WebAppConfiguration
 @Ignore
+@DirtiesContext
 public class WicketBaseIntTest {
 
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "admin";
 
-	private static WicketTester tester;
-	
+	private WicketTester tester;
+
 	@Autowired
 	private WicketWebApplicationConfig wicketApplication;
 
 	@Before
 	public void setUp() {
-		if(tester == null){
-			tester = new WicketTester(wicketApplication);
-			login(USERNAME, PASSWORD);
-		}
+		tester = new WicketTester(wicketApplication);
+		login(USERNAME, PASSWORD);
 	}
 
 	private void login(String username, String password) {

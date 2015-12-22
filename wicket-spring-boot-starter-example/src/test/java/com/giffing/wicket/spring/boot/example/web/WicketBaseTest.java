@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -31,12 +32,13 @@ import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 @SpringApplicationConfiguration(classes = WicketWebApplicationConfig.class)
 @WebAppConfiguration
 @Ignore
+@DirtiesContext
 public class WicketBaseTest {
 
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "admin";
 
-	private static WicketTester tester;
+	private WicketTester tester;
 
 	@Autowired
 	private WicketWebApplicationConfig wicketApplication;
@@ -47,17 +49,15 @@ public class WicketBaseTest {
 	public void setUp() {
 		applicationContextMock = new ApplicationContextMock();
 		applicationContextMock.putBean("authenticationManager", new AuthenticationManager() {
-			
+
 			@Override
 			public Authentication authenticate(Authentication arg0) throws AuthenticationException {
 				return new TestingAuthenticationToken(USERNAME, PASSWORD, "USER", "ADMIN");
 			}
 		});
 		ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
-		if (tester == null) {
-			tester = new WicketTester(wicketApplication);
-			login(USERNAME, PASSWORD);
-		}
+		tester = new WicketTester(wicketApplication);
+		login(USERNAME, PASSWORD);
 	}
 
 	private void login(String username, String password) {

@@ -14,5 +14,7 @@ public interface CustomerRepository extends CrudRepository<Customer, Long>, JpaS
 	List<Customer> findAll(Specification<Customer> specs);
 
 	int countByUsernameIgnoreCase(String username);
+
+	Customer findByUsernameIgnoreCase(String username);
 	
 }
