@@ -26,6 +26,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -42,6 +43,7 @@ import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
+import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractTextFieldFilter;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
@@ -61,6 +63,7 @@ public class CustomerListPage extends BasePage {
 	private FilterForm<CustomerFilter> filterForm;
 
 	public CustomerListPage() {
+		add(new FeedbackPanel("feedback"));
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 		
@@ -206,8 +209,10 @@ public class CustomerListPage extends BasePage {
 					IModel<Customer> rowModel) {
 				List<AbstrractActionItem> abstractItems = new ArrayList<>();
 				
+				PageParameters params = new PageParameters();
+				params.add(CustomerEditPage.CUSTOMER_ID_PARAM, rowModel.getObject().getId());
 				abstractItems.add(new ActionItemLink(Model.of("edit"), IconType.EDIT,
-						new BookmarkablePageLink<Customer>("link", CustomerEditPage.class)));
+						new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params )));
 				
 				abstractItems.add(new YesNoLink<String>(Model.of("xx"), IconType.DELETE) {
 

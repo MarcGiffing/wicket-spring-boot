@@ -21,5 +21,5 @@ public interface CustomerRepositoryService extends FilterService<Customer, Long,
 	 * @return true if the username already exists
 	 */
 	boolean usernameExists(String username);
-
+	
 }

@@ -27,14 +27,49 @@ public class CustomerCreatePage extends BasePage{
 	public CustomerCreatePage(){
 		customerModel = new CompoundPropertyModel<>(new Customer());
 		queue(new ValidationForm<>("form", customerModel));
-		queue(new LabledFormBroder<>(getString("username"), new UsernameTextField("username")));
-		queue(new LabledFormBroder<>(getString("firstname"), new RequiredTextField<>("firstname")));
-		queue(new LabledFormBroder<>(getString("lastname"), new RequiredTextField<>("lastname")));
-		queue(new LabledFormBroder<>(getString("password"), new PasswordTextField("password")));
+		queue(usernameField());
+		queue(firstnameField());
+		queue(lastnameField());
+		queue(passwordField());
 		queue(submitButton());
 		queue(cancelButton());
 	}
 
+	private LabledFormBroder<String> usernameField() {
+		return new LabledFormBroder<String>(getString("username"), new UsernameTextField("username")){
+
+			@Override
+			public boolean isEnabled() {
+				return isCreatePage();
+			}
+			
+		};
+	}
+
+	private LabledFormBroder<Object> firstnameField() {
+		return new LabledFormBroder<>(getString("firstname"), new RequiredTextField<>("firstname"));
+	}
+
+	private LabledFormBroder<Object> lastnameField() {
+		return new LabledFormBroder<>(getString("lastname"), new RequiredTextField<>("lastname"));
+	}
+	
+	private LabledFormBroder<String> passwordField() {
+		LabledFormBroder<String> passwordTextField = new LabledFormBroder<String>(getString("password"), new PasswordTextField("password")){
+
+			@Override
+			public boolean isVisible() {
+				return isCreatePage();
+			}
+			
+		};
+		return passwordTextField;
+	}
+
+	public boolean isCreatePage(){
+		return true;
+	}
+	
 	private Component submitButton() {
 		return new Button("submit"){
 			@Override
@@ -56,6 +91,10 @@ public class CustomerCreatePage extends BasePage{
 		};
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
+	}
+
+	public CompoundPropertyModel<Customer> getCustomerModel() {
+		return customerModel;
 	}
 	
 }

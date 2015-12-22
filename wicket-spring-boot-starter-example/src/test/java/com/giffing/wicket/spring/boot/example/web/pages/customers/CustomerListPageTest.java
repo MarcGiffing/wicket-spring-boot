@@ -109,7 +109,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 		return "filterForm:table:body:rows:" + row + ":cells:" + cell + ":cell:";
 	}
 	
-	private List<Customer> createCustomers(long count) {
+	public static List<Customer> createCustomers(long count) {
 		List<Customer> customers = new ArrayList<>();
 		for(long i = 1; i <= count; i++){
 			customers.add(createCustomer(i));
@@ -117,7 +117,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 		return customers;
 	}
 
-	private Customer createCustomer(long i) {
+	public static Customer createCustomer(long i) {
 		Customer customer = new Customer();
 		customer.setId(Long.valueOf(i));
 		customer.setUsername("username" + i);

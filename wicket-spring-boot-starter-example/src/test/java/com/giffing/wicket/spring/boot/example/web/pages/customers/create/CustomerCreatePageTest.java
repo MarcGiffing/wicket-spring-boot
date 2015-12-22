@@ -10,9 +10,7 @@ import static org.mockito.Mockito.when;
 import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.test.annotation.DirtiesContext;
@@ -22,7 +20,6 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.Custo
 import com.giffing.wicket.spring.boot.example.web.WicketBaseTest;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class CustomerCreatePageTest extends WicketBaseTest {
 
 	private CustomerRepositoryService repository;
@@ -32,7 +29,6 @@ public class CustomerCreatePageTest extends WicketBaseTest {
 	public void setUp(){
 		super.setUp();
 		ApplicationContextMock applicationContextMock = getApplicationContextMock();
-		System.out.println(repository + " " + applicationContextMock);
 		repository = Mockito.mock(CustomerRepositoryService.class);
 		
 		applicationContextMock.putBean(repository);

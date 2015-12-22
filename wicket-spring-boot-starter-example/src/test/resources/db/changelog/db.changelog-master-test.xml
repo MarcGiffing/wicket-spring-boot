@@ -9,6 +9,7 @@
 
 	<changeSet id="init-testdata" author="mgiffing">
 		<insert tableName="customer">
+			<column name="id">1</column>
 			<column name="username">frodo</column>
 			<column name="password">123</column>
 			<column name="firstname">Frodo</column>
