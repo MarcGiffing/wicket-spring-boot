@@ -79,6 +79,15 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
+	public void assert_click_customer_create_page(){
+		getTester().startPage(CustomerListPage.class);
+		getTester().assertRenderedPage(CustomerListPage.class);
+		
+		getTester().clickLink("create");
+		getTester().assertRenderedPage(CustomerCreatePage.class);
+	}
+	
+	@Test
 	@DirtiesContext
 	public void assert_delete_customer_method_called_once(){
 		getTester().startPage(CustomerListPage.class);
