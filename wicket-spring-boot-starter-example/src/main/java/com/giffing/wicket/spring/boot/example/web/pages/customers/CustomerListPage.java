@@ -42,7 +42,6 @@ import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
-import com.giffing.wicket.spring.boot.example.web.html.form.focus.FocusBehaviour;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractTextFieldFilter;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
@@ -69,9 +68,7 @@ public class CustomerListPage extends BasePage {
 		
 		queue(new ValidationForm<>("form", customerFilterModel));
 		queue(new LabledFormBroder<>(getString("id"), new TextField<>("id")));
-		UsernameSearchTextField usernameTextField = new UsernameSearchTextField("usernameLike");
-		usernameTextField.add(new FocusBehaviour());
-		queue(new LabledFormBroder<>(getString("username"), usernameTextField));
+		queue(new LabledFormBroder<>(getString("username"), new UsernameSearchTextField("usernameLike")));
 		queue(new LabledFormBroder<>(getString("firstname"), new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3))));
 		queue(new LabledFormBroder<>(getString("lastname"), new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3))));
 		queue(new LabledFormBroder<>(getString("active"), new CheckBox("active")));
