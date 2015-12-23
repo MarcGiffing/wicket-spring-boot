@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.dev;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.dev.spring.devtools;
 
 import org.apache.wicket.serialize.ISerializer;
 import org.springframework.core.convert.converter.Converter;

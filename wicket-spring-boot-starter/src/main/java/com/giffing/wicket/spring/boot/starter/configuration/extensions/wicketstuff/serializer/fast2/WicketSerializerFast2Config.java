@@ -4,6 +4,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.serialize.ISerializer;
 import org.apache.wicket.serialize.java.JavaSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer;
@@ -11,11 +12,13 @@ import org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer;
 import com.giffing.wicket.spring.boot.context.exceptions.extensions.ExtensionMisconfigurationException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.dev.spring.devtools.SpringDevtoolsSerializerConfig;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = WicketSerializerFast2Properties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = org.wicketstuff.pageserializer.fast2.Fast2WicketSerializer.class)
 @EnableConfigurationProperties({ WicketSerializerFast2Properties.class })
+@ConditionalOnMissingBean(SpringDevtoolsSerializerConfig.class)
 public class WicketSerializerFast2Config implements WicketApplicationInitConfiguration {
 
 	@Override
