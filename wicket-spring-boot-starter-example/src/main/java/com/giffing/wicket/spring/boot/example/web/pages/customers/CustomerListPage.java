@@ -19,7 +19,6 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
-import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -212,17 +211,9 @@ public class CustomerListPage extends BasePage {
 				
 				PageParameters params = new PageParameters();
 				params.add(CustomerEditPage.CUSTOMER_ID_PARAM, rowModel.getObject().getId());
-				
-				Link<Customer> linkToCustomerEditPage = new Link<Customer>("link") {
-
-					@Override
-					public void onClick() {
-						setResponsePage(new CustomerEditPage(params, getPageId()));
-						
-					}
-				};
+				params.add(CustomerEditPage.PAGE_REFERENCE_ID, getPageId());
 				abstractItems.add(new ActionItemLink(Model.of("edit"), IconType.EDIT,
-						linkToCustomerEditPage));
+						new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params )));
 				
 				abstractItems.add(new YesNoLink<String>(Model.of("xx"), IconType.DELETE) {
 

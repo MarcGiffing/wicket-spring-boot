@@ -17,28 +17,29 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.create.Custome
 public class CustomerEditPage extends CustomerCreatePage {
 	
 	public static final String CUSTOMER_ID_PARAM = "id";
+	public static final String PAGE_REFERENCE_ID = "referenceId";
 	
 	@SpringBean
 	private CustomerRepositoryService service;
 	
-	public CustomerEditPage(PageParameters params, Integer pageId){
-		this(params);
-		setPageReferenceId(pageId);
-	}
-	
 	public CustomerEditPage(PageParameters params){
 		super();
-		StringValue stringValue = params.get(CUSTOMER_ID_PARAM);
-		if(stringValue.isEmpty() || !StringUtils.isNumeric(stringValue.toString())){
-			getSession().error(MessageFormat.format(getString("param.customer.id.missing"), stringValue));
+		StringValue customerIdParam = params.get(CUSTOMER_ID_PARAM);
+		if(customerIdParam.isEmpty() || !StringUtils.isNumeric(customerIdParam.toString())){
+			getSession().error(MessageFormat.format(getString("param.customer.id.missing"), customerIdParam));
 //			"Missing customer id " + stringValue
 			setResponsePage(CustomerListPage.class);
 		}
-		Long customerId = stringValue.toLong();
+		Long customerId = customerIdParam.toLong();
 		Customer customer = service.findById(customerId);
 		if(customer == null){
 			getSession().error(MessageFormat.format(getString("customer.not-found"), customerId.toString()));
 			setResponsePage(CustomerListPage.class);
+		}
+		
+		StringValue pageReferfenceIdParam = params.get(PAGE_REFERENCE_ID);
+		if(!pageReferfenceIdParam.isEmpty() || StringUtils.isNumeric(pageReferfenceIdParam.toString())){
+			setPageReferenceId(pageReferfenceIdParam.toInteger());
 		}
 		
 		getCustomerModel().setObject(customer);
