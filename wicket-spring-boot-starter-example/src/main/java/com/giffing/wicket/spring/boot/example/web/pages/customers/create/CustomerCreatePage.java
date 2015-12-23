@@ -1,7 +1,9 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers.create;
 
 import org.apache.wicket.Component;
+import org.apache.wicket.PageReference;
 import org.apache.wicket.markup.html.form.Button;
+import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -24,6 +26,12 @@ public class CustomerCreatePage extends BasePage{
 	
 	CompoundPropertyModel<Customer> customerModel;
 	
+	private Integer pageReferenceId;
+	
+	public CustomerCreatePage(Integer pageId){
+		this.pageReferenceId = pageId;
+	}
+	
 	public CustomerCreatePage(){
 		customerModel = new CompoundPropertyModel<>(new Customer());
 		queue(new ValidationForm<>("form", customerModel));
@@ -31,8 +39,13 @@ public class CustomerCreatePage extends BasePage{
 		queue(firstnameField());
 		queue(lastnameField());
 		queue(passwordField());
+		queue(activeField());
 		queue(submitButton());
 		queue(cancelButton());
+	}
+
+	private Component activeField() {
+		return new LabledFormBroder<Boolean>(getString("active"), new CheckBox("active"));
 	}
 
 	private LabledFormBroder<String> usernameField() {
@@ -75,7 +88,11 @@ public class CustomerCreatePage extends BasePage{
 			@Override
 			public void onSubmit() {
 				service.save(customerModel.getObject());
-				setResponsePage(CustomerListPage.class);
+				if(pageReferenceId != null){
+					setResponsePage(new PageReference(pageReferenceId).getPage());
+				} else {
+					setResponsePage(CustomerListPage.class);
+				}
 			}
 		};
 	}
@@ -85,7 +102,11 @@ public class CustomerCreatePage extends BasePage{
 
 			@Override
 			public void onSubmit() {
-				setResponsePage(CustomerListPage.class);
+				if(pageReferenceId != null){
+					setResponsePage(new PageReference(pageReferenceId).getPage());
+				} else {
+					setResponsePage(CustomerListPage.class);
+				}
 			}
 			
 		};
@@ -95,6 +116,14 @@ public class CustomerCreatePage extends BasePage{
 
 	public CompoundPropertyModel<Customer> getCustomerModel() {
 		return customerModel;
+	}
+
+	public Integer getPageReferenceId() {
+		return pageReferenceId;
+	}
+
+	public void setPageReferenceId(Integer pageReferenceId) {
+		this.pageReferenceId = pageReferenceId;
 	}
 	
 }

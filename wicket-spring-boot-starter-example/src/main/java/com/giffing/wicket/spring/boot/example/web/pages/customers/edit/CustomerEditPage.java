@@ -21,6 +21,11 @@ public class CustomerEditPage extends CustomerCreatePage {
 	@SpringBean
 	private CustomerRepositoryService service;
 	
+	public CustomerEditPage(PageParameters params, Integer pageId){
+		this(params);
+		setPageReferenceId(pageId);
+	}
+	
 	public CustomerEditPage(PageParameters params){
 		super();
 		StringValue stringValue = params.get(CUSTOMER_ID_PARAM);
