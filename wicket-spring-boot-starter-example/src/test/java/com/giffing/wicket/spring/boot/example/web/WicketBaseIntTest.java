@@ -36,7 +36,7 @@ public class WicketBaseIntTest {
 	private WicketTester tester;
 
 	@Autowired
-	private WicketWebApplicationConfig wicketApplication;
+	private WicketApplication wicketApplication;
 
 	@Before
 	public void setUp() {
@@ -60,7 +60,7 @@ public class WicketBaseIntTest {
 		return tester;
 	}
 
-	public WicketWebApplicationConfig getWicketApplication() {
+	public WicketApplication getWicketApplication() {
 		return wicketApplication;
 	}
 

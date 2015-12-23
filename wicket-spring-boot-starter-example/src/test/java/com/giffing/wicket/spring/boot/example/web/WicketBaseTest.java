@@ -21,6 +21,8 @@ import com.giffing.wicket.spring.boot.starter.pages.HomePage;
 import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
+import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
+
 /**
  * Test class for initialize Wicket & Spring Boot only in the web package. All
  * external spring beans have to be mocked.

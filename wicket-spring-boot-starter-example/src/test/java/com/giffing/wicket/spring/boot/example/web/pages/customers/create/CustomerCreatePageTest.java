@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import org.apache.wicket.spring.test.ApplicationContextMock;
@@ -86,9 +87,11 @@ public class CustomerCreatePageTest extends WicketBaseTest {
 		getTester().assertErrorMessages("Username already exists!");
 		getTester().assertRenderedPage(CustomerCreatePage.class);
 		
-		//it should be checked, that the username does not already exists
+		//it should be checked, that the username does already exists
 		verify(repository, times(1)).usernameExists(newUsername);
 		verify(repository, times(0)).save(Mockito.any());
+	
+		verifyNoMoreInteractions(repository);
 	}
 	
 	private String borderPath(String componentName){
