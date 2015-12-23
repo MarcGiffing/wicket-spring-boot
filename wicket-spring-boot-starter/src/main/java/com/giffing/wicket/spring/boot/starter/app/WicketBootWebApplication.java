@@ -21,6 +21,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.dev.SpringDevToolsSerializer;
 import com.giffing.wicket.spring.boot.starter.pages.HomePage;
 import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
@@ -79,6 +80,8 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 			logger.info("init-config: " + configuration.getClass().getName());
 			configuration.init(this);
 		}
+		
+		this.getFrameworkSettings().setSerializer(new SpringDevToolsSerializer());
 	}
 	
 	@Override
