@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
@@ -53,6 +54,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.model.Customer
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameSearchTextField;
 
 @MountPath("customers")
+@AuthorizeInstantiation("USER")
 public class CustomerListPage extends BasePage {
 
 	@SpringBean

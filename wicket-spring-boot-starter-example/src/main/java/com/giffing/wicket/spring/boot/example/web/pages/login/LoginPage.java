@@ -1,15 +1,16 @@
-package com.giffing.wicket.spring.boot.starter.pages;
+package com.giffing.wicket.spring.boot.example.web.pages.login;
 
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
+
+import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
+import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 
 /**
  * Default login page.
@@ -17,8 +18,8 @@ import org.wicketstuff.annotation.mount.MountPath;
  * @author Marc Giffing
  *
  */
-@MountPath("bootLoginPage")
-public class LoginPage extends WebPage {
+@MountPath("login")
+public class LoginPage extends BasePage {
 
 	public LoginPage(PageParameters parameters) {
 		super(parameters);

@@ -3,12 +3,10 @@ package com.giffing.wicket.spring.boot.starter.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.slf4j.Logger;
@@ -21,8 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
 import com.giffing.wicket.spring.boot.starter.WicketProperties;
-import com.giffing.wicket.spring.boot.starter.pages.HomePage;
-import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 /**
@@ -44,7 +40,7 @@ import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
  * @author Marc Giffing
  *
  */
-public class WicketBootWebApplication extends AuthenticatedWebApplication {
+public abstract class WicketBootWebApplication extends AuthenticatedWebApplication {
 
 	private final static Logger logger = LoggerFactory
 		.getLogger(WicketBootWebApplication.class);
@@ -91,19 +87,5 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
 		return SecureWebSession.class;
 	}
-	
-	/**
-	 * The default home page which can be overridden.
-	 */
-	@Override
-	public Class<? extends Page> getHomePage() {
-		return HomePage.class;
-	}
-
-	@Override
-	protected Class<? extends WebPage> getSignInPageClass() {
-		return LoginPage.class;
-	}
-
 	
 }

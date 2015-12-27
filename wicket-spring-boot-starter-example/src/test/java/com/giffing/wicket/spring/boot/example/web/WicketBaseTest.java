@@ -17,8 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import com.giffing.wicket.spring.boot.starter.pages.HomePage;
-import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
+import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
@@ -71,7 +70,7 @@ public class WicketBaseTest {
 		formTester.setValue("password", password);
 		formTester.submit();
 		tester.assertNoErrorMessage();
-		tester.assertRenderedPage(HomePage.class);
+		tester.assertRenderedPage(tester.getApplication().getHomePage());
 	}
 
 	public WicketTester getTester() {

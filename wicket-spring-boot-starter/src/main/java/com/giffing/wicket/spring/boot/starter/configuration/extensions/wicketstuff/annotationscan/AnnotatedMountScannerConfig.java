@@ -6,12 +6,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.core.annotation.Order;
-import org.wicketstuff.annotation.scan.AnnotatedMountList;
 import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.pages.LoginPage;
 
 /**
  * Auto configuration for the {@link AnnotatedMountScanner}.
@@ -47,9 +45,6 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 			packagename = prop.getPackagename();
 		}
 		
-		String homepagePackage = webApplication.getHomePage().getPackage().getName();
-		webApplication.mountPage("bootLoginPage", LoginPage.class);
-		new AnnotatedMountScanner().scanPackage(homepagePackage).mount(webApplication);
 		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);
 	}
 

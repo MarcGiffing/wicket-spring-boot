@@ -6,9 +6,10 @@
 
 	</head>
 	<body>
+		<wicket:extend>
 		<h2>Login</h2>
 		<form wicket:id="loginForm">
-			<div wicket:id="feedback" />
+			<div wicket:id="feedback"></div>
 			<p>
 				<label>Username:</label>
 				<input type="text" wicket:id="username" />
@@ -19,6 +20,6 @@
 			</p>
 			<input type="submit" value="Login" />
 		</form>
-
+		</wicket:extend>
 	</body>
 </html>
