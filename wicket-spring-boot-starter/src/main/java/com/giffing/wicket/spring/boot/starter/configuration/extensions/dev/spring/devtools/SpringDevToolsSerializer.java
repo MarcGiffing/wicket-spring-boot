@@ -12,7 +12,7 @@ import org.springframework.core.serializer.support.SerializingConverter;
  * provide a custom Wicket {@link ISerializer}.
  * 
  * <p>
- * <b>20.2.6 Known limitations</b> <br/>
+ * <b>20.2.6 Known limitations</b> <br>
  * Restart functionality does not work well with objects that are deserialized using a 
  * standard ObjectInputStream. If you need to deserialize data, you may need to use Spring’s 
  * ConfigurableObjectInputStream in combination with Thread.currentThread().getContextClassLoader().
