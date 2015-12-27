@@ -4,7 +4,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
+import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplication;
@@ -23,7 +23,7 @@ public class WicketApplication extends WicketBootWebApplication {
 
 	@Override
 	public Class<? extends Page> getHomePage() {
-		return CustomerListPage.class;
+		return HomePage.class;
 	}
 
 }

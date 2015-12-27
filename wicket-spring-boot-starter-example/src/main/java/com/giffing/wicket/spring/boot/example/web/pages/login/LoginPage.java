@@ -11,6 +11,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
+import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 
 /**
  * Default login page.
@@ -48,7 +49,7 @@ public class LoginPage extends BasePage {
 		protected void onSubmit() {
 			AuthenticatedWebSession session = AuthenticatedWebSession.get();
 			if (session.signIn(username, password)) {
-				setResponsePage(getApplication().getHomePage());
+				setResponsePage(HomePage.class);
 			} else {
 				error("Login failed");
 			}
