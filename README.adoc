@@ -6,20 +6,19 @@ This project (should) makes it easy to create Wicket projects with a minimum
 of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
 its extension with an reasonable default value which can be overridden over property files.
 
+Spring Boot is using embedded servlet containers so you don't have to deploy the Application to an e.g.
+Tomcat by hand.
+
 The detailed description of the autoconfiguration support can be read in the <<extension>> section.
 
-Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
-[source,java]
-----
-getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
----- 
+This project is automatically registers the needed
+link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WebInitializer.java[WicketFilter]
+for handling Wicket requests and added the Spring applicationBean as an init parameter. 
 
-Also Spring Security is automatically configured. You get a default login page and a default home page.
-These pages can be overridden as usual like in any WicketApplication.
-[source,java]
-----
-getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
-----
+Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
+Also Spring Security is automatically configured. 
+See link:/wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/app/WicketBootWebApplication.java[WicketBootWebApplication]
+
 
 :toc: macro
 
@@ -31,8 +30,8 @@ and add the *wicket-spring-boot-starter* dependency to your configuration.
 [source,xml]
 ----
 <dependency>
-	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
-	<artifactId>wicket-spring-boot-starter</artifactId>
+  <groupId>com.giffing.wicket.spring.boot.starter</groupId>
+  <artifactId>wicket-spring-boot-starter</artifactId>
 </dependency>
 ----
 
@@ -41,6 +40,7 @@ Beside the Maven dependency configuration we need the following steps to do
 . Create a class (e.g. WicketApplication) with a main method
 . Annotate the class with @WicketSpringBootApplication
 . Extend this class with WicketBootWebApplication
+. Define your project specific SignInPage and HomePage.
 . Use the SpringApplicationBuilder to run the WicketApplication class you've created
 
 
@@ -53,13 +53,22 @@ public class WicketApplication extends WicketBootWebApplication {
       .sources(WicketApplication.class)
       .run(args);
   }
+  
+  @Override
+  protected Class<? extends WebPage> getSignInPageClass() {
+    return YourLoginPage.class;
+  }
+
+  @Override
+  public Class<? extends Page> getHomePage() {
+    return YourHomePage.class;
+  }
 }
 ----
 
 Thats all! When you execute the main method you will get a fully working and configured 
-Wicket application with a simple login and home Page. An embedded Tomcat is automatically started.
+Wicket application. An embedded Tomcat is automatically started.
 As in every Wicket application you can override the WicketBootWebApplication as usual. 
-You can change the login/home page or the *init()* method to register other extensions. 
 
 [[how_does_it_work]]
 == How does it work?
