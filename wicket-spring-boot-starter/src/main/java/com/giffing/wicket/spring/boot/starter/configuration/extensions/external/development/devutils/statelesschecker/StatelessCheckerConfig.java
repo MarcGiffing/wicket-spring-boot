@@ -15,7 +15,7 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
  * 
  * 1. The {@link StatelessChecker} is present in the classpath
  * 
- * 2. the {@link WicketProperties}.statelessCheckerEnabled is set to true
+ * 2. the {@link StatelessCheckerProperties}.statelessCheckerEnabled is set to true
  * (default=false)
  * 
  * @author Marc Giffing
