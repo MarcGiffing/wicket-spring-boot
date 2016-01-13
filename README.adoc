@@ -91,7 +91,7 @@ found two properties:
 ----
 @ConfigurationProperties(prefix = AnnotatedMountScannerProperties.PROPERTY_PREFIX)
 public class AnnotatedMountScannerProperties {
-	public static final String PROPERTY_PREFIX = "wicket.wicketstuff.annotationscan";
+	public static final String PROPERTY_PREFIX = "wicket.stuff.annotationscan";
 	/**
 	 * @see AnnotatedMountScannerConfig
 	 */
@@ -279,20 +279,20 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 
 [source,properties]
 ----
-wicket.configuration-type=development # development/deployment(default)
-wicket.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
-wicket.default-markup-encoding=UTF-8 # if null it uses the system default 
+wicket.core.settings.general.runtime-configuration=development # development/deployment(default)
+wicket.core.settings.requestcycle.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
+wicket.core.settings.markup.default-markup-encoding=UTF-8 # if null it uses the system default 
 
 wicket.core.requestmapper.cryptmapper.enabled=false # URL encryption support
 
 
-wicket.core.storesettings.enabled=false # enables custom store settings
-wicket.core.storesettings.session-size=2
-wicket.core.storesettings.session-unit=megabytes
-wicket.core.storesettings.asynchronous= # overrides wickets default value only when set
-wicket.core.storesettings.asynchronous-queue-capacity= # overrides wickets default value only when set
-wicket.core.storesettings.file-store-folder= # overrides wickets default value only when set
-wicket.core.storesettings.inmemory-cache-size= # overrides wickets default value only when set
+wicket.core.settings.pagestore.enabled=false # enables custom store settings
+wicket.core.settings.pagestore.session-size=2
+wicket.core.settings.pagestore.session-unit=megabytes
+wicket.core.settings.pagestore.asynchronous= # overrides wickets default value only when set
+wicket.core.settings.pagestore.asynchronous-queue-capacity= # overrides wickets default value only when set
+wicket.core.settings.pagestore.file-store-folder= # overrides wickets default value only when set
+wicket.core.settings.pagestore.inmemory-cache-size= # overrides wickets default value only when set
 	
 	private Integer maxSizePerSession;
 ----
@@ -369,8 +369,8 @@ See https://github.com/wicketstuff/core/wiki/Annotation[documentation]
 
 [source,properties]
 ----
-wicket.wicketstuff.annotationscan.enabled=true
-wicket.wicketstuff.annotationscan.packagename=
+wicket.stuff.annotationscan.enabled=true
+wicket.stuff.annotationscan.packagename=
 ----
 
 [[extension-wicketstuff-htmlcompressor]]
@@ -392,8 +392,8 @@ See https://github.com/wicketstuff/core/wiki/Htmlcompressor[documentation]
 
 [source,properties]
 ----
-wicket.wicketstuff.htmlcompressor.enabled=true
-wicket.wicketstuff.htmlcompressor.features.*=
+wicket.stuff.htmlcompressor.enabled=true
+wicket.stuff.htmlcompressor.features.*=
 ----
 
 [[extension-core-serializer-deflated]]
@@ -420,7 +420,7 @@ See https://github.com/wicketstuff/core/wiki/FastSerializer2[documentation]
 
 [source,properties]
 ----
-wicket.wicketstuff.serializer.fast2.enabled=true
+wicket.stuff.serializer.fast2.enabled=true
 ----
 
 [[extension-wicketstuff-serializer-kryo2]]
@@ -438,7 +438,7 @@ See https://github.com/wicketstuff/core/wiki/Kryo-Serializer[documentation]
 
 [source,properties]
 ----
-wicket.wicketstuff.serializer.fast2.enabled=true
+wicket.stuff.serializer.fast2.enabled=true
 ----
 
 [[extension-general-debugsettings]]
@@ -448,12 +448,12 @@ Wicket provides some debug settings which could be
 
 [source,properties]
 ----
-wicket.core.debugsettings.enabled=true
-wicket.core.debugsettings.developmentUtilitiesEnabled=true # Enables all of the panels and pages, etc, from wicket-devutils package.
-wicket.core.debugsettings.ajaxDebugModeEnabled=false # if true: wicket-ajax-debug.js is added to header
-wicket.core.debugsettings.componentUseCheck=true
-wicket.core.debugsettings.outputMarkupContainerClassName=false
-wicket.core.debugsettings.componentPathAttributeName=
+wicket.core.settings.debug.enabled=true
+wicket.core.settings.debug.developmentUtilitiesEnabled=true # Enables all of the panels and pages, etc, from wicket-devutils package.
+wicket.core.settings.debug.ajaxDebugModeEnabled=false # if true: wicket-ajax-debug.js is added to header
+wicket.core.settings.debug.componentUseCheck=true
+wicket.core.settings.debug.outputMarkupContainerClassName=false
+wicket.core.settings.debug.componentPathAttributeName=
 ----
 
 [[extension-datastore]]
@@ -466,14 +466,14 @@ See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
 
 [source,properties]
 ----
-wicket.datastore.cassandra.enabled=true
-wicket.datastore.cassandra.contact-points= #comma-separated list 
-wicket.datastore.cassandra.table-name=pagestore
-wicket.datastore.cassandra.keyspace-name=wicket
-wicket.datastore.cassandra.record-ttl=30
-wicket.datastore.cassandra.record-ttl-unit=minutes
-wicket.datastore.cassandra.session-size=2
-wicket.datastore.cassandra.session-unit=megabytes
+wicket.stuff.datastore.cassandra.enabled=true
+wicket.stuff.datastore.cassandra.contact-points= #comma-separated list 
+wicket.stuff.datastore.cassandra.table-name=pagestore
+wicket.stuff.datastore.cassandra.keyspace-name=wicket
+wicket.stuff.datastore.cassandra.record-ttl=30
+wicket.stuff.datastore.cassandra.record-ttl-unit=minutes
+wicket.stuff.datastore.cassandra.session-size=2
+wicket.stuff.datastore.cassandra.session-unit=megabytes
 ----
 
 [source,xml]
@@ -489,9 +489,9 @@ wicket.datastore.cassandra.session-unit=megabytes
 
 [source,properties]
 ----
-wicket.datastore.hazelcast.enabled=true
-wicket.datastore.hazelcast.session-size=2L 
-wicket.datastore.hazelcast.session-unit=megabytes
+wicket.stuff.datastore.hazelcast.enabled=true
+wicket.stuff.datastore.hazelcast.session-size=2L 
+wicket.stuff.datastore.hazelcast.session-unit=megabytes
 ----
 
 [source,xml]
@@ -511,14 +511,14 @@ wicket.datastore.hazelcast.session-unit=megabytes
 
 [source,properties]
 ----
-wicket.datastore.memcached.enabled=true
-wicket.datastore.memcached.session-size=2L 
-wicket.datastore.memcached.session-unit=megabytes
-wicket.datastore.memcached.expiration-time=30
-wicket.datastore.memcached.port=11211
-wicket.datastore.memcached.server-names=
-wicket.datastore.memcached.shutdown-timeout=30
-wicket.datastore.memcached.shutdown-timeout-unit=minutes
+wicket.stuff.datastore.memcached.enabled=true
+wicket.stuff.datastore.memcached.session-size=2L 
+wicket.stuff.datastore.memcached.session-unit=megabytes
+wicket.stuff.datastore.memcached.expiration-time=30
+wicket.stuff.datastore.memcached.port=11211
+wicket.stuff.datastore.memcached.server-names=
+wicket.stuff.datastore.memcached.shutdown-timeout=30
+wicket.stuff.datastore.memcached.shutdown-timeout-unit=minutes
 ----
 
 [source,xml]
@@ -534,14 +534,14 @@ wicket.datastore.memcached.shutdown-timeout-unit=minutes
 
 [source,properties]
 ----
-wicket.datastore.redis.enabled=true
-wicket.datastore.redis.session-size=2L 
-wicket.datastore.redis.session-unit=megabytes
-wicket.datastore.redis.expiration-time=30
-wicket.datastore.redis.port=11211
-wicket.datastore.redis.server-names=
-wicket.datastore.redis.shutdown-timeout=30
-wicket.datastore.redis.shutdown-timeout-unit=minutes
+wicket.stuff.datastore.redis.enabled=true
+wicket.stuff.datastore.redis.session-size=2L 
+wicket.stuff.datastore.redis.session-unit=megabytes
+wicket.stuff.datastore.redis.expiration-time=30
+wicket.stuff.datastore.redis.port=11211
+wicket.stuff.datastore.redis.server-names=
+wicket.stuff.datastore.redis.shutdown-timeout=30
+wicket.stuff.datastore.redis.shutdown-timeout-unit=minutes
 ----
 
 [source,xml]
@@ -569,8 +569,8 @@ wicket.datastore.redis.shutdown-timeout-unit=minutes
 
 [source,properties]
 ----
-wicket.devutils.diskstorebrowser.enabled=false
-wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
+wicket.external.development.devutils.diskstorebrowser.enabled=false
+wicket.external.development.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
 ----
 
 [[extension-devutils-inspector]]
@@ -578,8 +578,8 @@ wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
 
 [source,properties]
 ----
-wicket.devutils.diskstorebrowser.enabled=false
-wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
+wicket.external.development.devutils.diskstorebrowser.enabled=false
+wicket.external.development.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
 ----
 
 [[extension-devutils-statelesschecker]]
@@ -587,8 +587,8 @@ wicket.devutils.diskstorebrowser.mountPage=devutils/diskstore/browser
 
 [source,properties]
 ----
-wicket.devutils.interceptor.enableLiveSessionsPage=false
-wicket.devutils.interceptor.liveSessionPageMount=devutils/inspector/live-session-page
+wicket.external.development.devutils.interceptor.enableLiveSessionsPage=false
+wicket.external.development.devutils.interceptor.liveSessionPageMount=devutils/inspector/live-session-page
 ----
 
 [[extension-wicketsource]]
@@ -606,7 +606,7 @@ See https://github.com/42Lines/wicket-source/wiki[documentation]
 
 [source,properties]
 ----
-wicket.wicketsource.enabled=false
+wicket.external.development.wicketsource.enabled=false
 ----
 
 

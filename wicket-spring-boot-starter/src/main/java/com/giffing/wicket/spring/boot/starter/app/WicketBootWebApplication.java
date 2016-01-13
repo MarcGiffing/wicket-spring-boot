@@ -18,7 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
-import com.giffing.wicket.spring.boot.starter.WicketProperties;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.markup.MarkupSettingsProperties;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requrestcycle.RequestCycleSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 /**
@@ -47,9 +49,15 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 
 	@Autowired
 	private ApplicationContext applicationContext;
-
+	
 	@Autowired
-	private WicketProperties wicketProperties;
+	private GeneralSettingsProperties generalSettingsProperties;
+	
+	@Autowired
+	private RequestCycleSettingsProperties requestCycleSettingsProperties;
+	
+	@Autowired
+	private MarkupSettingsProperties markupSettingsProperties;
 	
 	/**
 	 * Injects all active extension which matches the predefined conditions. May be empty
@@ -65,10 +73,10 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
 		
-		getRequestCycleSettings().setRenderStrategy(wicketProperties.getRenderStrategy());
+		getRequestCycleSettings().setRenderStrategy(requestCycleSettingsProperties.getRenderStrategy());
 		
-		if(wicketProperties.getDefaultMarkupEncoding() != null){
-			getMarkupSettings().setDefaultMarkupEncoding(wicketProperties.getDefaultMarkupEncoding());
+		if(markupSettingsProperties.getDefaultMarkupEncoding() != null){
+			getMarkupSettings().setDefaultMarkupEncoding(markupSettingsProperties.getDefaultMarkupEncoding());
 		}
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
@@ -80,7 +88,7 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 	
 	@Override
 	public RuntimeConfigurationType getConfigurationType() {
-		return wicketProperties.getConfigurationType();
+		return generalSettingsProperties.getConfigurationType();
 	}
 
 	@Override
