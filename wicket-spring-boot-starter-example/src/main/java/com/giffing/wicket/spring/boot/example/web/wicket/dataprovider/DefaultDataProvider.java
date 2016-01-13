@@ -16,7 +16,13 @@ import com.giffing.wicket.spring.boot.example.repository.Filter;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.Sort;
 
-public abstract class DefaultDataProvider<MODEL extends Domain<ID>, ID, FILTER_MODEL extends Filter, SORT, SERVICE extends FilterService<MODEL, ID, FILTER_MODEL>> implements ISortableDataProvider<MODEL, SORT>, IFilterStateLocator<FILTER_MODEL>{
+public abstract class DefaultDataProvider<MODEL extends Domain<ID>, 
+				ID, 
+				FILTER_MODEL extends Filter, 
+				SORT, 
+				SERVICE extends FilterService<MODEL, ID, FILTER_MODEL>> 
+		implements 	ISortableDataProvider<MODEL, SORT>, 
+					IFilterStateLocator<FILTER_MODEL> {
 	
 	public abstract SERVICE getFilterService();
 	
