@@ -318,7 +318,7 @@ project. It will automatically configured and can be used in the project.
 
 [source,properties]
 ----
-wicket.beanvalidation.enabled=true # enabled by default if bean validation project is present
+wicket.external.beanvalidation.enabled=true # enabled by default if bean validation project is present
 ----
 
 [source,xml]
@@ -347,7 +347,7 @@ https://github.com/l0rdn1kk0n/wicket-webjars
 
 [source,properties]
 ----
-wicket.webjars.enabled=true
+wicket.external.webjars.enabled=true
 ----
 
 [source,xml]
