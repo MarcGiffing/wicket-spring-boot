@@ -179,11 +179,15 @@ include::wicket-spring-boot-starter/src/main/resources/application-development.y
 [source,yml]
 ----
 wicket:
-  configuration-type: development
   core:
-    debugsettings:
-      enabled: true
-  wicketstuff:
+    settings:
+      general:
+        configuration-type: development
+      debug:
+        enabled: true
+        component-use-check: true
+        development-utilities-enabled: true
+  stuff:
     htmlcompressor:
       enabled: false
       features:
@@ -204,15 +208,17 @@ wicket:
         removeHttpProtocol: false
         removeHttpsProtocol: false
         preserveLineBreaks: false
-  devutils:
-    statelesschecker:
-      enabled: true
-    interceptor:
-      enable-live-sessions-page: true
-    diskstorebrowser:
-      enabled: true
-  wicketsource:
-    enabled: true
+  external:
+    development:
+      devutils:
+        statelesschecker:
+          enabled: true
+        interceptor:
+          enable-live-sessions-page: true
+        diskstorebrowser:
+          enabled: true
+      wicketsource:
+        enabled: true
 ----
 
 [[custom-conditions]]
