@@ -9,12 +9,11 @@ import org.springframework.context.annotation.Import;
 import com.giffing.wicket.spring.boot.starter.configuration.CustomAnnotationBeanNameGenerator;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.WicketExtensionLocation;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.markup.MarkupSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requrestcycle.RequestCycleSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.web.WebInitializer;
 
 @Configuration
-@EnableConfigurationProperties({ GeneralSettingsProperties.class, MarkupSettingsProperties.class, RequestCycleSettingsProperties.class })
+@EnableConfigurationProperties({ GeneralSettingsProperties.class, RequestCycleSettingsProperties.class })
 @ConditionalOnWebApplication
 @Import({ WebInitializer.class, WebSecurityConfig.class })
 @ComponentScan(basePackageClasses = WicketExtensionLocation.class, nameGenerator=CustomAnnotationBeanNameGenerator.class)

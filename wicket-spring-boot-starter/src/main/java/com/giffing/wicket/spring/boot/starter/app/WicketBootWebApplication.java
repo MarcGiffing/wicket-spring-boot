@@ -19,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.markup.MarkupSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requrestcycle.RequestCycleSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
@@ -56,9 +55,6 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 	@Autowired
 	private RequestCycleSettingsProperties requestCycleSettingsProperties;
 	
-	@Autowired
-	private MarkupSettingsProperties markupSettingsProperties;
-	
 	/**
 	 * Injects all active extension which matches the predefined conditions. May be empty
 	 * if no precondition matches the given preconditions.
@@ -74,10 +70,6 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
 		
 		getRequestCycleSettings().setRenderStrategy(requestCycleSettingsProperties.getRenderStrategy());
-		
-		if(markupSettingsProperties.getDefaultMarkupEncoding() != null){
-			getMarkupSettings().setDefaultMarkupEncoding(markupSettingsProperties.getDefaultMarkupEncoding());
-		}
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());
