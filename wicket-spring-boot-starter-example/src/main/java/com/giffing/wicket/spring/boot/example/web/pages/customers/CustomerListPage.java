@@ -6,22 +6,20 @@ import java.util.List;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
+import org.apache.wicket.extensions.ajax.markup.html.repeater.data.table.AjaxFallbackDefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.grid.ICellPopulator;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
-import org.apache.wicket.extensions.markup.html.repeater.data.table.DefaultDataTable;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilteredPropertyColumn;
-import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.repeater.Item;
-import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -79,7 +77,6 @@ public class CustomerListPage extends BasePage {
 		queue(new LabledFormBroder<>(getString("active"), new CheckBox("active")));
 		queue(cancelButton());
 		
-		customerDataView(customerDataProvider);
 		customerDataTable(customerDataProvider);
 
 	}
@@ -112,7 +109,7 @@ public class CustomerListPage extends BasePage {
 		columns.add(activeColumn());
 		columns.add(actionColumn());
 
-		DataTable<Customer, CustomerSort> dataTable = new DefaultDataTable<Customer, CustomerSort>("table", columns,
+		DataTable<Customer, CustomerSort> dataTable = new AjaxFallbackDefaultDataTable<Customer, CustomerSort>("table", columns,
 				customerDataProvider, 10);
 		FilterToolbar filterToolbar = new FilterToolbar(dataTable, filterForm);
 
@@ -231,18 +228,6 @@ public class CustomerListPage extends BasePage {
 
 			}
 		};
-	}
-	
-	private void customerDataView(CustomerDataProvider customerDataProvider) {
-		DataView<Customer> dataView = new DataView<Customer>("rows", customerDataProvider) {
-
-			@Override
-			protected void populateItem(Item<Customer> item) {
-				item.add(new Label("id"));
-				item.add(new Label("username"));
-			}
-		};
-		queue(dataView);
 	}
 
 }
