@@ -346,6 +346,12 @@ wicket.external.beanvalidation.enabled=true # enabled by default if bean validat
 [source,properties]
 ----
 wicket.core.csrf.enabled=true
+wicket.core.csrf.no-origin-action=allow
+wicket.core.csrf.conflicting-origin-action=abort
+wicket.core.csrf.error-code=400
+wicket.core.csrf.error-message=Origin does not correspond to request
+wicket.core.csrf.accepted-origins.*=
+
 #TODO: There are some configuration options which should be added
 ----
 
