@@ -288,6 +288,12 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 wicket.core.settings.general.runtime-configuration=development # development/deployment(default)
 
 wicket.core.settings.requestcycle.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
+wicket.core.settings.requestcycle.buffer-response=true
+wicket.core.settings.requestcycle.gather-extended-browser-info=false
+wicket.core.settings.requestcycle.response-request-encoding=UTF-8
+wicket.core.settings.requestcycle.timeout-size=1
+wicket.core.settings.requestcycle.timeout-unit=minutes
+wicket.core.settings.requestcycle.exception-retry-count=10
 
 #Markup - Settings
 wicket.core.settings.markup.default-markup-encoding=UTF-8 # if null it uses the system default 

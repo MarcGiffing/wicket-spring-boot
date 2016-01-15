@@ -19,7 +19,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.WebSecurityConfig;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requrestcycle.RequestCycleSettingsProperties;
 import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
 
 /**
@@ -52,9 +51,6 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 	@Autowired
 	private GeneralSettingsProperties generalSettingsProperties;
 	
-	@Autowired
-	private RequestCycleSettingsProperties requestCycleSettingsProperties;
-	
 	/**
 	 * Injects all active extension which matches the predefined conditions. May be empty
 	 * if no precondition matches the given preconditions.
@@ -68,8 +64,6 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 	    
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
-		
-		getRequestCycleSettings().setRenderStrategy(requestCycleSettingsProperties.getRenderStrategy());
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());
