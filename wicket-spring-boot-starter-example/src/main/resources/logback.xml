@@ -1,0 +1,4 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+</configuration>

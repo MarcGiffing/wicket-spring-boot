@@ -13,8 +13,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
@@ -42,8 +40,7 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 	
 	@Override
 	public List<Customer> findAll(Long page, Long count, CustomerFilter filter) {
-		Pageable pageable = new PageRequest(page.intValue(), count.intValue(), getSort(filter));
-		return customerRepository.findAll(filter(filter), pageable).getContent();
+		return customerRepository.findAllBySpec(filter(filter), page, count, getSort(filter) );
 	}
 
 	@Override
