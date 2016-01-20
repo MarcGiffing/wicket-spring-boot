@@ -644,7 +644,9 @@ See https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[Spring Boot De
 
 The project tries to improve the development-time experience when working with Spring Boot. 
 There is a problem with Wickets default and other serializer (fast2, kryo2...). See https://github.com/MarcGiffing/wicket-spring-boot/issues/29[Issue 29]
-If the spring-boot-devtools dependency is in the classpath a special Spring serializer will be activated. 
+If the spring-boot-devtools dependency is in the classpath a 
+link:/wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/configuration/extensions/external/development/springboot/devtools/SpringDevToolsSerializer.java[special Spring serializer]
+will be activated. 
 
 All other serializer will only be activated if the Spring Boot DevTools dependency is not in the classpath.
 
