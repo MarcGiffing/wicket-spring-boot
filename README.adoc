@@ -2,7 +2,7 @@
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
-This project (should) makes it easy to create Wicket projects with a minimum
+This project makes it easy to create Wicket projects with a minimum
 of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
 its extension with an reasonable default value which can be overridden over property files.
 
@@ -247,10 +247,10 @@ public ConditionalConfig implements WicketApplicationInitConfiguration{
 [[extension]]
 == Extensions
 
-The following section describes the current extensions and there
+The following section describes the current extensions and the
 required dependencies. An extension is a custom labeling in this project
 which is used to auto-configure a specific part of an Wicket application. An extension
-may require an external dependency or is using core features. See section
+may require an external dependency or is using Wickets core features. See section
 <<how_does_it_work>> to get a deeper knowledge.
 
 * <<extension-general>>
@@ -274,6 +274,7 @@ may require an external dependency or is using core features. See section
 *** <<extension-devutils-inspector>>
 *** <<extension-devutils-statelesschecker>>
 *** <<extension-wicketsource>>
+*** <<extension-springboot-devtools>>
 
 [[extension-general]]
 === General
@@ -636,4 +637,25 @@ See https://github.com/42Lines/wicket-source/wiki[documentation]
 wicket.external.development.wicketsource.enabled=false
 ----
 
+[[extension-springboot-devtools]]
+==== Spring Boot - DevTools
 
+See https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[Spring Boot DevTools]
+
+The project tries to improve the development-time experience when working with Spring Boot. 
+But there is a Problem with Wickets default and other serializer (fast2, kryo2...).
+
+If the spring-boot-devtools dependency is in the classpath a special Spring serializer will be activated. 
+See https://github.com/MarcGiffing/wicket-spring-boot/issues/29[Issue 29]
+
+The other serializer will only be activated if the Spring Boot DevTools dependency is not in the classpath.
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+</dependencies>
+----
