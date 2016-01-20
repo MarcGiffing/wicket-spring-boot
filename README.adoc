@@ -643,12 +643,10 @@ wicket.external.development.wicketsource.enabled=false
 See https://spring.io/blog/2015/06/17/devtools-in-spring-boot-1-3[Spring Boot DevTools]
 
 The project tries to improve the development-time experience when working with Spring Boot. 
-But there is a Problem with Wickets default and other serializer (fast2, kryo2...).
-
+There is a problem with Wickets default and other serializer (fast2, kryo2...). See https://github.com/MarcGiffing/wicket-spring-boot/issues/29[Issue 29]
 If the spring-boot-devtools dependency is in the classpath a special Spring serializer will be activated. 
-See https://github.com/MarcGiffing/wicket-spring-boot/issues/29[Issue 29]
 
-The other serializer will only be activated if the Spring Boot DevTools dependency is not in the classpath.
+All other serializer will only be activated if the Spring Boot DevTools dependency is not in the classpath.
 
 [source,xml]
 ----
