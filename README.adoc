@@ -263,6 +263,7 @@ may require an external dependency or is using Wickets core features. See sectio
 *** <<extension-core-serializer-deflated>>
 *** <<extension-wicketstuff-serializer-fast2>>
 *** <<extension-wicketstuff-serializer-kryo2>>
+*** <<extension-wicketstuff-restannotations>>
 *** <<extension-datastore-cassandra>>
 *** <<extension-datastore-hazelcast>>
 *** <<extension-datastore-memcached>>
@@ -478,6 +479,31 @@ See https://github.com/wicketstuff/core/wiki/Kryo-Serializer[documentation]
 ----
 wicket.stuff.serializer.fast2.enabled=true
 ----
+
+
+[[extension-wicketstuff-restannotations]]
+=== Wicketstuff - restannotations
+
+See https://github.com/wicketstuff/core/tree/master/wicketstuff-restannotations-parent[documentation]
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-restannotations</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-restannotations-json</artifactId>
+</dependency>
+----
+
+[source,properties]
+----
+wicket.stuff.restannotations.enabled=true
+wicket.stuff.restannotations.packagename= # the package name to scan for project specific annotations
+----
+
 
 [[extension-general-debugsettings]]
 === General - debugsettings
