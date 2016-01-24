@@ -12,7 +12,7 @@ Tomcat by hand.
 The detailed description of the autoconfiguration support can be read in the <<extension>> section.
 
 This project is automatically registers the needed
-link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WebInitializer.java[WicketFilter]
+link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WicketWebInitializer.java[WicketFilter]
 for handling Wicket requests and added the Spring applicationBean as an init parameter. 
 
 Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
@@ -287,6 +287,11 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 [source,properties]
 ----
 wicket.core.settings.general.runtime-configuration=development # development/deployment(default)
+
+wicket.web.servlet.filter-mapping-param=/*
+wicket.web.servlet.init-parameters.*= # map<string,string> - configuration support for additional servlet init parameters
+
+wicket.external.websocket=true # enables websocket support - dependency required (move documentation to seperated section)
 
 wicket.core.settings.requestcycle.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
 wicket.core.settings.requestcycle.buffer-response=true
