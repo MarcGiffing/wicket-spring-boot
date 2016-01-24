@@ -293,6 +293,11 @@ wicket.web.servlet.init-parameters.*= # map<string,string> - configuration suppo
 
 wicket.external.websocket=true # enables websocket support - dependency required (move documentation to seperated section)
 
+
+#exception settings
+wicket.core.settings.exceptions.thread-dump-strategy=thread_holding_lock
+wicket.core.settings.exceptions.error-handling-strategy-during-ajax-requests=redirect_to_error_page
+
 wicket.core.settings.requestcycle.render-strategy=redirect-to-buffer # redirect-to-buffer / one-pass-render / redirect-to-render
 wicket.core.settings.requestcycle.buffer-response=true
 wicket.core.settings.requestcycle.gather-extended-browser-info=false
