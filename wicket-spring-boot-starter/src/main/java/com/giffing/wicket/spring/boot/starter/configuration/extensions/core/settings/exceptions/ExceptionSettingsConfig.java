@@ -9,6 +9,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 
+/**
+ * Configuration options for Wickets exception settings. I don't know if someone needs this
+ * settings and when they don't need my javadoc :-)
+ * 
+ * @author Marc Giffing
+ *
+ */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = ExceptionSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @EnableConfigurationProperties({ ExceptionSettingsProperties.class })
