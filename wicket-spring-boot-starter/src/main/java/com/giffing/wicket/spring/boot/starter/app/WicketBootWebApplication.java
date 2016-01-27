@@ -53,7 +53,7 @@ public abstract class WicketBootWebApplication extends AuthenticatedWebApplicati
 	
 	/**
 	 * Injects all active extension which matches the predefined conditions. May be empty
-	 * if no precondition matches the given preconditions.
+	 * if no extension matches the given preconditions.
 	 */
 	@Autowired(required = false)
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
