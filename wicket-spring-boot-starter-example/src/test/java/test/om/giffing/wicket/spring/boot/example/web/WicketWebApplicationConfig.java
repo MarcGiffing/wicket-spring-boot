@@ -1,6 +1,7 @@
 package test.om.giffing.wicket.spring.boot.example.web;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
@@ -12,6 +13,7 @@ import com.giffing.wicket.spring.boot.example.web.SpringBootWebPackageIdentifier
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplication;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplication;
 
 //TODO move to test
@@ -34,4 +36,9 @@ public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication 
 		return CustomerListPage.class;
 	}
 
+	@Override
+	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+		return SecureWebSession.class;
+	}
+	
 }
