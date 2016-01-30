@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.giffing.wicket.spring.boot.example.web.SpringBootWebPackageIdentifier;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
-import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
+import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplication;
 import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplication;
 
 //TODO move to test
@@ -22,7 +22,7 @@ import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplicatio
 		HibernateJpaAutoConfiguration.class,
 	})
 @ComponentScan(basePackageClasses=SpringBootWebPackageIdentifier.class)
-public class WicketWebApplicationConfig extends WicketBootWebApplication {
+public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication {
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {

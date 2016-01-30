@@ -9,12 +9,12 @@ import com.giffing.wicket.spring.boot.example.repository.jpa.support.CustomSimpl
 import com.giffing.wicket.spring.boot.example.repository.services.DefaultRepositoryService;
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
-import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
+import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplication;
 import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplication;
 
 @WicketSpringBootApplication
 @EnableJpaRepositories(basePackageClasses={DefaultRepositoryService.class}, repositoryBaseClass = CustomSimpleJpaRepository.class)
-public class WicketApplication extends WicketBootWebApplication {
+public class WicketApplication extends WicketBootSecuredWebApplication {
 
 	public static void main(String[] args) throws Exception {
 		new SpringApplicationBuilder().sources(WicketApplication.class).run(args);

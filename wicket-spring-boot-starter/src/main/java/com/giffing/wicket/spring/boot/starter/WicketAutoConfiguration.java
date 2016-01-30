@@ -14,7 +14,7 @@ import com.giffing.wicket.spring.boot.starter.web.WicketWebInitializer;
 @Configuration
 @EnableConfigurationProperties({ GeneralSettingsProperties.class })
 @ConditionalOnWebApplication
-@Import({ WicketWebInitializer.class, WebSecurityConfig.class })
+@Import({ WicketWebInitializer.class })
 @ComponentScan(basePackageClasses = WicketExtensionLocation.class, nameGenerator=CustomAnnotationBeanNameGenerator.class)
 public class WicketAutoConfiguration {
 

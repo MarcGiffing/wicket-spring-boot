@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.security;
+package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security;
 
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;

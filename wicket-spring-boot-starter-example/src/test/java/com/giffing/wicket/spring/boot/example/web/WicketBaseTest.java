@@ -19,7 +19,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
-import com.giffing.wicket.spring.boot.starter.security.SecureWebSession;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 
 import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 

@@ -1,7 +1,6 @@
-package com.giffing.wicket.spring.boot.starter;
+package com.giffing.wicket.spring.boot.example.web.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,8 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  */
 @Configuration
-@ConditionalOnMissingBean(value = WebSecurityConfigurerAdapter.class)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WicketWebSecurityApapterConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
