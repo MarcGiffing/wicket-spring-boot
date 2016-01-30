@@ -13,6 +13,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
+/**
+ * Spring Security Implementation of Wickets {@link AuthenticatedWebSession}. 
+ * 
+ * @author Marc Giffing
+ *
+ */
 public class SecureWebSession extends AuthenticatedWebSession {
 
 	private static final long serialVersionUID = 1L;

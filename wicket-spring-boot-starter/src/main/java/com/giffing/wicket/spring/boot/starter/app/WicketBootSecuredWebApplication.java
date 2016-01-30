@@ -7,6 +7,7 @@ import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,23 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.context.security.AuthenticatedWebSessionConfig;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
+/**
+ * Default Wicket Application which should be subclassed by framework clients to
+ * enable autoconfiguration with help of Spring Boot.
+ * 
+ * It automatically configures the {@link SpringComponentInjector} to 
+ * enable injection of Spring components via the {@link SpringBean} annotation.
+ * 
+ * Beside Springs injection support it also automatically enables security support.
+ * You also have to add a security provider like Spring Security (@link SpringSecurityConfig)
+ * or Apache shiro. 
+ * 
+ * To initialize the application in an decoupled way a list of {@link WicketApplicationInitConfiguration}
+ * is injected as a list in this class. Each configuration item will be called in the init method.
+ * 
+ * @author Marc Giffing
+ *
+ */
 public abstract class WicketBootSecuredWebApplication extends AuthenticatedWebApplication {
 
 	private final static Logger logger = LoggerFactory

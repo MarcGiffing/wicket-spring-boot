@@ -16,9 +16,6 @@ link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/sta
 for handling Wicket requests and added the Spring applicationBean as an init parameter. 
 
 Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
-Also Spring Security is automatically configured. 
-See link:/wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/app/WicketBootWebApplication.java[WicketBootWebApplication]
-
 
 :toc: macro
 
@@ -40,7 +37,7 @@ Beside the Maven dependency configuration we need the following steps to do
 . Create a class (e.g. WicketApplication) with a main method
 . Annotate the class with @WicketSpringBootApplication
 . Extend this class with WicketBootWebApplication
-. Define your project specific SignInPage and HomePage.
+. Define your project HomePage.
 . Use the SpringApplicationBuilder to run the WicketApplication class you've created
 
 
@@ -52,11 +49,6 @@ public class WicketApplication extends WicketBootWebApplication {
     new SpringApplicationBuilder()
       .sources(WicketApplication.class)
       .run(args);
-  }
-  
-  @Override
-  protected Class<? extends WebPage> getSignInPageClass() {
-    return YourLoginPage.class;
   }
 
   @Override
@@ -255,6 +247,7 @@ may require an external dependency or is using Wickets core features. See sectio
 
 * <<extension-general>>
 ** DEPLOYMENT-CONFIGURATIONS
+*** <<extension-spring-security>>
 *** <<extension-beanvalidation>>
 *** <<extension-core-csrf-prevention>>
 *** <<extension-webjars>>
@@ -332,6 +325,24 @@ wicket.core.settings.pagestore.inmemory-cache-size= # overrides wickets default 
 If you insert e.g. developmentx you will get a startup error:
 [listing]
 Field error in object 'wicket' on field 'configurationType': rejected value [developmentx]; codes [typeMismatch.wicket.configurationType
+
+[[extension-spring-security]]
+=== Spring Security
+
+To use Spring Security you have to extend WicketBootSecuredWebApplication instead of WicketBootWebApplication.
+
+[source,properties]
+----
+wicket.external.spring.security=true #
+----
+
+[source,xml]
+----
+<dependency>
+ <groupId>org.springframework.boot</groupId>
+ <artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+----
 
 [[extension-beanvalidation]]
 === Bean validation
