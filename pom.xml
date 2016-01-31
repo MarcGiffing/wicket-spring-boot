@@ -127,6 +127,11 @@
 				<artifactId>wicketstuff-restannotations</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-springreference</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
 			<!-- Wicket other dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>

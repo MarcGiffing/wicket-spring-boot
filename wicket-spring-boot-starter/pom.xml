@@ -87,6 +87,11 @@
 			<artifactId>wicketstuff-restannotations</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-springreference</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<!-- Other wicket dependnecies deploymend -->
 		<dependency>
 			<groupId>de.agilecoders.wicket.webjars</groupId>
