@@ -16,12 +16,16 @@
 	</description>
 
 	<dependencies>
-		<!-- Internal dependnecies -->
+		
+		<!-- Internal dependencies -->
+		
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 			<artifactId>wicket-spring-boot-context</artifactId>
 		</dependency>
+		
 		<!-- Spring dependencies -->
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -39,7 +43,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
+		
 		<!-- Wicket dependencies -->
+		
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
@@ -56,7 +62,9 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-spring</artifactId>
 		</dependency>
+		
 		<!-- Wicketstuff Dependencies -->
+		
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotation</artifactId>
@@ -92,13 +100,17 @@
 			<artifactId>wicketstuff-springreference</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Other wicket dependnecies deploymend -->
+		
+		<!-- Other wicket dependencies deployment -->
+		
 		<dependency>
 			<groupId>de.agilecoders.wicket.webjars</groupId>
 			<artifactId>wicket-webjars</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
 		<!-- Wicket datastore dependencies -->
+		
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-datastore-cassandra</artifactId>
@@ -119,13 +131,17 @@
 			<artifactId>wicketstuff-datastore-redis</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
 		<!-- Wicket websockets -->
+		
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-native-websocket-javax</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Other wicket dependnecies development -->
+		
+		<!-- Other wicket dependencies development -->
+		
 		<dependency>
 			<groupId>net.ftlines.wicket-source</groupId>
 			<artifactId>wicket-source</artifactId>
