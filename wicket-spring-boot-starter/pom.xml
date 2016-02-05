@@ -1,7 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>wicket-spring-boot-starter</artifactId>
 
 	<parent>
 		<groupId>com.giffing.wicket.spring.boot.starter</groupId>
@@ -10,18 +9,24 @@
 		<relativePath>..</relativePath>
 	</parent>
 
+	<artifactId>wicket-spring-boot-starter</artifactId>
 	<name>Wicket Spring Boot Starter</name>
 	<description>
-	  
+                Enables and configures Apache Wicket from within a Spring Boot
+                Application. Used **only** in combination with Spring Boot.
 	</description>
 
 	<dependencies>
-		<!-- Internal dependnecies -->
+            
+		<!-- Internal -->
+                
 		<dependency>
 			<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 			<artifactId>wicket-spring-boot-context</artifactId>
 		</dependency>
-		<!-- Spring dependencies -->
+                
+		<!-- Spring -->
+                
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
@@ -39,7 +44,9 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
-		<!-- Wicket dependencies -->
+                
+		<!-- Wicket -->
+                
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-core</artifactId>
@@ -56,7 +63,13 @@
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-spring</artifactId>
 		</dependency>
-		<!-- Wicketstuff Dependencies -->
+                
+                <!-- The following modules are *not* linked. They are used
+                     from the starters conditional configuration (if a module
+                     exists, then some comfiguration is applied). -->
+                     
+		<!-- Wicketstuff -->
+                
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-annotation</artifactId>
@@ -92,13 +105,17 @@
 			<artifactId>wicketstuff-springreference</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Other wicket dependnecies deploymend -->
+                
+		<!-- Wicket Deployment -->
+                
 		<dependency>
 			<groupId>de.agilecoders.wicket.webjars</groupId>
 			<artifactId>wicket-webjars</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Wicket datastore dependencies -->
+                
+		<!-- Wicket Datastore -->
+                
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-datastore-cassandra</artifactId>
@@ -119,13 +136,17 @@
 			<artifactId>wicketstuff-datastore-redis</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Wicket websockets -->
+                
+		<!-- Wicket Websockets -->
+                
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-native-websocket-javax</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Other wicket dependnecies development -->
+                
+		<!-- Wicket / Spring Development -->
+                
 		<dependency>
 			<groupId>net.ftlines.wicket-source</groupId>
 			<artifactId>wicket-source</artifactId>
