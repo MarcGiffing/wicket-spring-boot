@@ -3,8 +3,8 @@
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
 This project makes it easy to create Wicket projects with a minimum
-of configuration effort. Is uses Spring Boot to autoconfigure Wickets core and
-its extension with an reasonable default value which can be overridden over property files.
+of configuration effort. It uses Spring Boot to autoconfigure Wickets core and
+its extension (related projects like wicketstuff, beanvalidation...( with an reasonable default value which can be overridden over property files.
 
 Spring Boot is using embedded servlet containers so you don't have to deploy the Application to an e.g.
 Tomcat by hand.
@@ -248,6 +248,7 @@ may require an external dependency or is using Wickets core features. See sectio
 * <<extension-general>>
 ** DEPLOYMENT-CONFIGURATIONS
 *** <<extension-spring-security>>
+*** <<extension-wicket-websocket>>
 *** <<extension-beanvalidation>>
 *** <<extension-core-csrf-prevention>>
 *** <<extension-webjars>>
@@ -284,9 +285,6 @@ wicket.core.settings.general.runtime-configuration=development # development/dep
 
 wicket.web.servlet.filter-mapping-param=/*
 wicket.web.servlet.init-parameters.*= # map<string,string> - configuration support for additional servlet init parameters
-
-wicket.external.websocket=true # enables websocket support - dependency required (move documentation to seperated section)
-
 
 #exception settings
 wicket.core.settings.exceptions.thread-dump-strategy=thread_holding_lock
@@ -343,6 +341,35 @@ wicket.external.spring.security=true #
  <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 ----
+
+[[extension-wicket-websocket]]
+
+https://ci.apache.org/projects/wicket/guide/7.x/guide/single.html#nativewebsockets[Documentation]
+
+This project provides an auto configuration support for native websockets. If the required dependencies
+are in the classpath a JavaxWebSocketFilter servlet filter is configured instead of the default WicketFilter. 
+
+To simplify the usage of sending websocket messages a class named WebSocketEventHandler is automatically registered as a 
+spring bean. You can inject the class anywhere with @SpringBean and use the 'send' method to send websocket messages.
+
+
+[source,properties]
+----
+wicket.external.websocket=true # enables websocket support - dependency required (move documentation to seperated section)
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.apache.wicket</groupId>
+  <artifactId>wicket-native-websocket-javax</artifactId>
+</dependency>
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-websocket</artifactId>
+</dependency>
+----
+
 
 [[extension-beanvalidation]]
 === Bean validation
