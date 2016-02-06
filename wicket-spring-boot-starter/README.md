@@ -95,3 +95,7 @@ wicket:
         enabled: true
 ```
 
+### Extensions
+
+See [EXTENSIONS.adoc](EXTENSIONS.adoc) for some more advanced options subjecting
+Extension Modules.
