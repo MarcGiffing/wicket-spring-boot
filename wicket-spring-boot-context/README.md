@@ -22,8 +22,22 @@ Here is also the place for common configuration checks which can be used by othe
 The annotation **@ConditionalOnWicket**  can be used to activate a configuration only on a 
 specific version of `Apache Wicket`.
 
-To fully understand how [Spring Boots autconfiguration](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration) 
-and in general Spring Boot works you should read the excellent [documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) from this fantastic [project](http://projects.spring.io/spring-boot/).
+### @ConditionalOnWicket
+
+With the ConditionOnWicket annotation you can check that configuration classes only apply
+on a specific Wicket major version. If some functionality is only available on Wicket 7 
+you can use this annotation.
+
+```java
+@ApplicationInitExtension
+@ConditionalOnWicket(value=7, range=Range.EQUALS_OR_HIGHER)
+public ConditionalConfig implements WicketApplicationInitConfiguration{
+	@Override
+	public void init(WebApplication webApplication) {
+		// configuration option which only apply to Wickets major version 7 or higher
+	}
+}
+```
 
 ## Example
 
@@ -114,3 +128,8 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
   }
 }
 ```
+
+## Further Reading
+
+To fully understand how [Spring Boots autconfiguration](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-developing-auto-configuration) 
+and in general Spring Boot works you should read the excellent [documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) from this fantastic [project](http://projects.spring.io/spring-boot/).
