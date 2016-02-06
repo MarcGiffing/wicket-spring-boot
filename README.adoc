@@ -19,48 +19,6 @@ Out of the box Wickets dependency injection support (@SpringBean) for Spring is 
 
 :toc: macro
 
-== Getting started
-
-To get started you have to create a new Maven Project (or another preferred dependency/build-management tool)
-and add the *wicket-spring-boot-starter* dependency to your configuration. 
-
-[source,xml]
-----
-<dependency>
-  <groupId>com.giffing.wicket.spring.boot.starter</groupId>
-  <artifactId>wicket-spring-boot-starter</artifactId>
-</dependency>
-----
-
-Beside the Maven dependency configuration we need the following steps to do
-
-. Create a class (e.g. WicketApplication) with a main method
-. Annotate the class with @WicketSpringBootApplication
-. Extend this class with WicketBootWebApplication
-. Define your project HomePage.
-. Use the SpringApplicationBuilder to run the WicketApplication class you've created
-
-
-[source,java]
-----
-@WicketSpringBootApplication
-public class WicketApplication extends WicketBootWebApplication {
-  public static void main(String[] args) throws Exception {
-    new SpringApplicationBuilder()
-      .sources(WicketApplication.class)
-      .run(args);
-  }
-
-  @Override
-  public Class<? extends Page> getHomePage() {
-    return YourHomePage.class;
-  }
-}
-----
-
-Thats all! When you execute the main method you will get a fully working and configured 
-Wicket application. An embedded Tomcat is automatically started.
-As in every Wicket application you can override the WicketBootWebApplication as usual. 
 
 [[how_does_it_work]]
 == How does it work?
