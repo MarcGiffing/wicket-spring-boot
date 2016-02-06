@@ -84,10 +84,6 @@
 			<version>3.4</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-native-websocket-javax</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-restannotations</artifactId>
 		</dependency>
@@ -109,9 +105,9 @@
 			<version>5.0.5.Final</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Websocket Support -->
-		
+
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-native-websocket-javax</artifactId>
@@ -152,6 +148,10 @@
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-actuator</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.wicketstuff.htmlvalidator</groupId>
+					<artifactId>wicketstuff-htmlvalidator</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>

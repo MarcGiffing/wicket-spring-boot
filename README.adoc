@@ -270,6 +270,7 @@ may require an external dependency or is using Wickets core features. See sectio
 *** <<extension-devutils-statelesschecker>>
 *** <<extension-wicketsource>>
 *** <<extension-springboot-devtools>>
+*** <<extension-wicketstuff-htmlvalidator>>
 
 [[extension-general]]
 === General
@@ -724,6 +725,26 @@ link:/wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/st
 will be activated. 
 
 All other serializer will only be activated if the Spring Boot DevTools dependency is not in the classpath.
+
+[source,xml]
+----
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+</dependencies>
+----
+
+[[extension-wicketstuff-htmlvalidator]]
+==== Wicketstuff - htmlvalidator
+
+See https://github.com/dashorst/wicket-stuff-markup-validator[documentation]
+
+[source,properties]
+----
+wicket.stuff.htmlvalidator.enabled=true
+----
 
 [source,xml]
 ----

@@ -132,6 +132,11 @@
 				<artifactId>wicketstuff-springreference</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff.htmlvalidator</groupId>
+				<artifactId>wicketstuff-htmlvalidator</artifactId>
+				<version>1.11</version>
+			</dependency>
 			<!-- Wicket other dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
@@ -251,9 +256,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.5</version>
-                                <configuration>
-                                    <skip>true</skip>
-                                </configuration>				
+				<configuration>
+					<skip>true</skip>
+				</configuration>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>

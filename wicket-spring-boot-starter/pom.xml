@@ -105,6 +105,11 @@
 			<artifactId>wicketstuff-springreference</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.wicketstuff.htmlvalidator</groupId>
+			<artifactId>wicketstuff-htmlvalidator</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
 		<!-- Wicket Deployment -->
 
