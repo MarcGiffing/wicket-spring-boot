@@ -28,6 +28,8 @@ import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerCon
 @EnableConfigurationProperties({ WicketWebInitializerProperties.class })
 public class WicketWebInitializer implements ServletContextInitializer {
 
+	public static final String WICKET_FILTERNAME = "wicket-filter";
+	
 	@Autowired
 	private WicketWebInitializerConfig wicketWebInitializerConfig;
 
@@ -36,7 +38,7 @@ public class WicketWebInitializer implements ServletContextInitializer {
 
 	@Override
 	public void onStartup(ServletContext sc) throws ServletException {
-		FilterRegistration filter = sc.addFilter("wicket-filter", wicketWebInitializerConfig.filterClass());
+		FilterRegistration filter = sc.addFilter(WICKET_FILTERNAME, wicketWebInitializerConfig.filterClass());
 
 		// Spring configuration
 		filter.setInitParameter(WicketFilter.APP_FACT_PARAM, SpringWebApplicationFactory.class.getName());
