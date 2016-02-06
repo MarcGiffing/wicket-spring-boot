@@ -343,19 +343,20 @@ wicket.external.spring.security=true #
 ----
 
 [[extension-wicket-websocket]]
+=== Wicket Native WebSockets
 
 https://ci.apache.org/projects/wicket/guide/7.x/guide/single.html#nativewebsockets[Documentation]
 
-This project provides an auto configuration support for native websockets. If the required dependencies
+This project provides an auto configuration support for native WebSockets. If the required dependencies
 are in the classpath a JavaxWebSocketFilter servlet filter is configured instead of the default WicketFilter. 
 
-To simplify the usage of sending websocket messages a class named WebSocketEventHandler is automatically registered as a 
-spring bean. You can inject the class anywhere with @SpringBean and use the 'send' method to send websocket messages.
+To simplify the usage of sending WebSocket messages a class named WebSocketEventHandler is automatically registered as a 
+spring bean. You can inject the class anywhere with @SpringBean and use the 'send' method to send WebSocket messages.
 
 
 [source,properties]
 ----
-wicket.external.websocket=true # enables websocket support - dependency required (move documentation to seperated section)
+wicket.external.websocket=true # enables WebSocket support - dependency required (move documentation to seperated section)
 ----
 
 [source,xml]
