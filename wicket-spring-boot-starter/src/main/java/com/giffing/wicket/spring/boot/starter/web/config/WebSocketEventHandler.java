@@ -16,7 +16,7 @@ public class WebSocketEventHandler {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
-	public void sendEvent(IWebSocketPushMessage event) {
+	public void send(IWebSocketPushMessage event) {
 		Application application = Application.get(WicketWebInitializer.WICKET_FILTERNAME);
 		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(application);
 		IWebSocketConnectionRegistry connectionRegistry = webSocketSettings.getConnectionRegistry();

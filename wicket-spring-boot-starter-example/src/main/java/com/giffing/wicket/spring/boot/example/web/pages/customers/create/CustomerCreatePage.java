@@ -93,7 +93,7 @@ public class CustomerCreatePage extends BasePage{
 			@Override
 			public void onSubmit() {
 				service.save(customerModel.getObject());
-				webSocketEventHandler.sendEvent(new CustomerChangedEvent(customerModel.getObject()));
+				webSocketEventHandler.send(new CustomerChangedEvent(customerModel.getObject()));
 				if(pageReferenceId != null){
 					setResponsePage(new PageReference(pageReferenceId).getPage());
 				} else {
