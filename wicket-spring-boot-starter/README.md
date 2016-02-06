@@ -1,8 +1,8 @@
-= wicket-spring-boot-starter
+# wicket-spring-boot-starter
 
 Start using Apache Wicket within your Spring Boot Application.
 
-== Getting Started
+## Getting Started
 
 Following the spring-boot-starter concept, just add the dependency:
 
@@ -41,3 +41,57 @@ public class WicketApplication extends WicketBootWebApplication {
 Start the application as usual (e.g. with `mvn spring-boot:run`).
 
 As in every Wicket application you can override the WicketBootWebApplication.
+
+### Spring profile configuration
+
+The Wicket Spring Boot Starter project ships with a default development configuration.
+It can be activated by activating the 'development' Spring profile in the main class or over
+external JVM/Maven arguments.
+
+The default configuration can be overridden with a custom property file. See [Spring Boots reference documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config).
+
+[source](wicket-spring-boot-starter/src/main/resources/application-development.yml)
+```yml
+wicket:
+  core:
+    settings:
+      general:
+        configuration-type: development
+      debug:
+        enabled: true
+        component-use-check: true
+        development-utilities-enabled: true
+  stuff:
+    htmlcompressor:
+      enabled: false
+      features:
+        removeComments: false
+        removeMultiSpaces: false
+        removeIntertagSpaces: false
+        removeQuotes: false
+        compressJavaScript: false
+        compressCss: false
+        simpleDoctype: false
+        removeScriptAttributes: false
+        removeStyleAttributes: false
+        removeLinkAttributes: false
+        removeFormAttributes: false
+        removeInputAttributes: false
+        simpleBooleanAttributes: false
+        removeJavaScriptProtocol: false
+        removeHttpProtocol: false
+        removeHttpsProtocol: false
+        preserveLineBreaks: false
+  external:
+    development:
+      devutils:
+        statelesschecker:
+          enabled: true
+        interceptor:
+          enable-live-sessions-page: true
+        diskstorebrowser:
+          enabled: true
+      wicketsource:
+        enabled: true
+```
+
