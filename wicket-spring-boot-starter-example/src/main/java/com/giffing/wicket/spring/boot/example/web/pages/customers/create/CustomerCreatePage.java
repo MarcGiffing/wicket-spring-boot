@@ -16,18 +16,13 @@ import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
-import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameTextField;
-import com.giffing.wicket.spring.boot.starter.web.config.WebSocketEventHandler;
 
 @MountPath("customers/create")
 public class CustomerCreatePage extends BasePage{
 	
 	@SpringBean
 	private CustomerRepositoryService service;
-	
-	@SpringBean
-	private WebSocketEventHandler webSocketEventHandler;
 	
 	CompoundPropertyModel<Customer> customerModel;
 	
@@ -93,7 +88,6 @@ public class CustomerCreatePage extends BasePage{
 			@Override
 			public void onSubmit() {
 				service.save(customerModel.getObject());
-				webSocketEventHandler.send(new CustomerChangedEvent(customerModel.getObject()));
 				if(pageReferenceId != null){
 					setResponsePage(new PageReference(pageReferenceId).getPage());
 				} else {
