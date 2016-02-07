@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -7,9 +8,9 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.giffing.wicket.spring.boot.example.WicketApplication;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
@@ -24,7 +25,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WicketApplication.class)
-@WebAppConfiguration
+@EnableWebSecurity
 @Ignore
 @DirtiesContext
 public class WicketBaseIntTest {
@@ -35,7 +36,7 @@ public class WicketBaseIntTest {
 	private WicketTester tester;
 
 	@Autowired
-	private WicketApplication wicketApplication;
+	private WebApplication wicketApplication;
 
 	@Before
 	public void setUp() {
@@ -59,7 +60,7 @@ public class WicketBaseIntTest {
 		return tester;
 	}
 
-	public WicketApplication getWicketApplication() {
+	public WebApplication getWicketApplication() {
 		return wicketApplication;
 	}
 

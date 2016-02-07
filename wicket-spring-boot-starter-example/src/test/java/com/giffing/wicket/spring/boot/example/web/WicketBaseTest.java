@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -14,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
@@ -32,7 +32,6 @@ import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = WicketWebApplicationConfig.class)
-@WebAppConfiguration
 @Ignore
 @DirtiesContext
 public class WicketBaseTest {
@@ -43,7 +42,7 @@ public class WicketBaseTest {
 	private WicketTester tester;
 
 	@Autowired
-	private WicketWebApplicationConfig wicketApplication;
+	private WebApplication wicketApplication;
 
 	private ApplicationContextMock applicationContextMock;
 
@@ -78,7 +77,7 @@ public class WicketBaseTest {
 		return tester;
 	}
 
-	public WicketWebApplicationConfig getWicketApplication() {
+	public WebApplication getWicketApplication() {
 		return wicketApplication;
 	}
 
