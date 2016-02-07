@@ -105,7 +105,6 @@
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-htmlcompressor</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency> <!-- required for the wicketstuff-htmlcompressor -->
 				<groupId>com.yahoo.platform.yui</groupId>
@@ -142,64 +141,54 @@
 				<groupId>org.apache.wicket</groupId>
 				<artifactId>wicket-bean-validation</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>de.agilecoders.wicket.webjars</groupId>
 				<artifactId>wicket-webjars</artifactId>
 				<version>0.5.3</version>
-				<scope>provided</scope>
 			</dependency>
 			<!-- Wicket datastore dependencies -->
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-datastore-common</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-datastore-cassandra</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-datastore-hazelcast</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-datastore-memcached</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-datastore-redis</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<!-- Wicket websockets -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
 				<artifactId>wicket-native-websocket-javax</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<!-- Wicket development dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
 				<artifactId>wicket-devutils</artifactId>
 				<version>${wicket.version}</version>
-				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>net.ftlines.wicket-source</groupId>
 				<artifactId>wicket-source</artifactId>
 				<version>7.0.0</version>
-				<scope>provided</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
