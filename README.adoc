@@ -366,10 +366,6 @@ wicket.external.websocket=true # enables WebSocket support - dependency required
   <groupId>org.apache.wicket</groupId>
   <artifactId>wicket-native-websocket-javax</artifactId>
 </dependency>
-<dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-websocket</artifactId>
-</dependency>
 ----
 
 

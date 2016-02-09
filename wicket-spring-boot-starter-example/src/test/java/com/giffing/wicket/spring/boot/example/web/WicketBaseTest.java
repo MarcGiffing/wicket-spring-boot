@@ -1,6 +1,7 @@
 package com.giffing.wicket.spring.boot.example.web;
 
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -20,6 +21,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
+import com.giffing.wicket.spring.boot.starter.web.config.WebSocketMessageSender;
 
 import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 
@@ -49,6 +51,15 @@ public class WicketBaseTest {
 	@Before
 	public void setUp() {
 		applicationContextMock = new ApplicationContextMock();
+		applicationContextMock.putBean(new WebSocketMessageSender() {
+			
+			@Override
+			public void send(IWebSocketPushMessage event) {
+				//do nothing
+			}
+		});
+		
+		
 		applicationContextMock.putBean("authenticationManager", new AuthenticationManager() {
 
 			@Override

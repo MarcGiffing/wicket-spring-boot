@@ -150,12 +150,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Wicket / Spring Development -->
 
 		<dependency>

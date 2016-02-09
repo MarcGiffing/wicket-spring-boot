@@ -12,10 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import com.giffing.wicket.spring.boot.starter.web.WicketWebInitializer;
 
-public class WebSocketEventHandler {
+public class WebSocketMessageSenderImpl implements WebSocketMessageSender {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-
+	
+	@Override
 	public void send(IWebSocketPushMessage event) {
 		Application application = Application.get(WicketWebInitializer.WICKET_FILTERNAME);
 		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(application);

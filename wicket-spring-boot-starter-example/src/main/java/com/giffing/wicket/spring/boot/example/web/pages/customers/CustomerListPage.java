@@ -25,6 +25,9 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.protocol.ws.api.WebSocketBehavior;
+import org.apache.wicket.protocol.ws.api.WebSocketRequestHandler;
+import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.StringValidator;
@@ -48,6 +51,7 @@ import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filte
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.create.CustomerCreatePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.edit.CustomerEditPage;
+import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.CustomerDataProvider;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameSearchTextField;
 
@@ -66,6 +70,18 @@ public class CustomerListPage extends BasePage {
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 		feedbackPanel.setOutputMarkupId(true);
 		add(feedbackPanel);
+		
+		add(new WebSocketBehavior() {
+
+			@Override
+			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
+				if (message instanceof CustomerChangedEvent) {
+					CustomerChangedEvent event = (CustomerChangedEvent)message;
+					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+			}
+		});
 		
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
