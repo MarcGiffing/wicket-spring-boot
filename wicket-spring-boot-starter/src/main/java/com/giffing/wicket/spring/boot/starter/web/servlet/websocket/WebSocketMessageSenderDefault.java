@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.web.config;
+package com.giffing.wicket.spring.boot.starter.web.servlet.websocket;
 
 import java.util.Collection;
 
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.giffing.wicket.spring.boot.starter.web.WicketWebInitializer;
 
-public class WebSocketMessageSenderImpl implements WebSocketMessageSender {
+public class WebSocketMessageSenderDefault implements WebSocketMessageBroadcaster {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	

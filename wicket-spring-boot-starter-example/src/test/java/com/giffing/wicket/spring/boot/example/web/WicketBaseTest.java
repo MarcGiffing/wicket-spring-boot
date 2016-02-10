@@ -21,7 +21,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
-import com.giffing.wicket.spring.boot.starter.web.config.WebSocketMessageSender;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 
 import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 
@@ -51,7 +51,7 @@ public class WicketBaseTest {
 	@Before
 	public void setUp() {
 		applicationContextMock = new ApplicationContextMock();
-		applicationContextMock.putBean(new WebSocketMessageSender() {
+		applicationContextMock.putBean(new WebSocketMessageBroadcaster() {
 			
 			@Override
 			public void send(IWebSocketPushMessage event) {

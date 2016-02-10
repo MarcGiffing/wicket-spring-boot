@@ -1,11 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.web.config;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.websocket.DeploymentException;
-import javax.websocket.server.ServerContainer;
-
 import org.apache.wicket.protocol.ws.javax.JavaxWebSocketFilter;
 import org.apache.wicket.protocol.ws.javax.WicketServerEndpointConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -14,6 +8,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.giffing.wicket.spring.boot.starter.web.servlet.standard.StandardWicketWebInitializer;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageSenderDefault;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketWicketWebInitializer;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketServerEndpointConfigRegister;
 
 /**
  * Configuration of the {@link WicketWebInitializerConfig} depending on property
@@ -54,39 +53,20 @@ public class WicketWebInitializerAutoConfig {
 		public WicketWebInitializerConfig wicketWebInitializerConfig() {
 			return new WebSocketWicketWebInitializer();
 		}
-
+		
+		/**
+		 * @return the wicket server endpoint config register which registers  the {@link WicketServerEndpointConfig}
+		 */
 		@Bean
-		public WicketServerEndpointConfigRegister myWicketServerEndpointConfig() {
+		public WicketServerEndpointConfigRegister wicketServerEndpointConfigRegister() {
 			return new WicketServerEndpointConfigRegister();
 		}
 
 		@Bean
-		public WebSocketMessageSenderImpl webSocketEventHandler() {
-			return new WebSocketMessageSenderImpl();
+		public WebSocketMessageSenderDefault webSocketEventHandler() {
+			return new WebSocketMessageSenderDefault();
 		}
 
-		public static class WicketServerEndpointConfigRegister implements ServletContextListener {
-
-			private final static String SERVER_CONTAINER_ATTRIBUTE = "javax.websocket.server.ServerContainer";
-
-			@Override
-			public void contextInitialized(ServletContextEvent sce) {
-				ServletContext container = sce.getServletContext();
-
-				final ServerContainer serverContainer = (ServerContainer) container
-						.getAttribute(SERVER_CONTAINER_ATTRIBUTE);
-				try {
-					serverContainer.addEndpoint(new WicketServerEndpointConfig());
-				} catch (DeploymentException e) {
-					e.printStackTrace();
-				}
-			}
-
-			@Override
-			public void contextDestroyed(ServletContextEvent sce) {
-			}
-		}
-		
 	}
 
 	

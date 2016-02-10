@@ -18,7 +18,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameTextField;
-import com.giffing.wicket.spring.boot.starter.web.config.WebSocketMessageSender;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 
 @MountPath("customers/create")
 public class CustomerCreatePage extends BasePage{
@@ -27,7 +27,7 @@ public class CustomerCreatePage extends BasePage{
 	private CustomerRepositoryService service;
 	
 	@SpringBean
-	private WebSocketMessageSender webSocketMessageSender;
+	private WebSocketMessageBroadcaster webSocketMessageBroadcaster;
 	
 	CompoundPropertyModel<Customer> customerModel;
 	
@@ -93,7 +93,7 @@ public class CustomerCreatePage extends BasePage{
 			@Override
 			public void onSubmit() {
 				service.save(customerModel.getObject());
-				webSocketMessageSender.send(new CustomerChangedEvent(customerModel.getObject()));
+				webSocketMessageBroadcaster.send(new CustomerChangedEvent(customerModel.getObject()));
 				if(pageReferenceId != null){
 					setResponsePage(new PageReference(pageReferenceId).getPage());
 				} else {
