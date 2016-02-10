@@ -351,7 +351,7 @@ https://ci.apache.org/projects/wicket/guide/7.x/guide/single.html#nativewebsocke
 This project provides an auto configuration support for native WebSockets. If the required dependencies
 are in the classpath a JavaxWebSocketFilter servlet filter is configured instead of the default WicketFilter. 
 
-To simplify the usage of sending WebSocket messages a class named WebSocketEventHandler is automatically registered as a 
+To simplify the usage of sending WebSocket messages a class named WebSocketMessageBroadcaster is automatically registered as a 
 spring bean. You can inject the class anywhere with @SpringBean and use the 'send' method to send WebSocket messages.
 
 
