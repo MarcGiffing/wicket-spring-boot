@@ -1,6 +1,7 @@
 = Wicket autoconfiguration with Spring Boot
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
+
 NOTE: Examples project: https://github.com/MarcGiffing/wicket-spring-boot-examples
 
 
