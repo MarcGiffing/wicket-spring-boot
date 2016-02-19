@@ -65,6 +65,38 @@ Thats all! When you execute the main method you will get a fully working and con
 Wicket application. An embedded Tomcat is automatically started.
 As in every Wicket application you can override the WicketBootWebApplication as usual. 
 
+To package the application as an executable jar you have to add the spring-boot-maven-plugin.
+
+[source,xml]
+----
+ <plugin>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-maven-plugin</artifactId>
+</plugin>
+----
+
+Resource files (html, css, js, ...) are not copied to the target folder if placed in the *src/main/java*
+folder. You have to tell Maven to copy these files:
+
+
+[source,xml]
+----
+<resources>
+  <resource>
+    <directory>src/main/resources</directory>
+  </resource>
+  <resource>
+    <directory>src/main/java</directory>
+    <includes>
+      <include>**</include>
+    </includes>
+    <excludes>
+      <exclude>**/*.java</exclude>
+    </excludes>
+  </resource>
+</resources>
+----
+
 [[how_does_it_work]]
 == How does it work?
 
