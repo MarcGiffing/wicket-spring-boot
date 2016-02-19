@@ -293,6 +293,7 @@ may require an external dependency or is using Wickets core features. See sectio
 *** <<extension-wicketstuff-serializer-fast2>>
 *** <<extension-wicketstuff-serializer-kryo2>>
 *** <<extension-wicketstuff-restannotations>>
+*** <<extension-datastore-httpsession>>
 *** <<extension-datastore-cassandra>>
 *** <<extension-datastore-hazelcast>>
 *** <<extension-datastore-memcached>>
@@ -591,13 +592,25 @@ wicket.core.settings.debug.outputMarkupContainerClassName=false
 wicket.core.settings.debug.componentPathAttributeName=
 ----
 
+
+
 [[extension-datastore]]
 == Datastore
 
-See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
+[[extension-datastore-httpsession]]
+=== Datastore HttpSession
+
+[source,properties]
+----
+wicket.core.datastore.httpsession.enabled=false
+wicket.core.datastore.httpsession.pagesNumber=20 # the maximum number of pages the data store can hold
+----
+
 
 [[extension-datastore-cassandra]]
 === Datastore cassandra
+
+See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
 
 [source,properties]
 ----
@@ -622,6 +635,8 @@ wicket.stuff.datastore.cassandra.session-unit=megabytes
 [[extension-datastore-hazelcast]]
 === Datastore hazelcast
 
+See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
+
 [source,properties]
 ----
 wicket.stuff.datastore.hazelcast.enabled=true
@@ -643,6 +658,8 @@ wicket.stuff.datastore.hazelcast.session-unit=megabytes
 
 [[extension-datastore-memcached]]
 === Datastore memcached
+
+See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
 
 [source,properties]
 ----
@@ -666,6 +683,8 @@ wicket.stuff.datastore.memcached.shutdown-timeout-unit=minutes
 
 [[extension-datastore-redis]]
 === Datastore redis
+
+See https://github.com/wicketstuff/core/wiki/DataStores[Documentation]
 
 [source,properties]
 ----
