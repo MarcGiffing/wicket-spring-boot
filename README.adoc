@@ -4,6 +4,15 @@ NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
 NOTE: Examples project: https://github.com/MarcGiffing/wicket-spring-boot-examples
 
+* <<introduction>>
+* <<getting_started>>
+* <<how_does_it_work>>
+* <<spring_profile_dev_configuration>>
+* <<custom-conditions>>
+* <<extension>>
+
+[[introduction]]
+== Introduction
 
 This project makes it easy to create Wicket projects with a minimum
 of configuration effort. It uses Spring Boot to autoconfigure Wickets core and
@@ -20,8 +29,8 @@ for handling Wicket requests and added the Spring applicationBean as an init par
 
 Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
 
-:toc: macro
 
+[[getting_started]]
 == Getting started
 
 To get started you have to create a new Maven Project (or another preferred dependency/build-management tool)
@@ -194,6 +203,7 @@ public class WicketBootWebApplication extends AuthenticatedWebApplication {
 }
 ----
 
+[[spring_profile_dev_configuration]]
 === Spring profile configuration
 
 The Wicket Spring Boot Starter project ships with a default development configuration.
