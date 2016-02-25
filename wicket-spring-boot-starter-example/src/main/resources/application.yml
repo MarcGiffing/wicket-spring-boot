@@ -1,4 +1,8 @@
 wicket:
+  stuff:
+    datastore:
+      hazelcast:
+        enabled: false
   core:
     resourcesettings:
       packageresourceguard:

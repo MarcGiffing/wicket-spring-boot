@@ -308,6 +308,7 @@ may require an external dependency or is using Wickets core features. See sectio
 *** <<extension-datastore-hazelcast>>
 *** <<extension-datastore-memcached>>
 *** <<extension-datastore-redis>>
+*** <<extension-wicketstuff-jamon>>
 
 ** DEVELOPMENT-CONFIGURATIONS
 *** <<extension-general-debugsettings>>
@@ -716,6 +717,30 @@ wicket.stuff.datastore.redis.shutdown-timeout-unit=minutes
 </dependency>
 ----
 
+
+[[extension-wicketstuff-jamon]]
+=== Wicketstuff - JAMon
+
+Used to monitor page requests. Provides a statistic page.
+
+See https://github.com/wicketstuff/core/blob/master/jamon-parent/[Github]
+
+[source,properties]
+----
+wicket.stuff.monitoring.jamon.enabled=true
+wicket.stuff.monitoring.jamon.include-source-name-in-monitor-label=true
+wicket.stuff.monitoring.jamon.mountPage=/monitoring/jamon # the url to which the statistic page is mounted
+----
+
+[source,xml]
+----
+<dependency>
+  <groupId>org.wicketstuff</groupId>
+  <artifactId>wicketstuff-jamon</artifactId>
+</dependency>
+----
+
+NOTE: JAMon includes hazelcast to gather statistics. You may need to disable the datastore hazelcast support: <<extension-datastore-hazelcast>>
 
 [[extension-devutils]]
 === Devutils

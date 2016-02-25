@@ -137,6 +137,11 @@
 				<artifactId>wicketstuff-htmlvalidator</artifactId>
 				<version>1.11</version>
 			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-jamon</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
 			<!-- Wicket other dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>

@@ -110,7 +110,12 @@
 			<artifactId>wicketstuff-htmlvalidator</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-jamon</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- Wicket Deployment -->
 
 		<dependency>
