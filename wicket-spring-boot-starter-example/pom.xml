@@ -148,10 +148,6 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-actuator</artifactId>
 				</dependency>
-				<dependency>
-					<groupId>org.wicketstuff.htmlvalidator</groupId>
-					<artifactId>wicketstuff-htmlvalidator</artifactId>
-				</dependency>
 			</dependencies>
 		</profile>
 	</profiles>
