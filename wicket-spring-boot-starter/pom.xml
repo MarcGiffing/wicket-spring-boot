@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 		<artifactId>wicket-spring-boot-starter-parent</artifactId>
-		<version>0.0.10-SNAPSHOT</version>
+		<version>0.0.11-SNAPSHOT</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -115,7 +115,7 @@
 			<artifactId>wicketstuff-jamon</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Wicket Deployment -->
 
 		<dependency>
