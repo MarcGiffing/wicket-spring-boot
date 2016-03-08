@@ -28,6 +28,8 @@ import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerCon
 @EnableConfigurationProperties({ WicketWebInitializerProperties.class })
 public class WicketWebInitializer implements ServletContextInitializer {
 
+	public static final String WICKET_SPRING_APPLICATION_BEAN_NAME = "wicketBootWebApplication";
+
 	public static final String WICKET_FILTERNAME = "wicket-filter";
 	
 	@Autowired
@@ -42,7 +44,7 @@ public class WicketWebInitializer implements ServletContextInitializer {
 
 		// Spring configuration
 		filter.setInitParameter(WicketFilter.APP_FACT_PARAM, SpringWebApplicationFactory.class.getName());
-		filter.setInitParameter("applicationBean", "wicketBootWebApplication");
+		filter.setInitParameter("applicationBean", WICKET_SPRING_APPLICATION_BEAN_NAME);
 
 		filter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, props.getFilterMappingParam());
 		filter.addMappingForUrlPatterns(null, false, "/*");

@@ -4,6 +4,7 @@ import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
@@ -14,10 +15,9 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPa
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplication;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
-import com.giffing.wicket.spring.boot.starter.context.WicketSpringBootApplication;
 
 //TODO move to test
-@WicketSpringBootApplication
+@SpringBootApplication
 @EnableAutoConfiguration(exclude={
 		DataSourceAutoConfiguration.class, 
 		JpaRepositoriesAutoConfiguration.class, 

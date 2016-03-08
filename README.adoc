@@ -47,7 +47,7 @@ and add the *wicket-spring-boot-starter* dependency to your configuration.
 Beside the Maven dependency configuration we need the following steps to do
 
 . Create a class (e.g. WicketApplication) with a main method
-. Annotate the class with @WicketSpringBootApplication
+. Annotate the class with @SpringBootApplication
 . Extend this class with WicketBootWebApplication
 . Define your project HomePage.
 . Use the SpringApplicationBuilder to run the WicketApplication class you've created
@@ -55,7 +55,7 @@ Beside the Maven dependency configuration we need the following steps to do
 
 [source,java]
 ----
-@WicketSpringBootApplication
+@SpringBootApplication
 public class WicketApplication extends WicketBootWebApplication {
   public static void main(String[] args) throws Exception {
     new SpringApplicationBuilder()

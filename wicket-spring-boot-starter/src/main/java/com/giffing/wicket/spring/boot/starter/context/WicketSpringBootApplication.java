@@ -18,6 +18,8 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
  * 
  * @author Marc Giffing
  * 
+ * @deprecated will be removed in the next releases. You will now only need {@link SpringBootApplication}
+ * 
  * TODO - move to context project?
  */
 @SpringBootApplication
