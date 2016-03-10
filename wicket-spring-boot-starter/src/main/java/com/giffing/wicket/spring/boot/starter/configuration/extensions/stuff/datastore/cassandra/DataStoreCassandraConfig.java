@@ -44,13 +44,14 @@ public class DataStoreCassandraConfig implements WicketApplicationInitConfigurat
 
 	@Override
 	public void init(WebApplication webApplication) {
-		ICassandraSettings settings = new CassandraSettings();
+		final ICassandraSettings settings = new CassandraSettings();
 		settings.getContactPoints().addAll(prop.getContactPoints());
 		settings.setTableName(prop.getTableName());
 		settings.setKeyspaceName(prop.getKeyspaceName());
 		settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
 
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
+			@Override
 			protected IDataStore newDataStore() {
 				return new SessionQuotaManagingDataStore(new CassandraDataStore(settings),
 						TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));

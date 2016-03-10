@@ -57,7 +57,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
+		<java.version>1.7</java.version>
 		<apache-shiro.version>1.2.4</apache-shiro.version>
 		<wicket.version>7.2.0</wicket.version>
 	</properties>
