@@ -23,7 +23,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 
-import test.om.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
+import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 
 /**
  * Test class for initialize Wicket & Spring Boot only in the web package. All

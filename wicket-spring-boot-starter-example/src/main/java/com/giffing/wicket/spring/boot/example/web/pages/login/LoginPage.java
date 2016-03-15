@@ -9,6 +9,7 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
@@ -19,6 +20,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
  * @author Marc Giffing
  *
  */
+@WicketSignInPage
 @MountPath("login")
 public class LoginPage extends BasePage {
 

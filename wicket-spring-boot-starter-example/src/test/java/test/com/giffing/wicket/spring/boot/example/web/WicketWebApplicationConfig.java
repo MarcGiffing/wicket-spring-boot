@@ -1,4 +1,4 @@
-package test.om.giffing.wicket.spring.boot.example.web;
+package test.com.giffing.wicket.spring.boot.example.web;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -35,10 +35,10 @@ public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication 
 	public Class<? extends Page> getHomePage() {
 		return CustomerListPage.class;
 	}
-
+	
 	@Override
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
 		return SecureWebSession.class;
 	}
-	
+
 }

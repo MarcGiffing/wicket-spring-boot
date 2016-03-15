@@ -4,9 +4,11 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.wicketstuff.annotation.mount.MountPath;
 
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 
+@WicketHomePage
 @MountPath("home")
 @AuthorizeInstantiation("USER")
 public class HomePage extends BasePage {
