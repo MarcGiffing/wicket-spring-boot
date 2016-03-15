@@ -2,4 +2,5 @@
 /.settings/
 .classpath
 .project
+.springBeans
 /src/main/resources/public/docs/
