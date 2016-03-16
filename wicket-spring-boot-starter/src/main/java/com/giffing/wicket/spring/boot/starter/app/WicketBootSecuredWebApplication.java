@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import com.giffing.wicket.spring.boot.context.security.AuthenticatedWebSessionConfig;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
@@ -56,7 +58,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
-	private PageCandiates pageCandiates;
+	private WicketClassCandidates classCandidates;
 	
 	@Override
 	protected void init() {
@@ -85,22 +87,22 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
-		if(pageCandiates.getSignInPageCandiates().size() != 1){
-			throw new IllegalStateException("Couln't find home page - please annotated the home page with @Home");
+		if(classCandidates.getSignInPageCandidates().size() != 1){
+			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketSignInPage.class.getName());
 		}
 		
-		Class<WebPage> candiateClass = pageCandiates.getSignInPageCandiates().get(0).getCandiate();
-		return candiateClass;
+		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().get(0).getCandidate();
+		return candidateClass;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
-		if(pageCandiates.getHomePageCandiates().size() != 1){
-			throw new IllegalStateException("Couln't find home page - please annotated the home page with @Home");
+		if(classCandidates.getHomePageCandidates().size() != 1){
+			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
 		}
 		
-		Class<Page> next = pageCandiates.getHomePageCandiates().get(0).getCandiate();
+		Class<Page> next = classCandidates.getHomePageCandidates().get(0).getCandidate();
 		return next;
 	}
 

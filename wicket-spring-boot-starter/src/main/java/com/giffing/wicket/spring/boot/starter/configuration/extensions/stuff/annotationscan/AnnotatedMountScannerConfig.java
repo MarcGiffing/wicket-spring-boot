@@ -10,6 +10,8 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.app.SpringBootApplicationCandidates;
+import com.giffing.wicket.spring.boot.starter.app.WicketClassCandidates;
 
 /**
  * Auto configuration for the {@link AnnotatedMountScanner}.
@@ -37,12 +39,18 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 
 	@Autowired
 	private AnnotatedMountScannerProperties prop;
-
+	
+	@Autowired
+	private WicketClassCandidates candidates;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		String packagename = webApplication.getClass().getPackage().getName();
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
+		} else if(candidates.getSpringBootApplicationCandidates().size() > 0){
+			SpringBootApplicationCandidates springBootApplicationCandidates = candidates.getSpringBootApplicationCandidates().get(0);
+			packagename = springBootApplicationCandidates.getCandidate().getPackage().getName();
 		}
 		
 		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
 /**
@@ -46,7 +47,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
-	private PageCandiates pageCandiates;
+	private WicketClassCandidates classCandidates;
 	
 	@Autowired
 	public WicketBootStandardWebApplication(ApplicationContext applicationContext, List<WicketApplicationInitConfiguration> configurations, GeneralSettingsProperties generalSettingsProperties) {
@@ -77,11 +78,11 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
-		if(pageCandiates.getHomePageCandiates().size() != 1){
-			throw new IllegalStateException("Couln't find home page - please annotated the home page with @Home");
+		if(classCandidates.getHomePageCandidates().size() != 1){
+			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
 		}
 		
-		Class<Page> next = pageCandiates.getHomePageCandiates().get(0).getCandiate();
+		Class<Page> next = classCandidates.getHomePageCandidates().get(0).getCandidate();
 		return next;
 	}
 
