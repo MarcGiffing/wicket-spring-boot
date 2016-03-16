@@ -15,6 +15,7 @@ import org.springframework.context.ApplicationContext;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
 /**
@@ -49,7 +50,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
-	private WicketClassCandidates classCandidates;
+	private WicketClassCandidatesHolder classCandidates;
 	
 	@Override
 	protected void init() {
@@ -104,11 +105,11 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 		this.configurations = configurations;
 	}
 
-	public WicketClassCandidates getClassCandidates() {
+	public WicketClassCandidatesHolder getClassCandidates() {
 		return classCandidates;
 	}
 
-	public void setClassCandidates(WicketClassCandidates classCandidates) {
+	public void setClassCandidates(WicketClassCandidatesHolder classCandidates) {
 		this.classCandidates = classCandidates;
 	}
 

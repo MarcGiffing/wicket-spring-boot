@@ -20,6 +20,7 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import com.giffing.wicket.spring.boot.context.security.AuthenticatedWebSessionConfig;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
 /**
@@ -58,7 +59,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
-	private WicketClassCandidates classCandidates;
+	private WicketClassCandidatesHolder classCandidates;
 	
 	@Override
 	protected void init() {

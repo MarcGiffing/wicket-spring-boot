@@ -8,6 +8,17 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplicatio
 import com.giffing.wicket.spring.boot.starter.app.WicketBootStandardWebApplication;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 
+/**
+ * Configures the standard {@link WicketBootWebApplication} configuration
+ * without security options.
+ * 
+ * The {@link WicketBootStandardWebApplication} will only be activated if there
+ * is no other {@link WicketBootWebApplication} present and if there is not
+ * {@link WicketBootSecuredWebApplication} present.
+ * 
+ * @author Marc Giffing
+ *
+ */
 @Configuration
 @ConditionalOnMissingBean(WicketBootSecuredWebApplication.class)
 public class WicketBootWebApplicationAutoConfiguration {

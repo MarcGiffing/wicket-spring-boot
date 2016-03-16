@@ -10,8 +10,8 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.app.SpringBootApplicationCandidates;
-import com.giffing.wicket.spring.boot.starter.app.WicketClassCandidates;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.SpringBootApplicationCandidates;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 
 /**
  * Auto configuration for the {@link AnnotatedMountScanner}.
@@ -41,7 +41,7 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 	private AnnotatedMountScannerProperties prop;
 	
 	@Autowired
-	private WicketClassCandidates candidates;
+	private WicketClassCandidatesHolder candidates;
 	
 	@Override
 	public void init(WebApplication webApplication) {

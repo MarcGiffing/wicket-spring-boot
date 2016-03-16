@@ -1,17 +1,24 @@
-package com.giffing.wicket.spring.boot.starter.app;
+package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WicketClassCandidates {
-
+/**
+ * Holds class candidates which should be configures in Wicket.
+ * It holds e.g. home page classes which should be configures in Wicket. 
+ * 
+ * @author Marc Giffing
+ *
+ */
+public class WicketClassCandidatesHolder {
+	
 	private List<HomePageCandidate> homePageCandidates = new ArrayList<>();
 	
 	private List<SignInPageCandidates> signInPageCandidates = new ArrayList<>();
 
 	private List<SpringBootApplicationCandidates> springBootApplicationCandidates;
 	
-	public WicketClassCandidates(List<HomePageCandidate> homePageCandidates, 
+	public WicketClassCandidatesHolder(List<HomePageCandidate> homePageCandidates, 
 			List<SignInPageCandidates> signInPageCandidates, 
 			List<SpringBootApplicationCandidates> springBootApplicationCandidates) {
 		
