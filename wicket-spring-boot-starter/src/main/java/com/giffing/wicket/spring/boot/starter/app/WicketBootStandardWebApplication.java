@@ -35,8 +35,10 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	private final static Logger logger = LoggerFactory
 		.getLogger(WicketBootStandardWebApplication.class);
 
+	@Autowired
 	private ApplicationContext applicationContext;
 	
+	@Autowired
 	private GeneralSettingsProperties generalSettingsProperties;
 	
 	/**
@@ -48,14 +50,6 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	
 	@Autowired
 	private WicketClassCandidates classCandidates;
-	
-	@Autowired
-	public WicketBootStandardWebApplication(ApplicationContext applicationContext, List<WicketApplicationInitConfiguration> configurations, GeneralSettingsProperties generalSettingsProperties) {
-		this.applicationContext = applicationContext;
-		this.configurations = configurations;
-		this.generalSettingsProperties = generalSettingsProperties;
-	}
-	
 	
 	@Override
 	protected void init() {
@@ -84,6 +78,38 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 		
 		Class<Page> next = classCandidates.getHomePageCandidates().get(0).getCandidate();
 		return next;
+	}
+
+	public ApplicationContext getApplicationContext() {
+		return applicationContext;
+	}
+
+	public void setApplicationContext(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
+
+	public GeneralSettingsProperties getGeneralSettingsProperties() {
+		return generalSettingsProperties;
+	}
+
+	public void setGeneralSettingsProperties(GeneralSettingsProperties generalSettingsProperties) {
+		this.generalSettingsProperties = generalSettingsProperties;
+	}
+
+	public List<WicketApplicationInitConfiguration> getConfigurations() {
+		return configurations;
+	}
+
+	public void setConfigurations(List<WicketApplicationInitConfiguration> configurations) {
+		this.configurations = configurations;
+	}
+
+	public WicketClassCandidates getClassCandidates() {
+		return classCandidates;
+	}
+
+	public void setClassCandidates(WicketClassCandidates classCandidates) {
+		this.classCandidates = classCandidates;
 	}
 
 }

@@ -46,32 +46,34 @@ and add the *wicket-spring-boot-starter* dependency to your configuration.
 
 Beside the Maven dependency configuration we need the following steps to do
 
-. Create a class (e.g. WicketApplication) with a main method
-. Annotate the class with @SpringBootApplication
-. Extend this class with WicketBootWebApplication
-. Define your project HomePage.
+. Create a application class which is marked with @SpringBootApplication as usal 
+. Create your HomePage class (with HTML) which will me marked with @WicketHomePage
 . Use the SpringApplicationBuilder to run the WicketApplication class you've created
 
 
 [source,java]
 ----
 @SpringBootApplication
-public class WicketApplication extends WicketBootWebApplication {
+public class WicketApplication {
   public static void main(String[] args) throws Exception {
     new SpringApplicationBuilder()
       .sources(WicketApplication.class)
       .run(args);
   }
 
-  @Override
-  public Class<? extends Page> getHomePage() {
-    return YourHomePage.class;
-  }
 }
+
+@WicketHomePage
+public class HomePage extends WebPage {
+}
+
 ----
 
 Thats all! When you execute the main method you will get a fully working and configured 
 Wicket application. An embedded Tomcat is automatically started.
+
+TODO explain how you can extend the init configuration and how to provide you ohn WicketApplication class/bean
+
 As in every Wicket application you can override the WicketBootWebApplication as usual. 
 
 To package the application as an executable jar you have to add the spring-boot-maven-plugin.
