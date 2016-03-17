@@ -14,21 +14,16 @@ NOTE: Examples project: https://github.com/MarcGiffing/wicket-spring-boot-exampl
 [[introduction]]
 == Introduction
 
-This project makes it easy to create Wicket projects with a minimum
+This project makes it easy to create a new Wicket projects with a minimum
 of configuration effort. It uses Spring Boot to autoconfigure Wickets core and
-its extension (related projects like wicketstuff, beanvalidation...( with an reasonable default value which can be overridden over property files.
+its extension (related projects like wicketstuff, beanvalidation...) with an reasonable default value which can be overridden over property files.
 
-Spring Boot is using embedded servlet containers so you don't have to deploy the Application to an e.g.
-Tomcat by hand.
+* Core Features
 
-The detailed description of the autoconfiguration support can be read in the <<extension>> section.
-
-This project is automatically registers the needed
-link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WicketWebInitializer.java[WicketFilter]
-for handling Wicket requests and added the Spring applicationBean as an init parameter. 
-
-Out of the box Wickets dependency injection support (@SpringBean) for Spring is automatically supported.
-
+** Configures an embedded Servlet Container by default (Spring Boot Feature).
+** Autoconfiguration of the needed link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WicketWebInitializer.java[Wicket Servlet filters].
+** Autoconfiguration for Spring/Spring-Security and dependency injection support with @SpringBean.
+** Autoconfiguration of Wicket <<extension>>.
 
 [[getting_started]]
 == Getting started
@@ -46,9 +41,8 @@ and add the *wicket-spring-boot-starter* dependency to your configuration.
 
 Beside the Maven dependency configuration we need the following steps to do
 
-. Create a application class which is marked with @SpringBootApplication as usal 
+. Create a class which is marked with @SpringBootApplication - see http://docs.spring.io/spring-boot/docs/current-SNAPSHOT/reference/htmlsingle/#using-boot-using-springbootapplication-annotation[Springs documentation]
 . Create your HomePage class (with HTML) which will me marked with @WicketHomePage
-. Use the SpringApplicationBuilder to run the WicketApplication class you've created
 
 
 [source,java]
@@ -67,14 +61,55 @@ public class WicketApplication {
 public class HomePage extends WebPage {
 }
 
+<html xmlns:wicket="http://wicket.apache.org">
+	<head></head>
+	<body>
+		You content
+		<wicket:child/>
+	</body>
+</html>
+
 ----
 
 Thats all! When you execute the main method you will get a fully working and configured 
 Wicket application. An embedded Tomcat is automatically started.
 
-TODO explain how you can extend the init configuration and how to provide you ohn WicketApplication class/bean
+In a usal Wicket application you would like to provide custom configuration in Wickets WebApplication init() method.
+You could create your own 'extension' by creating a bean which implements WicketApplicationInitConfiguration
 
-As in every Wicket application you can override the WicketBootWebApplication as usual. 
+[source,java]
+----
+@ApplicationInitExtension
+public class YouExtensionConif implements WicketApplicationInitConfiguration {
+
+  @Override
+  public void init(WebApplication webApplication) {
+  	// your custom configuration
+  }
+
+}
+----
+
+If this configuration is not enough and you want to override special methods of Wickets WebApplication class you have
+to create a bean which extends one of the following two classes
+
+* WicketBootStandardWebApplication - Without Security
+* WicketBootSecuredWebApplication  - With Security - You'll need a security provider like <<extension-spring-security>>
+
+[source,java]
+----
+@Component
+public class WicketWebApplication extends WicketBootSecuredWebApplication {
+  @Override
+  protected void init() {
+    super.init();
+  }
+}
+----
+
+The custom WicketWebApplication is automatically picked up instead of the default provided one.
+You can also override the getHomePage method() if you don't want to use the special @WicketHomePage annotations
+to mark the home page.
 
 To package the application as an executable jar you have to add the spring-boot-maven-plugin.
 
