@@ -10,7 +10,7 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.SpringBootApplicationCandidates;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 
 /**
@@ -49,7 +49,7 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
 		} else if(candidates.getSpringBootApplicationCandidates().size() > 0){
-			SpringBootApplicationCandidates springBootApplicationCandidates = candidates.getSpringBootApplicationCandidates().get(0);
+			WicketClassCandidate springBootApplicationCandidates = candidates.getSpringBootApplicationCandidates().get(0);
 			packagename = springBootApplicationCandidates.getCandidate().getPackage().getName();
 		}
 		

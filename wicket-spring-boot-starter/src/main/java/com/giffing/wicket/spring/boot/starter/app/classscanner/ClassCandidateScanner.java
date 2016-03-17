@@ -13,9 +13,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.HomePageCandidate;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.SignInPageCandidates;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.SpringBootApplicationCandidates;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 
 /**
@@ -31,24 +29,37 @@ import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.Wicket
 @Configuration
 public class ClassCandidateScanner extends AutowiredAnnotationBeanPostProcessor {
 	
-	private List<HomePageCandidate> homePageCandidates = new ArrayList<>();
+	private List<WicketClassCandidate<Page>> homePageCandidates = new ArrayList<>();
 	
-	private List<SignInPageCandidates> signInPageCandidates = new ArrayList<>();
+	private List<WicketClassCandidate<WebPage>> signInPageCandidates = new ArrayList<>();
 	
-	private List<SpringBootApplicationCandidates> springBootApplicationCandidates  = new ArrayList<>();
+	private List<WicketClassCandidate> springBootApplicationCandidates  = new ArrayList<>();
+	
+	private List<WicketClassCandidate<Page>> accessDeniedPageCandidates = new ArrayList<>();
+	
+	private List<WicketClassCandidate<Page>> expiredPageCandidates = new ArrayList<>();
+	
+	private List<WicketClassCandidate<Page>> internalErrorPageCandidates = new ArrayList<>();
 	
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
+		boolean isWicketBean = false;
 		if(beanClass.isAnnotationPresent(WicketHomePage.class)){
-			homePageCandidates.add(new HomePageCandidate((Class<Page>) beanClass));
-			return new Object();
+			homePageCandidates.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+			isWicketBean = true;
 		}
+		
 		if(beanClass.isAnnotationPresent(WicketSignInPage.class)){
-			signInPageCandidates.add(new SignInPageCandidates((Class<WebPage>) beanClass));
+			signInPageCandidates.add(new WicketClassCandidate<WebPage>((Class<WebPage>) beanClass));
+			isWicketBean = true;
+		}
+		
+		if(isWicketBean) {
 			return new Object();
 		}
+		
 		if(beanClass.isAnnotationPresent(SpringBootApplication.class)){
-			springBootApplicationCandidates.add(new SpringBootApplicationCandidates(beanClass));
+			springBootApplicationCandidates.add(new WicketClassCandidate(beanClass));
 		}
 		
 		return super.postProcessBeforeInstantiation(beanClass, beanName);
@@ -56,7 +67,10 @@ public class ClassCandidateScanner extends AutowiredAnnotationBeanPostProcessor 
 	
 	@Bean
 	public WicketClassCandidatesHolder pageCandidates() {
-		return new WicketClassCandidatesHolder(homePageCandidates, signInPageCandidates, springBootApplicationCandidates);
+		return new WicketClassCandidatesHolder(
+				homePageCandidates, 
+				signInPageCandidates, 
+				springBootApplicationCandidates);
 	}
 	
 }

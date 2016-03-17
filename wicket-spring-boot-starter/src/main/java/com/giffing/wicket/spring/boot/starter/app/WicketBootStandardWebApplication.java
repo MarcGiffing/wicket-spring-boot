@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
@@ -31,6 +32,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.sett
  * @author Marc Giffing
  *
  */
+@Lazy
 public class WicketBootStandardWebApplication extends WebApplication implements WicketBootWebApplication {
 
 	private final static Logger logger = LoggerFactory

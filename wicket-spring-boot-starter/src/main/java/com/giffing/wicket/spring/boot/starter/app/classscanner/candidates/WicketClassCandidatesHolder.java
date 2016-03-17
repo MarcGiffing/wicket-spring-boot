@@ -3,6 +3,9 @@ package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.Page;
+import org.apache.wicket.markup.html.WebPage;
+
 /**
  * Holds class candidates which should be configures in Wicket.
  * It holds e.g. home page classes which should be configures in Wicket. 
@@ -12,43 +15,44 @@ import java.util.List;
  */
 public class WicketClassCandidatesHolder {
 	
-	private List<HomePageCandidate> homePageCandidates = new ArrayList<>();
+	private List<WicketClassCandidate<Page>> homePageCandidates = new ArrayList<>();
 	
-	private List<SignInPageCandidates> signInPageCandidates = new ArrayList<>();
+	private List<WicketClassCandidate<WebPage>> signInPageCandidates = new ArrayList<>();
 
-	private List<SpringBootApplicationCandidates> springBootApplicationCandidates;
+	private List<WicketClassCandidate> springBootApplicationCandidates;
 	
-	public WicketClassCandidatesHolder(List<HomePageCandidate> homePageCandidates, 
-			List<SignInPageCandidates> signInPageCandidates, 
-			List<SpringBootApplicationCandidates> springBootApplicationCandidates) {
+	
+	public WicketClassCandidatesHolder(List<WicketClassCandidate<Page>> homePageCandidates, 
+			List<WicketClassCandidate<WebPage>> signInPageCandidates, 
+			List<WicketClassCandidate> springBootApplicationCandidates) {
 		
 		this.homePageCandidates = homePageCandidates;
 		this.signInPageCandidates = signInPageCandidates;
-		this.setSpringBootApplicationCandidates(springBootApplicationCandidates);
-	}
-	
-	public List<HomePageCandidate> getHomePageCandidates() {
-		return homePageCandidates;
-	}
-
-	public void setHomePageCandidates(List<HomePageCandidate> homePageCandidates) {
-		this.homePageCandidates = homePageCandidates;
-	}
-
-	public List<SignInPageCandidates> getSignInPageCandidates() {
-		return signInPageCandidates;
-	}
-
-	public void setSignInPageCandidates(List<SignInPageCandidates> signInPageCandidates) {
-		this.signInPageCandidates = signInPageCandidates;
-	}
-
-	public List<SpringBootApplicationCandidates> getSpringBootApplicationCandidates() {
-		return springBootApplicationCandidates;
-	}
-
-	public void setSpringBootApplicationCandidates(List<SpringBootApplicationCandidates> springBootApplicationCandidates) {
 		this.springBootApplicationCandidates = springBootApplicationCandidates;
 	}
 	
+	public List<WicketClassCandidate<Page>> getHomePageCandidates() {
+		return homePageCandidates;
+	}
+
+	public void setHomePageCandidates(List<WicketClassCandidate<Page>> homePageCandidates) {
+		this.homePageCandidates = homePageCandidates;
+	}
+
+	public List<WicketClassCandidate<WebPage>> getSignInPageCandidates() {
+		return signInPageCandidates;
+	}
+
+	public void setSignInPageCandidates(List<WicketClassCandidate<WebPage>> signInPageCandidates) {
+		this.signInPageCandidates = signInPageCandidates;
+	}
+
+	public List<WicketClassCandidate> getSpringBootApplicationCandidates() {
+		return springBootApplicationCandidates;
+	}
+
+	public void setSpringBootApplicationCandidates(List<WicketClassCandidate> springBootApplicationCandidates) {
+		this.springBootApplicationCandidates = springBootApplicationCandidates;
+	}
+
 }

@@ -5,7 +5,7 @@ package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
  *
  * @param <T> candidate class type
  */
-public abstract class WicketClassCandidate<T> {
+public class WicketClassCandidate<T> {
 
 	private Class<T> candidate;
 	
