@@ -24,6 +24,7 @@ its extension (related projects like wicketstuff, beanvalidation...) with an rea
 ** Autoconfiguration of the needed link:wicket-spring-boot-starter/src/main/java/com/giffing/wicket/spring/boot/starter/web/WicketWebInitializer.java[Wicket Servlet filters].
 ** Autoconfiguration for Spring/Spring-Security and dependency injection support with @SpringBean.
 ** Autoconfiguration of Wicket <<extension>>.
+** Faster development support with <<extension-springboot-devtools>>
 
 [[getting_started]]
 == Getting started
