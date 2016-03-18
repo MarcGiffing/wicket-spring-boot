@@ -92,7 +92,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketSignInPage.class.getName());
 		}
 		
-		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().get(0).getCandidate();
+		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
 		return candidateClass;
 	}
 
@@ -103,7 +103,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
 		}
 		
-		Class<Page> next = classCandidates.getHomePageCandidates().get(0).getCandidate();
+		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 		return next;
 	}
 

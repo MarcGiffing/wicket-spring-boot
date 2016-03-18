@@ -79,7 +79,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
 		}
 		
-		Class<Page> next = classCandidates.getHomePageCandidates().get(0).getCandidate();
+		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 		return next;
 	}
 

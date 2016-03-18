@@ -1,17 +1,31 @@
 package com.giffing.wicket.spring.boot.starter.app.classscanner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Set;
+
+import javax.annotation.PostConstruct;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.StringUtils;
 
+import com.giffing.wicket.spring.boot.context.scan.WicketAccessDeniedPage;
+import com.giffing.wicket.spring.boot.context.scan.WicketExpiredPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.context.scan.WicketInternalErrorPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
@@ -19,52 +33,84 @@ import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.Wicket
 /**
  * The candidate class scanner is used to find class with special annotations.
  * 
- * You can't create beans of Wicket pages cause they have to be created in a Wicket
- * context. You will get errors if. Therefore the {@link AutowiredAnnotationBeanPostProcessor}
- * is used to prevent the creation of the beans and get only the classes instead.
- * 
  * @author Marc Giffing
  *
  */
 @Configuration
-public class ClassCandidateScanner extends AutowiredAnnotationBeanPostProcessor {
+public class ClassCandidateScanner implements BeanClassLoaderAware {
 	
-	private List<WicketClassCandidate<Page>> homePageCandidates = new ArrayList<>();
+	@Autowired
+	private Environment environment;
+
+	@Autowired
+	private ResourceLoader resourceLoader;
+
+	@Autowired
+	private BeanFactory beanFactory;
 	
-	private List<WicketClassCandidate<WebPage>> signInPageCandidates = new ArrayList<>();
-	
-	private List<WicketClassCandidate> springBootApplicationCandidates  = new ArrayList<>();
-	
+	private ClassLoader classLoader;
+
 	@Override
-	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-		boolean isWicketBean = false;
-		if(beanClass.isAnnotationPresent(WicketHomePage.class)){
-			homePageCandidates.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
-			isWicketBean = true;
-		}
-		
-		if(beanClass.isAnnotationPresent(WicketSignInPage.class)){
-			signInPageCandidates.add(new WicketClassCandidate<WebPage>((Class<WebPage>) beanClass));
-			isWicketBean = true;
-		}
-		
-		if(isWicketBean) {
-			return new Object();
-		}
-		
-		if(beanClass.isAnnotationPresent(SpringBootApplication.class)){
-			springBootApplicationCandidates.add(new WicketClassCandidate(beanClass));
-		}
-		
-		return super.postProcessBeforeInstantiation(beanClass, beanName);
+	public void setBeanClassLoader(ClassLoader classLoader) {
+		this.classLoader = classLoader;
 	}
 	
 	@Bean
 	public WicketClassCandidatesHolder pageCandidates() {
-		return new WicketClassCandidatesHolder(
-				homePageCandidates, 
-				signInPageCandidates, 
-				springBootApplicationCandidates);
+		return new WicketClassCandidatesHolder();
+	}
+	
+	@PostConstruct
+	public void postConstruct() {
+		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(
+				false);
+		scanner.setEnvironment(this.environment);
+		scanner.setResourceLoader(this.resourceLoader);
+		scanner.addIncludeFilter(new AnnotationTypeFilter(WicketHomePage.class));
+		scanner.addIncludeFilter(new AnnotationTypeFilter(WicketSignInPage.class));
+	    scanner.addIncludeFilter(new AnnotationTypeFilter(WicketAccessDeniedPage.class));
+	    scanner.addIncludeFilter(new AnnotationTypeFilter(WicketExpiredPage.class));
+	    scanner.addIncludeFilter(new AnnotationTypeFilter(WicketInternalErrorPage.class));
+	    for (String basePackage : getMappingBasePackages(beanFactory)) {
+			if (StringUtils.hasText(basePackage)) {
+				pageCandidates().getBasePackages().add(basePackage);
+				Set<BeanDefinition> beanDefinitions = scanner.findCandidateComponents(basePackage);
+				for (BeanDefinition beanDefinition : beanDefinitions) {
+					Class<?> beanClass;
+					try {
+						beanClass = ClassUtils.forName(beanDefinition.getBeanClassName(), classLoader);
+					} catch (ClassNotFoundException e) {
+						throw new IllegalStateException(e);
+					}
+					if(beanClass.isAnnotationPresent(WicketHomePage.class)){
+						pageCandidates().getHomePageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+					}
+					if(beanClass.isAnnotationPresent(WicketSignInPage.class)){
+						pageCandidates().getSignInPageCandidates().add(new WicketClassCandidate<WebPage>((Class<WebPage>) beanClass));
+					}
+					if(beanClass.isAnnotationPresent(WicketAccessDeniedPage.class)){
+						pageCandidates().getAccessDeniedPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+					}
+					if(beanClass.isAnnotationPresent(WicketExpiredPage.class)){
+						pageCandidates().getExpiredPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+					}
+					if(beanClass.isAnnotationPresent(WicketInternalErrorPage.class)){
+						pageCandidates().getInternalErrorPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+					}
+				}
+				
+			}
+	    }
+	}
+	
+	private static Collection<String> getMappingBasePackages(BeanFactory beanFactory) {
+		try {
+			return AutoConfigurationPackages.get(beanFactory);
+		}
+		catch (IllegalStateException ex) {
+			// no auto-configuration package registered yet
+			return Collections.emptyList();
+		}
 	}
 	
 }

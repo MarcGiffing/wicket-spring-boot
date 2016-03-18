@@ -20,7 +20,7 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
  *
  */
 @Configuration
-@ConditionalOnMissingBean(WicketBootSecuredWebApplication.class)
+@ConditionalOnMissingBean({WicketBootSecuredWebApplication.class, WicketBootWebApplication.class})
 public class WicketBootWebApplicationAutoConfiguration {
 
 	@Bean

@@ -10,7 +10,6 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 
 /**
@@ -45,15 +44,21 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 	
 	@Override
 	public void init(WebApplication webApplication) {
+		AnnotatedMountScanner annotatedMountScanner = new AnnotatedMountScanner();
+
 		String packagename = webApplication.getClass().getPackage().getName();
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
-		} else if(candidates.getSpringBootApplicationCandidates().size() > 0){
-			WicketClassCandidate springBootApplicationCandidates = candidates.getSpringBootApplicationCandidates().get(0);
-			packagename = springBootApplicationCandidates.getCandidate().getPackage().getName();
+		} 
+		annotatedMountScanner.scanPackage(packagename).mount(webApplication);
+		
+		if(candidates.getBasePackages().size() > 0){
+			for (String basePackage : candidates.getBasePackages()) {
+				annotatedMountScanner.scanPackage(basePackage).mount(webApplication);
+			}
 		}
 		
-		new AnnotatedMountScanner().scanPackage(packagename).mount(webApplication);
+		
 	}
 
 }

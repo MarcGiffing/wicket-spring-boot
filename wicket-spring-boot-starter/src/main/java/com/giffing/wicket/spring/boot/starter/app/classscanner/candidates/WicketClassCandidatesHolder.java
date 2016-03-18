@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
@@ -15,44 +15,64 @@ import org.apache.wicket.markup.html.WebPage;
  */
 public class WicketClassCandidatesHolder {
 	
-	private List<WicketClassCandidate<Page>> homePageCandidates = new ArrayList<>();
+	private Set<String> basePackages = new HashSet<>();
 	
-	private List<WicketClassCandidate<WebPage>> signInPageCandidates = new ArrayList<>();
+	private Set<WicketClassCandidate<Page>> homePageCandidates = new HashSet<>();
+	
+	private Set<WicketClassCandidate<WebPage>> signInPageCandidates = new HashSet<>();
+	
+	private Set<WicketClassCandidate<Page>> accessDeniedPageCandidates = new HashSet<>();
+	
+	private Set<WicketClassCandidate<Page>> expiredPageCandidates = new HashSet<>();
+	
+	private Set<WicketClassCandidate<Page>> internalErrorPageCandidates = new HashSet<>();
 
-	private List<WicketClassCandidate> springBootApplicationCandidates;
-	
-	
-	public WicketClassCandidatesHolder(List<WicketClassCandidate<Page>> homePageCandidates, 
-			List<WicketClassCandidate<WebPage>> signInPageCandidates, 
-			List<WicketClassCandidate> springBootApplicationCandidates) {
-		
-		this.homePageCandidates = homePageCandidates;
-		this.signInPageCandidates = signInPageCandidates;
-		this.springBootApplicationCandidates = springBootApplicationCandidates;
-	}
-	
-	public List<WicketClassCandidate<Page>> getHomePageCandidates() {
+	public Set<WicketClassCandidate<Page>> getHomePageCandidates() {
 		return homePageCandidates;
 	}
 
-	public void setHomePageCandidates(List<WicketClassCandidate<Page>> homePageCandidates) {
+	public void setHomePageCandidates(Set<WicketClassCandidate<Page>> homePageCandidates) {
 		this.homePageCandidates = homePageCandidates;
 	}
 
-	public List<WicketClassCandidate<WebPage>> getSignInPageCandidates() {
+	public Set<WicketClassCandidate<WebPage>> getSignInPageCandidates() {
 		return signInPageCandidates;
 	}
 
-	public void setSignInPageCandidates(List<WicketClassCandidate<WebPage>> signInPageCandidates) {
+	public void setSignInPageCandidates(Set<WicketClassCandidate<WebPage>> signInPageCandidates) {
 		this.signInPageCandidates = signInPageCandidates;
 	}
 
-	public List<WicketClassCandidate> getSpringBootApplicationCandidates() {
-		return springBootApplicationCandidates;
+	public Set<WicketClassCandidate<Page>> getAccessDeniedPageCandidates() {
+		return accessDeniedPageCandidates;
 	}
 
-	public void setSpringBootApplicationCandidates(List<WicketClassCandidate> springBootApplicationCandidates) {
-		this.springBootApplicationCandidates = springBootApplicationCandidates;
+	public void setAccessDeniedPageCandidates(Set<WicketClassCandidate<Page>> accessDeniedPageCandidates) {
+		this.accessDeniedPageCandidates = accessDeniedPageCandidates;
+	}
+
+	public Set<WicketClassCandidate<Page>> getExpiredPageCandidates() {
+		return expiredPageCandidates;
+	}
+
+	public void setExpiredPageCandidates(Set<WicketClassCandidate<Page>> expiredPageCandidates) {
+		this.expiredPageCandidates = expiredPageCandidates;
+	}
+
+	public Set<WicketClassCandidate<Page>> getInternalErrorPageCandidates() {
+		return internalErrorPageCandidates;
+	}
+
+	public void setInternalErrorPageCandidates(Set<WicketClassCandidate<Page>> internalErrorPageCandidates) {
+		this.internalErrorPageCandidates = internalErrorPageCandidates;
+	}
+
+	public Set<String> getBasePackages() {
+		return basePackages;
+	}
+
+	public void setBasePackages(Set<String> basePackages) {
+		this.basePackages = basePackages;
 	}
 
 }

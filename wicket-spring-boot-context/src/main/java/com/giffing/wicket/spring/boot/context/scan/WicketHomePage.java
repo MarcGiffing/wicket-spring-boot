@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.stereotype.Component;
 
 /**
  * Should be used to mark the home page which should automatically configures in the {@link WebApplication}.
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Component;
  */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Component
 @Inherited
 public @interface WicketHomePage {
 
