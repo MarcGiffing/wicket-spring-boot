@@ -12,7 +12,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 
-import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.scan.WicketAccessDeniedPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketExpiredPage;
@@ -21,7 +20,6 @@ import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.Wicket
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 
 
-@ApplicationInitExtension
 public class ApplicationSettingsConfig implements WicketApplicationInitConfiguration {
 	
 	@Autowired
