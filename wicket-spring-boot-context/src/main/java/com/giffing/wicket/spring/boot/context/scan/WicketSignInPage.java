@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.stereotype.Component;
 
 /**
  * Should be used to mark the sign in page which should be automatically configured in the {@link WebApplication} class.
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Component;
  */
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
-@Component
 @Inherited
 public @interface WicketSignInPage {
 

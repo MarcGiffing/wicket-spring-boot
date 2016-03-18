@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Lazy;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
@@ -75,8 +76,16 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
-		if(classCandidates.getHomePageCandidates().size() != 1){
+		if(classCandidates.getHomePageCandidates().size() <= 0){
 			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
+		}
+		if(classCandidates.getHomePageCandidates().size() > 1 ){
+			String message = "Multiple home pages found - please annotated exactly one class with @" + WicketHomePage.class.getName();
+			message += "\n";
+			for(WicketClassCandidate<Page> classCandidate : classCandidates.getHomePageCandidates()) {
+				message += "\t" + classCandidate.getCandidate() + "\n";
+			}
+			throw new IllegalStateException(message);
 		}
 		
 		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();

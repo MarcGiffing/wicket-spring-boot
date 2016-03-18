@@ -38,7 +38,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 				WicketClassCandidate<Page> internalErrorPage = internalErrorPageCandidates.get(0);
 				applicationSettings.setInternalErrorPage(internalErrorPage.getCandidate());
 			} else {
-				throw new IllegalStateException("Multiple annotation of " + WicketInternalErrorPage.class.getName() + " found");
+				throwExceptionOnMultipleAnnotations(WicketInternalErrorPage.class, internalErrorPageCandidates);
 			}
 		}
 	}
@@ -49,7 +49,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 				WicketClassCandidate<Page> accessDeniedPage = accessDeniedPageCandidates.get(0);
 				applicationSettings.setAccessDeniedPage(accessDeniedPage.getCandidate());
 			} else {
-				throw new IllegalStateException("Multiple annotation of " + WicketAccessDeniedPage.class.getName() + " found");
+				throwExceptionOnMultipleAnnotations(WicketAccessDeniedPage.class, accessDeniedPageCandidates);
 			}
 		}
 	}
@@ -60,9 +60,18 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 				WicketClassCandidate<Page> expiredPageCandidate = expiredPageCandidates.get(0);
 				applicationSettings.setPageExpiredErrorPage(expiredPageCandidate.getCandidate());
 			} else {
-				throw new IllegalStateException("Multiple annotation of " + WicketExpiredPage.class.getName() + " found");
+				throwExceptionOnMultipleAnnotations(WicketExpiredPage.class, expiredPageCandidates);
 			}
 		}
+	}
+
+	private void throwExceptionOnMultipleAnnotations(Class<?> pageClass, List<WicketClassCandidate<Page>> expiredPageCandidates) throws IllegalAccessError {
+		String message = "Multiple annotation of " + pageClass.getName() + " found";
+		message += "\n";
+		for(WicketClassCandidate<Page> classCandidate : expiredPageCandidates) {
+			message += "\t" + classCandidate.getCandidate() + "\n";
+		}
+		throw new IllegalAccessError(message);
 	}
 
 }
