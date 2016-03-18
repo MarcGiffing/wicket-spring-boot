@@ -23,13 +23,9 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 @ConditionalOnMissingBean(WicketBootSecuredWebApplication.class)
 public class WicketBootWebApplicationAutoConfiguration {
 
-	@Configuration
-	@ConditionalOnMissingBean(WicketBootWebApplication.class)
-	public static class WicketBootStandardWebApplicationAuto {
-		@Bean
-		public WicketBootStandardWebApplication wicketBootWebApplication() {
-			return new WicketBootStandardWebApplication();
-		}
+	@Bean
+	public WicketBootStandardWebApplication wicketBootWebApplication() {
+		return new WicketBootStandardWebApplication();
 	}
 
 }

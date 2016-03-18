@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.security.AuthenticatedWebSessionConfig;
@@ -21,18 +20,13 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 		org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.class
 })
 @EnableConfigurationProperties({ SpringSecurityProperties.class })
+@ConditionalOnMissingBean(WicketBootWebApplication.class)
 public class SpringSecurityConfig {
 	
 	
-	@Configuration
-	@ConditionalOnMissingBean(WicketBootWebApplication.class)
-	public static class WicketBootSecuredWebApplicationAuto {
-		
-		@Bean
-		public WicketBootSecuredWebApplication wicketBootWebApplication() {
-			return new WicketBootSecuredWebApplication();
-		}
-		
+	@Bean
+	public WicketBootSecuredWebApplication wicketBootWebApplication() {
+		return new WicketBootSecuredWebApplication();
 	}
 	
 	@Bean
