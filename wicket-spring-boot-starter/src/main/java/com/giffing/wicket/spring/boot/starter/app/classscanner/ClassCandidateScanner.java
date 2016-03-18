@@ -35,12 +35,6 @@ public class ClassCandidateScanner extends AutowiredAnnotationBeanPostProcessor 
 	
 	private List<WicketClassCandidate> springBootApplicationCandidates  = new ArrayList<>();
 	
-	private List<WicketClassCandidate<Page>> accessDeniedPageCandidates = new ArrayList<>();
-	
-	private List<WicketClassCandidate<Page>> expiredPageCandidates = new ArrayList<>();
-	
-	private List<WicketClassCandidate<Page>> internalErrorPageCandidates = new ArrayList<>();
-	
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
 		boolean isWicketBean = false;
