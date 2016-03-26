@@ -2,7 +2,7 @@ package com.giffing.wicket.spring.boot.example.repository.services.customer.filt
 
 import com.giffing.wicket.spring.boot.example.repository.Sort;
 
-public enum CustomerSort implements Sort{
+public enum CustomerSort implements Sort {
 	ID("id"),
 	USERNAME("username"),
 	FIRSTNAME("firstname"),

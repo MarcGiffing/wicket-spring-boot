@@ -2,7 +2,6 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers.create;
 
 import org.apache.wicket.Component;
 import org.apache.wicket.PageReference;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -14,6 +13,7 @@ import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
+import com.giffing.wicket.spring.boot.example.web.html.form.button.XButton;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
@@ -89,33 +89,30 @@ public class CustomerCreatePage extends BasePage{
 	}
 	
 	private Component submitButton() {
-		return new Button("submit"){
-			@Override
-			public void onSubmit() {
-				service.save(customerModel.getObject());
-				webSocketMessageBroadcaster.send(new CustomerChangedEvent(customerModel.getObject()));
-				if(pageReferenceId != null){
-					setResponsePage(new PageReference(pageReferenceId).getPage());
-				} else {
-					setResponsePage(CustomerListPage.class);
-				}
-			}
-		};
+		return new XButton("submit")
+					.setOnSubmitEvent((button) -> {
+						service.save(customerModel.getObject());
+						webSocketMessageBroadcaster.send(new CustomerChangedEvent(customerModel.getObject()));
+						if(pageReferenceId != null){
+							setResponsePage(new PageReference(pageReferenceId).getPage());
+						} else {
+							setResponsePage(CustomerListPage.class);
+						}
+					});
+			
 	}
 	
 	private Component cancelButton() {
-		Button cancelButton = new Button("cancel"){
-
-			@Override
-			public void onSubmit() {
-				if(pageReferenceId != null){
-					setResponsePage(new PageReference(pageReferenceId).getPage());
-				} else {
-					setResponsePage(CustomerListPage.class);
-				}
+		XButton cancelButton = new XButton("cancel");
+		cancelButton.setOnSubmitEvent((btn)-> {
+			if(pageReferenceId != null){
+				setResponsePage(new PageReference(pageReferenceId).getPage());
+			} else {
+				setResponsePage(CustomerListPage.class);
 			}
-			
-		};
+		});
+
+		
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
 	}
