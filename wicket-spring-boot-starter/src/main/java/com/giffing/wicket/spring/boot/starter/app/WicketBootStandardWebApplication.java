@@ -88,7 +88,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 			throw new IllegalStateException(message);
 		}
 		
-		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
+		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate().get();
 		return next;
 	}
 

@@ -1,5 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
 
+import java.lang.ref.WeakReference;
+
 /**
  * @author Marc Giffing
  *
@@ -7,17 +9,17 @@ package com.giffing.wicket.spring.boot.starter.app.classscanner.candidates;
  */
 public class WicketClassCandidate<T> {
 
-	private Class<T> candidate;
+	private WeakReference<Class<T>> candidate;
 	
-	public WicketClassCandidate(Class<T> candidate) {
+	public WicketClassCandidate(WeakReference<Class<T>> candidate) {
 		this.candidate = candidate;
 	}
 
-	public Class<T> getCandidate() {
+	public WeakReference<Class<T>> getCandidate() {
 		return candidate;
 	}
 
-	public void setCandidate(Class<T> candidate) {
+	public void setCandidate(WeakReference<Class<T>> candidate) {
 		this.candidate = candidate;
 	}
 	
