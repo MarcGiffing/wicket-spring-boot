@@ -3,6 +3,7 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.extensions.ajax.markup.html.repeater.data.table.AjaxFallbackDefaultDataTable;
@@ -44,11 +45,9 @@ import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
-import com.giffing.wicket.spring.boot.example.web.html.form.button.XButton;
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractTextFieldFilter;
-import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.XFilteredPropertyColumn;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.create.CustomerCreatePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.edit.CustomerEditPage;
@@ -102,13 +101,16 @@ public class CustomerListPage extends BasePage {
 	}
 
 	private Button cancelButton() {
-		XButton cancelButton = new XButton("cancel");
-		cancelButton.setOnSubmitEvent((button) ->{
-			customerFilterModel.setObject(new CustomerFilter());
-			button.getForm().clearInput();
-			filterForm.clearInput();
-		});
+		Button cancelButton = new Button("cancel") {
 
+			@Override
+			public void onSubmit() {
+				customerFilterModel.setObject(new CustomerFilter());
+				getForm().clearInput();
+				filterForm.clearInput();
+			}
+
+		};
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
 	}
@@ -126,7 +128,7 @@ public class CustomerListPage extends BasePage {
 		columns.add(activeColumn());
 		columns.add(actionColumn());
 
-		DataTable<Customer, CustomerSort> dataTable = new AjaxFallbackDefaultDataTable<>("table", columns,
+		DataTable<Customer, CustomerSort> dataTable = new AjaxFallbackDefaultDataTable<Customer, CustomerSort>("table", columns,
 				customerDataProvider, 10);
 		FilterToolbar filterToolbar = new FilterToolbar(dataTable, filterForm);
 
@@ -140,49 +142,81 @@ public class CustomerListPage extends BasePage {
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> usernameColumn() {
-		XFilteredPropertyColumn<Customer, CustomerSort> usernameColumn = new XFilteredPropertyColumn<>(new ResourceModel("username"), CustomerSort.USERNAME,
-				CustomerSort.USERNAME.getFieldName());
-		
-		usernameColumn.setFilter((componentId, form) -> {
-			PropertyModel<String> usernameLikeModel = new PropertyModel<>(form.getModel(), "usernameLike");
-			AbstractTextFieldFilter<String> usernameSearchFilter = new AbstractTextFieldFilter<String>(componentId, usernameLikeModel, form);
-			usernameSearchFilter.setOnCreateTextField((componentId2, model) -> new UsernameSearchTextField(componentId2, model));
-			return usernameSearchFilter;
-		}); 
-		
-		return usernameColumn;
+		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("username"), CustomerSort.USERNAME,
+				CustomerSort.USERNAME.getFieldName()) {
+
+			@Override
+			public Component getFilter(String componentId, FilterForm<?> form) {
+				return new AbstractTextFieldFilter<String>(componentId,
+						new PropertyModel<>(form.getModel(), "usernameLike"), form) {
+
+					@Override
+					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+						return new UsernameSearchTextField(componentId, model);
+					}
+
+				};
+			}
+
+		};
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> firstnameColumn() {
-		XFilteredPropertyColumn<Customer, CustomerSort> firstNameColumn = new XFilteredPropertyColumn<>(new ResourceModel("firstname"),
-				CustomerSort.FIRSTNAME, CustomerSort.FIRSTNAME.getFieldName());
-		
-		firstNameColumn.setFilter((componentId, form) -> 
-			new AbstractTextFieldFilter<>(componentId, new PropertyModel<>(form.getModel(), "firstnameLike"), form)	
-		); 
-		
-		return firstNameColumn;
+		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("firstname"),
+				CustomerSort.FIRSTNAME, CustomerSort.FIRSTNAME.getFieldName()) {
+
+			@Override
+			public Component getFilter(String componentId, FilterForm<?> form) {
+				return new AbstractTextFieldFilter<String>(componentId,
+						new PropertyModel<>(form.getModel(), "firstnameLike"), form) {
+
+					@Override
+					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+						return new TextField<>(componentId, model);
+					}
+
+				};
+			}
+
+		};
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> lastnameColumn() {
-		XFilteredPropertyColumn<Customer, CustomerSort> lastnameColumn = new XFilteredPropertyColumn<>(new ResourceModel("lastname"), CustomerSort.LASTNAME,
-				CustomerSort.LASTNAME.getFieldName());
-		
-		lastnameColumn.setFilter((componentId, form) -> 
-			new AbstractTextFieldFilter<>(componentId, new PropertyModel<>(form.getModel(), "lastnameLike"), form)	
-		); 
-		
-		return lastnameColumn;
+		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("lastname"), CustomerSort.LASTNAME,
+				CustomerSort.LASTNAME.getFieldName()) {
+
+			@Override
+			public Component getFilter(String componentId, FilterForm<?> form) {
+				return new AbstractTextFieldFilter<String>(componentId,
+						new PropertyModel<>(form.getModel(), "lastnameLike"), form) {
+
+					@Override
+					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+						return new TextField<>(componentId, model);
+					}
+
+				};
+			}
+
+		};
 	}
 
 	private FilteredPropertyColumn<Customer, CustomerSort> activeColumn() {
-		XFilteredPropertyColumn<Customer, CustomerSort> activeColumn = new XFilteredPropertyColumn<>(new ResourceModel("active"), CustomerSort.ACTIVE,
-				CustomerSort.ACTIVE.getFieldName());
-		
-		activeColumn.setOnPopulateItem((item, componentId, dataModel)-> item.add(new YesNoLabel(componentId, (IModel<Boolean>) dataModel)));
-		activeColumn.setFilter((componentId, form) -> new AbstractCheckBoxFilter(componentId, new PropertyModel<>(form.getModel(), "active"), form));
-		
-		return activeColumn;
+		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("active"), CustomerSort.ACTIVE,
+				CustomerSort.ACTIVE.getFieldName()) {
+
+			@Override
+			public Component getFilter(String componentId, FilterForm<?> form) {
+				return new AbstractCheckBoxFilter(componentId, new PropertyModel<>(form.getModel(), "active"), form);
+			}
+
+			@Override
+			public void populateItem(Item<ICellPopulator<Customer>> item, String componentId,
+					IModel<Customer> rowModel) {
+				item.add(new YesNoLabel(componentId, (IModel<Boolean>) getDataModel(rowModel)));
+			}
+
+		};
 	}
 	
 	private AbstractColumn<Customer, CustomerSort> actionColumn() {
