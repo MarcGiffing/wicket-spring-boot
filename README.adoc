@@ -404,11 +404,23 @@ wicket.core.settings.pagestore.asynchronous-queue-capacity= # overrides wickets 
 wicket.core.settings.pagestore.file-store-folder= # overrides wickets default value only when set
 wicket.core.settings.pagestore.inmemory-cache-size= # overrides wickets default value only when set
 	
-	private Integer maxSizePerSession;
 ----
 If you insert e.g. developmentx you will get a startup error:
 [listing]
 Field error in object 'wicket' on field 'configurationType': rejected value [developmentx]; codes [typeMismatch.wicket.configurationType
+
+==== Special Annotations
+
+* @WicketHomePage
+** A Page marked with this annotation will be configured as the default home page. If multiple WicketHomePage annotation found an exception is thrown.
+* @WicketSignInPage
+** A Page marked with this annotation will be configured as the default login page. A security provider like Spring Security is needed. If multiple annotations found an exception is thrown. 
+* @WicketAccessDeniedPage
+** A Page marked with this annotation will be configured as the default access denied page.  
+* @WicketInternalErrorPage
+** A Page marked with this annotation will be configured as the default internal error page.
+* @WicketExpiredPage  
+** A Page marked with this annotation will be configured as the default expired page.
 
 [[extension-spring-security]]
 === Spring Security
