@@ -3,10 +3,12 @@ package com.giffing.wicket.spring.boot.example.web.pages.errors;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.wicket.request.http.WebResponse;
+import org.wicketstuff.annotation.mount.MountPath;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketAccessDeniedPage;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 
+@MountPath("problem")
 @WicketAccessDeniedPage
 public class AccessDeniedPage extends BasePage {
 
