@@ -36,7 +36,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 		if(internalErrorPageCandidates.size() > 0) {
 			if(internalErrorPageCandidates.size() == 1){
 				WicketClassCandidate<Page> internalErrorPage = internalErrorPageCandidates.get(0);
-				applicationSettings.setInternalErrorPage(internalErrorPage.getCandidate().get());
+				applicationSettings.setInternalErrorPage(internalErrorPage.getCandidate());
 			} else {
 				throwExceptionOnMultipleAnnotations(WicketInternalErrorPage.class, internalErrorPageCandidates);
 			}
@@ -47,7 +47,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 		if(accessDeniedPageCandidates.size() > 0) {
 			if(accessDeniedPageCandidates.size() == 1){
 				WicketClassCandidate<Page> accessDeniedPage = accessDeniedPageCandidates.get(0);
-				applicationSettings.setAccessDeniedPage(accessDeniedPage.getCandidate().get());
+				applicationSettings.setAccessDeniedPage(accessDeniedPage.getCandidate());
 			} else {
 				throwExceptionOnMultipleAnnotations(WicketAccessDeniedPage.class, accessDeniedPageCandidates);
 			}
@@ -58,7 +58,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 		if(expiredPageCandidates.size() > 0) {
 			if(expiredPageCandidates.size() == 1){
 				WicketClassCandidate<Page> expiredPageCandidate = expiredPageCandidates.get(0);
-				applicationSettings.setPageExpiredErrorPage(expiredPageCandidate.getCandidate().get());
+				applicationSettings.setPageExpiredErrorPage(expiredPageCandidate.getCandidate());
 			} else {
 				throwExceptionOnMultipleAnnotations(WicketExpiredPage.class, expiredPageCandidates);
 			}

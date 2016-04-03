@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.app.classscanner;
 
-import java.lang.ref.WeakReference;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
@@ -84,19 +83,19 @@ public class ClassCandidateScanner implements BeanClassLoaderAware {
 						throw new IllegalStateException(e);
 					}
 					if(beanClass.isAnnotationPresent(WicketHomePage.class)){
-						pageCandidates().getHomePageCandidates().add(new WicketClassCandidate<Page>(new WeakReference<>((Class<Page>) beanClass)));
+						pageCandidates().getHomePageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
 					}
 					if(beanClass.isAnnotationPresent(WicketSignInPage.class)){
-						pageCandidates().getSignInPageCandidates().add(new WicketClassCandidate<WebPage>(new WeakReference<>((Class<WebPage>) beanClass)));
+						pageCandidates().getSignInPageCandidates().add(new WicketClassCandidate<WebPage>((Class<WebPage>) beanClass));
 					}
 					if(beanClass.isAnnotationPresent(WicketAccessDeniedPage.class)){
-						pageCandidates().getAccessDeniedPageCandidates().add(new WicketClassCandidate<Page>(new WeakReference<>((Class<Page>) beanClass)));
+						pageCandidates().getAccessDeniedPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
 					}
 					if(beanClass.isAnnotationPresent(WicketExpiredPage.class)){
-						pageCandidates().getExpiredPageCandidates().add(new WicketClassCandidate<Page>(new WeakReference<>((Class<Page>) beanClass)));
+						pageCandidates().getExpiredPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
 					}
 					if(beanClass.isAnnotationPresent(WicketInternalErrorPage.class)){
-						pageCandidates().getInternalErrorPageCandidates().add(new WicketClassCandidate<Page>(new WeakReference<>((Class<Page>) beanClass)));
+						pageCandidates().getInternalErrorPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
 					}
 				}
 				

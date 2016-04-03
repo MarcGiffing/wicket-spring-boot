@@ -11,16 +11,13 @@ public class WicketClassCandidate<T> {
 
 	private WeakReference<Class<T>> candidate;
 	
-	public WicketClassCandidate(WeakReference<Class<T>> candidate) {
-		this.candidate = candidate;
+	public WicketClassCandidate(Class<T> candidate) {
+		this.candidate = new WeakReference<Class<T>>(candidate);
 	}
 
-	public WeakReference<Class<T>> getCandidate() {
-		return candidate;
+	public Class<T> getCandidate() {
+		return candidate.get();
 	}
 
-	public void setCandidate(WeakReference<Class<T>> candidate) {
-		this.candidate = candidate;
-	}
 	
 }

@@ -101,7 +101,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			throw new IllegalStateException(message);
 		}
 		
-		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().iterator().next().getCandidate().get();
+		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
 		return candidateClass;
 	}
 
@@ -120,7 +120,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			throw new IllegalStateException(message);
 		}
 		
-		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate().get();
+		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 		return next;
 	}
 
