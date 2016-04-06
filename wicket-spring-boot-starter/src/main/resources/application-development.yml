@@ -1,3 +1,7 @@
+spring:
+  devtools:
+    restart:
+      additional-exclude: /**/*.js, /**/*.css, /**/*.html, /**/*.htm
 wicket:
   core:
     settings:
