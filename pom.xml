@@ -70,6 +70,11 @@
 				<artifactId>wicket-spring-boot-context</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.giffing.wicket.spring.boot.starter</groupId>
+				<artifactId>wicket-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 			<!-- Wicket dependencies -->
 			<dependency>
 				<groupId>org.apache.wicket</groupId>
@@ -125,6 +130,11 @@
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
 				<artifactId>wicketstuff-restannotations</artifactId>
+				<version>${wicket.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-restannotations-json</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
 			<dependency>
@@ -244,12 +254,16 @@
 		</profile>
 	</profiles>
 	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-pluigin</artifactId>
-				<version>2.5.3</version>
-			</plugin>
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
