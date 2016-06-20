@@ -26,7 +26,6 @@ public class CustomerCreatePageIntTest extends WicketBaseIntTest {
 	private CustomerRepositoryService service;
 	
 	@Test
-	@DirtiesContext
 	public void assert_new_customer_saved(){
 		
 		long initialCustomerCount = service.count(new CustomerFilter());
@@ -55,7 +54,6 @@ public class CustomerCreatePageIntTest extends WicketBaseIntTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_error_when_create_existing_customer(){
 		getTester().startPage(CustomerCreatePage.class);
 		getTester().assertRenderedPage(CustomerCreatePage.class);

@@ -27,7 +27,6 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 	private CustomerRepositoryService service;
 	
 	@Test
-	@DirtiesContext
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void assert_start_customer_list_page(){
 		getTester().startPage(CustomerListPage.class);
@@ -50,7 +49,6 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_delete_customer_method_called_once(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);

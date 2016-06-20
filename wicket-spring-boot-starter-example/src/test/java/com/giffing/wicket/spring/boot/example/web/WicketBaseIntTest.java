@@ -31,7 +31,6 @@ import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMes
 @SpringApplicationConfiguration(classes = WicketApplication.class)
 @EnableWebSecurity
 @Ignore
-@DirtiesContext
 public class WicketBaseIntTest {
 
 	private static final String USERNAME = "admin";
