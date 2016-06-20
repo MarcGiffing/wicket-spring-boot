@@ -33,21 +33,18 @@ public class CustomerListPageTest extends WicketBaseTest {
 	@Before
 	public void setUp(){
 		super.setUp();
-		ApplicationContextMock applicationContextMock = getApplicationContextMock();
 		
-		repository = Mockito.mock(CustomerRepositoryService.class);
+		repository = registerMock(CustomerRepositoryService.class);
 		
 		Mockito.when(repository.findAll(Mockito.anyLong(), Mockito.anyLong(), Mockito.any())).thenReturn(createCustomers(CUSTOMERS_COUNT));
 		Mockito.when(repository.count(Mockito.any())).thenReturn(CUSTOMERS_COUNT);
 		for (long i=1; i <= CUSTOMERS_COUNT; i++) {
 			Mockito.when(repository.findById(i)).thenReturn(createCustomer(i));
 		}
-		applicationContextMock.putBean(repository);
 	}
 	
 	
 	@Test
-	@DirtiesContext
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void assert_start_customer_list_page(){
 		getTester().startPage(CustomerListPage.class);
@@ -70,7 +67,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_click_customer_edit_page(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
@@ -81,7 +77,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_click_customer_create_page(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
@@ -91,7 +86,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_delete_customer_method_called_once(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);

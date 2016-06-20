@@ -31,8 +31,7 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	@Before
 	public void setUp(){
 		super.setUp();
-		ApplicationContextMock applicationContextMock = getApplicationContextMock();
-		repository = Mockito.mock(CustomerRepositoryService.class);
+		repository = registerMock(CustomerRepositoryService.class);
 		
 		Mockito.when(repository.findAll(Mockito.anyLong(), Mockito.anyLong(), Mockito.any())).thenReturn(CustomerListPageTest.createCustomers(CUSTOMERS_COUNT));
 		Mockito.when(repository.count(Mockito.any())).thenReturn(CUSTOMERS_COUNT);
@@ -40,12 +39,10 @@ public class CustomerEditPageTest extends WicketBaseTest {
 			Mockito.when(repository.findById(i)).thenReturn(CustomerListPageTest.createCustomer(i));
 		}
 		
-		applicationContextMock.putBean(repository);
 	}
 	
 	
 	@Test
-	@DirtiesContext
 	public void assert_customer_not_exists(){
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "9548");
@@ -62,7 +59,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_customer_on_load_existing(){
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "3");
@@ -94,7 +90,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_customer_saved(){
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "3");

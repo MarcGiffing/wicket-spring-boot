@@ -4,3 +4,8 @@ spring:
       ddl-auto: none
 liquibase:
   change-log: classpath:db/changelog/db.changelog-master-test.xml
+wicket:
+  stuff:
+    serializer:
+      fast2:
+        enabled: false

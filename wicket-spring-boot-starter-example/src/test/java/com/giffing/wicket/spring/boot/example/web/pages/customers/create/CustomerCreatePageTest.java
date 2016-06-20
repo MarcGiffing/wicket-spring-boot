@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.Rollback;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -29,14 +30,10 @@ public class CustomerCreatePageTest extends WicketBaseTest {
 	@Before
 	public void setUp(){
 		super.setUp();
-		ApplicationContextMock applicationContextMock = getApplicationContextMock();
-		repository = Mockito.mock(CustomerRepositoryService.class);
-		
-		applicationContextMock.putBean(repository);
+		repository = registerMock(CustomerRepositoryService.class);
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_customer_save_called(){
 		getTester().startPage(CustomerCreatePage.class);
 		getTester().assertRenderedPage(CustomerCreatePage.class);
@@ -68,7 +65,6 @@ public class CustomerCreatePageTest extends WicketBaseTest {
 	}
 	
 	@Test
-	@DirtiesContext
 	public void assert_customer_not_saved_if_user_already_exist() {
 		getTester().startPage(CustomerCreatePage.class);
 		getTester().assertRenderedPage(CustomerCreatePage.class);
