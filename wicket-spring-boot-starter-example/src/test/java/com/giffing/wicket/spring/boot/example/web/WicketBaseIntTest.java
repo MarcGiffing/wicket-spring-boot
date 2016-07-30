@@ -8,12 +8,12 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import com.giffing.wicket.spring.boot.example.WicketApplication;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
@@ -27,8 +27,8 @@ import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMes
  * @author Marc Giffing
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = WicketApplication.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = WicketApplication.class)
 @EnableWebSecurity
 @Ignore
 public class WicketBaseIntTest {
@@ -37,15 +37,20 @@ public class WicketBaseIntTest {
 	private static final String PASSWORD = "admin";
 
 	private WicketTester tester;
-	
+
 	@Autowired
 	private WebApplication wicketApplication;
-	
-	@Bean
-	@Primary
-	public WebSocketMessageBroadcaster webSocketMessageBroadcaster() {
-		return Mockito.mock(WebSocketMessageBroadcaster.class);
+
+	@Configuration
+	public static class TestConfig {
+		@Bean
+		@Primary
+		public WebSocketMessageBroadcaster webSocketMessageBroadcaster() {
+			return Mockito.mock(WebSocketMessageBroadcaster.class);
+		}
 	}
+
+	
 
 	@Before
 	public void setUp() {
