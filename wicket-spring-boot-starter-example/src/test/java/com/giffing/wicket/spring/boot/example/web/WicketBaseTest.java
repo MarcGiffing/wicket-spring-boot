@@ -12,7 +12,7 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -35,7 +35,7 @@ import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfi
  *
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = WicketWebApplicationConfig.class)
+@SpringBootTest(classes = WicketWebApplicationConfig.class)
 @Ignore
 public class WicketBaseTest {
 
