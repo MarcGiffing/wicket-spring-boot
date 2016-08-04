@@ -1,5 +1,8 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.annotationscan;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -11,6 +14,8 @@ import org.wicketstuff.annotation.scan.AnnotatedMountScanner;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 /**
  * Auto configuration for the {@link AnnotatedMountScanner}.
@@ -42,22 +47,34 @@ public class AnnotatedMountScannerConfig implements WicketApplicationInitConfigu
 	@Autowired
 	private WicketClassCandidatesHolder candidates;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
+		List<String> packagesToScan = new ArrayList<>();
 		AnnotatedMountScanner annotatedMountScanner = new AnnotatedMountScanner();
 
 		String packagename = webApplication.getClass().getPackage().getName();
 		if (prop.getPackagename() != null) {
 			packagename = prop.getPackagename();
-		} 
+		}
+		
+		
+		packagesToScan.add(packagename);
 		annotatedMountScanner.scanPackage(packagename).mount(webApplication);
 		
 		if(candidates.getBasePackages().size() > 0){
+			packagesToScan.addAll(candidates.getBasePackages());
 			for (String basePackage : candidates.getBasePackages()) {
 				annotatedMountScanner.scanPackage(basePackage).mount(webApplication);
 			}
 		}
 		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", prop)
+				.withDetail("packagesToScan", packagesToScan)
+				.build());
 		
 	}
 

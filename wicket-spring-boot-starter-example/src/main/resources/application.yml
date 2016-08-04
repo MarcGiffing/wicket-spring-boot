@@ -14,6 +14,8 @@ wicket:
 server:
   compression:
     enabled: true
+management:
+  port: 8081
 spring:
   jpa:
     hibernate:
