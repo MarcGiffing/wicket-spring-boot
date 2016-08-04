@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 /**
  * Mounts pages from the devutils inspector package. Currently only the
@@ -29,11 +31,18 @@ public class InspectorConfig implements WicketApplicationInitConfiguration {
 	@Autowired
 	private InspectorProperties properties;
 
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		if (properties.isEnableLiveSessionsPage()) {
 			webApplication.mountPage(properties.getLiveSessionPageMount(), LiveSessionsPage.class);
 		}
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", properties)
+				.build());
 	}
 
 }

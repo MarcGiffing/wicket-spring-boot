@@ -14,7 +14,7 @@ public class WicketEndpoint extends AbstractEndpoint<Map<String, Object>> implem
 	private WicketEndpointRepository repository;
 
 	public WicketEndpoint(WicketEndpointRepository repository) {
-		super("config_wicket");
+		super("wicket");
 		this.repository = repository;
 	}
 

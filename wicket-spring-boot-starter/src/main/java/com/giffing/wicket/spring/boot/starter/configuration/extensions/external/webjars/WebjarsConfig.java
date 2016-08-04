@@ -1,6 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.webjars;
 
 import org.apache.wicket.protocol.http.WebApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -8,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.condition.ConditionalOnWicket;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 import de.agilecoders.wicket.webjars.WicketWebjars;
 import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
@@ -30,10 +33,21 @@ import de.agilecoders.wicket.webjars.settings.WebjarsSettings;
 @ConditionalOnWicket(value=7)
 public class WebjarsConfig implements WicketApplicationInitConfiguration{
 
+	@Autowired
+	private WebjarsProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		WebjarsSettings settings = new WebjarsSettings();
         WicketWebjars.install(webApplication, settings);
+        
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
+        
 	}
 
 }

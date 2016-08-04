@@ -13,6 +13,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHttpSessionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
@@ -21,7 +23,10 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 public class DataStoreHttpSessionConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
-	private DataStoreHttpSessionProperties prop;
+	private DataStoreHttpSessionProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {
@@ -29,9 +34,13 @@ public class DataStoreHttpSessionConfig implements WicketApplicationInitConfigur
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
 			protected IDataStore newDataStore() {
-				return new HttpSessionDataStore(new DefaultPageManagerContext(), new PageNumberEvictionStrategy(prop.getPagesNumber()));
+				return new HttpSessionDataStore(new DefaultPageManagerContext(), new PageNumberEvictionStrategy(props.getPagesNumber()));
 			}
 		});
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 
 	}
 

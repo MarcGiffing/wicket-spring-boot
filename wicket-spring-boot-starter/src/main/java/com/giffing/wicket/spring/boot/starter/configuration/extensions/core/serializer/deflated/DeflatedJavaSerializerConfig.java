@@ -4,12 +4,15 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.serialize.ISerializer;
 import org.apache.wicket.serialize.java.DeflatedJavaSerializer;
 import org.apache.wicket.serialize.java.JavaSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import com.giffing.wicket.spring.boot.context.exceptions.extensions.ExtensionMisconfigurationException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 
 /**
@@ -25,6 +28,12 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 @EnableConfigurationProperties({ DeflatedJavaSerializerProperties.class })
 public class DeflatedJavaSerializerConfig implements WicketApplicationInitConfiguration {
 	
+	@Autowired
+	private DeflatedJavaSerializerProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		ISerializer currentSerializer = webApplication.getFrameworkSettings().getSerializer();
@@ -33,6 +42,10 @@ public class DeflatedJavaSerializerConfig implements WicketApplicationInitConfig
 		} else {
 			throw new ExtensionMisconfigurationException("DeflatedJavaSerializer: There is already another serializer configured " + currentSerializer);
 		}
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 	}
 
 }

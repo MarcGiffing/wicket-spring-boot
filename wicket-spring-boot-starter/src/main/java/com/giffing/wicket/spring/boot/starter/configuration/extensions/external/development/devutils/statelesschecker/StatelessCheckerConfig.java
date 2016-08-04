@@ -2,12 +2,15 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 
 import org.apache.wicket.devutils.stateless.StatelessChecker;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 /**
  * Enables the states checker from the Wicket devutils. Its only enabled if the
@@ -27,9 +30,20 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 @EnableConfigurationProperties({ StatelessCheckerProperties.class })
 public class StatelessCheckerConfig implements WicketApplicationInitConfiguration {
 
+	@Autowired
+	private StatelessCheckerProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		webApplication.getComponentPostOnBeforeRenderListeners().add(new StatelessChecker());
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
+		
 	}
 
 }

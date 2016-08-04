@@ -48,7 +48,6 @@ public class WicketAutoConfig implements Serializable {
 
 		public Builder withDetail(String key, Object value) {
 			Assert.notNull(key, "Key must not be null");
-			Assert.notNull(value, "Value must not be null");
 			this.details.put(key, value);
 			return this;
 		}

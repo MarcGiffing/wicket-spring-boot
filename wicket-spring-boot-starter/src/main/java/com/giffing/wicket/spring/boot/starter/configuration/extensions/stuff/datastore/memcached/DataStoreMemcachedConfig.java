@@ -18,6 +18,8 @@ import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootExcepti
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 import net.spy.memcached.MemcachedClient;
 
@@ -45,6 +47,8 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 	@Autowired
 	private DataStoreMemcachedProperties prop;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {
@@ -67,6 +71,10 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 				return new SessionQuotaManagingDataStore(memcachedDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", prop)
+				.build());
 
 	}
 

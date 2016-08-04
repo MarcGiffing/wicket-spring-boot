@@ -17,6 +17,8 @@ import org.wicketstuff.datastores.redis.RedisSettings;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 import redis.clients.jedis.Jedis;
 
@@ -44,6 +46,9 @@ public class DataStoreRedisConfig implements WicketApplicationInitConfiguration 
 	@Autowired
 	private DataStoreRedisProperties prop;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		
@@ -59,6 +64,10 @@ public class DataStoreRedisConfig implements WicketApplicationInitConfiguration 
 			}
 		});
 
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", prop)
+				.build());
+		
 	}
 
 }

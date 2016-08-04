@@ -2,6 +2,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 /**
  * Enables the bean validation support if the following condition matches
@@ -29,9 +32,20 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 @EnableConfigurationProperties({ BeanValidationProperties.class })
 public class BeanValidationConfig implements WicketApplicationInitConfiguration {
 
+	@Autowired
+	private BeanValidationProperties props;
+	
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		new BeanValidationConfiguration().configure(webApplication);
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 	}
 
 }

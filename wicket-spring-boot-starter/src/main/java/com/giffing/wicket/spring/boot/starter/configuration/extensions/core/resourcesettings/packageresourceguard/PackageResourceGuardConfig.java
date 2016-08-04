@@ -8,23 +8,32 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 @ApplicationInitExtension
 @EnableConfigurationProperties({ PackageResourceGuardProperties.class })
 public class PackageResourceGuardConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
-	private PackageResourceGuardProperties prop;
+	private PackageResourceGuardProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
 		IPackageResourceGuard packageResourceGuard = webApplication.getResourceSettings().getPackageResourceGuard();
 		if (packageResourceGuard instanceof SecurePackageResourceGuard) {
 			SecurePackageResourceGuard guard = (SecurePackageResourceGuard) packageResourceGuard;
-			for(String pattern : prop.getPattern()){
+			for(String pattern : props.getPattern()){
 				guard.addPattern(pattern);
 			}
 		}
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 		
 	}
 

@@ -15,6 +15,8 @@ import org.wicketstuff.datastores.hazelcast.HazelcastDataStore;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 import com.hazelcast.core.HazelcastInstance;
 
 /**
@@ -43,6 +45,9 @@ public class DataStoreHazelcastConfig implements WicketApplicationInitConfigurat
 	
 	@Autowired
 	private HazelcastInstance hazelcastInstance;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {
@@ -54,6 +59,10 @@ public class DataStoreHazelcastConfig implements WicketApplicationInitConfigurat
 				return new SessionQuotaManagingDataStore(hazelcastDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", prop)
+				.build());
 
 	}
 
