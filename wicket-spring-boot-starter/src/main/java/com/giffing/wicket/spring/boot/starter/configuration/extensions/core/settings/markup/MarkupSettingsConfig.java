@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 /**
  * Configuration for the markup settings.
@@ -19,21 +21,28 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 public class MarkupSettingsConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
-	private MarkupSettingsProperties markupSettingsProperties;
+	private MarkupSettingsProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
 		MarkupSettings markupSettings = webApplication.getMarkupSettings();
 
-		if(markupSettingsProperties.getDefaultMarkupEncoding() != null){
-			markupSettings.setDefaultMarkupEncoding(markupSettingsProperties.getDefaultMarkupEncoding());
+		if(props.getDefaultMarkupEncoding() != null){
+			markupSettings.setDefaultMarkupEncoding(props.getDefaultMarkupEncoding());
 		}
 		
-		markupSettings.setAutomaticLinking(markupSettingsProperties.isAutomaticLinking());
-		markupSettings.setCompressWhitespace(markupSettingsProperties.isCompressWhitespace());
-		markupSettings.setStripComments(markupSettingsProperties.isStripComments());
-		markupSettings.setStripWicketTags(markupSettingsProperties.isStripWicketTags());
-		markupSettings.setThrowExceptionOnMissingXmlDeclaration(markupSettingsProperties.isThrowExceptionOnMissingXmlDeclaration());
+		markupSettings.setAutomaticLinking(props.isAutomaticLinking());
+		markupSettings.setCompressWhitespace(props.isCompressWhitespace());
+		markupSettings.setStripComments(props.isStripComments());
+		markupSettings.setStripWicketTags(props.isStripWicketTags());
+		markupSettings.setThrowExceptionOnMissingXmlDeclaration(props.isThrowExceptionOnMissingXmlDeclaration());
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 		
 	}
 

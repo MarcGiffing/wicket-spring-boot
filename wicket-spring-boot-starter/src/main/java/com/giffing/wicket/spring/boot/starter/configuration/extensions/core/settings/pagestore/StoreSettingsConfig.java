@@ -11,6 +11,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = StoreSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
@@ -20,6 +22,9 @@ public class StoreSettingsConfig implements WicketApplicationInitConfiguration {
 	@Autowired
 	private StoreSettingsProperties props;
 
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		StoreSettings storeSettings = webApplication.getStoreSettings();
@@ -36,6 +41,10 @@ public class StoreSettingsConfig implements WicketApplicationInitConfiguration {
 			storeSettings.setInmemoryCacheSize(props.getInmemoryCacheSize());
 		}
 		storeSettings.setMaxSizePerSession(TypeParser.parse(props.getSessionSize(), props.getSessionUnit()));
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 	}
 
 }

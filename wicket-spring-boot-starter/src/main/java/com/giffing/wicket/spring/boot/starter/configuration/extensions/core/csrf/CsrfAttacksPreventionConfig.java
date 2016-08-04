@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
 
 
 /**
@@ -31,19 +33,26 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfiguration{
 
 	@Autowired
-	private CsrfAttacksPreventionProperties properties;
+	private CsrfAttacksPreventionProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
 		CsrfPreventionRequestCycleListener listener = new CsrfPreventionRequestCycleListener();
-		listener.setConflictingOriginAction(properties.getConflictingOriginAction());
-		listener.setErrorCode(properties.getErrorCode());
-		listener.setErrorMessage(properties.getErrorMessage());
-		listener.setNoOriginAction(properties.getNoOriginAction());
-		for (String acceptedOrigin : properties.getAcceptedOrigins()) {
+		listener.setConflictingOriginAction(props.getConflictingOriginAction());
+		listener.setErrorCode(props.getErrorCode());
+		listener.setErrorMessage(props.getErrorMessage());
+		listener.setNoOriginAction(props.getNoOriginAction());
+		for (String acceptedOrigin : props.getAcceptedOrigins()) {
 			listener.addAcceptedOrigin(acceptedOrigin);
 		}
 		webApplication.getRequestCycleListeners().add(listener);
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", props)
+				.build());
 	}
 
 }
