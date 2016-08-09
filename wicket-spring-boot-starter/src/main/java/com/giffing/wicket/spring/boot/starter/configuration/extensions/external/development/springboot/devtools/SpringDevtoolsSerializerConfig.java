@@ -10,9 +10,9 @@ import org.springframework.boot.devtools.restart.ConditionalOnInitializedRestart
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.inspector.InspectorProperties;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 /**
  * The Wicket serializer does not working with Spring Boot Devtools so we have to provide a custom {@link SpringDevToolsSerializer}.
@@ -38,7 +38,7 @@ public class SpringDevtoolsSerializerConfig implements WicketApplicationInitConf
 	private SpringDevToolsProperties props;
 	
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

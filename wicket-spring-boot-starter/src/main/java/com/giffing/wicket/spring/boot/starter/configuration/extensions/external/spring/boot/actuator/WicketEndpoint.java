@@ -11,9 +11,9 @@ import org.springframework.context.EnvironmentAware;
 @ConfigurationProperties(prefix = "endpoints.wicket")
 public class WicketEndpoint extends AbstractEndpoint<Map<String, Object>> implements EnvironmentAware  {
 
-	private WicketEndpointRepository repository;
+	private WicketEndpointRepositoryDefault repository;
 
-	public WicketEndpoint(WicketEndpointRepository repository) {
+	public WicketEndpoint(WicketEndpointRepositoryDefault repository) {
 		super("wicket");
 		this.repository = repository;
 	}

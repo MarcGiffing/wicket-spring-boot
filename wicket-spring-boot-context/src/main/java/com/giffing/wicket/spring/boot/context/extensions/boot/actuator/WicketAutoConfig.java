@@ -1,4 +1,4 @@
-package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator;
+package com.giffing.wicket.spring.boot.context.extensions.boot.actuator;
 
 import java.io.Serializable;
 import java.util.Collections;
@@ -7,10 +7,9 @@ import java.util.Map;
 
 import org.springframework.util.Assert;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-@JsonSerialize
 public class WicketAutoConfig implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private final String key;
 

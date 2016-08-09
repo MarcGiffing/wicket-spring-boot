@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+
 @Component
-public class WicketEndpointRepository {
+public class WicketEndpointRepositoryDefault {
 
 	public List<WicketAutoConfig> wicketAutoConfigurations = new ArrayList<>();
 	

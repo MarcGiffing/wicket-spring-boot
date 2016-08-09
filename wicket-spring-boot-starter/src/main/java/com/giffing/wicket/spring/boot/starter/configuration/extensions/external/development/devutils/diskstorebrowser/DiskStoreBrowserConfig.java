@@ -10,8 +10,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 /**
  * Mounts the {@link DiskStoreBrowserPage} if the following condition matches
@@ -33,7 +33,7 @@ public class DiskStoreBrowserConfig implements WicketApplicationInitConfiguratio
 	private DiskStoreBrowserProperties properties;
 	
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig.Builder;
 import com.giffing.wicket.spring.boot.context.scan.WicketAccessDeniedPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketExpiredPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketInternalErrorPage;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig.Builder;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 @ApplicationInitExtension	
 public class ApplicationSettingsConfig implements WicketApplicationInitConfiguration {
@@ -26,7 +26,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 	private WicketClassCandidatesHolder holder;
 
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {

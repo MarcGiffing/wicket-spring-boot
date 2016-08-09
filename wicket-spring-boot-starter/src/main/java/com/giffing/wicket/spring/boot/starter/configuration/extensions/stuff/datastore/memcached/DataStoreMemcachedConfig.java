@@ -17,9 +17,9 @@ import org.wicketstuff.datastores.memcached.MemcachedSettings;
 import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 import net.spy.memcached.MemcachedClient;
 
@@ -48,7 +48,7 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 	private DataStoreMemcachedProperties prop;
 	
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {

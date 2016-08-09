@@ -16,9 +16,9 @@ import org.wicketstuff.datastores.common.SessionQuotaManagingDataStore;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 /**
  * Data store auto configuration for the cassandra database
@@ -45,7 +45,7 @@ public class DataStoreCassandraConfig implements WicketApplicationInitConfigurat
 	private DataStoreCassandraProperties prop;
 
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

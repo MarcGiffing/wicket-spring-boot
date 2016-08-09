@@ -13,8 +13,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHttpSessionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
@@ -26,7 +26,7 @@ public class DataStoreHttpSessionConfig implements WicketApplicationInitConfigur
 	private DataStoreHttpSessionProperties props;
 	
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {

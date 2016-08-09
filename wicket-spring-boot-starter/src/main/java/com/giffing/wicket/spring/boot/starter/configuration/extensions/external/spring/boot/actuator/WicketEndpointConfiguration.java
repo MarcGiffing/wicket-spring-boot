@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class WicketEndpointConfiguration {
 
 	@Autowired
-	private WicketEndpointRepository repo;
+	private WicketEndpointRepositoryDefault repo;
 	
 	@Bean
 	public WicketEndpoint wicketEndpoint() {

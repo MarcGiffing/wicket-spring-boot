@@ -18,8 +18,8 @@ import org.wicketstuff.htmlcompressor.HtmlCompressingMarkupFactory;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepository;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 import com.googlecode.htmlcompressor.compressor.HtmlCompressor;
 
 /**
@@ -45,7 +45,7 @@ public class HTMLCompressingConfig implements WicketApplicationInitConfiguration
 	private HTMLCompressingProperties props;
 
 	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private WicketEndpointRepositoryDefault wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
