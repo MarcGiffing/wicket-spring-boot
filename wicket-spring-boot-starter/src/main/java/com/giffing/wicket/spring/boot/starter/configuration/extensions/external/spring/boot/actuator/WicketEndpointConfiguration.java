@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
+
 @Configuration
 @ConditionalOnClass(value = {
 		org.springframework.boot.actuate.endpoint.AbstractEndpoint.class,
@@ -12,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class WicketEndpointConfiguration {
 
 	@Autowired
-	private WicketEndpointRepositoryDefault repo;
+	private WicketEndpointRepository repo;
 	
 	@Bean
 	public WicketEndpoint wicketEndpoint() {

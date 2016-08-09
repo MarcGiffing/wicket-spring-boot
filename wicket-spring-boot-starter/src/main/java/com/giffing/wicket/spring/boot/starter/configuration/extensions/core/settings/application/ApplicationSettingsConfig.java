@@ -12,12 +12,12 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig.Builder;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.context.scan.WicketAccessDeniedPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketExpiredPage;
 import com.giffing.wicket.spring.boot.context.scan.WicketInternalErrorPage;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 @ApplicationInitExtension	
 public class ApplicationSettingsConfig implements WicketApplicationInitConfiguration {
@@ -26,7 +26,7 @@ public class ApplicationSettingsConfig implements WicketApplicationInitConfigura
 	private WicketClassCandidatesHolder holder;
 
 	@Autowired
-	private WicketEndpointRepositoryDefault wicketEndpointRepository;
+	private WicketEndpointRepository wicketEndpointRepository;
 
 	@Override
 	public void init(WebApplication webApplication) {

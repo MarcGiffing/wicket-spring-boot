@@ -14,8 +14,8 @@ import com.giffing.wicket.spring.boot.context.exceptions.extensions.ExtensionMis
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.springboot.devtools.SpringDevtoolsSerializerConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = WicketSerializerFast2Properties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
@@ -28,7 +28,7 @@ public class WicketSerializerFast2Config implements WicketApplicationInitConfigu
 	private WicketSerializerFast2Properties props;
 	
 	@Autowired
-	private WicketEndpointRepositoryDefault wicketEndpointRepository;
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

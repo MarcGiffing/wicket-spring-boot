@@ -10,7 +10,7 @@ import org.springframework.core.annotation.Order;
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = CryptMapperProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
@@ -22,7 +22,7 @@ public class CryptMapperConfig implements WicketApplicationInitConfiguration {
 	private CryptMapperProperties props;
 	
 	@Autowired
-	private WicketEndpointRepositoryDefault wicketEndpointRepository;
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

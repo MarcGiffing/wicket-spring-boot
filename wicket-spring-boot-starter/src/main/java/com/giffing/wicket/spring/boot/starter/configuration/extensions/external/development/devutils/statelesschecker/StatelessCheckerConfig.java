@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 
 /**
  * Enables the states checker from the Wicket devutils. Its only enabled if the
@@ -34,7 +34,7 @@ public class StatelessCheckerConfig implements WicketApplicationInitConfiguratio
 	private StatelessCheckerProperties props;
 	
 	@Autowired
-	private WicketEndpointRepositoryDefault wicketEndpointRepository;
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {

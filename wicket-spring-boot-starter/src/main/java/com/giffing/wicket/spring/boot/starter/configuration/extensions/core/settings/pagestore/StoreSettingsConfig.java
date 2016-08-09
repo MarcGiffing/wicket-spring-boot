@@ -11,8 +11,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator.WicketEndpointRepositoryDefault;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = StoreSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
@@ -23,7 +23,7 @@ public class StoreSettingsConfig implements WicketApplicationInitConfiguration {
 	private StoreSettingsProperties props;
 
 	@Autowired
-	private WicketEndpointRepositoryDefault wicketEndpointRepository;
+	private WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
