@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.context.scan.WicketSignInPage;
 import com.giffing.wicket.spring.boot.context.security.AuthenticatedWebSessionConfig;
@@ -62,12 +64,21 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	@Autowired
 	private WicketClassCandidatesHolder classCandidates;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	protected void init() {
 		super.init();
 	    
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
+		
+		WicketAutoConfig.Builder builder = new WicketAutoConfig.Builder(this.getClass());
+		wicketEndpointRepository.add(builder
+				.withDetail("signInPages", classCandidates.getSignInPageCandidates())
+				.withDetail("homePages", classCandidates.getHomePageCandidates())
+				.build());
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());

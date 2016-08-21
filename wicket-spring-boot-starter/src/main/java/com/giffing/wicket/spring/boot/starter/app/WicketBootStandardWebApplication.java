@@ -15,6 +15,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
@@ -55,11 +57,20 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	@Autowired
 	private WicketClassCandidatesHolder classCandidates;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	protected void init() {
 		super.init();
 	    
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+		
+		WicketAutoConfig.Builder builder = new WicketAutoConfig.Builder(this.getClass());
+		wicketEndpointRepository.add(builder
+				.withDetail("signInPages", classCandidates.getSignInPageCandidates())
+				.withDetail("homePages", classCandidates.getHomePageCandidates())
+				.build());
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
 			logger.info("init-config: " + configuration.getClass().getName());
