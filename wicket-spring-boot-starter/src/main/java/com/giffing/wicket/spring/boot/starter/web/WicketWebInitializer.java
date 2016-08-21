@@ -16,6 +16,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerAutoConfig;
 import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerConfig;
@@ -40,6 +42,9 @@ public class WicketWebInitializer implements ServletContextInitializer {
 
 	@Autowired
 	private WicketWebInitializerProperties props;
+	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
@@ -62,6 +67,14 @@ public class WicketWebInitializer implements ServletContextInitializer {
 		for (Entry<String, String> initParam : initParameters.entrySet()) {
 			filter.setInitParameter(initParam.getKey(), initParam.getValue());
 		}
+		
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("wicketFilterName", WICKET_FILTERNAME)
+				.withDetail("wicketFilterClass", wicketWebInitializerConfig.filterClass())
+				.withDetail("properties", props)
+				.build());
+		
 		
 	}
 
