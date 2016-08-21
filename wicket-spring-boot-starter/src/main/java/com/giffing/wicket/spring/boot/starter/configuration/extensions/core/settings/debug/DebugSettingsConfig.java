@@ -8,6 +8,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 
 /**
  * Enables debug settings if the following condition matches.
@@ -25,6 +27,9 @@ public class DebugSettingsConfig implements WicketApplicationInitConfiguration {
 	@Autowired
 	private DebugSettingsProperties properties;
 	
+	@Autowired
+	private WicketEndpointRepository wicketEndpointRepository;
+	
 	@Override
 	public void init(WebApplication webApplication) {
 		if(properties.isEnabled()){
@@ -35,6 +40,10 @@ public class DebugSettingsConfig implements WicketApplicationInitConfiguration {
 			debugSettings.setOutputMarkupContainerClassName(properties.isOutputMarkupContainerClassName());
 			debugSettings.setComponentPathAttributeName(properties.getComponentPathAttributeName());
 		}
+		
+		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+				.withDetail("properties", properties)
+				.build());
 	}
 
 }
