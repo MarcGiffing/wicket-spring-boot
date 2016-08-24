@@ -8,14 +8,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.annotation.Rollback;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -24,13 +22,13 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPa
 
 public class CustomerCreatePageTest extends WicketBaseTest {
 
+	@MockBean
 	private CustomerRepositoryService repository;
 	
 	@Override
 	@Before
 	public void setUp(){
 		super.setUp();
-		repository = registerMock(CustomerRepositoryService.class);
 	}
 	
 	@Test

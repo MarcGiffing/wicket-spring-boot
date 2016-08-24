@@ -6,13 +6,12 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.apache.wicket.util.tester.FormTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -25,14 +24,15 @@ public class CustomerEditPageTest extends WicketBaseTest {
 
 	private static final Long CUSTOMERS_COUNT = 5L;
 	
+	@MockBean
 	private CustomerRepositoryService repository;
 	
 	@Override
 	@Before
 	public void setUp(){
 		super.setUp();
-		repository = registerMock(CustomerRepositoryService.class);
-		
+//		repository = registerMock(CustomerRepositoryService.class);
+		System.out.println(repository);
 		Mockito.when(repository.findAll(Mockito.anyLong(), Mockito.anyLong(), Mockito.any())).thenReturn(CustomerListPageTest.createCustomers(CUSTOMERS_COUNT));
 		Mockito.when(repository.count(Mockito.any())).thenReturn(CUSTOMERS_COUNT);
 		for (long i=1; i <= CUSTOMERS_COUNT; i++) {
@@ -62,6 +62,7 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	public void assert_customer_on_load_existing(){
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "3");
+		System.out.println(repository);
 		getTester().startPage(CustomerEditPage.class, params);
 
 		getTester().assertNoErrorMessage();

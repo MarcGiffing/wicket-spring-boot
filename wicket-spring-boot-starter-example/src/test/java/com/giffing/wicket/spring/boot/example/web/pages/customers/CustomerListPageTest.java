@@ -10,11 +10,10 @@ import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.markup.repeater.Item;
-import org.apache.wicket.spring.test.ApplicationContextMock;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -27,14 +26,13 @@ public class CustomerListPageTest extends WicketBaseTest {
 
 	private static final long CUSTOMERS_COUNT = 5;
 
+	@MockBean
 	private CustomerRepositoryService repository;
 	
 	@Override
 	@Before
 	public void setUp(){
 		super.setUp();
-		
-		repository = registerMock(CustomerRepositoryService.class);
 		
 		Mockito.when(repository.findAll(Mockito.anyLong(), Mockito.anyLong(), Mockito.any())).thenReturn(createCustomers(CUSTOMERS_COUNT));
 		Mockito.when(repository.count(Mockito.any())).thenReturn(CUSTOMERS_COUNT);
