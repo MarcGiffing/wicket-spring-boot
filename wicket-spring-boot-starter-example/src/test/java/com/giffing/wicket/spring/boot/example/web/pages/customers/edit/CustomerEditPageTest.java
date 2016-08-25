@@ -31,8 +31,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	@Before
 	public void setUp(){
 		super.setUp();
-//		repository = registerMock(CustomerRepositoryService.class);
-		System.out.println(repository);
 		Mockito.when(repository.findAll(Mockito.anyLong(), Mockito.anyLong(), Mockito.any())).thenReturn(CustomerListPageTest.createCustomers(CUSTOMERS_COUNT));
 		Mockito.when(repository.count(Mockito.any())).thenReturn(CUSTOMERS_COUNT);
 		for (long i=1; i <= CUSTOMERS_COUNT; i++) {
@@ -62,7 +60,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 	public void assert_customer_on_load_existing(){
 		PageParameters params = new PageParameters();
 		params.add(CustomerEditPage.CUSTOMER_ID_PARAM, "3");
-		System.out.println(repository);
 		getTester().startPage(CustomerEditPage.class, params);
 
 		getTester().assertNoErrorMessage();

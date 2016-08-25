@@ -30,7 +30,6 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 	public void assert_start_customer_list_page(){
 		getTester().startPage(CustomerListPage.class);
 		getTester().assertRenderedPage(CustomerListPage.class);
-		System.out.println(service.findAll(0L, 10L, new CustomerFilter()).size());
 		getTester().assertComponent("filterForm:table", DataTable.class);
 		
 		DataTable<Customer, CustomerSort> dataTable = (DataTable) getTester().getComponentFromLastRenderedPage("filterForm:table");
