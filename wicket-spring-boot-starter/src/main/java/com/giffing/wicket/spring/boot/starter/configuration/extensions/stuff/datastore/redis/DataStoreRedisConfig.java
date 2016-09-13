@@ -38,7 +38,7 @@ import redis.clients.jedis.Jedis;
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreRedisProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(Jedis.class)
+@ConditionalOnClass({Jedis.class, RedisDataStore.class})
 @EnableConfigurationProperties({ DataStoreRedisProperties.class })
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 public class DataStoreRedisConfig implements WicketApplicationInitConfiguration {
