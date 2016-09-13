@@ -36,7 +36,7 @@ import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreCassandraProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(name = "com.datastax.driver.core.Session")
+@ConditionalOnClass(name = "com.datastax.driver.core.Session", value = {CassandraDataStore.class})
 @EnableConfigurationProperties({ DataStoreCassandraProperties.class })
 @AutoConfigureAfter(CassandraAutoConfiguration.class)
 public class DataStoreCassandraConfig implements WicketApplicationInitConfiguration {

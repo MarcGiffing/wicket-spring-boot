@@ -40,7 +40,7 @@ import net.spy.memcached.MemcachedClient;
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreMemcachedProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(MemcachedClient.class)
+@ConditionalOnClass({MemcachedClient.class, MemcachedDataStore.class})
 @EnableConfigurationProperties({ DataStoreMemcachedProperties.class })
 public class DataStoreMemcachedConfig implements WicketApplicationInitConfiguration {
 

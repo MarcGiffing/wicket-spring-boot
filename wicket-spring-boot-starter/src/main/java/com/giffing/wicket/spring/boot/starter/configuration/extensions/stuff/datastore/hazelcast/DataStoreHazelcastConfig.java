@@ -6,6 +6,7 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -36,6 +37,7 @@ import com.hazelcast.core.HazelcastInstance;
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHazelcastProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnBean(HazelcastInstance.class)
+@ConditionalOnClass({HazelcastInstance.class, HazelcastDataStore.class})
 @EnableConfigurationProperties({ DataStoreHazelcastProperties.class })
 @AutoConfigureAfter(HazelcastAutoConfiguration.class)
 public class DataStoreHazelcastConfig implements WicketApplicationInitConfiguration {
