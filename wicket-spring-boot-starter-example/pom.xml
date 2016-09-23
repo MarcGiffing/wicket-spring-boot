@@ -95,15 +95,6 @@
 			<artifactId>wicketstuff-restannotations-json</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-dashboard-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-dashboard-widgets-loremipsum</artifactId>
-			<version>7.3.0</version>
-		</dependency>
-		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
 			<version>1.4.9</version>

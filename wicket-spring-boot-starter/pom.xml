@@ -119,11 +119,6 @@
 			<artifactId>wicketstuff-jamon</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.wicketstuff</groupId>
-			<artifactId>wicketstuff-dashboard-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<!-- Wicket Deployment -->
 

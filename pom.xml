@@ -152,11 +152,6 @@
 				<artifactId>wicketstuff-jamon</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.wicketstuff</groupId>
-				<artifactId>wicketstuff-dashboard-core</artifactId>
-				<version>${wicket.version}</version>
-			</dependency>
 
 			<!-- Wicket other dependencies -->
 			<dependency>
