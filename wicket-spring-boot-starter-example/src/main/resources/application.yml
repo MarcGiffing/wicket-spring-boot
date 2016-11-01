@@ -11,9 +11,6 @@ wicket:
       packageresourceguard:
         pattern:
         - +*.map
-    settings:
-      markup:
-        strip-wicket-tags: true
 server:
   compression:
     enabled: true

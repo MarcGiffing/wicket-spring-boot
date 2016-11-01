@@ -12,7 +12,7 @@ public class DebugSettingsProperties {
 	 */
 	private boolean enabled;
 	
-	private boolean developmentUtilitiesEnabled = true;
+	private boolean developmentUtilitiesEnabled = false;
 	
 	private boolean ajaxDebugModeEnabled = false;
 	

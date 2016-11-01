@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = MarkupSettingsProperties.PROPERTY_PREFIX)
 public class MarkupSettingsProperties {
 
-	static final String PROPERTY_PREFIX = "wicket.core.settings.markup";
+	public static final String PROPERTY_PREFIX = "wicket.core.settings.markup";
 	
 	/** Application default for automatically resolving hrefs */
 	private boolean automaticLinking = false;
@@ -29,7 +29,7 @@ public class MarkupSettingsProperties {
 	/**
 	 * If true, wicket tags ( <wicket: ..>) and wicket:id attributes we be removed from output
 	 */
-	private boolean stripWicketTags = false;
+	private boolean stripWicketTags = true;
 	
 	public String getDefaultMarkupEncoding() {
 		return defaultMarkupEncoding;
