@@ -23,6 +23,8 @@ public class WicketDevToolsPropertyDefaultsPostProcessor implements EnvironmentP
 
 	static {
 		Map<String, Object> properties = new HashMap<String, Object>();
+		properties.put("wicket.core.settings.general.configuration-type", "development");
+		properties.put("wicket.core.settings.markup.strip-wicket-tags", "false");
 		properties.put("wicket.core.settings.markup.strip-wicket-tags", "false");
 		properties.put("wicket.core.settings.debug.component-use-check", "true");
 		properties.put("wicket.core.settings.debug.development-utilities-enabled", "true");
@@ -49,11 +51,12 @@ public class WicketDevToolsPropertyDefaultsPostProcessor implements EnvironmentP
 	}
 
 	private boolean isRestarterInitialized() {
+		
 		try {
 			Restarter restarter = Restarter.getInstance();
 			return (restarter != null && restarter.getInitialUrls() != null);
 		}
-		catch (Exception ex) {
+		catch (NoClassDefFoundError | Exception ex) {
 			return false;
 		}
 	}
