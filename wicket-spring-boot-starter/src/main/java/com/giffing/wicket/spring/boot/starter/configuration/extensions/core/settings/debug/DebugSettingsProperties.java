@@ -12,11 +12,11 @@ public class DebugSettingsProperties {
 	 */
 	private boolean enabled;
 	
-	private boolean developmentUtilitiesEnabled = false;
+	private boolean developmentUtilitiesEnabled = true;
 	
-	private boolean ajaxDebugModeEnabled = false;
+	private boolean ajaxDebugModeEnabled = true;
 	
-	private boolean componentUseCheck = false;
+	private boolean componentUseCheck = true;
 	
 	private boolean outputMarkupContainerClassName = false;
 	
