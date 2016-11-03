@@ -647,7 +647,7 @@ Wicket provides some debug settings which could be
 ----
 wicket.core.settings.debug.enabled=false
 wicket.core.settings.debug.developmentUtilitiesEnabled=true # Enables all of the panels and pages, etc, from wicket-devutils package.
-wicket.core.settings.debug.ajaxDebugModeEnabled=false # if true: wicket-ajax-debug.js is added to header
+wicket.core.settings.debug.ajaxDebugModeEnabled=true # if true: wicket-ajax-debug.js is added to header
 wicket.core.settings.debug.componentUseCheck=true
 wicket.core.settings.debug.outputMarkupContainerClassName=false
 wicket.core.settings.debug.componentPathAttributeName=
