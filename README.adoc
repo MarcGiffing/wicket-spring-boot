@@ -367,7 +367,7 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 
 [source,properties]
 ----
-wicket.core.settings.general.runtime-configuration=development # development/deployment(default)
+wicket.core.settings.general.configuration-type=development # development/deployment(default)
 
 wicket.web.servlet.filter-mapping-param=/*
 wicket.web.servlet.init-parameters.*= # map<string,string> - configuration support for additional servlet init parameters
@@ -389,7 +389,7 @@ wicket.core.settings.markup.default-markup-encoding=UTF-8 # if null it uses the 
 wicket.core.settings.markup.automatic-linking=false
 wicket.core.settings.markup.compress-whitespace=false
 wicket.core.settings.markup.strip-comments=false
-wicket.core.settings.markup.strip-wicket-tags=false
+wicket.core.settings.markup.strip-wicket-tags=true
 wicket.core.settings.markup.throw-exception-on-missing-xml-declaration=false
 
 
@@ -645,7 +645,7 @@ Wicket provides some debug settings which could be
 
 [source,properties]
 ----
-wicket.core.settings.debug.enabled=true
+wicket.core.settings.debug.enabled=false
 wicket.core.settings.debug.developmentUtilitiesEnabled=true # Enables all of the panels and pages, etc, from wicket-devutils package.
 wicket.core.settings.debug.ajaxDebugModeEnabled=false # if true: wicket-ajax-debug.js is added to header
 wicket.core.settings.debug.componentUseCheck=true
