@@ -5,6 +5,7 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.event.Broadcast;
 import org.apache.wicket.markup.html.panel.Panel;
+import org.apache.wicket.model.IModel;
 
 public abstract class YesNoPanel extends Panel{
 	
@@ -12,17 +13,17 @@ public abstract class YesNoPanel extends Panel{
 	public YesNoPanel(String id) {
 		super(id);
 		
-		add(new AjaxLink("yes") {
+		add(new AjaxLink<Void>("yes") {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
 				YesNoPanel.this.yesClicked(target);
 			}
-			
+
 			
 		});
 		
-		add(new AjaxLink("no") {
+		add(new AjaxLink<Void>("no") {
 
 			@Override
 			public void onClick(AjaxRequestTarget target) {
