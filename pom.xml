@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.4.1.RELEASE</version>
+		<version>1.5.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -58,7 +58,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<apache-shiro.version>1.2.4</apache-shiro.version>
-		<wicket.version>8.0.0-M2</wicket.version>
+		<wicket.version>8.0.0-M4</wicket.version>
 	</properties>
 
 	<dependencyManagement>
