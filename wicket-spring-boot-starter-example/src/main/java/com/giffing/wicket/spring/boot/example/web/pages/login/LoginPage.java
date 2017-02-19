@@ -2,9 +2,9 @@ package com.giffing.wicket.spring.boot.example.web.pages.login;
 
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
-import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
+import org.apache.wicket.markup.html.form.StatelessForm;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.wicketstuff.annotation.mount.MountPath;
@@ -33,7 +33,7 @@ public class LoginPage extends BasePage {
 		add(new LoginForm("loginForm"));
 	}
 
-	private class LoginForm extends Form<LoginForm> {
+	private class LoginForm extends StatelessForm<LoginForm> {
 
 		private String username;
 		
