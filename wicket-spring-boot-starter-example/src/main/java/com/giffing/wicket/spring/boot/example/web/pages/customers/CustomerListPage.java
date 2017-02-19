@@ -72,19 +72,18 @@ public class CustomerListPage extends BasePage {
 		feedbackPanel.setOutputMarkupId(true);
 		add(feedbackPanel);
 		
-		//TODO broken in 7.5.0 - fixed in 7.6.0 - https://issues.apache.org/jira/browse/WICKET-6262
-//		add(new WebSocketBehavior() {
-//
-//			@Override
-//			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
-//				if (message instanceof CustomerChangedEvent) {
-//					CustomerChangedEvent event = (CustomerChangedEvent)message;
-//					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
-//					handler.add(feedbackPanel);
-//				}
-//			}
-//
-//		});
+		add(new WebSocketBehavior() {
+
+			@Override
+			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
+				if (message instanceof CustomerChangedEvent) {
+					CustomerChangedEvent event = (CustomerChangedEvent)message;
+					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+			}
+
+		});
 		
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
