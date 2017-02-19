@@ -15,7 +15,6 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColu
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilteredPropertyColumn;
-import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextField;
@@ -72,19 +71,18 @@ public class CustomerListPage extends BasePage {
 		feedbackPanel.setOutputMarkupId(true);
 		add(feedbackPanel);
 		
-		//TODO broken in 7.5.0 - fixed in 7.6.0 - https://issues.apache.org/jira/browse/WICKET-6262
-//		add(new WebSocketBehavior() {
-//
-//			@Override
-//			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
-//				if (message instanceof CustomerChangedEvent) {
-//					CustomerChangedEvent event = (CustomerChangedEvent)message;
-//					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
-//					handler.add(feedbackPanel);
-//				}
-//			}
-//
-//		});
+		add(new WebSocketBehavior() {
+
+			@Override
+			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
+				if (message instanceof CustomerChangedEvent) {
+					CustomerChangedEvent event = (CustomerChangedEvent)message;
+					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+			}
+
+		});
 		
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
