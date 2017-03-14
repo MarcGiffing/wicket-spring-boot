@@ -43,7 +43,7 @@ import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.lin
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno.YesNoLink;
 import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
-import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
+import com.giffing.wicket.spring.boot.example.web.html.border.LabeledFormBorder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
@@ -90,11 +90,11 @@ public class CustomerListPage extends BasePage {
 		queue(new BookmarkablePageLink<Customer>("create", CustomerCreatePage.class));
 		
 		queue(new ValidationForm<>("form", customerFilterModel));
-		queue(new LabledFormBroder<>(getString("id"), new TextField<>("id")));
-		queue(new LabledFormBroder<>(getString("username"), new UsernameSearchTextField("usernameLike")));
-		queue(new LabledFormBroder<>(getString("firstname"), new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3))));
-		queue(new LabledFormBroder<>(getString("lastname"), new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3))));
-		queue(new LabledFormBroder<>(getString("active"), new CheckBox("active")));
+		queue(new LabeledFormBorder<>(getString("id"), new TextField<>("id")));
+		queue(new LabeledFormBorder<>(getString("username"), new UsernameSearchTextField("usernameLike")));
+		queue(new LabeledFormBorder<>(getString("firstname"), new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3))));
+		queue(new LabeledFormBorder<>(getString("lastname"), new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3))));
+		queue(new LabeledFormBorder<>(getString("active"), new CheckBox("active")));
 		queue(cancelButton());
 		
 		customerDataTable(customerDataProvider);
