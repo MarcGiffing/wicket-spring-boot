@@ -12,7 +12,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
-import com.giffing.wicket.spring.boot.example.web.html.border.LabledFormBroder;
+import com.giffing.wicket.spring.boot.example.web.html.border.LabeledFormBorder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
@@ -50,11 +50,11 @@ public class CustomerCreatePage extends BasePage{
 	}
 
 	private Component activeField() {
-		return new LabledFormBroder<Boolean>(getString("active"), new CheckBox("active"));
+		return new LabeledFormBorder<Boolean>(getString("active"), new CheckBox("active"));
 	}
 
-	private LabledFormBroder<String> usernameField() {
-		return new LabledFormBroder<String>(getString("username"), new UsernameTextField("username")){
+	private LabeledFormBorder<String> usernameField() {
+		return new LabeledFormBorder<String>(getString("username"), new UsernameTextField("username")){
 
 			@Override
 			public boolean isEnabled() {
@@ -64,19 +64,19 @@ public class CustomerCreatePage extends BasePage{
 		};
 	}
 
-	private LabledFormBroder<Object> firstnameField() {
-		return new LabledFormBroder<>(getString("firstname"), new RequiredTextField<>("firstname"));
+	private LabeledFormBorder<Object> firstnameField() {
+		return new LabeledFormBorder<>(getString("firstname"), new RequiredTextField<>("firstname"));
 	}
 
-	private LabledFormBroder<Object> lastnameField() {
-		return new LabledFormBroder<>(getString("lastname"), new RequiredTextField<>("lastname"));
+	private LabeledFormBorder<Object> lastnameField() {
+		return new LabeledFormBorder<>(getString("lastname"), new RequiredTextField<>("lastname"));
 	}
 	
-	private LabledFormBroder<String> passwordField() {
+	private LabeledFormBorder<String> passwordField() {
 		PasswordTextField passwordTextField = new PasswordTextField("password");
 		//TODO its not recommended to disable the password reset. But without my tests are failing cause the password is not submitted. https://issues.apache.org/jira/browse/WICKET-6221 
 		passwordTextField.setResetPassword(false);
-		LabledFormBroder<String> labledPasswordTextField = new LabledFormBroder<String>(getString("password"), passwordTextField){
+		LabeledFormBorder<String> labeledPasswordTextField = new LabeledFormBorder<String>(getString("password"), passwordTextField){
 
 			@Override
 			public boolean isVisible() {
@@ -84,7 +84,7 @@ public class CustomerCreatePage extends BasePage{
 			}
 			
 		};
-		return labledPasswordTextField;
+		return labeledPasswordTextField;
 	}
 
 	public boolean isCreatePage(){
