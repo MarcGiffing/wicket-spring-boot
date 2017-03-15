@@ -92,9 +92,7 @@ public class CustomerCreatePage extends BasePage{
 	}
 	
 	private Component submitButton() {
-		return new Button("submit"){
-			@Override
-			public void onSubmit() {
+		return Button.onSubmit("submit", (b) ->{
 				service.save(customerModel.getObject());
 				webSocketMessageBroadcaster.send(new CustomerChangedEvent(customerModel.getObject()));
 				if(pageReferenceId != null){
@@ -102,23 +100,17 @@ public class CustomerCreatePage extends BasePage{
 				} else {
 					setResponsePage(CustomerListPage.class);
 				}
-			}
-		};
+			});
 	}
 	
 	private Component cancelButton() {
-		Button cancelButton = new Button("cancel"){
-
-			@Override
-			public void onSubmit() {
-				if(pageReferenceId != null){
-					setResponsePage(new PageReference(pageReferenceId).getPage());
-				} else {
-					setResponsePage(CustomerListPage.class);
-				}
+		Button cancelButton = Button.onSubmit("cancel", (b)->{
+			if(pageReferenceId != null){
+				setResponsePage(new PageReference(pageReferenceId).getPage());
+			} else {
+				setResponsePage(CustomerListPage.class);
 			}
-			
-		};
+		});
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
 	}

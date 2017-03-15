@@ -103,16 +103,11 @@ public class CustomerListPage extends BasePage {
 	}
 
 	private Button cancelButton() {
-		Button cancelButton = new Button("cancel") {
-
-			@Override
-			public void onSubmit() {
+		Button cancelButton = Button.onSubmit("cancel", (b) -> {
 				customerFilterModel.setObject(new CustomerFilter());
-				getForm().clearInput();
+				b.getForm().clearInput();
 				filterForm.clearInput();
-			}
-
-		};
+		});
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
 	}

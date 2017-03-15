@@ -23,15 +23,9 @@ public abstract class YesNoPanel extends Panel{
 			
 		});
 		
-		add(new AjaxLink<Void>("no") {
-
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-				YesNoPanel.this.noClicked(target);
-			}
+		add(AjaxLink.onClick("no", (t)-> YesNoPanel.this.noClicked(t)));
 			
 			
-		});
 		
 	}
 
