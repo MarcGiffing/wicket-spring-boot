@@ -7,13 +7,13 @@ import org.apache.wicket.markup.html.form.FormComponent;
 import org.apache.wicket.markup.html.form.FormComponentLabel;
 import org.apache.wicket.model.Model;
 
-public class LabledFormBroder<T> extends Border {
+public class LabeledFormBorder<T> extends Border {
 
 	private static final long serialVersionUID = 1L;
 
 	private FormComponent<T> formComponent;
 
-	public LabledFormBroder(String labelText, FormComponent<T> container) {
+	public LabeledFormBorder(String labelText, FormComponent<T> container) {
 		super(container.getId() + "Border");
 		this.formComponent = container;
 		FormComponentLabel label = new FormComponentLabel("label", container);
