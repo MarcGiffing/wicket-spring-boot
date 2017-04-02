@@ -2,8 +2,8 @@
 
 Current release version:
 
-* [Wicket 8.x](http://wicket.apache.org/) 2.x.x
-* [Wicket 7.x](http://wicket.apache.org/) 1.x.x
+* http://wicket.apache.org/[Wicket 8.x] 2.x.x
+* http://wicket.apache.org/[Wicket 7.x] 1.x.x
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
