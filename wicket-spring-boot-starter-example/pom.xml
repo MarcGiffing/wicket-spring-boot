@@ -139,8 +139,10 @@
 					<groupId>org.apache.wicket</groupId>
 					<artifactId>wicket-devutils</artifactId>
 				</dependency>
-				<!-- <dependency> <groupId>net.ftlines.wicket-source</groupId> <artifactId>wicket-source</artifactId> 
-					</dependency> -->
+				<dependency>
+				<groupId>com.github.jennybrown8.wicket-source</groupId>
+				<artifactId>wicket-source</artifactId>
+			</dependency>
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-web</artifactId>

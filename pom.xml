@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
@@ -202,9 +203,9 @@
 				<version>${wicket.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>net.ftlines.wicket-source</groupId>
+				<groupId>com.github.jennybrown8.wicket-source</groupId>
 				<artifactId>wicket-source</artifactId>
-				<version>7.0.0</version>
+				<version>8.0.0</version>
 			</dependency>
 			<!-- Security - Apache Shiro -->
 			<dependency>

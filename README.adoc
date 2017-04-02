@@ -833,13 +833,13 @@ wicket.external.development.devutils.interceptor.liveSessionPageMount=devutils/i
 [[extension-wicketsource]]
 === Wicket-Source
 
-See https://github.com/42Lines/wicket-source/wiki[documentation]
+See https://github.com/jennybrown8/wicket-source/wiki[documentation]
 
 [source,xml]
 ----
 <dependency>
-  <groupId>net.ftlines.wicket-source</groupId>
-  <artifactId>wicket-source</artifactId>
+	<groupId>com.github.jennybrown8.wicket-source</groupId>
+	<artifactId>wicket-source</artifactId>
 </dependency>
 ----
 
