@@ -11,7 +11,14 @@ import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 public abstract class AbstractActionItemLink<T> extends AbstrractActionItem {
 	
 	public AbstractActionItemLink(IModel<T> label, IconType iconType){
-		AjaxLink<T> link = AjaxLink.onClick("link", (target) -> AbstractActionItemLink.this.onClick(target));
+		AjaxLink<T> link = new AjaxLink<T>("link") {
+
+			@Override
+			public void onClick(AjaxRequestTarget target) {
+				AbstractActionItemLink.this.onClick(target);
+				
+			}
+		};
 		add(link);
 		WebMarkupContainer webMarkupContainer = new WebMarkupContainer("icon-type");
 		webMarkupContainer.add(new AttributeAppender("class", "glyphicon glyphicon-" + iconType.getCssName()));
