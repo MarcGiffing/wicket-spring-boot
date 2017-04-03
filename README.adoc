@@ -7,7 +7,7 @@ Current release version:
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
-NOTE: Examples project: https://github.com/MarcGiffing/wicket-spring-boot-examples
+NOTE: Example projects: https://github.com/MarcGiffing/wicket-spring-boot-examples
 
 * <<introduction>>
 * <<getting_started>>
@@ -18,6 +18,8 @@ NOTE: Examples project: https://github.com/MarcGiffing/wicket-spring-boot-exampl
 
 [[introduction]]
 == Introduction
+
+https://dzone.com/articles/enhance-wicket-with-spring-boot *by Andrea Del Bene*
 
 This project makes it easy to create a new Wicket projects with a minimum
 of configuration effort. It uses Spring Boot to autoconfigure Wickets core and
