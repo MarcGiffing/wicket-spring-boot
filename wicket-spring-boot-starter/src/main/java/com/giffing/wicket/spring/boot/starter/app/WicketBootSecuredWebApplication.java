@@ -72,7 +72,6 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 		super.init();
 	    
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
-		getSecuritySettings().setAuthorizationStrategy(new AnnotationsRoleAuthorizationStrategy(this));
 		
 		WicketAutoConfig.Builder builder = new WicketAutoConfig.Builder(this.getClass());
 		wicketEndpointRepository.add(builder
