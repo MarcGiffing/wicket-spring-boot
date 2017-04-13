@@ -399,6 +399,11 @@ wicket.core.settings.markup.strip-comments=false
 wicket.core.settings.markup.strip-wicket-tags=true
 wicket.core.settings.markup.throw-exception-on-missing-xml-declaration=false
 
+#RequestLogger - Settings
+wicket.core.settings.requestlogger.enabled=false
+wicket.core.settings.requestlogger.record-session-size
+wicket.core.settings.requestlogger.requests-window-size
+
 
 wicket.core.requestmapper.cryptmapper.enabled=false # URL encryption support
 
