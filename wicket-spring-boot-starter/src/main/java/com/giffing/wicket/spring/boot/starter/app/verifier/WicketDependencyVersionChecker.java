@@ -1,9 +1,7 @@
-package com.giffing.wicket.spring.boot.starter.app.classscanner;
+package com.giffing.wicket.spring.boot.starter.app.verifier;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -11,6 +9,9 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -19,6 +20,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternUtils;
 
 @Configuration
+@ConditionalOnProperty(prefix = WicketDependencyVersionCheckerProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
+@EnableConfigurationProperties({ WicketDependencyVersionCheckerProperties.class })
 public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 
 	private Logger log = LoggerFactory.getLogger( WicketDependencyVersionChecker.class );
@@ -30,6 +33,13 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 	private static final String WICKET_CORE_GROUPID = "org.apache.wicket";
 	
 	private ResourcePatternResolver resourcePatternResolver;
+	
+	private WicketDependencyVersionCheckerProperties props;
+	
+	@Autowired
+	public WicketDependencyVersionChecker(WicketDependencyVersionCheckerProperties props) {
+		this.props = props;
+	}
 
 	@Override
 	public void setResourceLoader(ResourceLoader resourceLoader) {
@@ -44,12 +54,20 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 		List<MavenDependency> wicketMavenDependencies = collectWicketMavenDependencies( resources);
 		String wicketCoreVersion = findWicketCoreVersion( wicketMavenDependencies );
 		
+		boolean versionMissmatchFound = false;
+		List<MavenDependency> mismatchVersionDependencies = new ArrayList<>();
 		for ( MavenDependency mavenDependency : wicketMavenDependencies ) {
 			if(mavenDependency.groupId.equals( WICKET_CORE_GROUPID ) || mavenDependency.groupId.equals( WICKETSTUFF_GROUPID ) ) {
 				if(!mavenDependency.version.equals( wicketCoreVersion )) {
 					log.error( "########## INVALID WICKET VERSION DETECTED - CORE: {} - DEPENDENCY: {}", wicketCoreVersion,  mavenDependency);
+					versionMissmatchFound = true;
+					mismatchVersionDependencies.add( mavenDependency );
 				}
 			}
+		}
+		
+		if(versionMissmatchFound && props.isThrowExceptionOnDependencyVersionMismatch()) {
+			throw new WicketDependencyMismatchDetectedException( wicketCoreVersion, mismatchVersionDependencies );
 		}
 		
 	}
@@ -81,7 +99,7 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 		return wicketMavenDependencies;
 	}
 	
-	private static class MavenDependency {
+	public static class MavenDependency {
 		public String groupId;
 		public String artifactId;
 		public String version;
