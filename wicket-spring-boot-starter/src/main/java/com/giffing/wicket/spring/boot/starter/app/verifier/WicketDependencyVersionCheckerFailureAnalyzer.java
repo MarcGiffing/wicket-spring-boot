@@ -11,7 +11,7 @@ public class WicketDependencyVersionCheckerFailureAnalyzer extends AbstractFailu
 	
 	@Override
 	protected FailureAnalysis analyze(Throwable rootFailure, WicketDependencyMismatchDetectedException cause) {
-		String descriptionMessage = "One ore more Wicket dependencies (jars) doesn't match the wicket-core dependency.\n\r" 
+		String descriptionMessage = "One or more Wicket dependencies (jars) doesn't match the wicket-core dependency.\n\r" 
 				+"Wicket Core Version: " + cause.getWicketCoreVersion() + newline;
 		for(MavenDependency dependency :cause.getDependencies()) {
 			descriptionMessage += "\t" + dependency + newline;
