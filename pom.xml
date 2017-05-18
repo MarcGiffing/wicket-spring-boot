@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
@@ -57,7 +58,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
-		<apache-shiro.version>1.2.4</apache-shiro.version>
+		<apache-shiro.version>1.4.0</apache-shiro.version>
 		<wicket.version>7.7.0</wicket.version>
 	</properties>
 
@@ -208,13 +209,13 @@
 			</dependency>
 			<!-- Security - Apache Shiro -->
 			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-core</artifactId>
-				<version>${apache-shiro.version}</version>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-shiro</artifactId>
+				<version>${wicket.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-web</artifactId>
+				<artifactId>shiro-spring-boot-web-starter</artifactId>
 				<version>${apache-shiro.version}</version>
 			</dependency>
 		</dependencies>
