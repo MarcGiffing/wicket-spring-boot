@@ -1,6 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.SessionTrackingMode;
+
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.mock.MockServletContext;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -8,10 +15,8 @@ import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -54,7 +59,7 @@ public class WicketBaseTest {
 	@Before
 	public void setUp() {
 		ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
-		tester = new WicketTester(wicketApplication);
+		tester = new WicketTester(wicketApplication, new WicketMockServletContext(wicketApplication, null));
 		login(USERNAME, PASSWORD);
 	}
 	

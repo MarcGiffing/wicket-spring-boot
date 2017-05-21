@@ -1,6 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.SessionTrackingMode;
+
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.mock.MockServletContext;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -54,7 +61,7 @@ public class WicketBaseIntTest {
 
 	@Before
 	public void setUp() {
-		tester = new WicketTester(wicketApplication);
+		tester = new WicketTester(wicketApplication, new WicketMockServletContext(wicketApplication, null));
 		login(USERNAME, PASSWORD);
 	}
 

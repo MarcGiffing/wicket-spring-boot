@@ -3,6 +3,7 @@ package com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filt
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.AbstractFilter;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.FormComponentUpdatingBehavior;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.IModel;
 
@@ -21,14 +22,8 @@ public class AbstractCheckBoxFilter extends AbstractFilter{
 	}
 
 	public CheckBox createTextFieldComponent(String componentId, final IModel<Boolean> model) {
-		CheckBox checkBox = new CheckBox("filter", model){
-
-			@Override
-			protected boolean wantOnSelectionChangedNotifications() {
-				return true;
-			}
-			
-		};
+		CheckBox checkBox = new CheckBox("filter", model);
+		checkBox.add( new FormComponentUpdatingBehavior());
 		return checkBox;
 	}
 
