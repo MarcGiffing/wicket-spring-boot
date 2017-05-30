@@ -1,8 +1,10 @@
 package com.giffing.wicket.spring.boot.starter.web;
 
+import java.util.EnumSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -61,7 +63,7 @@ public class WicketWebInitializer implements ServletContextInitializer {
 		filter.setInitParameter("applicationBean", beanNamesForType[0]);
 
 		filter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, props.getFilterMappingParam());
-		filter.addMappingForUrlPatterns(null, false, props.getFilterMappingParam());
+		filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), false, props.getFilterMappingParam());
 
 		Map<String, String> initParameters = props.getInitParameters();
 		for (Entry<String, String> initParam : initParameters.entrySet()) {
