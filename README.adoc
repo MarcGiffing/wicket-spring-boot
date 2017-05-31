@@ -377,6 +377,7 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 wicket.core.settings.general.configuration-type=development # development/deployment(default)
 
 wicket.web.servlet.filter-mapping-param=/*
+wicket.web.servlet.dispatcher-types=request, error, async # request, error, async, include, forward
 wicket.web.servlet.init-parameters.*= # map<string,string> - configuration support for additional servlet init parameters
 
 #exception settings
