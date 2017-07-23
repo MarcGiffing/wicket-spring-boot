@@ -1,5 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.beanvalidation;
 
+import javax.validation.Validator;
+
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +41,12 @@ public class BeanValidationConfig implements WicketApplicationInitConfiguration 
 	@Autowired
 	private WicketEndpointRepository wicketEndpointRepository;
 	
+	@Autowired
+	private Validator validator;
+	
 	@Override
 	public void init(WebApplication webApplication) {
-		new BeanValidationConfiguration().configure(webApplication);
+		new WicketSpringBeanValidationConfiguration(validator).configure(webApplication);
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
 				.withDetail("properties", props)
