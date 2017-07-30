@@ -54,16 +54,21 @@ public class WicketWebInitializerAutoConfig {
 	@ConditionalOnProperty(prefix = "wicket.external.websocket", value = "enabled", matchIfMissing = true)
 	public static class WebSocketWicketWebInitializerAutoConfiguration {
 
+		public static final String REGISTER_SERVER_ENDPOINT = "wicket.external.websocket.registerServerEndpoint";
+		public static final String REGISTER_SERVER_ENDPOINT_ENABLED = REGISTER_SERVER_ENDPOINT + ".enabled";
+		
 		@Bean
 		public WicketWebInitializerConfig wicketWebInitializerConfig() {
 			return new WebSocketWicketWebInitializer();
 		}
 		
+		
+		
 		/**
 		 * @return the wicket server endpoint config register which registers  the {@link WicketServerEndpointConfig}
 		 */
 		@Bean
-		@ConditionalOnProperty(prefix = "wicket.external.websocket.registerServerEndpoint", value = "enabled", matchIfMissing = true)
+		@ConditionalOnProperty(prefix = REGISTER_SERVER_ENDPOINT, value = "enabled", matchIfMissing = true)
 		public WicketServerEndpointConfigRegister wicketServerEndpointConfigRegister() {
 			return new WicketServerEndpointConfigRegister();
 		}
