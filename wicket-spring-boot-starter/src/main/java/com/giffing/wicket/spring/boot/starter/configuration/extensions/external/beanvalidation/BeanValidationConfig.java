@@ -4,6 +4,7 @@ import javax.validation.Validator;
 
 import org.apache.wicket.bean.validation.BeanValidationConfiguration;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.util.IProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -46,7 +47,14 @@ public class BeanValidationConfig implements WicketApplicationInitConfiguration 
 	
 	@Override
 	public void init(WebApplication webApplication) {
-		new WicketSpringBeanValidationConfiguration(validator).configure(webApplication);
+		BeanValidationConfiguration validationConfiguration = new BeanValidationConfiguration();
+		validationConfiguration.setValidatorProvider(new IProvider<Validator>() {
+			@Override
+			public Validator get() {
+				return validator;
+			}
+		});
+		validationConfiguration.configure(webApplication);
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
 				.withDetail("properties", props)
