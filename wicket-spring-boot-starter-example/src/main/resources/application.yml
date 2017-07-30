@@ -16,6 +16,8 @@ server:
     enabled: true
 management:
   port: 8081
+  security:
+    enabled: false
 spring:
   jpa:
     hibernate:
