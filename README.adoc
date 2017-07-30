@@ -15,6 +15,7 @@ NOTE: Example projects: https://github.com/MarcGiffing/wicket-spring-boot-exampl
 * <<spring_profile_dev_configuration>>
 * <<custom-conditions>>
 * <<extension>>
+* <<war_deployment>>
 
 [[introduction]]
 == Introduction
@@ -900,4 +901,40 @@ wicket.stuff.htmlvalidator.enabled=true
   <groupId>org.wicketstuff.htmlvalidator</groupId>
   <artifactId>wicketstuff-htmlvalidator</artifactId>
 </dependency>
+----
+
+[[war_deployment]]
+==Configure as WAR for deploy on Servlet Container
+
+#115
+
+To run the application as a *war* file in the Servlet Container like Tomcat you have to do the following steps.
+
+* Set the packaging to war in your build system (maven, gradle)
+* Mark the *spring-boot-starter-tomcat* dependency as provided
+* Use the Spring provided plugins to repackage the project  
+** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging[maven]
+** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-gradle-repackage-configuration[gradle] 
+* Optionally you can extend from SpringBootServletInitializer to set configuration which only apply when deployed as a war in a Servlet Container.
+
+[source,java]
+----
+@SpringBootApplication
+public class WicketApplication extends SpringBootServletInitializer  {
+
+//Can be used while developing
+public static void main(String[] args) throws Exception {
+	new SpringApplicationBuilder()
+		.sources(WicketApplication.class)
+		.run(args);
+}
+
+//Executed when deployed as a WAR in a Servlet container.
+@Override
+protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	builder.properties( WebSocketWicketWebInitializerAutoConfiguration.REGISTER_SERVER_ENDPOINT_ENABLED + "=false" );
+	return super.configure( builder );
+}
+
+}
 ----
