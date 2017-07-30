@@ -938,3 +938,5 @@ protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 
 }
 ----
+
+If you already extend from a Wicket specific class you can create a separated class which extends from SpringBootServletInitializer (https://github.com/MarcGiffing/wicket-spring-boot/issues/115#issuecomment-311712298).
