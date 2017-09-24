@@ -904,7 +904,7 @@ wicket.stuff.htmlvalidator.enabled=true
 ----
 
 [[war_deployment]]
-==Configure as WAR for deploy on Servlet Container
+== Configure as WAR for deploy on Servlet Container
 
 #115
 
@@ -912,10 +912,12 @@ To run the application as a *war* file in the Servlet Container like Tomcat you 
 
 * Set the packaging to war in your build system (maven, gradle)
 * Mark the *spring-boot-starter-tomcat* dependency as provided
-* Use the Spring provided plugins to repackage the project  
+* Use the Spring provided plugins to repackage the project
+* Extend from SpringBootServletInitializer
+** Here you can optionally set configurations which only apply when deployed as a war in a Servlet Container  
 ** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging[maven]
 ** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-gradle-repackage-configuration[gradle] 
-* Optionally you can extend from SpringBootServletInitializer to set configuration which only apply when deployed as a war in a Servlet Container.
+
 
 [source,java]
 ----
