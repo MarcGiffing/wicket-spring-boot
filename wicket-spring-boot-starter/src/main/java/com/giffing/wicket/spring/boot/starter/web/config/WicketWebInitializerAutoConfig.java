@@ -3,9 +3,14 @@ package com.giffing.wicket.spring.boot.starter.web.config;
 import org.apache.wicket.protocol.ws.javax.JavaxWebSocketFilter;
 import org.apache.wicket.protocol.ws.javax.WicketServerEndpointConfig;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -49,6 +54,9 @@ public class WicketWebInitializerAutoConfig {
 	@ConditionalOnProperty(prefix = "wicket.external.websocket", value = "enabled", matchIfMissing = true)
 	public static class WebSocketWicketWebInitializerAutoConfiguration {
 
+		public static final String REGISTER_SERVER_ENDPOINT = "wicket.external.websocket.registerServerEndpoint";
+		public static final String REGISTER_SERVER_ENDPOINT_ENABLED = REGISTER_SERVER_ENDPOINT + ".enabled";
+		
 		@Bean
 		public WicketWebInitializerConfig wicketWebInitializerConfig() {
 			return new WebSocketWicketWebInitializer();
@@ -58,6 +66,7 @@ public class WicketWebInitializerAutoConfig {
 		 * @return the wicket server endpoint config register which registers  the {@link WicketServerEndpointConfig}
 		 */
 		@Bean
+		@ConditionalOnProperty(prefix = REGISTER_SERVER_ENDPOINT, value = "enabled", matchIfMissing = true)
 		public WicketServerEndpointConfigRegister wicketServerEndpointConfigRegister() {
 			return new WicketServerEndpointConfigRegister();
 		}

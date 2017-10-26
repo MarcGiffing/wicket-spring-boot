@@ -15,6 +15,7 @@ NOTE: Example projects: https://github.com/MarcGiffing/wicket-spring-boot-exampl
 * <<spring_profile_dev_configuration>>
 * <<custom-conditions>>
 * <<extension>>
+* <<war_deployment>>
 
 [[introduction]]
 == Introduction
@@ -377,6 +378,7 @@ is automatically mapped to Wickets ConfigurationType enumeration.
 wicket.core.settings.general.configuration-type=development # development/deployment(default)
 
 wicket.web.servlet.filter-mapping-param=/*
+wicket.web.servlet.dispatcher-types=request, error, async # request, error, async, include, forward
 wicket.web.servlet.init-parameters.*= # map<string,string> - configuration support for additional servlet init parameters
 
 #exception settings
@@ -900,3 +902,42 @@ wicket.stuff.htmlvalidator.enabled=true
   <artifactId>wicketstuff-htmlvalidator</artifactId>
 </dependency>
 ----
+[[war_deployment]]
+== Configure as WAR for deploy on Servlet Container
+
+#115
+
+To run the application as a *war* file in the Servlet Container like Tomcat you have to do the following steps.
+
+* Set the packaging to war in your build system (maven, gradle)
+* Mark the *spring-boot-starter-tomcat* dependency as provided
+* Use the Spring provided plugins to repackage the project
+* Extend from SpringBootServletInitializer
+** Here you can optionally set configurations which only apply when deployed as a war in a Servlet Container  
+** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-maven-packaging[maven]
+** http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#build-tool-plugins-gradle-repackage-configuration[gradle] 
+
+
+[source,java]
+----
+@SpringBootApplication
+public class WicketApplication extends SpringBootServletInitializer  {
+
+//Can be used while developing
+public static void main(String[] args) throws Exception {
+	new SpringApplicationBuilder()
+		.sources(WicketApplication.class)
+		.run(args);
+}
+
+//Executed when deployed as a WAR in a Servlet container.
+@Override
+protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+	builder.properties( WebSocketWicketWebInitializerAutoConfiguration.REGISTER_SERVER_ENDPOINT_ENABLED + "=false" );
+	return super.configure( builder );
+}
+
+}
+----
+
+If you already extend from a Wicket specific class you can create a separated class which extends from SpringBootServletInitializer (https://github.com/MarcGiffing/wicket-spring-boot/issues/115#issuecomment-311712298).

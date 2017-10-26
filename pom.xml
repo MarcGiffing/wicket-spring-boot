@@ -20,7 +20,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.3.RELEASE</version>
+		<version>1.5.7.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -57,7 +57,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
-		<apache-shiro.version>1.2.4</apache-shiro.version>
+		<apache-shiro.version>1.4.0</apache-shiro.version>
 		<wicket.version>8.0.0-M7</wicket.version>
 	</properties>
 
@@ -208,13 +208,13 @@
 			</dependency>
 			<!-- Security - Apache Shiro -->
 			<dependency>
-				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-core</artifactId>
-				<version>${apache-shiro.version}</version>
+				<groupId>org.wicketstuff</groupId>
+				<artifactId>wicketstuff-shiro</artifactId>
+				<version>${wicket.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.shiro</groupId>
-				<artifactId>shiro-web</artifactId>
+				<artifactId>shiro-spring-boot-web-starter</artifactId>
 				<version>${apache-shiro.version}</version>
 			</dependency>
 		</dependencies>
@@ -238,7 +238,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.5</version>
+						<version>1.6</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -291,7 +291,7 @@
 			<plugin>
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
-				<version>1.6.6</version>
+				<version>1.6.8</version>
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>

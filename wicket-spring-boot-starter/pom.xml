@@ -109,6 +109,16 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.wicketstuff</groupId>
+			<artifactId>wicketstuff-shiro</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring-boot-web-starter</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.wicketstuff.htmlvalidator</groupId>
 			<artifactId>wicketstuff-htmlvalidator</artifactId>
 			<scope>provided</scope>
