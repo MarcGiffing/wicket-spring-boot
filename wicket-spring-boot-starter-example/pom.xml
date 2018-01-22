@@ -16,6 +16,7 @@
 
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -172,7 +173,7 @@
 			<plugin>
 				<groupId>org.bsc.maven</groupId>
 				<artifactId>maven-processor-plugin</artifactId>
-				<version>2.2.4</version>
+				<version>${maven-processor-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>process</id>
@@ -194,6 +195,26 @@
 						<version>5.0.5.Final</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<!-- Assist eclipse in recognizing the classes generated --> 
+			<!-- by jpa-modelgen (via maven-processor-plugin) as source files -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>target/generated-sources/apt</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
@@ -280,6 +301,19 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.bsc.maven</groupId>
+										<artifactId>maven-processor-plugin</artifactId>
+										<versionRange>[${maven-processor-plugin.version},)</versionRange>
+										<goals>
+											<goal>process</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
