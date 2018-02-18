@@ -41,7 +41,6 @@ public abstract class BasePage extends WebPage {
 		super.renderHead(response);
 		
 		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getJQueryReference()));
-		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getWicketEventReference()));
 		response.render(JavaScriptHeaderItem.forReference(getApplication().getJavaScriptLibrarySettings().getWicketAjaxReference()));
 		
 		String bootstrapPrefixPath = "bootstrap/current";
