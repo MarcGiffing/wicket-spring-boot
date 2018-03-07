@@ -2,8 +2,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-liquibase:
-  change-log: classpath:db/changelog/db.changelog-master-test.xml
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master-test.xml
 wicket:
   stuff:
     serializer:

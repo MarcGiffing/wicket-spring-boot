@@ -42,8 +42,8 @@ import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfi
 @Ignore
 public class WicketBaseTest {
 
-	private static final String USERNAME = "test";
-	private static final String PASSWORD = "test123";
+	private static final String USERNAME = "admin";
+	private static final String PASSWORD = "admin";
 
 	private WicketTester tester;
 

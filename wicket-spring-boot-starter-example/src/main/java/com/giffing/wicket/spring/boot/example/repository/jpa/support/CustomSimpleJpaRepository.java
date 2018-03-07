@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -26,7 +28,13 @@ public class CustomSimpleJpaRepository<T, ID extends Serializable> extends Simpl
 
 	@Override
 	public List<T> findAllBySpec(Specification<T> spec, long offset, long count, Sort sort) {
-		return getQuery(spec, sort)
+		TypedQuery<T> query = null;
+		if(spec == null) {
+			query = getQuery(Specification.where(null),sort);
+		} else {
+			query = getQuery(spec, sort);
+		}
+		return query
 			.setFirstResult(Long.valueOf(offset).intValue())
 			.setMaxResults(Long.valueOf(count).intValue())
 			.getResultList();

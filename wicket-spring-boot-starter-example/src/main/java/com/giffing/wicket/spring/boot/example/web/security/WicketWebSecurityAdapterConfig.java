@@ -1,10 +1,15 @@
 package com.giffing.wicket.spring.boot.example.web.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 /**
  * Default Spring Boot Wicket security getting started configuration. Its only
@@ -27,12 +32,26 @@ public class WicketWebSecurityAdapterConfig extends WebSecurityConfigurerAdapter
 			.permitAll();
 		http.headers().frameOptions().disable();
 	}
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-			.inMemoryAuthentication()
-			.withUser("admin").password("admin").authorities("USER", "ADMIN");
+	
+	@Bean
+	public static BCryptPasswordEncoder passwordEncoder() {
+	return new BCryptPasswordEncoder();
 	}
+	
+	@Bean( name="authenticationManager")
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
+	@Bean
+	public UserDetailsService userDetailsService() {
+	    InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+	    manager.createUser(
+	    		User.withUsername("admin")
+	    		 .password(passwordEncoder().encode("admin"))
+	    		 .authorities("USER", "ADMIN")
+	    		 .build());
+	    return manager;
+	}
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.boot.devtools.restart.Restarter;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.Ordered;
@@ -62,9 +61,7 @@ public class WicketDevToolsPropertyDefaultsPostProcessor implements EnvironmentP
 	}
 
 	private boolean isRemoteRestartEnabled(Environment environment) {
-		RelaxedPropertyResolver resolver = new RelaxedPropertyResolver(environment,
-				"spring.devtools.remote.");
-		return resolver.containsProperty("secret");
+		return environment.containsProperty("spring.devtools.remote.secret");
 	}
 
 }

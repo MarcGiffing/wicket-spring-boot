@@ -3,6 +3,7 @@ package com.giffing.wicket.spring.boot.example.repository.services.customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
@@ -98,13 +99,14 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 
 	@Override
 	public Customer findById(Long id) {
-		return customerRepository.findOne(id);
+		Optional<Customer> customer = customerRepository.findById(id);
+		return customer.isPresent() ? customer.get() : null;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
 	public void delete(Long id) {
-		customerRepository.delete(id);
+		customerRepository.deleteById(id);
 	}
 
 	@Override

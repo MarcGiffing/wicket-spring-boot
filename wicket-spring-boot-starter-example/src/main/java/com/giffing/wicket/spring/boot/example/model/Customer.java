@@ -13,7 +13,7 @@ import com.giffing.wicket.spring.boot.example.repository.Domain;
 public class Customer implements Domain<Long>, Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String username;
