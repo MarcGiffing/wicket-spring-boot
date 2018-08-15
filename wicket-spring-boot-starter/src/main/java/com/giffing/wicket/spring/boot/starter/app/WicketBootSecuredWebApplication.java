@@ -100,10 +100,10 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
 		if(classCandidates.getSignInPageCandidates().size() <= 0){
-			throw new IllegalStateException("Couln't find sign in page - please annotated the sign in page with @" + WicketSignInPage.class.getName());
+			throw new IllegalStateException("Couln't find sign in page - please annotate the sign in page with @" + WicketSignInPage.class.getName());
 		}
 		if(classCandidates.getSignInPageCandidates().size() > 1 ){
-			String message = "Multiple sign in pages found - please annotated exactly one class with @" + WicketSignInPage.class.getName();
+			String message = "Multiple sign in pages found - please annotate exactly one class with @" + WicketSignInPage.class.getName();
 			message += "\n";
 			for(WicketClassCandidate<Page> classCandidate : classCandidates.getHomePageCandidates()) {
 				message += "\t" + classCandidate.getCandidate() + "\n";
@@ -119,10 +119,10 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	@Override
 	public Class<? extends Page> getHomePage() {
 		if(classCandidates.getHomePageCandidates().size() <= 0){
-			throw new IllegalStateException("Couln't find home page - please annotated the home page with @" + WicketHomePage.class.getName());
+			throw new IllegalStateException("Couln't find home page - please annotate the home page with @" + WicketHomePage.class.getName());
 		}
 		if(classCandidates.getHomePageCandidates().size() > 1 ){
-			String message = "Multiple home pages found - please annotated exactly one class with @" + WicketHomePage.class.getName();
+			String message = "Multiple home pages found - please annotate exactly one class with @" + WicketHomePage.class.getName();
 			message += "\n";
 			for(WicketClassCandidate<Page> classCandidate : classCandidates.getHomePageCandidates()) {
 				message += "\t" + classCandidate.getCandidate() + "\n";
