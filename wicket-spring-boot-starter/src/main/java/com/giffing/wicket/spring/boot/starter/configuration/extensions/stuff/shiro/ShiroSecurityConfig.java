@@ -45,10 +45,10 @@ public class ShiroSecurityConfig implements WicketApplicationInitConfiguration {
 		webApplication.getSecuritySettings().setAuthorizationStrategy( authz );
 
 		if ( classCandidates.getSignInPageCandidates().size() <= 0 ) {
-			throw new IllegalStateException( "Couln't find sign in page - please annotated the sign in page with @" + WicketSignInPage.class.getName() );
+			throw new IllegalStateException( "Couln't find sign in page - please annotate the sign in page with @" + WicketSignInPage.class.getName() );
 		}
 		if ( classCandidates.getAccessDeniedPageCandidates().size() <= 0 ) {
-			throw new IllegalStateException( "Couln't find access denied in page - please annotated the sign in page with @" + WicketAccessDeniedPage.class.getName() );
+			throw new IllegalStateException( "Couln't find access denied in page - please annotate the sign in page with @" + WicketAccessDeniedPage.class.getName() );
 		}
 		Class<WebPage> signInPage = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
 		Class<Page> accessDeniedPage = classCandidates.getAccessDeniedPageCandidates().iterator().next().getCandidate();
