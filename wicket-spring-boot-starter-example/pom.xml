@@ -141,9 +141,9 @@
 					<artifactId>wicket-devutils</artifactId>
 				</dependency>
 				<dependency>
-				<groupId>com.github.jennybrown8.wicket-source</groupId>
-				<artifactId>wicket-source</artifactId>
-			</dependency>
+					<groupId>com.github.jennybrown8.wicket-source</groupId>
+					<artifactId>wicket-source</artifactId>
+				</dependency>
 				<dependency>
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-web</artifactId>
@@ -158,6 +158,13 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -196,7 +203,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!-- Assist eclipse in recognizing the classes generated --> 
+			<!-- Assist eclipse in recognizing the classes generated -->
 			<!-- by jpa-modelgen (via maven-processor-plugin) as source files -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
