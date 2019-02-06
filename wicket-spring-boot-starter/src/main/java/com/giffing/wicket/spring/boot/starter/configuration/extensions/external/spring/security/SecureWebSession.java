@@ -1,5 +1,8 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;
@@ -29,8 +32,11 @@ public class SecureWebSession extends AuthenticatedWebSession {
 	@SpringBean(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
 
+	private final HttpSession httpSession;
+	
 	public SecureWebSession(Request request) {
 		super(request);
+		this.httpSession = ((HttpServletRequest) request.getContainerRequest()).getSession(false);
 		Injector.get().inject(this);
 	}
 
@@ -41,7 +47,7 @@ public class SecureWebSession extends AuthenticatedWebSession {
 				new UsernamePasswordAuthenticationToken(username, password));
 			if (auth.isAuthenticated()) {
 				SecurityContextHolder.getContext().setAuthentication(auth);
-				setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+				httpSession.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
 				return true;
 			}
 			return false;
