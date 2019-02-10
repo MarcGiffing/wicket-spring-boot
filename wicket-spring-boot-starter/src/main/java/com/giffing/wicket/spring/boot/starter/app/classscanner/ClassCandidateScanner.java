@@ -13,6 +13,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.context.annotation.Configuration;
@@ -66,6 +67,7 @@ public class ClassCandidateScanner implements BeanClassLoaderAware {
 				false);
 		scanner.setEnvironment(this.environment);
 		scanner.setResourceLoader(this.resourceLoader);
+		scanner.addIncludeFilter(new AnnotationTypeFilter(SpringBootApplication.class));
 		scanner.addIncludeFilter(new AnnotationTypeFilter(WicketHomePage.class));
 		scanner.addIncludeFilter(new AnnotationTypeFilter(WicketSignInPage.class));
 	    scanner.addIncludeFilter(new AnnotationTypeFilter(WicketAccessDeniedPage.class));
@@ -96,6 +98,9 @@ public class ClassCandidateScanner implements BeanClassLoaderAware {
 					}
 					if(beanClass.isAnnotationPresent(WicketInternalErrorPage.class)){
 						pageCandidates().getInternalErrorPageCandidates().add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+					}
+					if(beanClass.isAnnotationPresent(SpringBootApplication.class)){
+						pageCandidates().setSpringBootMainClass( beanClass );
 					}
 				}
 				
