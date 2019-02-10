@@ -17,6 +17,8 @@ public class WicketClassCandidatesHolder {
 	
 	private Set<String> basePackages = new HashSet<>();
 	
+	private Class<?> springBootMainClass = null;
+	
 	private Set<WicketClassCandidate<Page>> homePageCandidates = new HashSet<>();
 	
 	private Set<WicketClassCandidate<WebPage>> signInPageCandidates = new HashSet<>();
@@ -73,6 +75,14 @@ public class WicketClassCandidatesHolder {
 
 	public void setBasePackages(Set<String> basePackages) {
 		this.basePackages = basePackages;
+	}
+
+	public Class<?> getSpringBootMainClass() {
+		return springBootMainClass;
+	}
+
+	public void setSpringBootMainClass(Class<?> springBootMainClass) {
+		this.springBootMainClass = springBootMainClass;
 	}
 
 }
