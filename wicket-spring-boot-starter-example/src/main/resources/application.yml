@@ -8,6 +8,9 @@ wicket:
       packageresourceguard:
         pattern:
         - +*.map
+    csrf:
+      accepted-origins:
+        - localhost
 management:
   endpoints:
     web:

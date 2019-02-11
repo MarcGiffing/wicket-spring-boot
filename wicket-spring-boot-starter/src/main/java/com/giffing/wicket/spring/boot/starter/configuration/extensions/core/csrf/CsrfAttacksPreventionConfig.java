@@ -2,6 +2,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.csr
 
 import org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.ws.WebSocketAwareCsrfPreventionRequestCycleListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,7 +29,7 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(value = org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener.class)
+@ConditionalOnClass(value = WebSocketAwareCsrfPreventionRequestCycleListener.class)
 @EnableConfigurationProperties({ CsrfAttacksPreventionProperties.class })
 public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfiguration{
 
@@ -40,7 +41,7 @@ public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfigu
 	
 	@Override
 	public void init(WebApplication webApplication) {
-		CsrfPreventionRequestCycleListener listener = new CsrfPreventionRequestCycleListener();
+		WebSocketAwareCsrfPreventionRequestCycleListener listener = new WebSocketAwareCsrfPreventionRequestCycleListener();
 		listener.setConflictingOriginAction(props.getConflictingOriginAction());
 		listener.setErrorCode(props.getErrorCode());
 		listener.setErrorMessage(props.getErrorMessage());
