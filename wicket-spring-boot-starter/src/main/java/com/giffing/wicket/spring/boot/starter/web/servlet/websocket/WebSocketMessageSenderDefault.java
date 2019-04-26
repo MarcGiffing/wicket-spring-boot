@@ -10,15 +10,13 @@ import org.apache.wicket.protocol.ws.api.registry.IWebSocketConnectionRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.giffing.wicket.spring.boot.starter.web.WicketWebInitializer;
-
 public class WebSocketMessageSenderDefault implements WebSocketMessageBroadcaster {
 
-	protected final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass());
 	
 	@Override
 	public void send(IWebSocketPushMessage event) {
-		Application application = Application.get(WicketWebInitializer.WICKET_FILTERNAME);
+		Application application = Application.get();
 		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(application);
 		IWebSocketConnectionRegistry connectionRegistry = webSocketSettings.getConnectionRegistry();
 		Collection<IWebSocketConnection> connections = connectionRegistry.getConnections(application);

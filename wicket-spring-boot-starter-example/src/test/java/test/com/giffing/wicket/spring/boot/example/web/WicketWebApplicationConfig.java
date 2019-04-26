@@ -1,9 +1,10 @@
 package test.com.giffing.wicket.spring.boot.example.web;
 
+import com.giffing.wicket.spring.boot.example.WicketApplication;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.apache.wicket.resource.loader.ClassStringResourceLoader;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -17,14 +18,21 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplicatio
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 
 //TODO move to test
-@SpringBootApplication
-@EnableAutoConfiguration(exclude={
-		DataSourceAutoConfiguration.class, 
-		JpaRepositoriesAutoConfiguration.class, 
+@SpringBootApplication(exclude = {
+		DataSourceAutoConfiguration.class,
+		JpaRepositoriesAutoConfiguration.class,
 		HibernateJpaAutoConfiguration.class,
-	})
+})
 @ComponentScan(basePackageClasses=SpringBootWebPackageIdentifier.class)
 public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication {
+
+	@Override
+	protected void init() {
+		super.init();
+
+		// Add WicketApplication.properties resource file
+		getResourceSettings().getStringResourceLoaders().add(new ClassStringResourceLoader(WicketApplication.class));
+	}
 
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
