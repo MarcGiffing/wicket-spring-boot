@@ -21,6 +21,8 @@ server:
     enabled: true
   port: 8081
 spring:
+  main:
+    allow-bean-definition-overriding: true
   jpa:
     hibernate:
       ddl-auto: none
