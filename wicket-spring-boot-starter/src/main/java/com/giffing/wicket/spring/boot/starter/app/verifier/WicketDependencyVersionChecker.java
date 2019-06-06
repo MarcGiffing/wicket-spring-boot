@@ -24,17 +24,19 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 @EnableConfigurationProperties({ WicketDependencyVersionCheckerProperties.class })
 public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 
-	private Logger log = LoggerFactory.getLogger( WicketDependencyVersionChecker.class );
+	private final Logger log = LoggerFactory.getLogger( WicketDependencyVersionChecker.class );
 	
 	static final String DEFAULT_RESOURCE_PATTERN = "/META-INF/maven/**/pom.properties";
 
 	private static final String WICKETSTUFF_GROUPID = "org.wicketstuff";
+        
+	private static final String WICKET_JQUERYUI_GROUPID = "com.googlecode.wicket-jquery-ui";
 	
 	private static final String WICKET_CORE_GROUPID = "org.apache.wicket";
 	
 	private ResourcePatternResolver resourcePatternResolver;
 	
-	private WicketDependencyVersionCheckerProperties props;
+	private final WicketDependencyVersionCheckerProperties props;
 	
 	@Autowired
 	public WicketDependencyVersionChecker(WicketDependencyVersionCheckerProperties props) {
@@ -57,13 +59,21 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 		boolean versionMissmatchFound = false;
 		List<MavenDependency> mismatchVersionDependencies = new ArrayList<>();
 		for ( MavenDependency mavenDependency : wicketMavenDependencies ) {
-			if(mavenDependency.groupId.equals( WICKET_CORE_GROUPID ) || mavenDependency.groupId.equals( WICKETSTUFF_GROUPID ) ) {
-				if(!mavenDependency.version.equals( wicketCoreVersion )) {
-					log.error( "########## INVALID WICKET VERSION DETECTED - CORE: {} - DEPENDENCY: {}", wicketCoreVersion,  mavenDependency);
-					versionMissmatchFound = true;
-					mismatchVersionDependencies.add( mavenDependency );
-				}
-			}
+                    if (mavenDependency.groupId.equals(WICKET_CORE_GROUPID) && !mavenDependency.version.equals(wicketCoreVersion)) {
+                        log.error("########## INVALID WICKET VERSION DETECTED - CORE: {} - DEPENDENCY: {}",
+                                wicketCoreVersion, mavenDependency);
+                        versionMissmatchFound = true;
+                        mismatchVersionDependencies.add(mavenDependency);
+                    } else if (mavenDependency.groupId.equals(WICKETSTUFF_GROUPID) || mavenDependency.groupId.equals(WICKET_JQUERYUI_GROUPID)) {
+                        String majorWicketCoreVersion = wicketCoreVersion.substring(0, wicketCoreVersion.indexOf('.'));
+                        String majorMavenDependencyVersion = mavenDependency.version.substring(0, mavenDependency.version.indexOf('.'));
+                        if (!majorWicketCoreVersion.equals(majorMavenDependencyVersion)) {
+                            log.error("########## INVALID {} MAJOR VERSION DETECTED - WICKET: {} - DEPENDENCY: {}",
+                                    mavenDependency.groupId, majorWicketCoreVersion, majorMavenDependencyVersion);
+                            versionMissmatchFound = true;
+                            mismatchVersionDependencies.add(mavenDependency);
+                        }
+                    }
 		}
 		
 		if(versionMissmatchFound && props.isThrowExceptionOnDependencyVersionMismatch()) {
