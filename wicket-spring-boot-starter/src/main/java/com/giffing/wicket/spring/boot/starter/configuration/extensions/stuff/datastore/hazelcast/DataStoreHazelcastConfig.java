@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.hazelcast;
 
 import org.apache.wicket.DefaultPageManagerProvider;
-import org.apache.wicket.pageStore.IDataStore;
+import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -56,8 +56,8 @@ public class DataStoreHazelcastConfig implements WicketApplicationInitConfigurat
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IDataStore newDataStore() {
-				HazelcastDataStore hazelcastDataStore = new HazelcastDataStore(hazelcastInstance);
+			protected IPageStore newSessionStore(final IPageStore pageStore) {
+				HazelcastDataStore hazelcastDataStore = new HazelcastDataStore(webApplication.getName(), hazelcastInstance);
 				return new SessionQuotaManagingDataStore(hazelcastDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});

@@ -1,10 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.datastore;
 
 import org.apache.wicket.DefaultPageManagerProvider;
-import org.apache.wicket.page.DefaultPageManagerContext;
-import org.apache.wicket.pageStore.IDataStore;
-import org.apache.wicket.pageStore.memory.HttpSessionDataStore;
-import org.apache.wicket.pageStore.memory.PageNumberEvictionStrategy;
+import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -15,11 +12,12 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
+import org.wicketstuff.shiro.wicket.page.store.SessionPageStore;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHttpSessionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ DataStoreHttpSessionProperties.class })
-@AutoConfigureAfter(HttpSessionDataStore.class)
+@AutoConfigureAfter(SessionPageStore.class)
 public class DataStoreHttpSessionConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired
@@ -33,8 +31,8 @@ public class DataStoreHttpSessionConfig implements WicketApplicationInitConfigur
 
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IDataStore newDataStore() {
-				return new HttpSessionDataStore(new DefaultPageManagerContext(), new PageNumberEvictionStrategy(props.getPagesNumber()));
+			protected IPageStore newSessionStore(final IPageStore pageStore) {
+				return new SessionPageStore(webApplication.getName(), props.getPagesNumber());
 			}
 		});
 		

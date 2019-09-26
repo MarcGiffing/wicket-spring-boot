@@ -4,7 +4,6 @@ import java.util.EnumSet;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

@@ -1,9 +1,9 @@
 package com.giffing.wicket.spring.boot.context.extensions.types;
 
 import org.apache.wicket.util.lang.Bytes;
-import org.apache.wicket.util.time.Duration;
 
 import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
+import java.time.Duration;
 
 public class TypeParser {
 
@@ -24,15 +24,15 @@ public class TypeParser {
 	public static Duration parse(Long time, DurationUnit durationUnit){
 		switch(durationUnit){
 		case DAYS:
-			return Duration.days(time);
+			return Duration.ofDays(time);
 		case HOURS:
-			return Duration.hours(time);
+			return Duration.ofHours(time);
 		case MILLISECONDS:
-			return Duration.milliseconds(time);
+			return Duration.ofMillis(time);
 		case MINUTES:
-			return Duration.minutes(time);
+			return Duration.ofMillis(time);
 		case SECONDS:
-			return Duration.seconds(time);
+			return Duration.ofSeconds(time);
 		}
 		
 		throw new WicketSpringBootException("Could not parse time with duration unit " + time + " " + durationUnit);

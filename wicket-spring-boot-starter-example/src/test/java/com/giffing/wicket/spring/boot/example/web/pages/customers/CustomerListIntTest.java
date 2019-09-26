@@ -13,7 +13,6 @@ import org.springframework.test.annotation.Rollback;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
-import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.WicketBaseIntTest;
 import com.giffing.wicket.spring.boot.example.web.html.modal.YesNoModal;

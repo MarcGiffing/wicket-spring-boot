@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.cassandra;
 
 import org.apache.wicket.DefaultPageManagerProvider;
-import org.apache.wicket.pageStore.IDataStore;
+import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -57,9 +57,10 @@ public class DataStoreCassandraConfig implements WicketApplicationInitConfigurat
 
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IDataStore newDataStore() {
-				return new SessionQuotaManagingDataStore(new CassandraDataStore(settings),
-						TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
+			protected IPageStore newSessionStore(final IPageStore pageStore) {
+				CassandraDataStore delegate = new CassandraDataStore(webApplication.getName(), settings);
+				return new SessionQuotaManagingDataStore(delegate,
+					TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});
 		

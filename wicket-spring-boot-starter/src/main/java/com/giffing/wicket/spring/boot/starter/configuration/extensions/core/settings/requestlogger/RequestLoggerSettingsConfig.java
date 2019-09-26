@@ -1,7 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requestlogger;
 
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.settings.ExceptionSettings;
 import org.apache.wicket.settings.RequestLoggerSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

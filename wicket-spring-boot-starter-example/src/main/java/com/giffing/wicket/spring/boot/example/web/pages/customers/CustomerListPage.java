@@ -15,7 +15,6 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColu
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterForm;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilterToolbar;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.filter.FilteredPropertyColumn;
-import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.TextField;
