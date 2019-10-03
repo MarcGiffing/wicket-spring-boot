@@ -24,8 +24,6 @@ public class StoreSettingsProperties {
 	
 	private String fileStoreFolder;
 	
-	private Integer inmemoryCacheSize;
-	
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -56,14 +54,6 @@ public class StoreSettingsProperties {
 
 	public void setFileStoreFolder(String fileStoreFolder) {
 		this.fileStoreFolder = fileStoreFolder;
-	}
-
-	public Integer getInmemoryCacheSize() {
-		return inmemoryCacheSize;
-	}
-
-	public void setInmemoryCacheSize(Integer inmemoryCacheSize) {
-		this.inmemoryCacheSize = inmemoryCacheSize;
 	}
 
 	public Long getSessionSize() {

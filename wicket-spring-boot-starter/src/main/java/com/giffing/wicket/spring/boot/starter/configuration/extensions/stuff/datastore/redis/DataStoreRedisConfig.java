@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.redis;
 
 import org.apache.wicket.DefaultPageManagerProvider;
-import org.apache.wicket.pageStore.IDataStore;
+import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -53,13 +53,14 @@ public class DataStoreRedisConfig implements WicketApplicationInitConfiguration 
 	public void init(WebApplication webApplication) {
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
-			protected IDataStore newDataStore() {
+			@Override
+			protected IPageStore newSessionStore(final IPageStore pageStore) {
 				IRedisSettings settings = new RedisSettings();
 				settings.setHostname(prop.getHostname());
 				settings.setPort(prop.getPort());
 				settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
-				
-				RedisDataStore redisDataStore = new RedisDataStore(settings );
+
+				RedisDataStore redisDataStore = new RedisDataStore(webApplication.getName(), settings);
 				return new SessionQuotaManagingDataStore(redisDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});

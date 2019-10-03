@@ -1,9 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.memcached;
 
-import java.io.IOException;
-
 import org.apache.wicket.DefaultPageManagerProvider;
-import org.apache.wicket.pageStore.IDataStore;
+import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -54,21 +52,19 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 	public void init(WebApplication webApplication) {
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
-			protected IDataStore newDataStore() {
+			@Override
+			protected IPageStore newSessionStore(final IPageStore pageStore) {
 				IMemcachedSettings settings = new MemcachedSettings();
 				settings.setExpirationTime(prop.getExpirationTime());
 				settings.setPort(prop.getPort());
 				settings.setServerNames(prop.getServerNames());
 				settings.setShutdownTimeout(TypeParser.parse(prop.getShutdownTimeout(), prop.getShutdownTimeoutUnit()));
-				MemcachedDataStore memcachedDataStore;
-				
 				try {
-					memcachedDataStore = new MemcachedDataStore(settings);
-				} catch (IOException e) {
+					MemcachedDataStore memcachedDataStore = new MemcachedDataStore(webApplication.getName(), settings);
+					return new SessionQuotaManagingDataStore(memcachedDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
+				} catch (Exception e) {
 					throw new WicketSpringBootException(e);
 				}
-				
-				return new SessionQuotaManagingDataStore(memcachedDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
 		});
 		
@@ -77,5 +73,4 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 				.build());
 
 	}
-
 }

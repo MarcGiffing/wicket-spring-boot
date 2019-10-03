@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.diskstorebrowser;
 
-import org.apache.wicket.devutils.diskstore.DiskStoreBrowserPage;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = DiskStoreBrowserProperties.PROPERTY_PREFIX)
@@ -9,7 +8,7 @@ public class DiskStoreBrowserProperties {
 	public static final String PROPERTY_PREFIX = "wicket.external.development.devutils.diskstorebrowser";
 	
 	/**
-	 * If enabled the {@link DiskStoreBrowserPage} should be mounted test page.
+	 * If enabled the {@link org.apache.wicket.devutils.pagestore.PageStorePage} should be mounted test page.
 	 * 
 	 * It is required that the deployment configuration is set to DEVELOPMENT.
 	 */

@@ -37,9 +37,6 @@ public class StoreSettingsConfig implements WicketApplicationInitConfiguration {
 		if (props.getFileStoreFolder() != null) {
 			storeSettings.setFileStoreFolder(new File(props.getFileStoreFolder()));
 		}
-		if (props.getInmemoryCacheSize() != null) {
-			storeSettings.setInmemoryCacheSize(props.getInmemoryCacheSize());
-		}
 		storeSettings.setMaxSizePerSession(TypeParser.parse(props.getSessionSize(), props.getSessionUnit()));
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
