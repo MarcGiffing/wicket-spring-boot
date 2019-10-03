@@ -17,7 +17,7 @@ public interface CustomerRepositoryService extends FilterService<Customer, Long,
 	Customer findByUsername(String username);
 
 	/**
-	 * @param username
+	 * @param username the username
 	 * @return true if the username already exists
 	 */
 	boolean usernameExists(String username);
