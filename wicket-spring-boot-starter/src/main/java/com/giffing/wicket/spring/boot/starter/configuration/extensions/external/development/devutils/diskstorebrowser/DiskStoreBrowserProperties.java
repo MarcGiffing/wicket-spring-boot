@@ -8,7 +8,7 @@ public class DiskStoreBrowserProperties {
 	public static final String PROPERTY_PREFIX = "wicket.external.development.devutils.diskstorebrowser";
 	
 	/**
-	 * If enabled the {@link org.apache.wicket.markup.html.pages.BrowserInfoPage} should be mounted test page.
+	 * If enabled the {@link org.apache.wicket.devutils.pagestore.PageStorePage} should be mounted test page.
 	 * 
 	 * It is required that the deployment configuration is set to DEVELOPMENT.
 	 */

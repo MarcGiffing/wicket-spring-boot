@@ -17,7 +17,6 @@ import org.wicketstuff.shiro.wicket.page.store.SessionPageStore;
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHttpSessionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ DataStoreHttpSessionProperties.class })
-@AutoConfigureAfter(SessionPageStore.class)
 public class DataStoreHttpSessionConfig implements WicketApplicationInitConfiguration {
 
 	@Autowired

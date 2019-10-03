@@ -1,6 +1,7 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.diskstorebrowser;
 
 import org.apache.wicket.DefaultPageManagerProvider;
+import org.apache.wicket.devutils.pagestore.PageStorePage;
 import org.apache.wicket.markup.html.pages.BrowserInfoPage;
 import org.apache.wicket.pageStore.DiskPageStore;
 import org.apache.wicket.pageStore.IPageStore;
@@ -20,9 +21,9 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 import java.io.File;
 
 /**
- * Mounts the {@link DiskPageStore} if the following condition matches
+ * Mounts the {@link PageStorePage} if the following condition matches
  * 
- * 1. The {@link DiskPageStore} is in the classpath
+ * 1. The {@link PageStorePage} is in the classpath
  * 
  * 2. The disk store browser page is enabled in the property (default=false)
  * 
@@ -31,7 +32,7 @@ import java.io.File;
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DiskStoreBrowserProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
-@ConditionalOnClass(value = DiskPageStore.class)
+@ConditionalOnClass(value = PageStorePage.class)
 @EnableConfigurationProperties({ DiskStoreBrowserProperties.class })
 public class DiskStoreBrowserConfig implements WicketApplicationInitConfiguration {
 
