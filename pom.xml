@@ -273,6 +273,9 @@
 								</goals>
 							</execution>
 						</executions>
+						<configuration>
+							<source>11</source>
+						</configuration>
 					</plugin>
 				</plugins>
 			</build>
