@@ -3,8 +3,8 @@ name: Java CI
 on:
   push:
     branches: 
-      - master
-      - "#85_Wicket_8_Support"
+    - master
+    - "#85_Wicket_8_Support"
 
 jobs:
   build:
