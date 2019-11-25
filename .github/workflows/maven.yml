@@ -4,6 +4,7 @@ on:
   push:
     branches: 
     - master
+    - wicket-9
     - "#85_Wicket_8_Support"
 
 jobs:
