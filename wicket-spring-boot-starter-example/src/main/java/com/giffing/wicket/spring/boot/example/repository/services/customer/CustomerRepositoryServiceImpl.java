@@ -15,7 +15,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,10 +75,10 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 			specs.add(CustomerSpecs.hasActive(filter.isActive()));
 		}
 		
-		Specifications<Customer> spec = null;
+		Specification<Customer> spec = null;
 		for (Specification<Customer> specification : specs) {
 			if(spec == null){
-				spec = Specifications.where(specification);
+				spec = Specification.where(specification);
 			}else {
 				spec = spec.and(specification);
 			}
