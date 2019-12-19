@@ -1,46 +1,44 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer;
 
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import com.giffing.wicket.spring.boot.example.model.Customer;
+import com.giffing.wicket.spring.boot.example.model.Customer_;
+import com.giffing.wicket.spring.boot.example.repository.services.DefaultRepositoryService;
+import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
+import com.giffing.wicket.spring.boot.example.repository.services.customer.specs.CustomerSpecs;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.giffing.wicket.spring.boot.example.model.Customer;
-import com.giffing.wicket.spring.boot.example.model.Customer_;
-import com.giffing.wicket.spring.boot.example.repository.services.DefaultRepositoryService;
-import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
-import com.giffing.wicket.spring.boot.example.repository.services.customer.specs.CustomerSpecs;
-
-@Component
+@Service
 @Transactional(readOnly=true)
 public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Customer, Long, CustomerFilter> implements CustomerRepositoryService {
 
-	private CustomerRepository customerRepository;
+	private final CustomerRepository customerRepository;
 
 	@Resource
 	private EntityManager em;
 	
-	@Inject
 	public CustomerRepositoryServiceImpl(CustomerRepository customerRepository){
 		this.customerRepository = customerRepository;
 	}
 	
 	@Override
 	public List<Customer> findAll(Long page, Long count, CustomerFilter filter) {
-		return customerRepository.findAllBySpec(filter(filter), page, count, getSort(filter) );
+		PageRequest pageRequest = PageRequest.of(page.intValue(), count.intValue(), getSort(filter));
+		return customerRepository.findAll(filter(filter), pageRequest).toList();
 	}
 
 	@Override
@@ -88,22 +86,18 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 	}
 	
 	boolean isNotEmpty(String toCheck){
-		if(toCheck != null && toCheck.length() > 0){
-			return true;
-		}
-		
-		return false;
+		return toCheck != null && toCheck.length() > 0;
 	}
 
 
 	@Override
 	public Customer findById(Long id) {
 		Optional<Customer> customer = customerRepository.findById(id);
-		return customer.isPresent() ? customer.get() : null;
+		return customer.orElse(null);
 	}
 
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public void delete(Long id) {
 		customerRepository.deleteById(id);
 	}
@@ -126,7 +120,7 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
 	}
 
 	@Override
-	@Transactional(readOnly=false)
+	@Transactional
 	public Customer save(Customer customer) {
 		return customerRepository.save(customer);
 	}

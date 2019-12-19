@@ -1,14 +1,8 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer.specs;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-
-import org.springframework.data.jpa.domain.Specification;
-
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.model.Customer_;
+import org.springframework.data.jpa.domain.Specification;
 
 public class CustomerSpecs {
 
