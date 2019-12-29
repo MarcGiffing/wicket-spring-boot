@@ -111,6 +111,7 @@
 			<groupId>net.minidev</groupId>
 			<artifactId>accessors-smart</artifactId>
 			<version>1.2</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- To provide the annotation processor in the IDE's classpath -->
 		<dependency>
