@@ -19,8 +19,12 @@ public class DebugSettingsProperties {
 	private boolean componentUseCheck = true;
 	
 	private boolean outputMarkupContainerClassName = false;
-	
+
 	private String componentPathAttributeName;
+
+	private boolean linePreciseReportingOnNewComponentEnabled;
+
+	private boolean linePreciseReportingOnAddComponentEnabled;
 
 	public boolean isDevelopmentUtilitiesEnabled() {
 		return developmentUtilitiesEnabled;
@@ -69,5 +73,24 @@ public class DebugSettingsProperties {
 	public void setComponentPathAttributeName(String componentPathAttributeName) {
 		this.componentPathAttributeName = componentPathAttributeName;
 	}
-	
+
+	public boolean isLinePreciseReportingOnAddComponentEnabled()
+	{
+		return linePreciseReportingOnAddComponentEnabled;
+	}
+
+	public void setLinePreciseReportingOnAddComponentEnabled(boolean linePreciseReportingOnAddComponentEnabled)
+	{
+		this.linePreciseReportingOnAddComponentEnabled = linePreciseReportingOnAddComponentEnabled;
+	}
+
+	public boolean isLinePreciseReportingOnNewComponentEnabled()
+	{
+		return linePreciseReportingOnNewComponentEnabled;
+	}
+
+	public void setLinePreciseReportingOnNewComponentEnabled(boolean linePreciseReportingOnNewComponentEnabled)
+	{
+		this.linePreciseReportingOnNewComponentEnabled = linePreciseReportingOnNewComponentEnabled;
+	}
 }
