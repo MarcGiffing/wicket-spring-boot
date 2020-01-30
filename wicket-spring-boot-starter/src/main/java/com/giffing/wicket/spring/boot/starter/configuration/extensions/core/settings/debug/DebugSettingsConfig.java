@@ -37,6 +37,8 @@ public class DebugSettingsConfig implements WicketApplicationInitConfiguration {
 			debugSettings.setDevelopmentUtilitiesEnabled(properties.isDevelopmentUtilitiesEnabled());
 			debugSettings.setAjaxDebugModeEnabled(properties.isAjaxDebugModeEnabled());
 			debugSettings.setComponentUseCheck(properties.isComponentUseCheck());
+			debugSettings.setLinePreciseReportingOnAddComponentEnabled(properties.isLinePreciseReportingOnAddComponentEnabled());
+			debugSettings.setLinePreciseReportingOnNewComponentEnabled(properties.isLinePreciseReportingOnNewComponentEnabled());
 			debugSettings.setOutputMarkupContainerClassName(properties.isOutputMarkupContainerClassName());
 			debugSettings.setComponentPathAttributeName(properties.getComponentPathAttributeName());
 		}
