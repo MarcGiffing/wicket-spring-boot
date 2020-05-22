@@ -30,7 +30,7 @@ public class TypeParser {
 		case MILLISECONDS:
 			return Duration.ofMillis(time);
 		case MINUTES:
-			return Duration.ofMillis(time);
+			return Duration.ofMinutes(time);
 		case SECONDS:
 			return Duration.ofSeconds(time);
 		}
