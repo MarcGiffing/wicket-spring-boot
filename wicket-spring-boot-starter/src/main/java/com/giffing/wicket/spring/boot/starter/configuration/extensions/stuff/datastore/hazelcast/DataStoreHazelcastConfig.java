@@ -56,7 +56,7 @@ public class DataStoreHazelcastConfig implements WicketApplicationInitConfigurat
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IPageStore newSessionStore(final IPageStore pageStore) {
+			protected IPageStore newPersistentStore() {
 				HazelcastDataStore hazelcastDataStore = new HazelcastDataStore(webApplication.getName(), hazelcastInstance);
 				return new SessionQuotaManagingDataStore(hazelcastDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}

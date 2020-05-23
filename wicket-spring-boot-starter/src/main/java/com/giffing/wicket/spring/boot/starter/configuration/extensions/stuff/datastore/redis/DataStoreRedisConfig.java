@@ -54,7 +54,7 @@ public class DataStoreRedisConfig implements WicketApplicationInitConfiguration 
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IPageStore newSessionStore(final IPageStore pageStore) {
+			protected IPageStore newPersistentStore() {
 				IRedisSettings settings = new RedisSettings();
 				settings.setHostname(prop.getHostname());
 				settings.setPort(prop.getPort());

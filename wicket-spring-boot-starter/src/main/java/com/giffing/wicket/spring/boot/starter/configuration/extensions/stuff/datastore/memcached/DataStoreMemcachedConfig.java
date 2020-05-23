@@ -53,7 +53,7 @@ public class DataStoreMemcachedConfig implements WicketApplicationInitConfigurat
 		
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IPageStore newSessionStore(final IPageStore pageStore) {
+			protected IPageStore newPersistentStore() {
 				IMemcachedSettings settings = new MemcachedSettings();
 				settings.setExpirationTime(prop.getExpirationTime());
 				settings.setPort(prop.getPort());

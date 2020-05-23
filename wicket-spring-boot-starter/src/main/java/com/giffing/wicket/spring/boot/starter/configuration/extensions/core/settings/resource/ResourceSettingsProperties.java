@@ -3,8 +3,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.set
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(ResourceSettingsProperties.PROPERTY_PREFIX)
-public class ResourceSettingsProperties
-{
+public class ResourceSettingsProperties {
 	public static final String PROPERTY_PREFIX = "wicket.core.settings.resource";
 
 	private boolean useMinifiedResources = true;

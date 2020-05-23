@@ -2,8 +2,10 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.set
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
+
+import java.time.Duration;
+
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.util.time.Duration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,9 +13,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = ResourceSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @EnableConfigurationProperties({ ResourceSettingsProperties.class })
-public class ResourceSettingsConfig implements WicketApplicationInitConfiguration
-{
-    @Autowired
+public class ResourceSettingsConfig implements WicketApplicationInitConfiguration {
+    
+	@Autowired
 	private ResourceSettingsProperties properties;
 
     @Override
@@ -21,7 +23,7 @@ public class ResourceSettingsConfig implements WicketApplicationInitConfiguratio
     {
         webApplication.getResourceSettings().setUseMinifiedResources(properties.isUseMinifiedResources());
         if (properties.getResourcePollFrequencySeconds() > 0) {
-            webApplication.getResourceSettings().setResourcePollFrequency(Duration.seconds( properties.getResourcePollFrequencySeconds()));
+            webApplication.getResourceSettings().setResourcePollFrequency(Duration.ofSeconds(properties.getResourcePollFrequencySeconds()));
         }
     }
 }

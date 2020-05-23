@@ -46,7 +46,7 @@ public class DiskStoreBrowserConfig implements WicketApplicationInitConfiguratio
 	public void init(WebApplication webApplication) {
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
-			protected IPageStore newSessionStore(final IPageStore pageStore) {
+			protected IPageStore newPersistentStore() {
 				StoreSettings storeSettings = application.getStoreSettings();
 				File fileStoreFolder = storeSettings.getFileStoreFolder();
 				Bytes maxSizePerSession = storeSettings.getMaxSizePerSession();

@@ -56,12 +56,14 @@ public class DataStoreCassandraConfig implements WicketApplicationInitConfigurat
 		settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
 
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
+			
 			@Override
-			protected IPageStore newSessionStore(final IPageStore pageStore) {
+			protected IPageStore newPersistentStore() {
 				CassandraDataStore delegate = new CassandraDataStore(webApplication.getName(), settings);
 				return new SessionQuotaManagingDataStore(delegate,
 					TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
 			}
+
 		});
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
