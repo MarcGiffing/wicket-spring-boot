@@ -2,6 +2,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
@@ -9,6 +10,7 @@ import org.springframework.boot.devtools.restart.Restarter;
 import org.springframework.boot.env.EnvironmentPostProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.env.AbstractEnvironment;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.MapPropertySource;
@@ -35,10 +37,19 @@ public class WicketDevToolsPropertyDefaultsPostProcessor implements EnvironmentP
 
 	@Override
 	public void postProcessEnvironment(ConfigurableEnvironment environment, SpringApplication application) {
-		if (isLocalApplication(environment) && canAddProperties(environment)) {
+		if (isWicketDevToolsEnabled(environment) && isLocalApplication(environment) && canAddProperties(environment)) {
 			PropertySource<?> propertySource = new MapPropertySource("wicketrefresh", PROPERTIES);
 			environment.getPropertySources().addLast(propertySource);
 		}
+	}
+
+	private Boolean isWicketDevToolsEnabled(ConfigurableEnvironment environment) {
+		Boolean devToolsEnabled = Boolean.TRUE;
+		String devToolsEnabledString = environment.getProperty("wicket." + SpringDevToolsProperties.PROPERTY_PREFIX + ".enabled");
+		if(devToolsEnabledString != null) {
+			devToolsEnabled = devToolsEnabledString.equalsIgnoreCase("true");
+		}
+		return devToolsEnabled;
 	}
 	
 	private boolean isLocalApplication(ConfigurableEnvironment environment) {
