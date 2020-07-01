@@ -2,9 +2,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.inspector.InspectorProperties;
-
-@ConfigurationProperties(prefix = InspectorProperties.PROPERTY_PREFIX)
+@ConfigurationProperties(prefix = SpringDevToolsProperties.PROPERTY_PREFIX)
 public class SpringDevToolsProperties {
 
 	public static final String PROPERTY_PREFIX = "spring.devtools.restart";
