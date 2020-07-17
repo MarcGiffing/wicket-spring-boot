@@ -2,9 +2,10 @@
 
 Current release version:
 
-* 2.1.x - http://wicket.apache.org/[Wicket 8.x] with Spring Boot 2 - Branch #85_Wicket_8_Support
-* 2.0.x - http://wicket.apache.org/[Wicket 8.x] with Spring Boot 1 - Branch #85_Wicket_8_Support
-* 1.x.x - http://wicket.apache.org/[Wicket 7.x] with Spring Boot 1 - Branch master
+* 3.0.x - http://wicket.apache.org/[Wicket 9.x] with Spring Boot 3 - Branch master
+* 2.1.x - http://wicket.apache.org/[Wicket 8.x] with Spring Boot 2 - Branch wicket-8
+* 2.0.x - http://wicket.apache.org/[Wicket 8.x] with Spring Boot 1 - Branch wicket-8
+* 1.x.x - http://wicket.apache.org/[Wicket 7.x] with Spring Boot 1 - Branch wicket-7
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
 
