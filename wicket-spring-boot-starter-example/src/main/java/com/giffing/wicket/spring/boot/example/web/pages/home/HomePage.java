@@ -7,6 +7,7 @@ import org.wicketstuff.annotation.mount.MountPath;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
+import com.giffing.wicket.spring.boot.example.web.pages.websocket.WebSocketPage;
 
 @WicketHomePage
 @MountPath("home")
@@ -15,6 +16,7 @@ public class HomePage extends BasePage {
 
 	public HomePage(){
 		add(new BookmarkablePageLink<String>("customersLink", CustomerListPage.class));
+		add(new BookmarkablePageLink<String>("websocketLink", WebSocketPage.class));
 	}
 	
 }
