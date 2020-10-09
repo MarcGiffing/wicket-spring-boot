@@ -1,7 +1,9 @@
 package com.giffing.wicket.spring.boot.starter.web.config;
 
+import org.apache.wicket.Application;
 import org.apache.wicket.protocol.ws.javax.JavaxWebSocketFilter;
 import org.apache.wicket.protocol.ws.javax.WicketServerEndpointConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -10,9 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.giffing.wicket.spring.boot.starter.web.servlet.standard.StandardWicketWebInitializer;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.DummyWicketSessionResolver;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageSenderDefault;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketWicketWebInitializer;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketServerEndpointConfigRegister;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketSessionResolver;
 
 /**
  * Configuration of the {@link WicketWebInitializerConfig} depending on property
@@ -67,8 +71,14 @@ public class WicketWebInitializerAutoConfig {
 		}
 
 		@Bean
-		public WebSocketMessageSenderDefault webSocketEventHandler() {
-			return new WebSocketMessageSenderDefault();
+		@ConditionalOnMissingBean(WicketSessionResolver.class)
+		public WicketSessionResolver dummyWicketSessionResolver() {
+			return new DummyWicketSessionResolver();
+		}
+		
+		@Bean
+		public WebSocketMessageSenderDefault webSocketEventHandler(Application application, WicketSessionResolver wicketSessionResolver) {
+			return new WebSocketMessageSenderDefault(application, wicketSessionResolver);
 		}
 
 	}

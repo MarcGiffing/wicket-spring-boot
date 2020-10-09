@@ -17,6 +17,15 @@ public interface WebSocketMessageBroadcaster {
 	 * 
 	 * @param event
 	 */
-	public void send(IWebSocketPushMessage event);
-
+	void sendToAll(IWebSocketPushMessage event);
+	
+	/**
+	 * Sends a message to a specific identifier. The {@link WicketSessionResolver} is responsible to
+	 * the identifier and return the corresponding session list to inform the user.
+	 * 
+	 *  The identifier can be an username or a user group. Its up to the user to decide how the session ids will
+	 *  resolved.
+	 */
+	void sendTo(Object identifier, IWebSocketPushMessage event);
+	
 }

@@ -96,7 +96,7 @@ public class CustomerCreatePage extends BasePage{
 			@Override
 			public void onSubmit() {
 				service.save(customerModel.getObject());
-				webSocketMessageBroadcaster.send(new CustomerChangedEvent(customerModel.getObject()));
+				webSocketMessageBroadcaster.sendToAll(new CustomerChangedEvent(customerModel.getObject()));
 				if(pageReferenceId != null){
 					setResponsePage(new PageReference(pageReferenceId).getPage());
 				} else {

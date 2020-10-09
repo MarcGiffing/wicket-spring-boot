@@ -1,4 +1,7 @@
 spring:
+  h2:
+    console:
+      enabled: true
   devtools:
     restart:
       additional-exclude: /**/*.js, /**/*.css, /**/*.html, /**/*.htm

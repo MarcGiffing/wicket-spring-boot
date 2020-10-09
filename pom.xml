@@ -51,7 +51,7 @@
 	<modules>
 		<module>wicket-spring-boot-context</module>
 		<module>wicket-spring-boot-starter</module>
-		<!--  <module>wicket-spring-boot-starter-example</module> -->
+		<module>wicket-spring-boot-starter-example</module>
 	</modules>
 
 	<properties>
