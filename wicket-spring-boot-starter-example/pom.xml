@@ -101,11 +101,6 @@
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-restannotations-json</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.9</version>
-		</dependency>
 		<!-- Test dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
