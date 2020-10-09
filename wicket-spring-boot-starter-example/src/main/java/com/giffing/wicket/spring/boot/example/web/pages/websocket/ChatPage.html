@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>Spring Boot - Apache Wicket Quickstart</title>
+
+	</head>
+	<body>
+	<wicket:extend>
+		<h1>Chat</h1>
+		<hr/>
+		<div wicket:id="feedback"></div>
+		<form wicket:id="form" class="form">
+			<div class="row">
+			    <div class="col-md-10">
+			        <div class="panel panel-default">
+			            <div class="panel-heading">
+			                <div class="input-group">
+			                	<span class="input-group-btn">
+			                        <button class="btn btn-default btn-sm">
+			                            <i class="glyphicon glyphicon-user" aria-hidden="true"></i>                                
+			                        </button>
+			                    </span>
+			                	<select wicket:id="participants" class="form-control input-sm" >
+			                	</select>
+			                </div>
+			                <div class="input-group">
+			                    <span class="input-group-btn">
+			                        <button class="btn btn-default btn-sm">
+			                            <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>                                
+			                        </button>
+			                    </span>
+			                    <input wicket:id="message" type="text" class="form-control input-sm" placeholder="Type your message here..." />
+			                    <span class="input-group-btn">
+			                        <button class="btn btn-default btn-sm" wicket:id="submit">
+			                            <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>                                    
+			                         </button>
+			                    </span>
+			                </div>
+			            </div>
+			            <div class="panel-collapse collapse in">
+			                <div class="panel-body">
+			                    <ul class="chat" wicket:id="chatMessageContainer">
+			                        <li class="left clearfix" wicket:id="messages">
+			                            <span class="chat-img pull-right">
+			                                <i class="glyphicon glyphicon-user" aria-hidden="true"></i>                                    
+			                            </span>
+			                            <div class="chat-body clearfix">
+			                                <div class="header">
+			                                    <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>1 min ago</small>
+			                                    <strong class="pull-right primary-font" wicket:id="from">Customer 1</strong>
+			                                </div>
+			                                <p>
+			                                    <span wicket:id="message"></span>
+			                                </p>
+			                            </div>
+			                        </li>
+			                    </ul>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</form>
+	</wicket:extend>
+	</body>
+</html>
