@@ -35,6 +35,9 @@ public class WebSocketMessageSenderDefault implements WebSocketMessageBroadcaste
 	}
 	
 	public void sendTo(Object identifier, IWebSocketPushMessage event) {
+		if(identifier == null) {
+			return;
+		}
 		Application application = Application.get();
 		WebSocketSettings webSocketSettings = WebSocketSettings.Holder.get(application);
 		IWebSocketConnectionRegistry connectionRegistry = webSocketSettings.getConnectionRegistry();

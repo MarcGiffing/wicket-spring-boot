@@ -2,6 +2,7 @@ package com.giffing.wicket.spring.boot.example.web.pages.websocket;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.wicket.ajax.AjaxPreventSubmitBehavior;
@@ -97,6 +98,8 @@ public class ChatPage extends BasePage {
 
 	private void addWebsocketBehaviour(FeedbackPanel feedbackPanel) {
 		String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+		String browserTabIdentifier = UUID.randomUUID().toString();
+		ChatParticipant chatParticipant = new ChatParticipant(browserTabIdentifier, currentUsername);
 		add(new WebSocketBehavior() {
 
 			private static final long serialVersionUID = 1L;
@@ -131,12 +134,11 @@ public class ChatPage extends BasePage {
 			}
 			
 			protected void onConnect(ConnectedMessage message) {
-				chatService.join(currentUsername);
+				chatService.join(chatParticipant);
 			}
 
 			protected void onClose(ClosedMessage message) {
-				//FIXME the user is leaving the chat even if he has multiple tabs open
-				chatService.leave(currentUsername);
+				chatService.leave(chatParticipant);
 			}
 
 		});
