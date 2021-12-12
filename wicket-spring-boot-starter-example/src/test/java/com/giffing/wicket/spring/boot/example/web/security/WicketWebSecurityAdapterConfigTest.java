@@ -1,16 +1,14 @@
 package com.giffing.wicket.spring.boot.example.web.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
-@Component
-@Primary
-@Order(99)
-public class WicketWebSecurityAdapterConfigTest extends WicketWebSecurityAdapterConfig {
+@Configuration
+@Import(WicketWebSecurityAdapterConfig.class)
+public class WicketWebSecurityAdapterConfigTest {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;

@@ -1,6 +1,5 @@
 package test.com.giffing.wicket.spring.boot.example.web;
 
-import com.giffing.wicket.spring.boot.example.WicketApplication;
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.apache.wicket.markup.html.WebPage;
@@ -10,7 +9,10 @@ import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfig
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.giffing.wicket.spring.boot.example.WicketApplication;
 import com.giffing.wicket.spring.boot.example.web.SpringBootWebPackageIdentifier;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
@@ -24,6 +26,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.
 		HibernateJpaAutoConfiguration.class,
 })
 @ComponentScan(basePackageClasses=SpringBootWebPackageIdentifier.class)
+@EnableTransactionManagement
 public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication {
 
 	@Override
@@ -48,5 +51,8 @@ public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication 
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
 		return SecureWebSession.class;
 	}
+	
+	
 
+	
 }

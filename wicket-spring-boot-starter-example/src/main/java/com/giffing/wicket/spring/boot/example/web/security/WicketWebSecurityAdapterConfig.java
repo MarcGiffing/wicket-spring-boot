@@ -73,10 +73,9 @@ public class WicketWebSecurityAdapterConfig extends WebSecurityConfigurerAdapter
 	    return manager;
 	}
 	
-	@Bean
-	@ConditionalOnMissingBean(WicketSessionResolver.class)
-	public WicketSessionResolver springSecurityWicketSessionResolver() {
-		return new SpringSecurityWicketSessionResolver();
-	}
+	//@Bean
+	//public WicketSessionResolver springSecurityWicketSessionResolver() {
+	//	return new SpringSecurityWicketSessionResolver();
+	//}
 
 }

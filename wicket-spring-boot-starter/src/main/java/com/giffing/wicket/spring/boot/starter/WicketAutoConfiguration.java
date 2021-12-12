@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import com.giffing.wicket.spring.boot.starter.app.classscanner.ClassCandidateScanner;
+import com.giffing.wicket.spring.boot.starter.app.classscanner.ClassCandidateScannerConfiguration;
 import com.giffing.wicket.spring.boot.starter.app.verifier.WicketDependencyVersionChecker;
 import com.giffing.wicket.spring.boot.starter.configuration.CustomAnnotationBeanNameGenerator;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.WicketExtensionLocation;
@@ -22,7 +23,7 @@ import com.giffing.wicket.spring.boot.starter.web.WicketWebInitializer;
 @Configuration
 @Import({ 
 			WicketDependencyVersionChecker.class,
-			ClassCandidateScanner.class,		
+			ClassCandidateScannerConfiguration.class,		
 			WicketBootWebApplicationAutoConfiguration.class, 
 			WicketWebInitializer.class 
 		})

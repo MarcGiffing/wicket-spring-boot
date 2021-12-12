@@ -3,9 +3,9 @@ package com.giffing.wicket.spring.boot.example.web;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
@@ -30,9 +31,9 @@ import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfi
  * @author Marc Giffing
  *
  */
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WicketWebApplicationConfig.class)
-@Ignore
+@Disabled
 public class WicketBaseTest {
 
 	private static final String USERNAME = "admin";
@@ -49,7 +50,7 @@ public class WicketBaseTest {
 	@SpyBean
 	private CustomAuthenticationManager customAuthenticationManager;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		ReflectionTestUtils.setField(wicketApplication, "applicationContext", applicationContextMock);
 		tester = new WicketTester(wicketApplication, new WicketMockServletContext(wicketApplication, null));

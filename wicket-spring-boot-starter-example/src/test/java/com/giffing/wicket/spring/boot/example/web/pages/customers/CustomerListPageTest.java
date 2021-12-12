@@ -1,7 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -10,8 +9,9 @@ import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.markup.repeater.Item;
-import org.junit.Before;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -30,7 +30,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 	private CustomerRepositoryService repository;
 	
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp(){
 		super.setUp();
 		

@@ -1,21 +1,23 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
 
-import javax.transaction.Transactional;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.markup.repeater.Item;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.WicketBaseIntTest;
 import com.giffing.wicket.spring.boot.example.web.html.modal.YesNoModal;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 @Transactional
 @Rollback

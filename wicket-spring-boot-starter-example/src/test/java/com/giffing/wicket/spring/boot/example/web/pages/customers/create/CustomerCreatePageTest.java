@@ -2,15 +2,15 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers.create;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Before;
-import org.junit.Test;
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,7 +26,7 @@ public class CustomerCreatePageTest extends WicketBaseTest {
 	private CustomerRepositoryService repository;
 	
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp(){
 		super.setUp();
 	}

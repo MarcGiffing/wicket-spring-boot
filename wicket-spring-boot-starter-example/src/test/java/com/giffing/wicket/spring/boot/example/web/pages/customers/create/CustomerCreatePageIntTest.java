@@ -2,14 +2,15 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers.create;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertThat;
 
-import javax.transaction.Transactional;
 
 import org.apache.wicket.util.tester.FormTester;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
