@@ -2,7 +2,6 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -14,7 +13,7 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 /**
  * Enables wicket-source support if the following two condition matches:
  * 
- * 1. The {@link WicketSource} is in the classpath.
+ * 1. The WicketSource is in the classpath.
  * 
  * 2. The property wicket.wicketsource.enabled is true (default = true)
  * 
