@@ -10,8 +10,6 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
-import com.github.jennybrown8.wicketsource.WicketSource;
-
 
 /**
  * Enables wicket-source support if the following two condition matches:
@@ -25,7 +23,7 @@ import com.github.jennybrown8.wicketsource.WicketSource;
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = WicketSourceProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(value = com.github.jennybrown8.wicketsource.WicketSource.class)
+//@ConditionalOnClass(value = com.github.jennybrown8.wicketsource.WicketSource.class)
 @EnableConfigurationProperties({ WicketSourceProperties.class })
 public class WicketSourceConfig implements WicketApplicationInitConfiguration{
 
@@ -37,7 +35,7 @@ public class WicketSourceConfig implements WicketApplicationInitConfiguration{
 	
 	@Override
 	public void init(WebApplication webApplication) {
-		WicketSource.configure(webApplication);
+		//WicketSource.configure(webApplication);
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
 				.withDetail("properties", props)
