@@ -174,6 +174,12 @@
 			<groupId>com.github.jennybrown8.wicket-source</groupId>
 			<artifactId>wicket-source</artifactId>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.wicket</groupId>
+					<artifactId>wicket-parent</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
