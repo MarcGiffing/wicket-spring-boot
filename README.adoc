@@ -366,7 +366,6 @@ may require an external dependency or is using Wickets core features. See sectio
 *** <<extension-devutils-statelesschecker>>
 *** <<extension-wicketsource>>
 *** <<extension-springboot-devtools>>
-*** <<extension-wicketstuff-htmlvalidator>>
 
 [[extension-general]]
 === General
@@ -889,23 +888,6 @@ All other serializer will only be activated if the Spring Boot DevTools dependen
 </dependencies>
 ----
 
-[[extension-wicketstuff-htmlvalidator]]
-==== Wicketstuff - htmlvalidator
-
-See https://github.com/dashorst/wicket-stuff-markup-validator[documentation]
-
-[source,properties]
-----
-wicket.stuff.htmlvalidator.enabled=true
-----
-
-[source,xml]
-----
-<dependency>
-  <groupId>org.wicketstuff.htmlvalidator</groupId>
-  <artifactId>wicketstuff-htmlvalidator</artifactId>
-</dependency>
-----
 [[war_deployment]]
 == Configure as WAR for deploy on Servlet Container
 
