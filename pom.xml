@@ -33,7 +33,7 @@
 	</licenses>
 	<scm>
 		<url>https://github.com/MarcGiffing/wicket-spring-boot/</url>
-		<connection>scm:git:git://github.com/MarcGiffing/wicket-spring-boot</connection>
+		<connection>scm:git:git@github.com/MarcGiffing/wicket-spring-boot</connection>
 		<developerConnection>scm:git:git@github.com:MarcGiffing/wicket-spring-boot</developerConnection>
 		<tag>wicket-spring-boot-starter-parent-3.1.2</tag>
 	</scm>
