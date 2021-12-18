@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
-	<version>3.1.4</version>
+	<version>3.1.5-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Wicket Spring Boot Starter Parent</name>
@@ -34,7 +34,7 @@
 	<scm>
 		<url>https://github.com/MarcGiffing/wicket-spring-boot/</url>
 		<connection>scm:git:https://github.com/MarcGiffing/wicket-spring-boot.git</connection>
-		<tag>wicket-spring-boot-starter-parent-3.1.4</tag>
+		<tag>wicket-spring-boot-starter-parent-3.1.2</tag>
 	</scm>
 
 	<developers>
@@ -310,7 +310,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<serverId>ossrh</serverId>
-					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
 					<autoReleaseAfterClose>true</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
