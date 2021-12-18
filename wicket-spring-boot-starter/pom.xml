@@ -166,6 +166,11 @@
 		<!-- Wicket / Spring Development -->
 
 		<dependency>
+			<groupId>com.github.jennybrown8.wicket-source</groupId>
+			<artifactId>wicket-source</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket-devutils</artifactId>
 			<scope>provided</scope>

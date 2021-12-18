@@ -198,6 +198,11 @@
 				<artifactId>wicket-devutils</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.github.jennybrown8.wicket-source</groupId>
+				<artifactId>wicket-source</artifactId>
+				<version>9.0.0</version>
+			</dependency>
 			<!-- Security - Apache Shiro -->
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
