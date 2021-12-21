@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 
-@Component
 public class WicketEndpointRepositoryDefault implements WicketEndpointRepository {
 
 	public List<WicketAutoConfig> wicketAutoConfigurations = new ArrayList<>();
