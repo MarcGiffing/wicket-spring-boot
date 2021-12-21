@@ -4,19 +4,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.wicket.Page;
 import org.apache.wicket.markup.html.WebPage;
-import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
@@ -37,29 +31,29 @@ import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.Wicket
  * @author Marc Giffing
  *
  */
-@Configuration
-public class ClassCandidateScanner implements BeanClassLoaderAware {
 
-	@Autowired
+public class ClassCandidateScanner {
+
 	private Environment environment;
-
-	@Autowired
 	private ResourceLoader resourceLoader;
-
-	@Autowired
 	private BeanFactory beanFactory;
-	
-	@Autowired
 	private WicketClassCandidatesHolder classCandidates;
 
 	private ClassLoader classLoader;
 
-	@Override
-	public void setBeanClassLoader(ClassLoader classLoader) {
+	public ClassCandidateScanner(
+			Environment environment,
+			ResourceLoader resourceLoader,
+			BeanFactory beanFactory,
+			ClassLoader classLoader,
+			WicketClassCandidatesHolder classCandidates) {
+		this.environment = environment;
+		this.resourceLoader = resourceLoader;
+		this.beanFactory = beanFactory;
 		this.classLoader = classLoader;
+		this.classCandidates = classCandidates;
 	}
-
-	@PostConstruct
+	
 	public void postConstruct() {
 		ClassPathScanningCandidateComponentProvider scanner = new ClassPathScanningCandidateComponentProvider(false);
 		scanner.setEnvironment(this.environment);
