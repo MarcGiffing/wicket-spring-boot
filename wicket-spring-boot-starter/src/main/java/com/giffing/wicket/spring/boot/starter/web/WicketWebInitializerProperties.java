@@ -16,7 +16,7 @@ public class WicketWebInitializerProperties {
 	
 	private String filterMappingParam = "/*";
 	
-	//Adds posibility to add init parameters dynamically
+	// Adds possibility to add init parameters dynamically
 	private Map<String, String> initParameters = new HashMap<>(); 
 
 	private List<DispatcherType> dispatcherTypes = Arrays.asList( DispatcherType.REQUEST, DispatcherType.ERROR, DispatcherType.ASYNC );
