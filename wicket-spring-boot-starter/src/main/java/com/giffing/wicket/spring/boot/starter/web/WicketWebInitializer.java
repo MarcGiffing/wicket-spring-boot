@@ -62,7 +62,7 @@ public class WicketWebInitializer implements ServletContextInitializer {
 		filter.setInitParameter("applicationBean", beanNamesForType[0]);
 
 		filter.setInitParameter(WicketFilter.FILTER_MAPPING_PARAM, props.getFilterMappingParam());
-		filter.addMappingForUrlPatterns(EnumSet.copyOf( props.getDispatcherTypes() ), false, props.getFilterMappingParam());
+		filter.addMappingForUrlPatterns(EnumSet.copyOf( props.getDispatcherTypes() ), props.isFilterMatchAfter(), props.getFilterMappingParam());
 
 		Map<String, String> initParameters = props.getInitParameters();
 		for (Entry<String, String> initParam : initParameters.entrySet()) {
