@@ -25,19 +25,19 @@ import org.springframework.core.io.support.ResourcePatternUtils;
 public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 
 	private final Logger log = LoggerFactory.getLogger( WicketDependencyVersionChecker.class );
-	
+
 	static final String DEFAULT_RESOURCE_PATTERN = "/META-INF/maven/**/pom.properties";
 
 	private static final String WICKETSTUFF_GROUPID = "org.wicketstuff";
-        
+
 	private static final String WICKET_JQUERYUI_GROUPID = "com.googlecode.wicket-jquery-ui";
-	
+
 	private static final String WICKET_CORE_GROUPID = "org.apache.wicket";
-	
+
 	private ResourcePatternResolver resourcePatternResolver;
-	
+
 	private final WicketDependencyVersionCheckerProperties props;
-	
+
 	@Autowired
 	public WicketDependencyVersionChecker(WicketDependencyVersionCheckerProperties props) {
 		this.props = props;
@@ -47,15 +47,12 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 	public void setResourceLoader(ResourceLoader resourceLoader) {
 		this.resourcePatternResolver = ResourcePatternUtils.getResourcePatternResolver(resourceLoader);
 	}
-	
+
 	@PostConstruct
-	public void detectWicketDependencyVersionMissmatch() throws IOException {
-		String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX +  DEFAULT_RESOURCE_PATTERN;
-		Resource[] resources = this.resourcePatternResolver.getResources(packageSearchPath);
-		
-		List<MavenDependency> wicketMavenDependencies = collectWicketMavenDependencies( resources);
+	public void detectWicketDependencyVersionMissmatch() {
+		List<MavenDependency> wicketMavenDependencies = collectWicketMavenDependencies();
 		String wicketCoreVersion = findWicketCoreVersion( wicketMavenDependencies );
-		
+
 		boolean versionMissmatchFound = false;
 		List<MavenDependency> mismatchVersionDependencies = new ArrayList<>();
 		for ( MavenDependency mavenDependency : wicketMavenDependencies ) {
@@ -75,11 +72,11 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
                         }
                     }
 		}
-		
+
 		if(versionMissmatchFound && props.isThrowExceptionOnDependencyVersionMismatch()) {
 			throw new WicketDependencyMismatchDetectedException( wicketCoreVersion, mismatchVersionDependencies );
 		}
-		
+
 	}
 
 	private String findWicketCoreVersion(List<MavenDependency> wicketMavenDependencies) {
@@ -91,35 +88,46 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 		return null;
 	}
 
+    private List<MavenDependency> collectWicketMavenDependencies() {
+        String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + DEFAULT_RESOURCE_PATTERN;
+        try {
+            Resource[] resources = this.resourcePatternResolver.getResources(packageSearchPath);
+            return collectWicketMavenDependencies(resources);
+        } catch(IOException e) {
+            // do not throw checked exception in @PostConstruct method to provide better JavaEE compatibility
+            throw new IllegalStateException(e);
+        }
+    }
+
 	private List<MavenDependency> collectWicketMavenDependencies(Resource[] resources) throws IOException {
 		List<MavenDependency> wicketMavenDependencies = new ArrayList<>();
 		for (Resource resource : resources) {
-			if(resource.isReadable() 
+			if(resource.isReadable()
 					&& resource.getURL().getPath().contains( "wicket" )) {
-				
+
 				Properties props = new Properties();
 				props.load( resource.getInputStream());
 				String groupId = String.class.cast( props.get( "groupId" ));
 				String artifactId = String.class.cast( props.get( "artifactId" ));
 				String version = String.class.cast( props.get( "version" ));
-				
+
 				wicketMavenDependencies.add( new MavenDependency( groupId, artifactId, version ) );
 			}
 		}
 		return wicketMavenDependencies;
 	}
-	
+
 	public static class MavenDependency {
 		public String groupId;
 		public String artifactId;
 		public String version;
-		
+
 		public MavenDependency(String groupId, String artifactId, String version) {
 			this.groupId = groupId;
 			this.artifactId = artifactId;
 			this.version = version;
 		}
-		
+
 		@Override
 		public String toString() {
 			return groupId + ":" + artifactId + ":" + version;
