@@ -49,17 +49,17 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 	}
 
 	@PostConstruct
-	public void detectWicketDependencyVersionMissmatch() {
+	public void detectWicketDependencyVersionMismatch() {
 		List<MavenDependency> wicketMavenDependencies = collectWicketMavenDependencies();
 		String wicketCoreVersion = findWicketCoreVersion( wicketMavenDependencies );
 
-		boolean versionMissmatchFound = false;
+		boolean versionMismatchFound = false;
 		List<MavenDependency> mismatchVersionDependencies = new ArrayList<>();
 		for ( MavenDependency mavenDependency : wicketMavenDependencies ) {
                     if (mavenDependency.groupId.equals(WICKET_CORE_GROUPID) && !mavenDependency.version.equals(wicketCoreVersion)) {
                         log.error("########## INVALID WICKET VERSION DETECTED - CORE: {} - DEPENDENCY: {}",
                                 wicketCoreVersion, mavenDependency);
-                        versionMissmatchFound = true;
+                        versionMismatchFound = true;
                         mismatchVersionDependencies.add(mavenDependency);
                     } else if (mavenDependency.groupId.equals(WICKETSTUFF_GROUPID) || mavenDependency.groupId.equals(WICKET_JQUERYUI_GROUPID)) {
                         String majorWicketCoreVersion = wicketCoreVersion.substring(0, wicketCoreVersion.indexOf('.'));
@@ -67,13 +67,13 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
                         if (!majorWicketCoreVersion.equals(majorMavenDependencyVersion)) {
                             log.error("########## INVALID {} MAJOR VERSION DETECTED - WICKET: {} - DEPENDENCY: {}",
                                     mavenDependency.groupId, majorWicketCoreVersion, majorMavenDependencyVersion);
-                            versionMissmatchFound = true;
+                            versionMismatchFound = true;
                             mismatchVersionDependencies.add(mavenDependency);
                         }
                     }
 		}
 
-		if(versionMissmatchFound && props.isThrowExceptionOnDependencyVersionMismatch()) {
+		if(versionMismatchFound && props.isThrowExceptionOnDependencyVersionMismatch()) {
 			throw new WicketDependencyMismatchDetectedException( wicketCoreVersion, mismatchVersionDependencies );
 		}
 
