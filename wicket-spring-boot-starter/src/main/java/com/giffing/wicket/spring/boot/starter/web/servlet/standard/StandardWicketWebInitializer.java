@@ -1,10 +1,8 @@
 package com.giffing.wicket.spring.boot.starter.web.servlet.standard;
 
-import javax.servlet.Filter;
-
-import org.apache.wicket.protocol.http.WicketFilter;
-
 import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerConfig;
+import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.WicketFilter;
 
 /**
  * The {@link StandardWicketWebInitializer} will be configured when no other 
@@ -15,8 +13,8 @@ import com.giffing.wicket.spring.boot.starter.web.config.WicketWebInitializerCon
 public class StandardWicketWebInitializer implements WicketWebInitializerConfig {
 
 	@Override
-	public Class<? extends Filter> filterClass() {
-		return WicketFilter.class;
+	public WicketFilter createWicketFilter(WebApplication application) {
+		return new WicketFilter(application);
 	}
 
 }
