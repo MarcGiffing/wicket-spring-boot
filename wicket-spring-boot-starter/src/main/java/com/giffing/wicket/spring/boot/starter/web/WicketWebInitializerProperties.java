@@ -21,6 +21,8 @@ public class WicketWebInitializerProperties {
 
 	private List<DispatcherType> dispatcherTypes = Arrays.asList( DispatcherType.REQUEST, DispatcherType.ERROR, DispatcherType.ASYNC );
 
+	private boolean filterMatchAfter;
+
 	public String getFilterMappingParam() {
 		return filterMappingParam;
 	}
@@ -43,5 +45,13 @@ public class WicketWebInitializerProperties {
 
 	public void setDispatcherTypes(List<DispatcherType> dispatcherTypes) {
 		this.dispatcherTypes = dispatcherTypes;
+	}
+
+	public boolean isFilterMatchAfter() {
+		return filterMatchAfter;
+	}
+
+	public void setFilterMatchAfter(boolean filterMatchAfter) {
+		this.filterMatchAfter = filterMatchAfter;
 	}
 }
