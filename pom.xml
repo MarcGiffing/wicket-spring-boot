@@ -52,8 +52,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
 		<apache-shiro.version>1.8.0</apache-shiro.version>
-		<wicket.version>9.7.0</wicket.version>
-		<wicketstuff.version>9.6.0</wicketstuff.version>
+		<wicket.version>9.12.0</wicket.version>
+		<wicketstuff.version>9.12.0</wicketstuff.version>
 		<dependency-check-maven.version>5.3.0</dependency-check-maven.version>
 		<log4j2.version>2.16.0</log4j2.version>
 	</properties>
