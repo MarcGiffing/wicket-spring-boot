@@ -40,19 +40,21 @@ public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfigu
 	
 	@Override
 	public void init(WebApplication webApplication) {
-		CsrfPreventionRequestCycleListener listener = new CsrfPreventionRequestCycleListener();
-		listener.setConflictingOriginAction(props.getConflictingOriginAction());
-		listener.setErrorCode(props.getErrorCode());
-		listener.setErrorMessage(props.getErrorMessage());
-		listener.setNoOriginAction(props.getNoOriginAction());
-		for (String acceptedOrigin : props.getAcceptedOrigins()) {
-			listener.addAcceptedOrigin(acceptedOrigin);
+		if (props.isEnabled()) {
+			CsrfPreventionRequestCycleListener listener = new CsrfPreventionRequestCycleListener();
+			listener.setConflictingOriginAction(props.getConflictingOriginAction());
+			listener.setErrorCode(props.getErrorCode());
+			listener.setErrorMessage(props.getErrorMessage());
+			listener.setNoOriginAction(props.getNoOriginAction());
+			for (String acceptedOrigin : props.getAcceptedOrigins()) {
+				listener.addAcceptedOrigin(acceptedOrigin);
+			}
+			webApplication.getRequestCycleListeners().add(listener);
+
+			wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+					.withDetail("properties", props)
+					.build());
 		}
-		webApplication.getRequestCycleListeners().add(listener);
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", props)
-				.build());
 	}
 
 }
