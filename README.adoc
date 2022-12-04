@@ -441,12 +441,8 @@ Field error in object 'wicket' on field 'configurationType': rejected value [dev
 [[extension-spring-security]]
 === Spring Security
 
-To use Spring Security you have to extend WicketBootSecuredWebApplication instead of WicketBootWebApplication.
-
-[source,properties]
-----
-wicket.external.spring.security=true #
-----
+This starter detects automatically Spring Security if the Spring Boot Starter Security dependency is added. 
+Internally the WicketBootSecuredWebApplication is used instead of the WicketBootStandardWebApplication class.
 
 [source,xml]
 ----
@@ -455,6 +451,14 @@ wicket.external.spring.security=true #
  <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 ----
+
+If you wan't to disable the Spring Security configuration for Wicket use the following property.
+
+[source,properties]
+----
+wicket.external.spring.security=false
+----
+
 
 [[extension-wicket-websocket]]
 === Wicket Native WebSockets
