@@ -1,6 +1,3 @@
-# AutoConfigurations
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.giffing.wicket.spring.boot.starter.WicketAutoConfiguration
-
 org.springframework.boot.env.EnvironmentPostProcessor=com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.springboot.devtools.WicketDevToolsPropertyDefaultsPostProcessor
 
 org.springframework.boot.diagnostics.FailureAnalyzer=com.giffing.wicket.spring.boot.starter.app.verifier.WicketDependencyVersionCheckerFailureAnalyzer

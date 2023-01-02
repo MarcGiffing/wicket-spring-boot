@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfig
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.session.jdbc.config.annotation.web.http.EnableJdbcHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.giffing.wicket.spring.boot.example.WicketApplication;
@@ -51,8 +50,5 @@ public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication 
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
 		return SecureWebSession.class;
 	}
-	
-	
-
 	
 }

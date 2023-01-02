@@ -3,7 +3,7 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.csr
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener.CsrfAction;
+import org.apache.wicket.protocol.http.ResourceIsolationRequestCycleListener.CsrfAction;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX)
@@ -12,20 +12,22 @@ public class CsrfAttacksPreventionProperties {
 	public static final String PROPERTY_PREFIX = "wicket.core.csrf";
 	
 	/**
-	 * Action to perform when no Origin header is present in the request.
+	 * Action to perform when a request is disallowed by a resource isolation policy.
+         * Default is {@link CsrfAction#ABORT}.
 	 */
-	private CsrfAction noOriginAction = CsrfAction.ALLOW;
+	private CsrfAction disallowedOutcomeAction = CsrfAction.ABORT;
 
 	/**
-	 * Action to perform when a conflicting Origin header is found.
+	 * Action to perform when none of the resource isolation policies can come to an outcome.
+         * Default is {@link CsrfAction#ABORT}.
 	 */
-	private CsrfAction conflictingOriginAction = CsrfAction.ABORT;
+	private CsrfAction unknownOutcomeAction = CsrfAction.ABORT;
 
 	/**
 	 * The error code to report when the action to take for a CSRF request is
 	 * {@link CsrfAction#ABORT}. Default {@code 400 BAD REQUEST}.
 	 */
-	private int errorCode = javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+	private int errorCode = jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 	/**
 	 * The error message to report when the action to take for a CSRF request is {@code ERROR}.
@@ -52,20 +54,20 @@ public class CsrfAttacksPreventionProperties {
 		this.enabled = enabled;
 	}
 
-	public CsrfAction getNoOriginAction() {
-		return noOriginAction;
+	public CsrfAction getDisallowedOutcomeAction() {
+		return disallowedOutcomeAction;
 	}
 
-	public void setNoOriginAction(CsrfAction noOriginAction) {
-		this.noOriginAction = noOriginAction;
+	public void setDisallowedOutcomeAction(CsrfAction disallowedOutcomeAction) {
+		this.disallowedOutcomeAction = disallowedOutcomeAction;
 	}
 
-	public CsrfAction getConflictingOriginAction() {
-		return conflictingOriginAction;
+	public CsrfAction gtUnknownOutcomeAction() {
+		return unknownOutcomeAction;
 	}
 
-	public void setConflictingOriginAction(CsrfAction conflictingOriginAction) {
-		this.conflictingOriginAction = conflictingOriginAction;
+	public void setUnknownOutcomeAction(CsrfAction unknownOutcomeAction) {
+		this.unknownOutcomeAction = unknownOutcomeAction;
 	}
 
 	public int getErrorCode() {

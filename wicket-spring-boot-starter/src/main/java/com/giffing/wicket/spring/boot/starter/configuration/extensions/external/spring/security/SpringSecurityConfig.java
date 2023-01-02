@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security;
 
-import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -17,12 +16,11 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 @ConditionalOnClass(value = {
 		org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession.class,
 		org.springframework.security.core.Authentication.class,
-		org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.class
+		org.springframework.security.web.SecurityFilterChain.class
 })
 @EnableConfigurationProperties({ SpringSecurityProperties.class })
 @ConditionalOnMissingBean(WicketBootWebApplication.class)
 public class SpringSecurityConfig {
-	
 	
 	@Bean
 	public WicketBootSecuredWebApplication wicketBootWebApplication() {
@@ -31,14 +29,6 @@ public class SpringSecurityConfig {
 	
 	@Bean
 	public AuthenticatedWebSessionConfig authenticatedWebSessionConfig(){
-		return new AuthenticatedWebSessionConfig() {
-			
-			@Override
-			public Class<? extends AbstractAuthenticatedWebSession> getAuthenticatedWebSessionClass() {
-				return SecureWebSession.class;
-			}
-		};
+		return () -> SecureWebSession.class;
 	}
-
-
 }

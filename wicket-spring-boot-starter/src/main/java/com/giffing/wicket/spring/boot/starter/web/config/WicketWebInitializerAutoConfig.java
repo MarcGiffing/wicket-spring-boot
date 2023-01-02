@@ -3,7 +3,6 @@ package com.giffing.wicket.spring.boot.starter.web.config;
 import org.apache.wicket.Application;
 import org.apache.wicket.protocol.ws.javax.JavaxWebSocketFilter;
 import org.apache.wicket.protocol.ws.javax.WicketServerEndpointConfig;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

@@ -85,7 +85,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>jquery-selectors</artifactId>
-			<version>2.0.9</version>
+			<version>3.0.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -111,9 +111,8 @@
 		</dependency>
 		<!-- To provide the annotation processor in the IDE's classpath -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
+			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-jpamodelgen</artifactId>
-			<version>5.0.5.Final</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -161,7 +160,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>2.5.3</version>
 				<executions>
 					<execution>
 						<phase>none</phase>
@@ -182,8 +180,7 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<release>${java.version}</release>
 					<compilerArgument>-proc:none</compilerArgument>
 				</configuration>
 			</plugin>
@@ -207,9 +204,9 @@
 				</executions>
 				<dependencies>
 					<dependency>
-						<groupId>org.hibernate</groupId>
+						<groupId>org.hibernate.orm</groupId>
 						<artifactId>hibernate-jpamodelgen</artifactId>
-						<version>5.0.5.Final</version>
+						<version>${hibernate.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -236,7 +233,7 @@
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>1.5.2</version>
+				<version>2.2.2</version>
 				<executions>
 					<execution>
 						<id>output-html</id>

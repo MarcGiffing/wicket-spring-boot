@@ -5,7 +5,6 @@ import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.giffing.wicket.spring.boot.example.WicketApplication;
 import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
@@ -27,7 +25,6 @@ import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMes
  * @author Marc Giffing
  *
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WicketApplication.class)
 @EnableWebSecurity
 @Disabled

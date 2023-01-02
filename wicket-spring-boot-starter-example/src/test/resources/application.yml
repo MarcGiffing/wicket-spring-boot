@@ -11,3 +11,6 @@ wicket:
     serializer:
       fast2:
         enabled: false
+  core:
+    csrf:
+      enabled: false
