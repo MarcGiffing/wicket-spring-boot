@@ -44,8 +44,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.sett
  */
 public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication implements WicketBootWebApplication {
 	
-	private final static Logger logger = LoggerFactory
-		.getLogger(WicketBootStandardWebApplication.class);
+	private final static Logger logger = LoggerFactory.getLogger(WicketBootStandardWebApplication.class);
 
 	@Autowired
 	private ApplicationContext applicationContext;

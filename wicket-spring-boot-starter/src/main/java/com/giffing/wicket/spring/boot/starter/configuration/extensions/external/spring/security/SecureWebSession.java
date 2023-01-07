@@ -12,7 +12,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
@@ -31,7 +30,6 @@ public class SecureWebSession extends AuthenticatedWebSession implements Seriali
 
 	@SpringBean(name = "authenticationManager")
 	private AuthenticationManager authenticationManager;
-	
 	
 	public SecureWebSession(Request request) {
 		super(request);
@@ -62,9 +60,7 @@ public class SecureWebSession extends AuthenticatedWebSession implements Seriali
 		Roles roles = new Roles();
 		if (isSignedIn()) {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			for (GrantedAuthority authority : authentication.getAuthorities()) {
-				roles.add(authority.getAuthority());
-			}
+                        authentication.getAuthorities().forEach(authority -> roles.add(authority.getAuthority()));
 		}
 		return roles;
 	}
