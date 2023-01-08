@@ -13,13 +13,13 @@ public class CsrfAttacksPreventionProperties {
 	
 	/**
 	 * Action to perform when a request is disallowed by a resource isolation policy.
-         * Default is {@link CsrfAction#ABORT}.
+	 * Default is {@link CsrfAction#ABORT}.
 	 */
 	private CsrfAction disallowedOutcomeAction = CsrfAction.ABORT;
 
 	/**
 	 * Action to perform when none of the resource isolation policies can come to an outcome.
-         * Default is {@link CsrfAction#ABORT}.
+	 * Default is {@link CsrfAction#ABORT}.
 	 */
 	private CsrfAction unknownOutcomeAction = CsrfAction.ABORT;
 

@@ -30,12 +30,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class WicketWebSecurityAdapterConfig {
 
 	@ConditionalOnMissingBean
-        @Bean
-        public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
-            throws Exception {
-                return authenticationConfiguration.getAuthenticationManager();
-        }
-    
+	@Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+		return authenticationConfiguration.getAuthenticationManager();
+	}
+	
 	@ConditionalOnMissingBean
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
