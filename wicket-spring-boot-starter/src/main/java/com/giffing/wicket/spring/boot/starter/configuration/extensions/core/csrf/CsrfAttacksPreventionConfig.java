@@ -1,6 +1,8 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.csrf;
 
-import org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener;
+import org.apache.wicket.protocol.http.FetchMetadataResourceIsolationPolicy;
+import org.apache.wicket.protocol.http.OriginResourceIsolationPolicy;
+import org.apache.wicket.protocol.http.ResourceIsolationRequestCycleListener;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -28,7 +30,7 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@ConditionalOnClass(value = org.apache.wicket.protocol.http.CsrfPreventionRequestCycleListener.class)
+@ConditionalOnClass(value = org.apache.wicket.protocol.http.ResourceIsolationRequestCycleListener.class)
 @EnableConfigurationProperties({ CsrfAttacksPreventionProperties.class })
 public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfiguration{
 
@@ -40,15 +42,17 @@ public class CsrfAttacksPreventionConfig implements WicketApplicationInitConfigu
 	
 	@Override
 	public void init(WebApplication webApplication) {
-		CsrfPreventionRequestCycleListener listener = new CsrfPreventionRequestCycleListener();
-		listener.setConflictingOriginAction(props.getConflictingOriginAction());
+                OriginResourceIsolationPolicy originResourceIsolationPolicy = new OriginResourceIsolationPolicy();
+                props.getAcceptedOrigins().forEach(originResourceIsolationPolicy::addAcceptedOrigin);
+            
+		ResourceIsolationRequestCycleListener listener = new ResourceIsolationRequestCycleListener(
+                        new FetchMetadataResourceIsolationPolicy(),
+		        originResourceIsolationPolicy);
+                listener.setUnknownOutcomeAction(props.gtUnknownOutcomeAction());
+                listener.setDisallowedOutcomeAction(props.getDisallowedOutcomeAction());
 		listener.setErrorCode(props.getErrorCode());
 		listener.setErrorMessage(props.getErrorMessage());
-		listener.setNoOriginAction(props.getNoOriginAction());
-		for (String acceptedOrigin : props.getAcceptedOrigins()) {
-			listener.addAcceptedOrigin(acceptedOrigin);
-		}
-		webApplication.getRequestCycleListeners().add(listener);
+                webApplication.getRequestCycleListeners().add(listener);
 		
 		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
 				.withDetail("properties", props)

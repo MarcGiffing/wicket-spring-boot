@@ -25,9 +25,7 @@ public abstract class YesNoLink<T> extends AbstractActionItemLink<T>{
 			}
 		};
 		((BasePage)getPage()).replaceDefaultModal(yesNoModal);
-		yesNoModal.showUnloadConfirmation(false);
-		yesNoModal.show(target);
-		
+		yesNoModal.open(target);
 	}
 
 	protected abstract void yesClicked(AjaxRequestTarget target);
