@@ -18,11 +18,11 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 /**
  * Enables CSRF protection if the following condition matches.
  * 
- * 1. The {@link CsrfPreventionRequestCycleListener} class is in the classpath.
+ * 1. The {@link ResourceIsolationRequestCycleListener} class is in the classpath.
  * 
  * 2. The property {@link CsrfAttacksPreventionProperties#PROPERTY_PREFIX}.enabled has to be true (default = true)
  *
- * The protection should be enabled by default cause the {@link CsrfPreventionRequestCycleListener} is located
+ * The protection should be enabled by default cause the {@link ResourceIsolationRequestCycleListener} is located
  * in Wickets core project.
  * 
  * @author Marc Giffing
