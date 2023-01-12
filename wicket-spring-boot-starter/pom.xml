@@ -187,18 +187,6 @@
 		</dependency>
 	</dependencies>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>apache.snapshots</id>
-			<name>Apache Development Snapshot Repository</name>
-			<url>https://repository.apache.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
