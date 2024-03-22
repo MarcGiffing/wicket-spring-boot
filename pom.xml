@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
-	<version>4.0.0-M1</version>
+	<version>4.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>Wicket Spring Boot Starter Parent</name>
@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.8</version>
+		<version>3.2.4</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -54,8 +54,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<apache-shiro.version>1.8.0</apache-shiro.version>
-		<wicket.version>10.0.0-M1</wicket.version>
-		<wicketstuff.version>10.0.0-M1</wicketstuff.version>
+		<wicket.version>10.0.0</wicket.version>
+		<wicketstuff.version>10.0.0</wicketstuff.version>
 	</properties>
 
 	<dependencyManagement>
@@ -202,6 +202,11 @@
 				<groupId>com.github.jennybrown8.wicket-source</groupId>
 				<artifactId>wicket-source</artifactId>
 				<version>9.0.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.wicket</groupId>
+				<artifactId>wicket-tester</artifactId>
+				<version>${wicket.version}</version>
 			</dependency>
 			<!-- Security - Apache Shiro -->
 			<dependency>

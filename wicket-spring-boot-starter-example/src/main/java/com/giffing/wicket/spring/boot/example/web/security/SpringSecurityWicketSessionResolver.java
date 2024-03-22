@@ -1,14 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web.security;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketSessionResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 
-import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketSessionResolver;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class SpringSecurityWicketSessionResolver implements WicketSessionResolver {
 	
@@ -18,7 +17,7 @@ public class SpringSecurityWicketSessionResolver implements WicketSessionResolve
 	@Override
 	public List<String> resolve(Object identifier) {
 		Map<String, ? extends Session> findByPrincipalName = sessions.findByPrincipalName(identifier.toString());
-		return findByPrincipalName.keySet().stream().collect(Collectors.toList());
+		return new ArrayList<>(findByPrincipalName.keySet());
 	}
 
 }

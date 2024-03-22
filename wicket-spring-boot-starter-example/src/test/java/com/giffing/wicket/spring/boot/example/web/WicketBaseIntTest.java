@@ -1,5 +1,9 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import com.giffing.wicket.spring.boot.example.WicketApplication;
+import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -10,11 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
-import com.giffing.wicket.spring.boot.example.WicketApplication;
-import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
-import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 
 /**
  * Test class for initialize Wicket & Spring Boot only in the web package. All

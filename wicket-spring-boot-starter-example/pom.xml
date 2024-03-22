@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 		<artifactId>wicket-spring-boot-starter-parent</artifactId>
-		<version>4.0.0-M1</version>
+		<version>4.0.0</version>
 		<relativePath>..</relativePath>
 	</parent>
 
@@ -74,6 +74,10 @@
 			<artifactId>wicket-webjars</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.xml.bind</groupId>
+			<artifactId>jakarta.xml.bind-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-fast2</artifactId>
 		</dependency>
@@ -85,7 +89,7 @@
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>
 			<artifactId>jquery-selectors</artifactId>
-			<version>3.0.4</version>
+			<version>4.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -107,6 +111,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket-tester</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- To provide the annotation processor in the IDE's classpath -->
