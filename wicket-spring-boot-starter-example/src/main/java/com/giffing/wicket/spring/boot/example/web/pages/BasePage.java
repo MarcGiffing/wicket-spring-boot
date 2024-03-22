@@ -1,7 +1,7 @@
 package com.giffing.wicket.spring.boot.example.web.pages;
 
 import org.apache.wicket.MarkupContainer;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalDialog;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -34,7 +34,7 @@ public abstract class BasePage extends WebPage {
 		add(defaultModal);
 	}
 	
-	public void replaceDefaultModal(ModalWindow newModal){
+	public void replaceDefaultModal(ModalDialog newModal){
 		defaultModal.replaceWith(newModal);
 		defaultModal = newModal;
 		defaultModal.setOutputMarkupId(true);

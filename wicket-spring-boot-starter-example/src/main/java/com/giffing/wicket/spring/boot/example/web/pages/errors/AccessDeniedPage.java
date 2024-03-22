@@ -1,6 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.pages.errors;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.wicket.request.http.WebResponse;
 import org.wicketstuff.annotation.mount.MountPath;

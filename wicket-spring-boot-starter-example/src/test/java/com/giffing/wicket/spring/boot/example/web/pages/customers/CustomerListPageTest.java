@@ -1,6 +1,7 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -9,7 +10,6 @@ import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.table.DataTable;
 import org.apache.wicket.markup.repeater.Item;
-import static org.hamcrest.MatcherAssert.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -90,7 +90,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 		
 		getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
 		getTester().assertComponent("defaultModal", YesNoModal.class);
-		getTester().clickLink("defaultModal:content:yes", true);
+		getTester().clickLink("defaultModal:overlay:dialog:content:yes", true);
 		
 		verify(repository, times(1)).delete(Mockito.anyLong());
 		verify(repository, times(1)).delete(5L);
@@ -111,7 +111,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 
 	public static Customer createCustomer(long i) {
 		Customer customer = new Customer();
-		customer.setId(Long.valueOf(i));
+		customer.setId(i);
 		customer.setUsername("username" + i);
 		customer.setFirstname("firstname" + i);
 		customer.setLastname("lastname" + i);

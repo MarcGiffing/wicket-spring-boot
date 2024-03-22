@@ -1,11 +1,10 @@
 package com.giffing.wicket.spring.boot.starter.web;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.DispatcherType;
+import jakarta.servlet.DispatcherType;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -19,7 +18,7 @@ public class WicketWebInitializerProperties {
 	// Adds possibility to add init parameters dynamically
 	private Map<String, String> initParameters = new HashMap<>(); 
 
-	private List<DispatcherType> dispatcherTypes = Arrays.asList( DispatcherType.REQUEST, DispatcherType.ERROR, DispatcherType.ASYNC );
+	private List<DispatcherType> dispatcherTypes = List.of( DispatcherType.REQUEST, DispatcherType.ERROR, DispatcherType.ASYNC );
 
 	private boolean filterMatchAfter;
 

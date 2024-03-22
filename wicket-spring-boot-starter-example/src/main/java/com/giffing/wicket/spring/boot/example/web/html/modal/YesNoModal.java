@@ -1,21 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web.html.modal;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.extensions.ajax.markup.html.modal.ModalWindow;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.extensions.ajax.markup.html.modal.ModalDialog;
 
-public abstract class YesNoModal extends ModalWindow {
+public abstract class YesNoModal extends ModalDialog {
 
 	public YesNoModal(String id) {
 		super(id);
-		setMinimalHeight(200);
-		setMinimalWidth(400);
-		setInitialHeight(200);
-		setInitialWidth(400);
-		setAutoSize(false);
-		setTitle(Model.of("Are you sure?"));
-		String contentId = getContentId();
-		YesNoPanel yesNoPanel = new YesNoPanel(contentId){
+		YesNoPanel yesNoPanel = new YesNoPanel(CONTENT_ID){
 
 			@Override
 			protected void yesClicked(AjaxRequestTarget target) {
@@ -29,16 +21,12 @@ public abstract class YesNoModal extends ModalWindow {
 			
 		};
 		setContent(yesNoPanel);
-		
 	}
 
 	protected void noClicked(AjaxRequestTarget target) {
 		close(target);
-		
 	}
 
 	protected abstract void yesClicked(AjaxRequestTarget target);
-	
-	
 	
 }
