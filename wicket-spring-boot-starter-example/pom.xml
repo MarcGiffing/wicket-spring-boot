@@ -16,7 +16,7 @@
 
 	<properties>
 		<maven.deploy.skip>true</maven.deploy.skip>
-		<maven-processor-plugin.version>2.2.4</maven-processor-plugin.version>
+		<maven-processor-plugin.version>5.1-jdk8</maven-processor-plugin.version>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
 	</properties>
 
