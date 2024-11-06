@@ -242,7 +242,7 @@
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>2.2.2</version>
+				<version>3.1.0</version>
 				<executions>
 					<execution>
 						<id>output-html</id>
