@@ -9,9 +9,10 @@ wicket:
         pattern:
         - +*.map
     csrf:
-      accepted-origins:
-        - localhost
-management:
+      enabled: false
+    settings:
+      markup:
+        stripWicketTags: true
   endpoints:
     web:
       exposure:

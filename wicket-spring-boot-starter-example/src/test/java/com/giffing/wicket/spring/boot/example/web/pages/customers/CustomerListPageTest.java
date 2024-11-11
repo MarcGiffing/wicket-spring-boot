@@ -90,7 +90,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 		
 		getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
 		getTester().assertComponent("defaultModal", YesNoModal.class);
-		getTester().clickLink("defaultModal:overlay:dialog:content:yes", true);
+		getTester().clickLink("defaultModal:content:yes", true);
 		
 		verify(repository, times(1)).delete(Mockito.anyLong());
 		verify(repository, times(1)).delete(5L);
@@ -115,7 +115,6 @@ public class CustomerListPageTest extends WicketBaseTest {
 		customer.setUsername("username" + i);
 		customer.setFirstname("firstname" + i);
 		customer.setLastname("lastname" + i);
-		customer.setPassword("password" + i);
 		return customer;
 	}
 	

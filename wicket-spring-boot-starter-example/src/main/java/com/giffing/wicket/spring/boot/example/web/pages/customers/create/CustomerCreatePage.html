@@ -1,31 +1,44 @@
 <html xmlns:wicket="http://wicket.apache.org">
 <body>
 <wicket:extend>
-	
-	<h1>Customer Create</h1>
-	
-	<form wicket:id="form">
-		<div wicket:id="usernameBorder">
-			<input type="text" wicket:id="username"/>
-		</div>
-		<div wicket:id="firstnameBorder">
-			<input type="text" wicket:id="firstname"/>
-		</div>
-		<div wicket:id="lastnameBorder">
-			<input type="text" wicket:id="lastname"/>
-		</div>
-		<div wicket:id="passwordBorder">
-			<input type="password" wicket:id="password"/>
-		</div>
-		<div wicket:id="activeBorder">
-			<input type="checkbox" wicket:id="active"/>
-		</div>
-		<button type="submit" wicket:id="submit">Save</button>
-		<button type="submit" wicket:id="cancel">Cancel</button>
-		
-	</form>
-	
-	
+
+    <header class="jumbotron subhead" id="content">
+        <div class="container">
+            <h1>Customer Create</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <form wicket:id="form">
+            <div class="row col-xs-4 col-md-4">
+                <div wicket:id="usernameBorder">
+                    <input type="text" class="form-control" wicket:id="username"/>
+                </div>
+            </div>
+            <div class="row col-xs-4 col-md-4">
+                <div wicket:id="firstnameBorder">
+                    <input type="text" class="form-control" wicket:id="firstname"/>
+                </div>
+            </div>
+            <div class="row col-xs-4 col-md-4">
+                <div wicket:id="lastnameBorder">
+                    <input type="text" class="form-control" wicket:id="lastname"/>
+                </div>
+            </div>
+            <div class="row col-xs-4 col-md-4">
+                <div wicket:id="activeBorder">
+                    <input type="checkbox" class="form-check-input" wicket:id="active"/>
+                </div>
+            </div>
+            <div class="row col-xs-4 col-md-4">
+                <hr>
+            </div>
+            <div class="row col-xs-1 col-md-1">
+                <button type="submit" class="btn btn-primary" wicket:id="submit">Save</button>
+                <button type="submit" class="btn" wicket:id="cancel">Cancel</button>
+            </div>
+        </form>
+    </div>
 </wicket:extend>
 </body>
 </html>

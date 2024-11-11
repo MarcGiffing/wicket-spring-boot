@@ -18,6 +18,7 @@
 		<maven.deploy.skip>true</maven.deploy.skip>
 		<maven-processor-plugin.version>5.1-jdk8</maven-processor-plugin.version>
 		<maven.javadoc.skip>true</maven.javadoc.skip>
+		<wicket-bootstrap.version>7.0.8</wicket-bootstrap.version>
 	</properties>
 
 	<dependencies>
@@ -50,6 +51,29 @@
 			<artifactId>wicketstuff-annotation</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-core</artifactId>
+			<version>${wicket-bootstrap.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-extensions</artifactId>
+			<version>${wicket-bootstrap.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-sass</artifactId>
+			<version>${wicket-bootstrap.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.agilecoders.wicket</groupId>
+			<artifactId>wicket-bootstrap-themes</artifactId>
+			<version>${wicket-bootstrap.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-htmlcompressor</artifactId>
 		</dependency>
@@ -80,11 +104,6 @@
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-serializer-fast2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>bootstrap</artifactId>
-			<version>5.3.3</version>
 		</dependency>
 		<dependency>
 			<groupId>de.agilecoders.wicket</groupId>

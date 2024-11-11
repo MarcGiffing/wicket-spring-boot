@@ -21,7 +21,7 @@ public abstract class AbstractActionItemLink<T> extends AbstrractActionItem {
 		};
 		add(link);
 		WebMarkupContainer webMarkupContainer = new WebMarkupContainer("icon-type");
-		webMarkupContainer.add(new AttributeAppender("class", "glyphicon glyphicon-" + iconType.getCssName()));
+		webMarkupContainer.add(new AttributeAppender("class", iconType.getCssName()));
 		link.add(webMarkupContainer);
 	}
 	

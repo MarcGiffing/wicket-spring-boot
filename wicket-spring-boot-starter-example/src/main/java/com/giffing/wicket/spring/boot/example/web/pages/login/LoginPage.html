@@ -1,33 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<meta charset="utf-8" />
-		<title>Spring Boot - Apache Wicket Quickstart</title>
+<head>
+    <meta charset="utf-8"/>
+    <title>Spring Boot - Apache Wicket Quickstart</title>
 
-	</head>
-	<body>
-		<wicket:extend>
-		<h2><wicket:message key="login.label">login</wicket:message></h2>
-		<form wicket:id="loginForm">
-			<div wicket:id="feedback"></div>
-			<p>
-				<label>Username:</label>
-				<input type="text" wicket:id="username" />
-			</p>
-			<p>
-				<label>Password:</label>
-				<input type="password" wicket:id="password" />
-			</p>
-			<input type="submit" value="Login" />
-		</form>
-		<hr>
-		<p class="help-block">
-			<b>Username:Password</b>: 
-				<div>admin:admin</div>
-				<div>customer:customer</div>
-			
-			
-			</p>
-		</wicket:extend>
-	</body>
+</head>
+<body>
+<wicket:extend>
+    <header class="jumbotron subhead" id="content">
+        <div class="container">
+            <h1>
+                <wicket:message key="login.label">login</wicket:message>
+            </h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <form wicket:id="loginForm">
+            <div wicket:id="feedback"></div>
+            <div class="input-group mb-4">
+                <div wicket:id="usernameBorder">
+                    <input type="text" class="form-control" wicket:id="username" placeholder="Username:"/>
+                </div>
+            </div>
+            <div class="input-group mb-4">
+                <div wicket:id="passwordBorder">
+                    <input type="password" class="form-control" wicket:id="password" placeholder="Password:"/>
+                </div>
+            </div>
+            <div class="input-group mb-4">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        <hr>
+        <ul class="list-group list-group-horizontal-md">
+            <li class="list-group-item flex-fill"><b>Username</b></li>
+            <li class="list-group-item flex-fill"><b>Password</b></li>
+        </ul>
+        <ul class="list-group list-group-horizontal-md">
+            <li class="list-group-item flex-fill">admin</li>
+            <li class="list-group-item flex-fill">admin</li>
+        </ul>
+        <ul class="list-group list-group-horizontal-md">
+            <li class="list-group-item flex-fill">customer</li>
+            <li class="list-group-item flex-fill">customer</li>
+        </ul>
+    </div>
+
+
+</wicket:extend>
+</body>
 </html>

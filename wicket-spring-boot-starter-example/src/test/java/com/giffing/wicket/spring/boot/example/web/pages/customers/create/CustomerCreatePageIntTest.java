@@ -38,7 +38,6 @@ public class CustomerCreatePageIntTest extends WicketBaseIntTest {
 		formTester.setValue(borderPath("username"), usernameOfNewCreatedUser);
 		formTester.setValue(borderPath("firstname"), "newFirstname");
 		formTester.setValue(borderPath("lastname"), "newLastname");
-		formTester.setValue(borderPath("password"), "newPassword");
 		formTester.submit("submit");
 		getTester().assertNoErrorMessage();
 		getTester().assertNoInfoMessage();
@@ -65,14 +64,13 @@ public class CustomerCreatePageIntTest extends WicketBaseIntTest {
 		formTester.setValue(borderPath("username"), usernameOfExistingUser);
 		formTester.setValue(borderPath("firstname"), "newFirstname");
 		formTester.setValue(borderPath("lastname"), "newLastname");
-		formTester.setValue(borderPath("password"), "newPassword");
 		formTester.submit("submit");
 		
 		getTester().assertErrorMessages("Username already exists!");
 		
 	}
 	
-	private String borderPath(String componentName){
+	protected String borderPath(String componentName){
 		return componentName + "Border:" + componentName + "Border_body:" + componentName;
 	}
 

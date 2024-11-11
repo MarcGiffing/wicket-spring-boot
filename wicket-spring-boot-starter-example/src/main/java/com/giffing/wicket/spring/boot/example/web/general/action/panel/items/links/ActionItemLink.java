@@ -13,7 +13,7 @@ public class ActionItemLink extends AbstrractActionItem {
 	public ActionItemLink(IModel<String> label, IconType iconType, AbstractLink link) {
 		add(link);
 		WebMarkupContainer webMarkupContainer = new WebMarkupContainer("icon-type");
-		webMarkupContainer.add(new AttributeAppender("class", "glyphicon glyphicon-" + iconType.getCssName()));
+		webMarkupContainer.add(new AttributeAppender("class", "fa-solid fa-" + iconType.getCssName()));
 		link.add(webMarkupContainer);
 	}
 

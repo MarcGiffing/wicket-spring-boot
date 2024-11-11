@@ -35,7 +35,7 @@ public class ValidationMsgBehavior extends BorderBehavior {
 			} else {
 				error = "Your input is invalid.";
 			}
-			fc.getResponse().write("*<span id=\"helpBlock2\" class=\"help-block\">"+error+"</span>");
+			fc.getResponse().write("*<span class=\"invalid-feedback\">"+error+"</span>");
 			super.afterRender(component);
 		}
 	}

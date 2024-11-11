@@ -52,7 +52,7 @@ public class CustomerListIntTest extends WicketBaseIntTest {
 
         getTester().clickLink(getTableCell(5, 6) + "items:1:item:link");
         getTester().assertComponent("defaultModal", YesNoModal.class);
-        getTester().clickLink("defaultModal:overlay:dialog:content:yes", true);
+        getTester().clickLink("defaultModal:content:yes", true);
 
         assertThat(dataTable.getItemCount(), equalTo(4L));
 

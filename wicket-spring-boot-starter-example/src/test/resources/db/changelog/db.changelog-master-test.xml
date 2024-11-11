@@ -10,7 +10,6 @@
 	<changeSet id="init-testdata" author="mgiffing">
 		<insert tableName="customer">
 			<column name="username">frodo</column>
-			<column name="password">123</column>
 			<column name="firstname">Frodo</column>
 			<column name="lastname">Beutlin</column>
 			<column name="active">true</column>
@@ -18,7 +17,6 @@
 
 		<insert tableName="customer">
 			<column name="username">bilbo</column>
-			<column name="password">123</column>
 			<column name="firstname">Bilbo</column>
 			<column name="lastname">Beutlin</column>
 			<column name="active">false</column>
@@ -27,7 +25,6 @@
 
 		<insert tableName="customer">
 			<column name="username">adalgrim</column>
-			<column name="password">123</column>
 			<column name="firstname">Adalgrim</column>
 			<column name="lastname">Tuk</column>
 			<column name="active">true</column>
@@ -35,7 +32,6 @@
 
 		<insert tableName="customer">
 			<column name="username">bodo</column>
-			<column name="password">123</column>
 			<column name="firstname">Bodo</column>
 			<column name="lastname">Stolzfuß</column>
 			<column name="active">false</column>
@@ -43,7 +39,6 @@
 
 		<insert tableName="customer">
 			<column name="username">tuk</column>
-			<column name="password">123</column>
 			<column name="firstname">Ferdibrand</column>
 			<column name="lastname">Tuk</column>
 			<column name="active">true</column>

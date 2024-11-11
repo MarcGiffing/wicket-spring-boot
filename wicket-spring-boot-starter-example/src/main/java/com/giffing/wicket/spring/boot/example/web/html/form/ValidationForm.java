@@ -1,10 +1,10 @@
 package com.giffing.wicket.spring.boot.example.web.html.form;
 
-import org.apache.wicket.markup.html.form.Form;
+import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.util.visit.IVisitor;
 
-public class ValidationForm<T> extends Form<T>{
+public class ValidationForm<T> extends BootstrapForm<T> {
 
 	private static final long serialVersionUID = 1L;
 

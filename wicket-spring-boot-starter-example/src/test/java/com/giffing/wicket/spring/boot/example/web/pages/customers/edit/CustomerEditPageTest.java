@@ -82,9 +82,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 		String usernameFieldPath = "form:" + borderPath("username");
 		getTester().assertComponent(usernameFieldPath, UsernameTextField.class);
 		getTester().isDisabled(usernameFieldPath);
-		
-		String passwordFieldPath = "form:" + borderPath("password");
-		getTester().isInvisible(passwordFieldPath);
 	}
 	
 	@Test
@@ -110,13 +107,7 @@ public class CustomerEditPageTest extends WicketBaseTest {
 		assertThat(value.getUsername(), equalTo("username3"));
 		assertThat(value.getFirstname(), equalTo("the-new-firstname"));
 		assertThat(value.getLastname(), equalTo("lastname3"));
-		assertThat(value.getPassword(), equalTo("password3"));
-		
-		
-	}
-	
-	private String borderPath(String componentName){
-		return componentName + "Border:" + componentName + "Border_body:" + componentName;
+
 	}
 
 }

@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:wicket="http://wicket.apache.org">
-	<head>
-		<title>Wicket!</title>
-	</head>
-	<body>
-		<div wicket:id="defaultModal"></div>
-		<div class="container">
-			<wicket:child/>
-		</div>
-	</body>
+    <head>
+        <meta charset="utf-8">
+        <title>Apache Wicket &amp; Spring Bootstrap</title>
+        <meta wicket:id="viewport">
+        <meta wicket:id="description">
+        <meta wicket:id="ie-edge">
+        <wicket:header-items/>
+    </head>
+
+    <body style="padding-top: 60px">
+        <a name="top" style="display: none;"></a>
+        <a class="visually-hidden" href="#content">Skip navigation</a>
+        <div wicket:id="defaultModal"></div>
+        <wicket:child/>
+
+        <pre style="display:none" wicket:id="code-internal"></pre>
+        <wicket:container wicket:id="footer-container"/>
+    </body>
 </html>

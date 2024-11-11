@@ -1,5 +1,8 @@
 package com.giffing.wicket.spring.boot.example.web;
 
+import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
+import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
+import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
@@ -16,11 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import com.giffing.wicket.spring.boot.example.web.pages.home.HomePage;
-import com.giffing.wicket.spring.boot.example.web.pages.login.LoginPage;
-import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.security.SecureWebSession;
-
 import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 
 /**
@@ -70,11 +68,11 @@ public class WicketBaseTest {
 		session.signOut();
 		tester.startPage(LoginPage.class);
 		FormTester formTester = tester.newFormTester("loginForm");
-		formTester.setValue("username", username);
-		formTester.setValue("password", password);
+		formTester.setValue(borderPath("username"), username);
+		formTester.setValue(borderPath("password"), password);
 		formTester.submit();
 		tester.assertNoErrorMessage();
-		tester.assertRenderedPage(HomePage.class);
+		tester.assertRenderedPage(CustomerListPage.class);
 	}
 
 	public WicketTester getTester() {
@@ -85,4 +83,7 @@ public class WicketBaseTest {
 		return wicketApplication;
 	}
 
+	protected String borderPath(String componentName){
+		return componentName + "Border:" + componentName + "Border_body:" + componentName;
+	}
 }

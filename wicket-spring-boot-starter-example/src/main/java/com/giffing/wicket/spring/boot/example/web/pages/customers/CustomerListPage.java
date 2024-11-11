@@ -3,6 +3,13 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.example.web.pages.BaseAuthenticatedPage;
+import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerDeletedEvent;
+import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
+import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapBookmarkablePageLink;
+import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome6IconType;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -43,30 +50,35 @@ import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.lin
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno.YesNoLink;
 import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
-import com.giffing.wicket.spring.boot.example.web.html.border.LabeledFormBorder;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractCheckBoxFilter;
 import com.giffing.wicket.spring.boot.example.web.html.repeater.data.table.filter.AbstractTextFieldFilter;
-import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.create.CustomerCreatePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.edit.CustomerEditPage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.CustomerDataProvider;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameSearchTextField;
 
-@MountPath("customers")
+@WicketHomePage
+@MountPath("custsomers")
 @AuthorizeInstantiation("USER")
-public class CustomerListPage extends BasePage {
+public class CustomerListPage extends BaseAuthenticatedPage {
 
 	@SpringBean
 	private CustomerRepositoryService customerRepositoryService;
+
+	@SpringBean
+	private WebSocketMessageBroadcaster webSocketMessageBroadcaster;
 	
 	private IModel<CustomerFilter> customerFilterModel;
 
 	private FilterForm<CustomerFilter> filterForm;
+
+	DataTable<Customer, CustomerSort> dataTable;
 	
 	public CustomerListPage() {
+		super(new PageParameters());
 		FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
 		feedbackPanel.setOutputMarkupId(true);
 		add(feedbackPanel);
@@ -75,9 +87,12 @@ public class CustomerListPage extends BasePage {
 
 			@Override
 			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
-				if (message instanceof CustomerChangedEvent) {
-					CustomerChangedEvent event = (CustomerChangedEvent)message;
-					info("changed/created " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+				if (message instanceof CustomerChangedEvent event) {
+					info("Customer changed " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+				if (message instanceof CustomerDeletedEvent event) {
+					warn("Customer deleted: " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
 					handler.add(feedbackPanel);
 				}
 			}
@@ -87,14 +102,16 @@ public class CustomerListPage extends BasePage {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 		
-		queue(new BookmarkablePageLink<Customer>("create", CustomerCreatePage.class));
+		queue(new BootstrapBookmarkablePageLink<Customer>("create", CustomerCreatePage.class, Buttons.Type.Link)
+				.setIconType(FontAwesome6IconType.plus_s)
+				.setSize(Buttons.Size.Large));
 		
 		queue(new ValidationForm<>("form", customerFilterModel));
-		queue(new LabeledFormBorder<>(getString("id"), new TextField<>("id")));
-		queue(new LabeledFormBorder<>(getString("username"), new UsernameSearchTextField("usernameLike")));
-		queue(new LabeledFormBorder<>(getString("firstname"), new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3))));
-		queue(new LabeledFormBorder<>(getString("lastname"), new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3))));
-		queue(new LabeledFormBorder<>(getString("active"), new CheckBox("active")));
+		queueFormComponent(new TextField<>("id"));
+		queueFormComponent(new UsernameSearchTextField("usernameLike"));
+		queueFormComponent(new TextField<String>("firstnameLike").add(StringValidator.minimumLength(3)));
+		queueFormComponent(new TextField<String>("lastnameLike").add(StringValidator.minimumLength(3)));
+		queueFormComponent(new CheckBox("active"));
 		queue(cancelButton());
 		
 		customerDataTable(customerDataProvider);
@@ -118,7 +135,7 @@ public class CustomerListPage extends BasePage {
 
 	private void customerDataTable(CustomerDataProvider customerDataProvider) {
 
-		filterForm = new FilterForm<CustomerFilter>("filterForm", customerDataProvider);
+		filterForm = new FilterForm<>("filterForm", customerDataProvider);
 		queue(filterForm);
 
 		List<IColumn<Customer, CustomerSort>> columns = new ArrayList<>();
@@ -129,8 +146,9 @@ public class CustomerListPage extends BasePage {
 		columns.add(activeColumn());
 		columns.add(actionColumn());
 
-		DataTable<Customer, CustomerSort> dataTable = new AjaxFallbackDefaultDataTable<Customer, CustomerSort>("table", columns,
+		dataTable = new AjaxFallbackDefaultDataTable<Customer, CustomerSort>("table", columns,
 				customerDataProvider, 10);
+		dataTable.setOutputMarkupId(true);
 		FilterToolbar filterToolbar = new FilterToolbar(dataTable, filterForm);
 
 		dataTable.addTopToolbar(filterToolbar);
@@ -239,7 +257,8 @@ public class CustomerListPage extends BasePage {
 					@Override
 					protected void yesClicked(AjaxRequestTarget target) {
 						customerRepositoryService.delete(rowModel.getObject().getId());
-						setResponsePage(CustomerListPage.this);
+						webSocketMessageBroadcaster.sendToAll(new CustomerDeletedEvent(rowModel.getObject()));
+						target.add(dataTable);
 					}
 				});
 				

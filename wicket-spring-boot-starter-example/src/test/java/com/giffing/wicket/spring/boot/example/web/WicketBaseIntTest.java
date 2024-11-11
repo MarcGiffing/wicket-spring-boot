@@ -53,8 +53,8 @@ public abstract class WicketBaseIntTest {
 		session.signOut();
 		tester.startPage(LoginPage.class);
 		FormTester formTester = tester.newFormTester("loginForm");
-		formTester.setValue("username", username);
-		formTester.setValue("password", password);
+		formTester.setValue(borderPath("username"), username);
+		formTester.setValue(borderPath("password"), password);
 		formTester.submit();
 		tester.assertNoErrorMessage();
 		tester.assertRenderedPage(tester.getApplication().getHomePage());
@@ -68,4 +68,7 @@ public abstract class WicketBaseIntTest {
 		return wicketApplication;
 	}
 
+	protected String borderPath(String componentName){
+		return componentName + "Border:" + componentName + "Border_body:" + componentName;
+	}
 }

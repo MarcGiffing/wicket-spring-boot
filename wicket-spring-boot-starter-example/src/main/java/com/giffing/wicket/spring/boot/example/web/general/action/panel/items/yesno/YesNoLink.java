@@ -1,12 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno;
 
+import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.model.IModel;
 
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstractActionItemLink;
 import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.modal.YesNoModal;
-import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 
 public abstract class YesNoLink<T> extends AbstractActionItemLink<T>{
 
@@ -21,11 +22,12 @@ public abstract class YesNoLink<T> extends AbstractActionItemLink<T>{
 			@Override
 			protected void yesClicked(AjaxRequestTarget target) {
 				YesNoLink.this.yesClicked(target);
-				this.close(target);
+				close(target);
+				((BasePage)getPage()).replaceDefaultModal( new EmptyPanel("defaultModal"), target);
 			}
 		};
-		((BasePage)getPage()).replaceDefaultModal(yesNoModal);
-		yesNoModal.open(target);
+		((BasePage)getPage()).replaceDefaultModal(yesNoModal, target);
+		yesNoModal.appendShowDialogJavaScript(target);
 	}
 
 	protected abstract void yesClicked(AjaxRequestTarget target);
