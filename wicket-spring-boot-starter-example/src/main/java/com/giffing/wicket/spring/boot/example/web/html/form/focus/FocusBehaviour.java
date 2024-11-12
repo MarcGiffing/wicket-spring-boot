@@ -5,14 +5,14 @@ import org.apache.wicket.behavior.Behavior;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 
-public class FocusBehaviour extends Behavior{
+public class FocusBehaviour extends Behavior {
 
-	@Override
-	public void renderHead(Component component, IHeaderResponse response) {
-		super.renderHead(component, response);
-		OnDomReadyHeaderItem focusComponentHeaderItem = OnDomReadyHeaderItem.forScript("document.getElementById('"
-				    + component.getMarkupId() + "').focus();");
-		response.render(focusComponentHeaderItem);
-	}
+    @Override
+    public void renderHead(Component component, IHeaderResponse response) {
+        super.renderHead(component, response);
+        OnDomReadyHeaderItem focusComponentHeaderItem = OnDomReadyHeaderItem
+				.forScript("document.getElementById('%s').focus();".formatted(component.getMarkupId()));
+        response.render(focusComponentHeaderItem);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.pages.login;
 
+import com.giffing.wicket.spring.boot.example.web.html.form.focus.FocusBehaviour;
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -29,6 +30,7 @@ public class LoginPage extends BasePage {
 
 		if (((AbstractAuthenticatedWebSession) getSession()).isSignedIn()) {
 			continueToOriginalDestination();
+			setResponsePage(CustomerListPage.class);
 		}
 		add(new LoginForm("loginForm"));
 	}
@@ -43,8 +45,16 @@ public class LoginPage extends BasePage {
 			super(id);
 			setModel(new CompoundPropertyModel<>(this));
 			add(new FeedbackPanel("feedback"));
-			queueFormComponent(new RequiredTextField<String>("username"));
+
+			queueFormComponent(usernameField());
 			queueFormComponent(new PasswordTextField("password"));
+		}
+
+		private RequiredTextField<String> usernameField() {
+			var usernameField = new RequiredTextField<String>("username");
+			usernameField.setOutputMarkupId(true);
+			usernameField.add(new FocusBehaviour());
+			return usernameField;
 		}
 
 		@Override

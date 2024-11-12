@@ -9,7 +9,7 @@ public enum CustomerSort implements Sort {
 	LASTNAME("lastname"),
 	ACTIVE("active");
 
-	private String sortName;
+	private final String sortName;
 	
 	CustomerSort(String sortName){
 		this.sortName = sortName;

@@ -1,29 +1,25 @@
 package com.giffing.wicket.spring.boot.example.web.general.action.panel;
 
-import java.util.List;
-
+import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstrractActionItem;
+import de.agilecoders.wicket.core.markup.html.bootstrap.list.BootstrapListView;
 import org.apache.wicket.markup.html.list.ListItem;
-import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.html.panel.Panel;
 
-import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstrractActionItem;
+import java.util.List;
 
 public class ActionPanel extends Panel {
-	
-	
+
 	public ActionPanel(String id, List<AbstrractActionItem> items) {
 		super(id);
-		ListView<AbstrractActionItem> listItems = new ListView<AbstrractActionItem>("items", items) {
+		add(new BootstrapListView<>("items", items) {
 
-			@Override
-			protected void populateItem(ListItem<AbstrractActionItem> item) {
-				item.add(item.getModel().getObject());
-			}
+            @Override
+            protected void populateItem(ListItem<AbstrractActionItem> item) {
+                item.add(item.getModel().getObject());
+            }
 
-
-		};
-		add(listItems);
+        });
 	}
-	
+
 
 }

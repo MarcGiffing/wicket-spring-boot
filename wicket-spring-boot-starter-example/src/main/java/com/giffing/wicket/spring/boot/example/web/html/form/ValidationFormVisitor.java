@@ -15,11 +15,11 @@ public class ValidationFormVisitor<R> implements IVisitor<Component, R>, ICluste
 
 	private static final long serialVersionUID = 1L;
 
-	Set<FormComponent> visited = new HashSet<>();
+	Set<FormComponent<?>> visited = new HashSet<>();
 
 	@Override
 	public void component(Component c, IVisit<R> visit) {
-		if(c instanceof FormComponent fc && !visited.contains(c)) {
+		if(c instanceof FormComponent<?> fc && !visited.contains(c)) {
 				c.add(new ValidationMsgBehavior());
 				visited.add(fc);
 			}

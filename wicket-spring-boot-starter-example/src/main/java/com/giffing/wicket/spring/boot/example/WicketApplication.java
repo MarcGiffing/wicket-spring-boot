@@ -10,7 +10,7 @@ import com.giffing.wicket.spring.boot.example.repository.services.DefaultReposit
 @EnableJpaRepositories(basePackageClasses={DefaultRepositoryService.class})
 public class WicketApplication {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		new SpringApplicationBuilder()
 			.sources(WicketApplication.class)
 			.run(args);

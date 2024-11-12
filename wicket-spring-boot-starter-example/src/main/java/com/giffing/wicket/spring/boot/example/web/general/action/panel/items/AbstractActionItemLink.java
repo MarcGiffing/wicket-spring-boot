@@ -1,16 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web.general.action.panel.items;
 
+import de.agilecoders.wicket.core.markup.html.bootstrap.image.Icon;
+import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
-import org.apache.wicket.behavior.AttributeAppender;
-import org.apache.wicket.markup.html.WebMarkupContainer;
-import org.apache.wicket.model.IModel;
-
-import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 
 public abstract class AbstractActionItemLink<T> extends AbstrractActionItem {
 	
-	public AbstractActionItemLink(IModel<T> label, IconType iconType){
+	protected AbstractActionItemLink(IconType iconType){
 		AjaxLink<T> link = new AjaxLink<T>("link") {
 
 			@Override
@@ -20,9 +17,7 @@ public abstract class AbstractActionItemLink<T> extends AbstrractActionItem {
 			}
 		};
 		add(link);
-		WebMarkupContainer webMarkupContainer = new WebMarkupContainer("icon-type");
-		webMarkupContainer.add(new AttributeAppender("class", iconType.getCssName()));
-		link.add(webMarkupContainer);
+		link.add( new Icon("icon", iconType));
 	}
 	
 	public abstract void onClick(AjaxRequestTarget target);

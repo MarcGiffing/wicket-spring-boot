@@ -8,7 +8,7 @@ public abstract class YesNoModal extends Modal<Panel> {
 
     public YesNoModal(String id) {
         super(id);
-        YesNoPanel yesNoPanel = new YesNoPanel("content") {
+        var yesNoPanel = new YesNoPanel("content") {
 
             @Override
             protected void yesClicked(AjaxRequestTarget target) {

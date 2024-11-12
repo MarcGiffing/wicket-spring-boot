@@ -31,12 +31,8 @@ public abstract class DefaultDataProvider<MODEL extends Domain<ID>,
 	public abstract void setFilter(FILTER_MODEL filterModel);
 	
 	private SingleSortState<SORT> singleSortState = new SingleSortState<>();
-	
-	@Override
-	public void detach() {
-	}
 
-	@Override
+    @Override
 	public Iterator<? extends MODEL> iterator(long first, long count) {
 		if(singleSortState.getSort() != null){
 			Sort property = (Sort) singleSortState.getSort().getProperty();
@@ -45,8 +41,7 @@ public abstract class DefaultDataProvider<MODEL extends Domain<ID>,
 		}
 		//TODO quick and dirty check again 
 		long page = first / count;
-		List<MODEL> customers = getFilterService().findAll(page, count, this.getFilter());
-		return customers.iterator();
+		return getFilterService().findAll(page, count, this.getFilter()).iterator();
 	}
 
 	@Override

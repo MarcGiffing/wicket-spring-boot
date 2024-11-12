@@ -1,16 +1,13 @@
 package com.giffing.wicket.spring.boot.example.web.pages.websocket.events;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 
+@Getter
+@RequiredArgsConstructor
 public class LeftChatEvent implements IWebSocketPushMessage {
 
 	private final String username;
-	
-	public LeftChatEvent(String username) {
-		this.username = username;
-	}
 
-	public String getUsername() {
-		return username;
-	}
 }

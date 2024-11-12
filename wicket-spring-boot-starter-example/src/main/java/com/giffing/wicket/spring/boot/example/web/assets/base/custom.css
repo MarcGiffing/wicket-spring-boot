@@ -1,3 +1,7 @@
 .navbar {
     --bs-navbar-padding-x: 1;
 }
+
+.items {
+    padding-right: 5px;
+}

@@ -1,10 +1,13 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer.specs;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.model.Customer_;
 
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class CustomerSpecs {
 
 	public static Specification<Customer> hasId(final Long id) {

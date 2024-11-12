@@ -3,6 +3,7 @@ package com.giffing.wicket.spring.boot.example.web.pages.customers.edit;
 import java.text.MessageFormat;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.string.StringValue;
@@ -14,6 +15,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPa
 import com.giffing.wicket.spring.boot.example.web.pages.customers.create.CustomerCreatePage;
 
 @MountPath("customers/edit/${" + CustomerEditPage.CUSTOMER_ID_PARAM + "}")
+@AuthorizeInstantiation("USER")
 public class CustomerEditPage extends CustomerCreatePage {
 	
 	public static final String CUSTOMER_ID_PARAM = "id";

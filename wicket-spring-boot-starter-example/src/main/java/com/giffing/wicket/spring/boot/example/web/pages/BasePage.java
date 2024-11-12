@@ -1,6 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.pages;
 
-import com.giffing.wicket.spring.boot.example.web.assets.base.FixBootstrapStylesCssResourceReference;
+import com.giffing.wicket.spring.boot.example.web.assets.base.CustomStylesCssRessourceReference;
 import com.giffing.wicket.spring.boot.example.web.general.notify.NotyJSReference;
 import com.giffing.wicket.spring.boot.example.web.general.notify.NotyPackagedJSReference;
 import com.giffing.wicket.spring.boot.example.web.general.notify.NotyThemeBootstrapJSReference;
@@ -35,7 +35,6 @@ public class BasePage extends GenericWebPage<Void> {
         defaultModal.setOutputMarkupId(true);
         queue(defaultModal);
 
-        //add(new HtmlTag("html", WebSession.get().getLocale()));
         MobileViewportMetaTag mvt = new MobileViewportMetaTag("viewport");
         mvt.setWidth("device-width");
         mvt.setInitialScale("1");
@@ -51,7 +50,7 @@ public class BasePage extends GenericWebPage<Void> {
     public void renderHead(IHeaderResponse response) {
         super.renderHead(response);
 
-        response.render(CssHeaderItem.forReference(FixBootstrapStylesCssResourceReference.INSTANCE));
+        response.render(CssHeaderItem.forReference(CustomStylesCssRessourceReference.INSTANCE));
         response.render(CssHeaderItem.forReference(FontAwesome6CssReference.instance()));
         response.render(JavaScriptHeaderItem.forReference(NotyJSReference.INSTANCE));
         response.render(JavaScriptHeaderItem.forReference(NotyPackagedJSReference.INSTANCE));
@@ -62,10 +61,6 @@ public class BasePage extends GenericWebPage<Void> {
         }
     }
 
-    public MarkupContainer getDefaultModal() {
-        return defaultModal;
-    }
-
     public void replaceDefaultModal(MarkupContainer newModal, AjaxRequestTarget target) {
         newModal.setMarkupId(defaultModal.getMarkupId());
         newModal.setOutputMarkupId(true);
@@ -74,12 +69,11 @@ public class BasePage extends GenericWebPage<Void> {
         defaultModal = newModal;
     }
 
-    protected FormGroup queueFormComponent(FormComponent formComponent) {
+    protected void queueFormComponent(FormComponent<?> formComponent) {
         var formGroup = new FormGroup(formComponent.getId() + "Border");
         formGroup.useFormComponentLabel(true);
         formGroup.add(formComponent);
         queue(formGroup);
-        return formGroup;
     }
 
 }

@@ -34,21 +34,22 @@ public abstract class BaseAuthenticatedPage extends BasePage {
     }
 
     protected Navbar newNavbar(String markupId) {
-        Navbar navbar = new Navbar(markupId)
+        var navbar = new Navbar(markupId)
                 .setPosition(Navbar.Position.TOP)
                 .setInverted(true)
                 .setBackgroundColor(BackgroundColorBehavior.Color.Dark);
 
         navbar.setBrandName(Model.of("Wicket"));
-        navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT,
-                        new NavbarButton<Void>(CustomerListPage.class, Model.of("Customers")).setIconType(FontAwesome6IconType.person_s),
-                        new NavbarButton<Void>(ChatPage.class, Model.of("Chat")).setIconType(FontAwesome6IconType.rocketchat),
-                        new NavbarExternalLink(Model.of("https://github.com/MarcGiffing/wicket-spring-boot"))
-                                .setLabel(Model.of("Github"))
-                                .setTarget(BootstrapExternalLink.Target.blank)
-                                .setIconType(FontAwesome6IconType.upload_s))
+        navbar.addComponents(NavbarComponents.transform(
+                Navbar.ComponentPosition.LEFT,
+                new NavbarButton<Void>(CustomerListPage.class, Model.of("Customers")).setIconType(FontAwesome6IconType.person_s),
+                new NavbarButton<Void>(ChatPage.class, Model.of("Chat")).setIconType(FontAwesome6IconType.rocketchat),
+                new NavbarExternalLink(Model.of("https://github.com/MarcGiffing/wicket-spring-boot"))
+                        .setLabel(Model.of("Github"))
+                        .setTarget(BootstrapExternalLink.Target.blank)
+                        .setIconType(FontAwesome6IconType.upload_s))
         );
-        DropDownButton dropdown = new NavbarDropDownButton(Model.of("Themes")) {
+        var dropdown = new NavbarDropDownButton(Model.of("Themes")) {
 
             @Override
             public boolean isActive(Component item) {
@@ -61,13 +62,12 @@ public abstract class BaseAuthenticatedPage extends BasePage {
                 subMenu.add(new MenuHeader(Model.of("all available themes:")));
                 subMenu.add(new MenuDivider());
 
-                final IBootstrapSettings settings = Bootstrap.getSettings(getApplication());
-                final List<ITheme> themes = settings.getThemeProvider().available();
+                var settings = Bootstrap.getSettings(getApplication());
+                var themes = settings.getThemeProvider().available();
 
                 for (final ITheme theme : themes) {
-                    PageParameters params = new PageParameters();
+                    var params = new PageParameters();
                     params.set("theme", theme.name());
-
                     subMenu.add(new MenuBookmarkablePageLink<Void>(getPageClass(), params, Model.of(theme.name())));
                 }
 
@@ -80,10 +80,10 @@ public abstract class BaseAuthenticatedPage extends BasePage {
     }
 
     private void configureTheme(PageParameters pageParameters) {
-        StringValue theme = pageParameters.get("theme");
+        var theme = pageParameters.get("theme");
 
         if (!theme.isEmpty()) {
-            IBootstrapSettings settings = Bootstrap.getSettings(getApplication());
+            var settings = Bootstrap.getSettings(getApplication());
             settings.getActiveThemeProvider().setActiveTheme(theme.toString(""));
         }
     }
@@ -99,7 +99,7 @@ public abstract class BaseAuthenticatedPage extends BasePage {
     }
 
     private Component newNavigation(String markupId) {
-        WebMarkupContainer navigation = new WebMarkupContainer(markupId);
+        var navigation = new WebMarkupContainer(markupId);
         navigation.setVisible(hasNavigation());
         return navigation;
     }

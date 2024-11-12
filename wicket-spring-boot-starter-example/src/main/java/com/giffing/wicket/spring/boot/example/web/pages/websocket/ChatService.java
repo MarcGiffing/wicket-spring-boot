@@ -29,7 +29,7 @@ public class ChatService {
 	public Set<String> getParticipants() {
 		return participants
 				.stream()
-				.map(p -> p.getUsername())
+				.map(ChatParticipant::getUsername)
 				.collect(Collectors.toSet());
 	}
 	
@@ -38,7 +38,7 @@ public class ChatService {
 		List<ChatParticipant> existingUserSpecificParticipants = participants
 				.stream()
 				.filter(p -> p.getUsername().equalsIgnoreCase(chatParticipant.getUsername()))
-				.collect(Collectors.toList());
+				.toList();
 		participants.add(chatParticipant);
 		if(existingUserSpecificParticipants.isEmpty()) {
 			broadcaster.sendToAll(new JoinChatEvent(username));
@@ -51,13 +51,12 @@ public class ChatService {
 			.stream()
 			.filter(p -> p.getBrowserTabIdentifier().equals(chatParticipant.getBrowserTabIdentifier()))
 			.findAny();
-		if(chatParticipateToDelete.isPresent()) {
-			participants.remove(chatParticipateToDelete.get());
-		}
+        chatParticipateToDelete.ifPresent(participant -> participants.remove(participant));
+
 		List<ChatParticipant> remainingUserSpecificParticipants = participants
 			.stream()
 			.filter(p -> p.getUsername().equalsIgnoreCase(chatParticipant.getUsername()))
-			.collect(Collectors.toList());
+			.toList();
 		if(remainingUserSpecificParticipants.isEmpty()) {
 			broadcaster.sendToAll(new LeftChatEvent(username));
 		}

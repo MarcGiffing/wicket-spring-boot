@@ -12,8 +12,7 @@ public class ValidationMsgBehavior extends BorderBehavior {
 	
 	@Override
 	public void beforeRender(Component c) {
-		if (c instanceof FormComponent) {
-			FormComponent fc = (FormComponent) c;
+		if (c instanceof FormComponent fc) {
 			if (!fc.isValid()) {
 				super.beforeRender(c);
 				
@@ -24,8 +23,7 @@ public class ValidationMsgBehavior extends BorderBehavior {
 
 	@Override
 	public void afterRender(Component component) {
-		FormComponent fc = (FormComponent) component;
-		if (!fc.isValid()) {
+		if (component instanceof FormComponent<?> fc && !fc.isValid()) {
 			String error;
 			if (fc.hasFeedbackMessage()) {
 				FeedbackMessage first = fc.getFeedbackMessages().first();

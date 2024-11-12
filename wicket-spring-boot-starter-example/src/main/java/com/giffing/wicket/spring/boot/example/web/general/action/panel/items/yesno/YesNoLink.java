@@ -1,18 +1,17 @@
 package com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno;
 
 import com.giffing.wicket.spring.boot.example.web.pages.BasePage;
+import de.agilecoders.wicket.core.markup.html.bootstrap.image.IconType;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.html.panel.EmptyPanel;
-import org.apache.wicket.model.IModel;
 
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstractActionItemLink;
-import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.modal.YesNoModal;
 
 public abstract class YesNoLink<T> extends AbstractActionItemLink<T>{
 
-	public YesNoLink(IModel<T> label, IconType iconType) {
-		super(label, iconType);
+	public YesNoLink(IconType iconType) {
+		super(iconType);
 	}
 
 	@Override

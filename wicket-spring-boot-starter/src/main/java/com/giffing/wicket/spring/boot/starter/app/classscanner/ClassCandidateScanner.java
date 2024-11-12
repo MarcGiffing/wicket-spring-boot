@@ -77,23 +77,23 @@ public class ClassCandidateScanner {
 					}
 					if (beanClass.isAnnotationPresent(WicketHomePage.class)) {
 						classCandidates.getHomePageCandidates()
-								.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+								.add(new WicketClassCandidate<>((Class<Page>) beanClass));
 					}
 					if (beanClass.isAnnotationPresent(WicketSignInPage.class)) {
 						classCandidates.getSignInPageCandidates()
-								.add(new WicketClassCandidate<WebPage>((Class<WebPage>) beanClass));
+								.add(new WicketClassCandidate<>((Class<WebPage>) beanClass));
 					}
 					if (beanClass.isAnnotationPresent(WicketAccessDeniedPage.class)) {
 						classCandidates.getAccessDeniedPageCandidates()
-								.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+								.add(new WicketClassCandidate<>((Class<Page>) beanClass));
 					}
 					if (beanClass.isAnnotationPresent(WicketExpiredPage.class)) {
 						classCandidates.getExpiredPageCandidates()
-								.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+								.add(new WicketClassCandidate<>((Class<Page>) beanClass));
 					}
 					if (beanClass.isAnnotationPresent(WicketInternalErrorPage.class)) {
 						classCandidates.getInternalErrorPageCandidates()
-								.add(new WicketClassCandidate<Page>((Class<Page>) beanClass));
+								.add(new WicketClassCandidate<>((Class<Page>) beanClass));
 					}
 					if (beanClass.isAnnotationPresent(SpringBootApplication.class)) {
 						classCandidates.setSpringBootMainClass(beanClass);

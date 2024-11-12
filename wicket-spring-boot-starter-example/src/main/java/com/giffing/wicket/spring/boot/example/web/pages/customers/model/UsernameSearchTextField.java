@@ -13,8 +13,8 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.Custo
 import com.giffing.wicket.spring.boot.example.web.html.autocomplete.AutoCompleteTextField;
 
 public class UsernameSearchTextField extends AutoCompleteTextField {
-	
-	private final static Integer MINIMUM_INPUT_LENGTH = 3;
+
+	private static final Integer MINIMUM_INPUT_LENGTH = 3;
 	
 	@SpringBean
 	private CustomerRepositoryService service;

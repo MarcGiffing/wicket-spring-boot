@@ -8,8 +8,11 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPa
 import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerChangedEvent;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameTextField;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.wicket.Component;
 import org.apache.wicket.PageReference;
+import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.FormComponent;
@@ -20,6 +23,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("customers/create")
+@AuthorizeInstantiation("USER")
 public class CustomerCreatePage extends BaseAuthenticatedPage {
 
 	@SpringBean
@@ -28,8 +32,10 @@ public class CustomerCreatePage extends BaseAuthenticatedPage {
 	@SpringBean
 	private WebSocketMessageBroadcaster webSocketMessageBroadcaster;
 
-	CompoundPropertyModel<Customer> customerModel;
+	@Getter
+    CompoundPropertyModel<Customer> customerModel;
 
+	@Setter
 	private Integer pageReferenceId;
 
 	public CustomerCreatePage(Integer pageId){
@@ -68,7 +74,7 @@ public class CustomerCreatePage extends BaseAuthenticatedPage {
 		return new Button("submit"){
 			@Override
 			public void onSubmit() {
-				Customer customer = customerModel.getObject();
+				var customer = customerModel.getObject();
 				service.save(customer);
 				webSocketMessageBroadcaster.sendToAll(new CustomerChangedEvent(customer));
 				if(pageReferenceId != null){
@@ -95,18 +101,6 @@ public class CustomerCreatePage extends BaseAuthenticatedPage {
 		};
 		cancelButton.setDefaultFormProcessing(false);
 		return cancelButton;
-	}
-
-	public CompoundPropertyModel<Customer> getCustomerModel() {
-		return customerModel;
-	}
-
-	public Integer getPageReferenceId() {
-		return pageReferenceId;
-	}
-
-	public void setPageReferenceId(Integer pageReferenceId) {
-		this.pageReferenceId = pageReferenceId;
 	}
 
 }

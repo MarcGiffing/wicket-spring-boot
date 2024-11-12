@@ -13,10 +13,6 @@ public abstract class AutoCompleteTextField
 		super(id, settings);
 	}
 
-	public AutoCompleteTextField(String id, IModel<String> model) {
-		super(id, model);
-	}
-
 	public AutoCompleteTextField(String id, IModel<String> model, AutoCompleteSettings settings) {
 		super(id, model, settings);
 	}

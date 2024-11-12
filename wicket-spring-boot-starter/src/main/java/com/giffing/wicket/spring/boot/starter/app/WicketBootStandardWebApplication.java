@@ -87,7 +87,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
-		if(classCandidates.getHomePageCandidates().size() <= 0){
+		if(classCandidates.getHomePageCandidates().isEmpty()){
 			throw new IllegalStateException("Couln't find home page - please annotate the home page with @" + WicketHomePage.class.getName());
 		}
 		if(classCandidates.getHomePageCandidates().size() > 1 ){
@@ -98,9 +98,8 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 			}
 			throw new IllegalStateException(message);
 		}
-		
-		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
-		return next;
+
+		return classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 	}
 
 	public ApplicationContext getApplicationContext() {

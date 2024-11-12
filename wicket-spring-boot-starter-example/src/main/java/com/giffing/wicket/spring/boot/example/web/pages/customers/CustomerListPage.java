@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
+import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstrractActionItem;
 import com.giffing.wicket.spring.boot.example.web.pages.BaseAuthenticatedPage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.events.CustomerDeletedEvent;
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
@@ -45,10 +46,8 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.Custo
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.ActionPanel;
-import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.AbstrractActionItem;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.links.ActionItemLink;
 import com.giffing.wicket.spring.boot.example.web.general.action.panel.items.yesno.YesNoLink;
-import com.giffing.wicket.spring.boot.example.web.general.icons.IconType;
 import com.giffing.wicket.spring.boot.example.web.html.basic.YesNoLabel;
 import com.giffing.wicket.spring.boot.example.web.html.form.ValidationForm;
 import com.giffing.wicket.spring.boot.example.web.html.panel.FeedbackPanel;
@@ -83,21 +82,7 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 		feedbackPanel.setOutputMarkupId(true);
 		add(feedbackPanel);
 		
-		add(new WebSocketBehavior() {
-
-			@Override
-			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
-				if (message instanceof CustomerChangedEvent event) {
-					info("Customer changed " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
-					handler.add(feedbackPanel);
-				}
-				if (message instanceof CustomerDeletedEvent event) {
-					warn("Customer deleted: " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
-					handler.add(feedbackPanel);
-				}
-			}
-
-		});
+		add(getWebSocketBehavior(feedbackPanel));
 		
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
@@ -116,6 +101,24 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 		
 		customerDataTable(customerDataProvider);
 
+	}
+
+	private WebSocketBehavior getWebSocketBehavior(FeedbackPanel feedbackPanel) {
+		return new WebSocketBehavior() {
+
+			@Override
+			protected void onPush(WebSocketRequestHandler handler, IWebSocketPushMessage message) {
+				if (message instanceof CustomerChangedEvent event) {
+					info("Customer changed " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+				if (message instanceof CustomerDeletedEvent event) {
+					warn("Customer deleted: " + event.getCustomer().getFirstname() + " " + event.getCustomer().getLastname());
+					handler.add(feedbackPanel);
+				}
+			}
+
+		};
 	}
 
 	private Button cancelButton() {
@@ -146,7 +149,7 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 		columns.add(activeColumn());
 		columns.add(actionColumn());
 
-		dataTable = new AjaxFallbackDefaultDataTable<Customer, CustomerSort>("table", columns,
+		dataTable = new AjaxFallbackDefaultDataTable<>("table", columns,
 				customerDataProvider, 10);
 		dataTable.setOutputMarkupId(true);
 		FilterToolbar filterToolbar = new FilterToolbar(dataTable, filterForm);
@@ -161,112 +164,119 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> usernameColumn() {
-		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("username"), CustomerSort.USERNAME,
-				CustomerSort.USERNAME.getFieldName()) {
+		return new FilteredPropertyColumn<>(new ResourceModel("username"), CustomerSort.USERNAME,
+                CustomerSort.USERNAME.getFieldName()) {
 
-			@Override
-			public Component getFilter(String componentId, FilterForm<?> form) {
-				return new AbstractTextFieldFilter<String>(componentId,
-						new PropertyModel<>(form.getModel(), "usernameLike"), form) {
+            @Override
+            public Component getFilter(String componentId, FilterForm<?> form) {
+                return new AbstractTextFieldFilter<String>(componentId,
+                        new PropertyModel<>(form.getModel(), "usernameLike"), form) {
 
-					@Override
-					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new UsernameSearchTextField(componentId, model);
-					}
+                    @Override
+                    public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+                        return new UsernameSearchTextField(componentId, model);
+                    }
 
-				};
-			}
+                };
+            }
 
-		};
+        };
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> firstnameColumn() {
-		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("firstname"),
-				CustomerSort.FIRSTNAME, CustomerSort.FIRSTNAME.getFieldName()) {
+		return new FilteredPropertyColumn<>(new ResourceModel("firstname"),
+                CustomerSort.FIRSTNAME, CustomerSort.FIRSTNAME.getFieldName()) {
 
-			@Override
-			public Component getFilter(String componentId, FilterForm<?> form) {
-				return new AbstractTextFieldFilter<String>(componentId,
-						new PropertyModel<>(form.getModel(), "firstnameLike"), form) {
+            @Override
+            public Component getFilter(String componentId, FilterForm<?> form) {
+                return new AbstractTextFieldFilter<String>(componentId,
+                        new PropertyModel<>(form.getModel(), "firstnameLike"), form) {
 
-					@Override
-					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new TextField<>(componentId, model);
-					}
+                    @Override
+                    public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+                        return new TextField<>(componentId, model);
+                    }
 
-				};
-			}
+                };
+            }
 
-		};
+        };
 	}
 	
 	private FilteredPropertyColumn<Customer, CustomerSort> lastnameColumn() {
-		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("lastname"), CustomerSort.LASTNAME,
-				CustomerSort.LASTNAME.getFieldName()) {
+		return new FilteredPropertyColumn<>(new ResourceModel("lastname"), CustomerSort.LASTNAME,
+                CustomerSort.LASTNAME.getFieldName()) {
 
-			@Override
-			public Component getFilter(String componentId, FilterForm<?> form) {
-				return new AbstractTextFieldFilter<String>(componentId,
-						new PropertyModel<>(form.getModel(), "lastnameLike"), form) {
+            @Override
+            public Component getFilter(String componentId, FilterForm<?> form) {
+                return new AbstractTextFieldFilter<String>(componentId,
+                        new PropertyModel<>(form.getModel(), "lastnameLike"), form) {
 
-					@Override
-					public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
-						return new TextField<>(componentId, model);
-					}
+                    @Override
+                    public TextField<String> createTextFieldComponent(String componentId, IModel<String> model) {
+                        return new TextField<>(componentId, model);
+                    }
 
-				};
-			}
+                };
+            }
 
-		};
+        };
 	}
 
 	private FilteredPropertyColumn<Customer, CustomerSort> activeColumn() {
-		return new FilteredPropertyColumn<Customer, CustomerSort>(new ResourceModel("active"), CustomerSort.ACTIVE,
-				CustomerSort.ACTIVE.getFieldName()) {
+		return new FilteredPropertyColumn<>(new ResourceModel("active"), CustomerSort.ACTIVE,
+                CustomerSort.ACTIVE.getFieldName()) {
 
-			@Override
-			public Component getFilter(String componentId, FilterForm<?> form) {
-				return new AbstractCheckBoxFilter(componentId, new PropertyModel<>(form.getModel(), "active"), form);
-			}
+            @Override
+            public Component getFilter(String componentId, FilterForm<?> form) {
+                return new AbstractCheckBoxFilter(componentId, new PropertyModel<>(form.getModel(), "active"), form);
+            }
 
-			@Override
-			public void populateItem(Item<ICellPopulator<Customer>> item, String componentId,
-					IModel<Customer> rowModel) {
-				item.add(new YesNoLabel(componentId, (IModel<Boolean>) getDataModel(rowModel)));
-			}
+            @Override
+            public void populateItem(Item<ICellPopulator<Customer>> item, String componentId,
+                                     IModel<Customer> rowModel) {
+                item.add(new YesNoLabel(componentId, (IModel<Boolean>) getDataModel(rowModel)));
+            }
 
-		};
+        };
 	}
 	
 	private AbstractColumn<Customer, CustomerSort> actionColumn() {
-		return new AbstractColumn<Customer, CustomerSort>(Model.of("Action")) {
+		return new AbstractColumn<>(Model.of("Action")) {
 
-			@Override
-			public void populateItem(Item<ICellPopulator<Customer>> cellItem, String componentId,
-					IModel<Customer> rowModel) {
-				List<AbstrractActionItem> abstractItems = new ArrayList<>();
-				
-				PageParameters params = new PageParameters();
-				params.add(CustomerEditPage.CUSTOMER_ID_PARAM, rowModel.getObject().getId());
-				params.add(CustomerEditPage.PAGE_REFERENCE_ID, getPageId());
-				abstractItems.add(new ActionItemLink(Model.of("edit"), IconType.EDIT,
-						new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params )));
-				
-				abstractItems.add(new YesNoLink<String>(Model.of("xx"), IconType.DELETE) {
+            @Override
+            public void populateItem(Item<ICellPopulator<Customer>> cellItem, String componentId,
+                                     IModel<Customer> rowModel) {
+                List<AbstrractActionItem> abstractItems = new ArrayList<>();
+                var params = new PageParameters();
+                params.add(CustomerEditPage.CUSTOMER_ID_PARAM, rowModel.getObject().getId());
+                params.add(CustomerEditPage.PAGE_REFERENCE_ID, getPageId());
 
-					@Override
-					protected void yesClicked(AjaxRequestTarget target) {
-						customerRepositoryService.delete(rowModel.getObject().getId());
-						webSocketMessageBroadcaster.sendToAll(new CustomerDeletedEvent(rowModel.getObject()));
-						target.add(dataTable);
-					}
-				});
-				
-				ActionPanel actionPanel = new ActionPanel(componentId, abstractItems);
-				cellItem.add(actionPanel);
+                abstractItems.add(editActionItem(params));
+                abstractItems.add(deleteActionItem(rowModel));
+                cellItem.add(new ActionPanel(componentId, abstractItems));
+            }
 
-			}
-		};
+            private static ActionItemLink editActionItem(PageParameters params) {
+                return new ActionItemLink(
+                        Model.of("edit"),
+                        FontAwesome6IconType.pen_s,
+                        new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params)
+                );
+            }
+
+            private YesNoLink<Object> deleteActionItem(IModel<Customer> rowModel) {
+                return new YesNoLink<>(FontAwesome6IconType.trash_s) {
+
+                    @Override
+                    protected void yesClicked(AjaxRequestTarget target) {
+                        customerRepositoryService.delete(rowModel.getObject().getId());
+                        webSocketMessageBroadcaster.sendToAll(new CustomerDeletedEvent(rowModel.getObject()));
+                        target.add(dataTable);
+                    }
+                };
+            }
+        };
 	}
 
 }

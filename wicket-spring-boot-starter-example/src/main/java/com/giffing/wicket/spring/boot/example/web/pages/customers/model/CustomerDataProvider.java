@@ -1,7 +1,8 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.wicket.injection.Injector;
-import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
@@ -11,26 +12,18 @@ import com.giffing.wicket.spring.boot.example.repository.services.customer.filte
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerSort;
 import com.giffing.wicket.spring.boot.example.web.wicket.dataprovider.DefaultDataProvider;
 
+@Getter
+@Setter
 public class CustomerDataProvider extends DefaultDataProvider<Customer, Long, CustomerFilter, CustomerSort, CustomerRepositoryService>{
 	
 	@SpringBean
-	private CustomerRepositoryService customerRepositoryService;
+	private CustomerRepositoryService filterService;
 	
 	private IModel<CustomerFilter> customerFilterModel;
 
-	public CustomerDataProvider(){
-		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
-		Injector.get().inject(this);
-	}
-	
 	public CustomerDataProvider(IModel<CustomerFilter> customerFilterModel){
 		this.customerFilterModel = customerFilterModel;
 		Injector.get().inject(this);
-	}
-	
-	@Override
-	public CustomerRepositoryService getFilterService() {
-		return customerRepositoryService;
 	}
 
 	@Override
