@@ -1,96 +1,33 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.debug;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(DebugSettingsProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class DebugSettingsProperties {
 
-	public static final String PROPERTY_PREFIX = "wicket.core.settings.debug";
-	
-	/**
-	 * Toggle debug settings
-	 */
-	private boolean enabled;
-	
-	private boolean developmentUtilitiesEnabled = true;
-	
-	private boolean ajaxDebugModeEnabled = true;
-	
-	private boolean componentUseCheck = true;
-	
-	private boolean outputMarkupContainerClassName = false;
+    public static final String PROPERTY_PREFIX = "wicket.core.settings.debug";
 
-	private String componentPathAttributeName;
+    /**
+     * Toggle debug settings
+     */
+    private boolean enabled;
 
-	private boolean linePreciseReportingOnNewComponentEnabled;
+    private boolean developmentUtilitiesEnabled = true;
 
-	private boolean linePreciseReportingOnAddComponentEnabled;
+    private boolean ajaxDebugModeEnabled = true;
 
-	public boolean isDevelopmentUtilitiesEnabled() {
-		return developmentUtilitiesEnabled;
-	}
+    private boolean componentUseCheck = true;
 
-	public void setDevelopmentUtilitiesEnabled(boolean developmentUtilitiesEnabled) {
-		this.developmentUtilitiesEnabled = developmentUtilitiesEnabled;
-	}
+    private boolean outputMarkupContainerClassName = false;
 
-	public boolean isAjaxDebugModeEnabled() {
-		return ajaxDebugModeEnabled;
-	}
+    private String componentPathAttributeName;
 
-	public void setAjaxDebugModeEnabled(boolean ajaxDebugModeEnabled) {
-		this.ajaxDebugModeEnabled = ajaxDebugModeEnabled;
-	}
+    private boolean linePreciseReportingOnNewComponentEnabled;
 
-	public boolean isComponentUseCheck() {
-		return componentUseCheck;
-	}
+    private boolean linePreciseReportingOnAddComponentEnabled;
 
-	public void setComponentUseCheck(boolean componentUseCheck) {
-		this.componentUseCheck = componentUseCheck;
-	}
-
-	public boolean isOutputMarkupContainerClassName() {
-		return outputMarkupContainerClassName;
-	}
-
-	public void setOutputMarkupContainerClassName(boolean outputMarkupContainerClassName) {
-		this.outputMarkupContainerClassName = outputMarkupContainerClassName;
-	}
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getComponentPathAttributeName() {
-		return componentPathAttributeName;
-	}
-
-	public void setComponentPathAttributeName(String componentPathAttributeName) {
-		this.componentPathAttributeName = componentPathAttributeName;
-	}
-
-	public boolean isLinePreciseReportingOnAddComponentEnabled()
-	{
-		return linePreciseReportingOnAddComponentEnabled;
-	}
-
-	public void setLinePreciseReportingOnAddComponentEnabled(boolean linePreciseReportingOnAddComponentEnabled)
-	{
-		this.linePreciseReportingOnAddComponentEnabled = linePreciseReportingOnAddComponentEnabled;
-	}
-
-	public boolean isLinePreciseReportingOnNewComponentEnabled()
-	{
-		return linePreciseReportingOnNewComponentEnabled;
-	}
-
-	public void setLinePreciseReportingOnNewComponentEnabled(boolean linePreciseReportingOnNewComponentEnabled)
-	{
-		this.linePreciseReportingOnNewComponentEnabled = linePreciseReportingOnNewComponentEnabled;
-	}
 }

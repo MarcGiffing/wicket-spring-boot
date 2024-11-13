@@ -1,11 +1,14 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.memcached;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import com.giffing.wicket.spring.boot.context.extensions.types.DurationUnit;
 import com.giffing.wicket.spring.boot.context.extensions.types.SessionUnit;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = DataStoreMemcachedProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class DataStoreMemcachedProperties {
 
 	public static final String PROPERTY_PREFIX = "wicket.stuff.datastore.memcached";
@@ -25,69 +28,5 @@ public class DataStoreMemcachedProperties {
 	private long shutdownTimeout = 30;
 	
 	private DurationUnit shutdownTimeoutUnit  = DurationUnit.MINUTES;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public Long getSessionSize() {
-		return sessionSize;
-	}
-
-	public void setSessionSize(Long sessionSize) {
-		this.sessionSize = sessionSize;
-	}
-
-	public SessionUnit getSessionUnit() {
-		return sessionUnit;
-	}
-
-	public void setSessionUnit(SessionUnit sessionUnit) {
-		this.sessionUnit = sessionUnit;
-	}
-
-	public int getExpirationTime() {
-		return expirationTime;
-	}
-
-	public int getPort() {
-		return port;
-	}
-
-	public void setPort(int port) {
-		this.port = port;
-	}
-
-	public String getServerNames() {
-		return serverNames;
-	}
-
-	public void setServerNames(String serverNames) {
-		this.serverNames = serverNames;
-	}
-
-	public long getShutdownTimeout() {
-		return shutdownTimeout;
-	}
-
-	public void setShutdownTimeout(long shutdownTimeout) {
-		this.shutdownTimeout = shutdownTimeout;
-	}
-
-	public DurationUnit getShutdownTimeoutUnit() {
-		return shutdownTimeoutUnit;
-	}
-
-	public void setShutdownTimeoutUnit(DurationUnit shutdownTimeoutUnit) {
-		this.shutdownTimeoutUnit = shutdownTimeoutUnit;
-	}
-
-	public void setExpirationTime(int expirationTime) {
-		this.expirationTime = expirationTime;
-	}
 
 }

@@ -5,16 +5,16 @@ import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WicketFilter;
 
 /**
- * The {@link StandardWicketWebInitializer} will be configured when no other 
+ * The {@link StandardWicketWebInitializer} will be configured when no other
  * {@link WicketWebInitializerConfig} is present. It uses the standard {@link WicketFilter}.
- *  
+ *
  * @author Marc Giffing
  */
 public class StandardWicketWebInitializer implements WicketWebInitializerConfig {
 
-	@Override
-	public WicketFilter createWicketFilter(WebApplication application) {
-		return new WicketFilter(application);
-	}
+    @Override
+    public WicketFilter createWicketFilter(WebApplication application) {
+        return new WicketFilter(application);
+    }
 
 }

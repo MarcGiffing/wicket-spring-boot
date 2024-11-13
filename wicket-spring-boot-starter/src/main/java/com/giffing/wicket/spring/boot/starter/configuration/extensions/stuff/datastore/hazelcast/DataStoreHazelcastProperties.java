@@ -1,10 +1,13 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.hazelcast;
 
+import com.giffing.wicket.spring.boot.context.extensions.types.SessionUnit;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.giffing.wicket.spring.boot.context.extensions.types.SessionUnit;
-
 @ConfigurationProperties(prefix = DataStoreHazelcastProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class DataStoreHazelcastProperties {
 
 	public static final String PROPERTY_PREFIX = "wicket.stuff.datastore.hazelcast";
@@ -14,29 +17,5 @@ public class DataStoreHazelcastProperties {
 	private Long sessionSize = 2L;
 
 	private SessionUnit sessionUnit = SessionUnit.MEGABYTES;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public Long getSessionSize() {
-		return sessionSize;
-	}
-
-	public void setSessionSize(Long sessionSize) {
-		this.sessionSize = sessionSize;
-	}
-
-	public SessionUnit getSessionUnit() {
-		return sessionUnit;
-	}
-
-	public void setSessionUnit(SessionUnit sessionUnit) {
-		this.sessionUnit = sessionUnit;
-	}
 
 }

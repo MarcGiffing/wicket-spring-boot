@@ -12,11 +12,10 @@ import org.apache.wicket.protocol.http.WebApplication;
 /**
  * Should be used to mark the home page which should automatically configures in the {@link WebApplication}.
  * Only one {@link Page} should be marked with this annotation.
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface WicketHomePage {

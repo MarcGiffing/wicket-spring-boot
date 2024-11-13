@@ -1,20 +1,16 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.springreference;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = SpringReferenceProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class SpringReferenceProperties {
 
-	public static final String PROPERTY_PREFIX = "wicket.stuff.springreference";
-	
-	private boolean enabled = true;
+    public static final String PROPERTY_PREFIX = "wicket.stuff.springreference";
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    private boolean enabled = true;
 
 }

@@ -1,45 +1,22 @@
 package com.giffing.wicket.spring.boot.starter.app.verifier;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.giffing.wicket.spring.boot.starter.app.verifier.WicketDependencyVersionChecker.MavenDependency;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 /**
  * Should  be thrown if the version of wicket dependencies doesn't match the core dependency version
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
+@Getter
+@RequiredArgsConstructor
 public class WicketDependencyMismatchDetectedException extends RuntimeException {
 
-	private String wicketCoreVersion;
-	
-	private List<MavenDependency> dependencies = new ArrayList<>();
-	
-	public WicketDependencyMismatchDetectedException(String wicketCoreVersion, List<MavenDependency> dependencies) {
-		this.wicketCoreVersion = wicketCoreVersion;
-		this.dependencies = dependencies;
-	}
+    private final String wicketCoreVersion;
 
-	
-	public String getWicketCoreVersion() {
-		return wicketCoreVersion;
-	}
+    private final List<MavenDependency> dependencies;
 
-	
-	public void setWicketCoreVersion(String wicketCoreVersion) {
-		this.wicketCoreVersion = wicketCoreVersion;
-	}
-
-	
-	public List<MavenDependency> getDependencies() {
-		return dependencies;
-	}
-
-	
-	public void setDependencies(List<MavenDependency> dependencies) {
-		this.dependencies = dependencies;
-	}
-	
 }

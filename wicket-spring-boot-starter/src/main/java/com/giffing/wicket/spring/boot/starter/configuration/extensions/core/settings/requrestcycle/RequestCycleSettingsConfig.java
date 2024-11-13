@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.requrestcycle;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.settings.RequestCycleSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,29 +15,28 @@ import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
 
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = RequestCycleSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
-@EnableConfigurationProperties({ RequestCycleSettingsProperties.class })
+@EnableConfigurationProperties({RequestCycleSettingsProperties.class})
+@RequiredArgsConstructor
 public class RequestCycleSettingsConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private RequestCycleSettingsProperties props;
-	
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+    private final RequestCycleSettingsProperties props;
 
-	@Override
-	public void init(WebApplication webApplication) {
-		RequestCycleSettings requestCycleSettings = webApplication.getRequestCycleSettings();
-		
-		requestCycleSettings.setRenderStrategy(props.getRenderStrategy());
-		requestCycleSettings.setBufferResponse(props.isBufferResponse());
-		requestCycleSettings.setExceptionRetryCount(props.getExceptionRetryCount());
-		requestCycleSettings.setGatherExtendedBrowserInfo(props.isGatherExtendedBrowserInfo());
-		requestCycleSettings.setResponseRequestEncoding(props.getResponseRequestEncoding());
-		requestCycleSettings.setTimeout(TypeParser.parse(props.getTimeoutSize(), props.getTimeoutUnit()));
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", props)
-				.build());
-	}
-	
+    private final WicketEndpointRepository wicketEndpointRepository;
+
+    @Override
+    public void init(WebApplication webApplication) {
+        var requestCycleSettings = webApplication.getRequestCycleSettings();
+
+        requestCycleSettings.setRenderStrategy(props.getRenderStrategy());
+        requestCycleSettings.setBufferResponse(props.isBufferResponse());
+        requestCycleSettings.setExceptionRetryCount(props.getExceptionRetryCount());
+        requestCycleSettings.setGatherExtendedBrowserInfo(props.isGatherExtendedBrowserInfo());
+        requestCycleSettings.setResponseRequestEncoding(props.getResponseRequestEncoding());
+        requestCycleSettings.setTimeout(TypeParser.parse(props.getTimeoutSize(), props.getTimeoutUnit()));
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", props)
+                .build());
+    }
+
 }

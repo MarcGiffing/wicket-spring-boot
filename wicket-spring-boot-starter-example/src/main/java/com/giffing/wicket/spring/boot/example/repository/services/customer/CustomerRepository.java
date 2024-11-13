@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.ListCrudRepository;
 
 public interface CustomerRepository extends ListCrudRepository<Customer, Long>, JpaSpecificationExecutor<Customer> {
-	
-	int countByUsernameIgnoreCase(String username);
 
-	Customer findByUsernameIgnoreCase(String username);
-	
+    int countByUsernameIgnoreCase(String username);
+
+    Customer findByUsernameIgnoreCase(String username);
+
 }

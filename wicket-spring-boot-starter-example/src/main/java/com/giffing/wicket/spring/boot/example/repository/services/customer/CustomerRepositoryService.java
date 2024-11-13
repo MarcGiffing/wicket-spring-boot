@@ -1,25 +1,25 @@
 package com.giffing.wicket.spring.boot.example.repository.services.customer;
 
-import java.util.List;
-
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.FilterService;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.filter.CustomerFilter;
 
-public interface CustomerRepositoryService extends FilterService<Customer, Long, CustomerFilter>{
+import java.util.List;
 
-	void delete(Long id);
+public interface CustomerRepositoryService extends FilterService<Customer, Long, CustomerFilter> {
 
-	List<String> findUsernames(int count, String usernamePart);
+    void delete(Long id);
 
-	Customer save(Customer customer);
-	
-	Customer findByUsername(String username);
+    List<String> findUsernames(int count, String usernamePart);
 
-	/**
-	 * @param username the username
-	 * @return true if the username already exists
-	 */
-	boolean usernameExists(String username);
-	
+    Customer save(Customer customer);
+
+    Customer findByUsername(String username);
+
+    /**
+     * @param username the username
+     * @return true if the username already exists
+     */
+    boolean usernameExists(String username);
+
 }

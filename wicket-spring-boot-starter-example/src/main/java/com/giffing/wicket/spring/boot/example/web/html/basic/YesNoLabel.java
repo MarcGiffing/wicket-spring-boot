@@ -7,17 +7,15 @@ import org.apache.wicket.model.IModel;
 
 public class YesNoLabel extends Label {
 
-	public YesNoLabel(String id, IModel<Boolean> model) {
-		super(id, model);
-	}
+    public YesNoLabel(String id, IModel<Boolean> model) {
+        super(id, model);
+    }
 
-	@Override
-	public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
-		boolean active = (boolean)getDefaultModelObject();
-		String resourceKey = active ? "yes" : "no";
-		replaceComponentTagBody(markupStream, openTag, getString(resourceKey));
-	}
-
-	
+    @Override
+    public void onComponentTagBody(MarkupStream markupStream, ComponentTag openTag) {
+        var active = (boolean) getDefaultModelObject();
+        var resourceKey = active ? "yes" : "no";
+        replaceComponentTagBody(markupStream, openTag, getString(resourceKey));
+    }
 
 }

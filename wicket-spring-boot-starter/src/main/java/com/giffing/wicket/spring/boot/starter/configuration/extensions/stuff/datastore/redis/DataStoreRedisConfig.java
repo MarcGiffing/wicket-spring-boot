@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.redis;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.DefaultPageManagerProvider;
 import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -24,51 +25,48 @@ import redis.clients.jedis.Jedis;
 
 /**
  * Data store auto configuration for the redis database
- * 
+ * <p>
  * Enables redis data store if the following two condition matches:
- * 
+ * <p>
  * 1. The {@link Jedis} is in the classpath.
- * 
+ * <p>
  * 2. The property {@link DataStoreRedisProperties#PROPERTY_PREFIX}.enabled
  * is true (default = true)
- * 
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreRedisProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass({Jedis.class, RedisDataStore.class})
-@EnableConfigurationProperties({ DataStoreRedisProperties.class })
+@EnableConfigurationProperties({DataStoreRedisProperties.class})
 @AutoConfigureAfter(RedisAutoConfiguration.class)
+@RequiredArgsConstructor
 public class DataStoreRedisConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private DataStoreRedisProperties prop;
-	
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
-	
-	@Override
-	public void init(WebApplication webApplication) {
-		
-		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
-			@Override
-			protected IPageStore newPersistentStore() {
-				IRedisSettings settings = new RedisSettings();
-				settings.setHostname(prop.getHostname());
-				settings.setPort(prop.getPort());
-				settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
+    private final DataStoreRedisProperties prop;
 
-				RedisDataStore redisDataStore = new RedisDataStore(webApplication.getName(), settings);
-				return new SessionQuotaManagingDataStore(redisDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
-			}
-		});
+    private final WicketEndpointRepository wicketEndpointRepository;
 
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", prop)
-				.build());
-		
-	}
+    @Override
+    public void init(WebApplication webApplication) {
+
+        webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
+            @Override
+            protected IPageStore newPersistentStore() {
+                var settings = new RedisSettings();
+                settings.setHostname(prop.getHostname());
+                settings.setPort(prop.getPort());
+                settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
+
+                var redisDataStore = new RedisDataStore(webApplication.getName(), settings);
+                return new SessionQuotaManagingDataStore(redisDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
+            }
+        });
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", prop)
+                .build());
+
+    }
 
 }

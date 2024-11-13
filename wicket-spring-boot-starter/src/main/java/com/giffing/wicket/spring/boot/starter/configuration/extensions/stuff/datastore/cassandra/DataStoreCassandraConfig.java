@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.cassandra;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.DefaultPageManagerProvider;
 import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -22,53 +23,50 @@ import com.giffing.wicket.spring.boot.context.extensions.types.TypeParser;
 
 /**
  * Data store auto configuration for the cassandra database
- * 
+ * <p>
  * Enables cassandra data store if the following two condition matches:
- * 
+ * <p>
  * 1. The "com.datastax.driver.core.Session" is in the classpath.
- * 
+ * <p>
  * 2. The property {@link DataStoreCassandraProperties#PROPERTY_PREFIX}.enabled
  * is true (default = true)
- * 
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreCassandraProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(name = "com.datastax.driver.core.Session", value = {CassandraDataStore.class})
-@EnableConfigurationProperties({ DataStoreCassandraProperties.class })
+@EnableConfigurationProperties({DataStoreCassandraProperties.class})
 @AutoConfigureAfter(CassandraAutoConfiguration.class)
+@RequiredArgsConstructor
 public class DataStoreCassandraConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private DataStoreCassandraProperties prop;
+    private final DataStoreCassandraProperties prop;
 
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
-	
-	@Override
-	public void init(WebApplication webApplication) {
-		final ICassandraSettings settings = new CassandraSettings();
-		settings.getContactPoints().addAll(prop.getContactPoints());
-		settings.setTableName(prop.getTableName());
-		settings.setKeyspaceName(prop.getKeyspaceName());
-		settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
+    private final WicketEndpointRepository wicketEndpointRepository;
 
-		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
-			
-			@Override
-			protected IPageStore newPersistentStore() {
-				CassandraDataStore delegate = new CassandraDataStore(webApplication.getName(), settings);
-				return new SessionQuotaManagingDataStore(delegate,
-					TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
-			}
+    @Override
+    public void init(WebApplication webApplication) {
+        var settings = new CassandraSettings();
+        settings.getContactPoints().addAll(prop.getContactPoints());
+        settings.setTableName(prop.getTableName());
+        settings.setKeyspaceName(prop.getKeyspaceName());
+        settings.setRecordTtl(TypeParser.parse(prop.getRecordTtl(), prop.getRecordTtlUnit()));
 
-		});
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", prop)
-				.build());
-	}
+        webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
+
+            @Override
+            protected IPageStore newPersistentStore() {
+                var delegate = new CassandraDataStore(webApplication.getName(), settings);
+                return new SessionQuotaManagingDataStore(delegate,
+                        TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
+            }
+
+        });
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", prop)
+                .build());
+    }
 
 }

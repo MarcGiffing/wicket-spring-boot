@@ -12,27 +12,26 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * To be independent from Springs annotation this annotation was introduced
+ * To be independent of Springs annotation this annotation was introduced
  * which is a replacement for the {@link Component} annotation.
- * 
- * In future you may introduce different configuration options.
- * 
- * @author Marc Giffing
+ * <p>
+ * In the future, you may introduce different configuration options.
  *
+ * @author Marc Giffing
  */
 @Configuration
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
 @Order(ApplicationInitExtension.DEFAULT_PRECEDENCE)
 public @interface ApplicationInitExtension {
 
-	int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
-	
-	int DEFAULT_PRECEDENCE = Integer.MAX_VALUE / 2;
+    int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
 
-	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
+    int DEFAULT_PRECEDENCE = Integer.MAX_VALUE / 2;
 
-	String value() default "";
+    int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
+
+    String value() default "";
 }

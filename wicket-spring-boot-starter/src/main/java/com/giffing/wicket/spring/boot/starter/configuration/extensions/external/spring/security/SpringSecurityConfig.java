@@ -12,23 +12,23 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootSecuredWebApplicatio
 import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 
 @ApplicationInitExtension
-@ConditionalOnProperty(prefix = SpringSecurityProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing=true)
+@ConditionalOnProperty(prefix = SpringSecurityProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = {
-		org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession.class,
-		org.springframework.security.core.Authentication.class,
-		org.springframework.security.web.SecurityFilterChain.class
+        org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession.class,
+        org.springframework.security.core.Authentication.class,
+        org.springframework.security.web.SecurityFilterChain.class
 })
-@EnableConfigurationProperties({ SpringSecurityProperties.class })
+@EnableConfigurationProperties({SpringSecurityProperties.class})
 @ConditionalOnMissingBean(WicketBootWebApplication.class)
 public class SpringSecurityConfig {
-	
-	@Bean
-	public WicketBootSecuredWebApplication wicketBootWebApplication() {
-		return new WicketBootSecuredWebApplication();
-	}
-	
-	@Bean
-	public AuthenticatedWebSessionConfig authenticatedWebSessionConfig(){
-		return () -> SecureWebSession.class;
-	}
+
+    @Bean
+    public WicketBootSecuredWebApplication wicketBootWebApplication() {
+        return new WicketBootSecuredWebApplication();
+    }
+
+    @Bean
+    public AuthenticatedWebSessionConfig authenticatedWebSessionConfig() {
+        return () -> SecureWebSession.class;
+    }
 }

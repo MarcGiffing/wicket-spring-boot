@@ -4,9 +4,9 @@ import java.util.List;
 
 public class DummyWicketSessionResolver implements WicketSessionResolver {
 
-	@Override
-	public List<String> resolve(Object value) {
-		return List.of();
-	}
+    @Override
+    public List<String> resolve(Object value) {
+        return List.of();
+    }
 
 }

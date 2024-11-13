@@ -3,6 +3,8 @@ package com.giffing.wicket.spring.boot.starter.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -36,15 +38,15 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.sett
  *
  */
 @Lazy
+@Slf4j
 public class WicketBootStandardWebApplication extends WebApplication implements WicketBootWebApplication {
 
-	private final static Logger logger = LoggerFactory
-		.getLogger(WicketBootStandardWebApplication.class);
-
 	@Autowired
+	@Getter
 	private ApplicationContext applicationContext;
 	
 	@Autowired
+	@Getter
 	private GeneralSettingsProperties generalSettingsProperties;
 	
 	/**
@@ -52,9 +54,11 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	 * if no extension matches the given preconditions.
 	 */
 	@Autowired(required = false)
+	@Getter
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
+	@Getter
 	private WicketClassCandidatesHolder classCandidates;
 	
 	@Autowired
@@ -73,7 +77,7 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 				.build());
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
-			logger.info("init-config: " + configuration.getClass().getName());
+			log.info("init-config: {}", configuration.getClass().getName());
 			configuration.init(this);
 		}
 		
@@ -88,50 +92,19 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 	@Override
 	public Class<? extends Page> getHomePage() {
 		if(classCandidates.getHomePageCandidates().isEmpty()){
-			throw new IllegalStateException("Couln't find home page - please annotate the home page with @" + WicketHomePage.class.getName());
+			throw new IllegalStateException("Couldn't find home page - please annotate the home page with @" + WicketHomePage.class.getName());
 		}
 		if(classCandidates.getHomePageCandidates().size() > 1 ){
-			String message = "Multiple home pages found - please annotate exactly one class with @" + WicketHomePage.class.getName();
-			message += "\n";
-			for(WicketClassCandidate<Page> classCandidate : classCandidates.getHomePageCandidates()) {
-				message += "\t" + classCandidate.getCandidate() + "\n";
+			StringBuilder message = new StringBuilder("Multiple home pages found - please annotate exactly one class with @" + WicketHomePage.class.getName());
+			message.append("\n");
+			for(var classCandidate : classCandidates.getHomePageCandidates()) {
+				message.append("\t").append(classCandidate.getCandidate()).append("\n");
 			}
-			throw new IllegalStateException(message);
+			throw new IllegalStateException(message.toString());
 		}
 
 		return classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
-	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
-
-	public GeneralSettingsProperties getGeneralSettingsProperties() {
-		return generalSettingsProperties;
-	}
-
-	public void setGeneralSettingsProperties(GeneralSettingsProperties generalSettingsProperties) {
-		this.generalSettingsProperties = generalSettingsProperties;
-	}
-
-	public List<WicketApplicationInitConfiguration> getConfigurations() {
-		return configurations;
-	}
-
-	public void setConfigurations(List<WicketApplicationInitConfiguration> configurations) {
-		this.configurations = configurations;
-	}
-
-	public WicketClassCandidatesHolder getClassCandidates() {
-		return classCandidates;
-	}
-
-	public void setClassCandidates(WicketClassCandidatesHolder classCandidates) {
-		this.classCandidates = classCandidates;
-	}
 
 }

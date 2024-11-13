@@ -5,13 +5,11 @@ import com.giffing.wicket.spring.boot.example.web.pages.footer.Footer;
 import com.giffing.wicket.spring.boot.example.web.pages.websocket.ChatPage;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapExternalLink;
-import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.DropDownButton;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuBookmarkablePageLink;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuDivider;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuHeader;
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.*;
 import de.agilecoders.wicket.core.markup.html.bootstrap.utilities.BackgroundColorBehavior;
-import de.agilecoders.wicket.core.settings.IBootstrapSettings;
 import de.agilecoders.wicket.core.settings.ITheme;
 import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome6IconType;
 import org.apache.wicket.Component;
@@ -19,14 +17,13 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.AbstractLink;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.apache.wicket.util.string.StringValue;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAuthenticatedPage extends BasePage {
 
-    public BaseAuthenticatedPage(final PageParameters parameters) {
+    protected BaseAuthenticatedPage(final PageParameters parameters) {
         super(parameters);
         add(newNavbar("navbar"));
         add(newNavigation("navigation"));

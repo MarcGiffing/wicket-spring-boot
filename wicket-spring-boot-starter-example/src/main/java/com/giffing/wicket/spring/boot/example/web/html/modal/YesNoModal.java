@@ -6,7 +6,7 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 public abstract class YesNoModal extends Modal<Panel> {
 
-    public YesNoModal(String id) {
+    protected YesNoModal(String id) {
         super(id);
         var yesNoPanel = new YesNoPanel("content") {
 

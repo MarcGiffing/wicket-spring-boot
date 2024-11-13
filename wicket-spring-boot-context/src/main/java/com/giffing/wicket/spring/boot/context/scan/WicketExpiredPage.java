@@ -12,11 +12,10 @@ import org.apache.wicket.settings.ApplicationSettings;
 /**
  * This annotation can be used to mark a {@link Page} which will automatically configured
  * as the page expired error page in the {@link ApplicationSettings}.
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface WicketExpiredPage {

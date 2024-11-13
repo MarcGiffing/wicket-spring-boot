@@ -10,13 +10,12 @@ import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
 /**
- * Should be used to mark the sign in page which should be automatically configured in the {@link WebApplication} class.
+ * Should be used to mark the sign-in page which should be automatically configured in the {@link WebApplication} class.
  * Only one {@link Page} should be marked with this annotation.
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface WicketSignInPage {

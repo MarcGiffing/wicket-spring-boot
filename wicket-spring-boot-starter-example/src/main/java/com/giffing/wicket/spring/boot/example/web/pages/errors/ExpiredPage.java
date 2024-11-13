@@ -11,14 +11,13 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 @WicketExpiredPage
 public class ExpiredPage extends BasePage {
 
-	public ExpiredPage(PageParameters parameters) {
-		super(parameters);
-	}
+    public ExpiredPage(PageParameters parameters) {
+        super(parameters);
+    }
 
-	@Override
-	protected void setHeaders(final WebResponse response)
-	{
-		response.setStatus(HttpServletResponse.SC_GONE);
-	}
-	
+    @Override
+    protected void setHeaders(final WebResponse response) {
+        response.setStatus(HttpServletResponse.SC_GONE);
+    }
+
 }

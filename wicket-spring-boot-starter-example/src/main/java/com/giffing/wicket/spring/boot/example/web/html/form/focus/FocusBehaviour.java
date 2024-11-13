@@ -11,7 +11,7 @@ public class FocusBehaviour extends Behavior {
     public void renderHead(Component component, IHeaderResponse response) {
         super.renderHead(component, response);
         OnDomReadyHeaderItem focusComponentHeaderItem = OnDomReadyHeaderItem
-				.forScript("document.getElementById('%s').focus();".formatted(component.getMarkupId()));
+                .forScript("document.getElementById('%s').focus();".formatted(component.getMarkupId()));
         response.render(focusComponentHeaderItem);
     }
 

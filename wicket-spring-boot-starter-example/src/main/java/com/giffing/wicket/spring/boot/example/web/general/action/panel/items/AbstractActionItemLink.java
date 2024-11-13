@@ -6,19 +6,19 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 
 public abstract class AbstractActionItemLink<T> extends AbstrractActionItem {
-	
-	protected AbstractActionItemLink(IconType iconType){
-		AjaxLink<T> link = new AjaxLink<T>("link") {
 
-			@Override
-			public void onClick(AjaxRequestTarget target) {
-				AbstractActionItemLink.this.onClick(target);
-				
-			}
-		};
-		add(link);
-		link.add( new Icon("icon", iconType));
-	}
-	
-	public abstract void onClick(AjaxRequestTarget target);
+    protected AbstractActionItemLink(IconType iconType) {
+        AjaxLink<T> link = new AjaxLink<T>("link") {
+
+            @Override
+            public void onClick(AjaxRequestTarget target) {
+                AbstractActionItemLink.this.onClick(target);
+
+            }
+        };
+        add(link);
+        link.add(new Icon("icon", iconType));
+    }
+
+    public abstract void onClick(AjaxRequestTarget target);
 }

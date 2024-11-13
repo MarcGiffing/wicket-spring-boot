@@ -1,96 +1,34 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.cassandra;
 
-import java.util.List;
-
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import com.giffing.wicket.spring.boot.context.extensions.types.DurationUnit;
 import com.giffing.wicket.spring.boot.context.extensions.types.SessionUnit;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+import java.util.List;
 
 @ConfigurationProperties(prefix = DataStoreCassandraProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class DataStoreCassandraProperties {
 
-	public static final String PROPERTY_PREFIX = "wicket.stuff.datastore.cassandra";
-	
-	private boolean enabled = true;
-	
-	private List<String> contactPoints;
-	
-	private String tableName = "pagestore";
-	
-	private String keyspaceName = "wicket";
-	
-	private Long recordTtl = 30L;
-	
-	private DurationUnit recordTtlUnit = DurationUnit.MINUTES;
-	
-	private Long sessionSize = 2L;
-	
-	private SessionUnit sessionUnit = SessionUnit.MEGABYTES;
+    public static final String PROPERTY_PREFIX = "wicket.stuff.datastore.cassandra";
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    private boolean enabled = true;
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    private List<String> contactPoints;
 
-	public Long getSessionSize() {
-		return sessionSize;
-	}
+    private String tableName = "pagestore";
 
-	public void setSessionSize(Long sessionSize) {
-		this.sessionSize = sessionSize;
-	}
+    private String keyspaceName = "wicket";
 
-	public SessionUnit getSessionUnit() {
-		return sessionUnit;
-	}
+    private Long recordTtl = 30L;
 
-	public void setSessionUnit(SessionUnit sessionUnit) {
-		this.sessionUnit = sessionUnit;
-	}
+    private DurationUnit recordTtlUnit = DurationUnit.MINUTES;
 
-	public Long getRecordTtl() {
-		return recordTtl;
-	}
+    private Long sessionSize = 2L;
 
-	public void setRecordTtl(Long recordTtl) {
-		this.recordTtl = recordTtl;
-	}
-
-	public DurationUnit getRecordTtlUnit() {
-		return recordTtlUnit;
-	}
-
-	public void setRecordTtlUnit(DurationUnit recordTtlUnit) {
-		this.recordTtlUnit = recordTtlUnit;
-	}
-
-	public String getTableName() {
-		return tableName;
-	}
-
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
-
-	public String getKeyspaceName() {
-		return keyspaceName;
-	}
-
-	public void setKeyspaceName(String keyspaceName) {
-		this.keyspaceName = keyspaceName;
-	}
-
-	public List<String> getContactPoints() {
-		return contactPoints;
-	}
-
-	public void setContactPoints(List<String> contactPoints) {
-		this.contactPoints = contactPoints;
-	}
-
+    private SessionUnit sessionUnit = SessionUnit.MEGABYTES;
 
 }

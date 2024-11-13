@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.inspector;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.devutils.inspector.LiveSessionsPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,34 +16,32 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
  * Mounts pages from the devutils inspector package. Currently only the
  * {@link LiveSessionsPage} is supported and is mounted if the following
  * condition matches.
- * 
+ * <p>
  * 1. The {@link LiveSessionsPage} is in the classpath.
- * 
+ * <p>
  * 2. The property enableLiveSessionsPage is enabled
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
 @ApplicationInitExtension
-@ConditionalOnClass(value = { org.apache.wicket.devutils.inspector.LiveSessionsPage.class, })
-@EnableConfigurationProperties({ InspectorProperties.class })
+@ConditionalOnClass(value = {org.apache.wicket.devutils.inspector.LiveSessionsPage.class,})
+@EnableConfigurationProperties({InspectorProperties.class})
+@RequiredArgsConstructor
 public class InspectorConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private InspectorProperties properties;
+    private final InspectorProperties properties;
 
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
-	
-	@Override
-	public void init(WebApplication webApplication) {
-		if (properties.isEnableLiveSessionsPage()) {
-			webApplication.mountPage(properties.getLiveSessionPageMount(), LiveSessionsPage.class);
-		}
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", properties)
-				.build());
-	}
+    private final WicketEndpointRepository wicketEndpointRepository;
+
+    @Override
+    public void init(WebApplication webApplication) {
+        if (properties.isEnableLiveSessionsPage()) {
+            webApplication.mountPage(properties.getLiveSessionPageMount(), LiveSessionsPage.class);
+        }
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", properties)
+                .build());
+    }
 
 }

@@ -26,81 +26,81 @@ import org.wicketstuff.annotation.mount.MountPath;
 @AuthorizeInstantiation("USER")
 public class CustomerCreatePage extends BaseAuthenticatedPage {
 
-	@SpringBean
-	private CustomerRepositoryService service;
+    @SpringBean
+    private CustomerRepositoryService service;
 
-	@SpringBean
-	private WebSocketMessageBroadcaster webSocketMessageBroadcaster;
+    @SpringBean
+    private WebSocketMessageBroadcaster webSocketMessageBroadcaster;
 
-	@Getter
+    @Getter
     CompoundPropertyModel<Customer> customerModel;
 
-	@Setter
-	private Integer pageReferenceId;
+    @Setter
+    private Integer pageReferenceId;
 
-	public CustomerCreatePage(Integer pageId){
-		super(new PageParameters());
-		this.pageReferenceId = pageId;
-	}
+    public CustomerCreatePage(Integer pageId) {
+        super(new PageParameters());
+        this.pageReferenceId = pageId;
+    }
 
-	public CustomerCreatePage(){
-		super(new PageParameters());
-		customerModel = new CompoundPropertyModel<>(new Customer());
-		queue(new ValidationForm<>("form", customerModel));
-		queueFormComponent(usernameField());
-		queueFormComponent(new RequiredTextField<>("firstname"));
-		queueFormComponent(new RequiredTextField<>("lastname"));
-		queueFormComponent(new CheckBox("active"));
-		queue(submitButton());
-		queue(cancelButton());
-	}
+    public CustomerCreatePage() {
+        super(new PageParameters());
+        customerModel = new CompoundPropertyModel<>(new Customer());
+        queue(new ValidationForm<>("form", customerModel));
+        queueFormComponent(usernameField());
+        queueFormComponent(new RequiredTextField<>("firstname"));
+        queueFormComponent(new RequiredTextField<>("lastname"));
+        queueFormComponent(new CheckBox("active"));
+        queue(submitButton());
+        queue(cancelButton());
+    }
 
 
-	private FormComponent<String> usernameField() {
-		return new UsernameTextField("username") {
+    private FormComponent<String> usernameField() {
+        return new UsernameTextField("username") {
 
-			@Override
+            @Override
             public boolean isEnabled() {
                 return isCreatePage();
             }
         };
-	}
+    }
 
-	public boolean isCreatePage(){
-		return true;
-	}
+    public boolean isCreatePage() {
+        return true;
+    }
 
-	private Component submitButton() {
-		return new Button("submit"){
-			@Override
-			public void onSubmit() {
-				var customer = customerModel.getObject();
-				service.save(customer);
-				webSocketMessageBroadcaster.sendToAll(new CustomerChangedEvent(customer));
-				if(pageReferenceId != null){
-					setResponsePage(new PageReference(pageReferenceId).getPage());
-				} else {
-					setResponsePage(CustomerListPage.class);
-				}
-	}
-		};
-	}
+    private Component submitButton() {
+        return new Button("submit") {
+            @Override
+            public void onSubmit() {
+                var customer = customerModel.getObject();
+                service.save(customer);
+                webSocketMessageBroadcaster.sendToAll(new CustomerChangedEvent(customer));
+                if (pageReferenceId != null) {
+                    setResponsePage(new PageReference(pageReferenceId).getPage());
+                } else {
+                    setResponsePage(CustomerListPage.class);
+                }
+            }
+        };
+    }
 
-	private Component cancelButton() {
-		Button cancelButton = new Button("cancel"){
+    private Component cancelButton() {
+        Button cancelButton = new Button("cancel") {
 
-			@Override
-			public void onSubmit() {
-			if(pageReferenceId != null){
-				setResponsePage(new PageReference(pageReferenceId).getPage());
-			} else {
-				setResponsePage(CustomerListPage.class);
-			}
-			}
+            @Override
+            public void onSubmit() {
+                if (pageReferenceId != null) {
+                    setResponsePage(new PageReference(pageReferenceId).getPage());
+                } else {
+                    setResponsePage(CustomerListPage.class);
+                }
+            }
 
-		};
-		cancelButton.setDefaultFormProcessing(false);
-		return cancelButton;
-	}
+        };
+        cancelButton.setDefaultFormProcessing(false);
+        return cancelButton;
+    }
 
 }

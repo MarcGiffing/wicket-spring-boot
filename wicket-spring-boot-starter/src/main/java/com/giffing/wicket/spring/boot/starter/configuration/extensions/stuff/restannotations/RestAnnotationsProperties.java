@@ -1,8 +1,12 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.restannotations;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = RestAnnotationsProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class RestAnnotationsProperties {
 
 	public static final String PROPERTY_PREFIX = "wicket.stuff.restannotations";
@@ -11,19 +15,4 @@ public class RestAnnotationsProperties {
 
 	private String packagename;
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public String getPackagename() {
-		return packagename;
-	}
-
-	public void setPackagename(String packagename) {
-		this.packagename = packagename;
-	}
 }

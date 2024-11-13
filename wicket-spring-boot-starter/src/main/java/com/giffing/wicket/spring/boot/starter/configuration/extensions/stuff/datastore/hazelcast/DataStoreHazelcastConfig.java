@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.datastore.hazelcast;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.DefaultPageManagerProvider;
 import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
@@ -22,50 +23,46 @@ import com.hazelcast.core.HazelcastInstance;
 
 /**
  * Data store auto configuration for the hazelcast database
- * 
+ * <p>
  * Enables hazelcast data store if the following two condition matches:
- * 
+ * <p>
  * 1. The {@link HazelcastInstance} is in the classpath.
- * 
+ * <p>
  * 2. The property {@link DataStoreHazelcastProperties#PROPERTY_PREFIX}.enabled
  * is true (default = true)
- * 
- * 
- * @author Marc Giffing
  *
+ * @author Marc Giffing
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DataStoreHazelcastProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnBean(HazelcastInstance.class)
 @ConditionalOnClass({HazelcastInstance.class, HazelcastDataStore.class})
-@EnableConfigurationProperties({ DataStoreHazelcastProperties.class })
+@EnableConfigurationProperties({DataStoreHazelcastProperties.class})
 @AutoConfigureAfter(HazelcastAutoConfiguration.class)
+@RequiredArgsConstructor
 public class DataStoreHazelcastConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private DataStoreHazelcastProperties prop;
-	
-	@Autowired
-	private HazelcastInstance hazelcastInstance;
-	
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+    private final DataStoreHazelcastProperties prop;
 
-	@Override
-	public void init(WebApplication webApplication) {
-		
-		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
-			@Override
-			protected IPageStore newPersistentStore() {
-				HazelcastDataStore hazelcastDataStore = new HazelcastDataStore(webApplication.getName(), hazelcastInstance);
-				return new SessionQuotaManagingDataStore(hazelcastDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
-			}
-		});
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", prop)
-				.build());
+    private final HazelcastInstance hazelcastInstance;
 
-	}
+    private final WicketEndpointRepository wicketEndpointRepository;
+
+    @Override
+    public void init(WebApplication webApplication) {
+
+        webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
+            @Override
+            protected IPageStore newPersistentStore() {
+                var hazelcastDataStore = new HazelcastDataStore(webApplication.getName(), hazelcastInstance);
+                return new SessionQuotaManagingDataStore(hazelcastDataStore, TypeParser.parse(prop.getSessionSize(), prop.getSessionUnit()));
+            }
+        });
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", prop)
+                .build());
+
+    }
 
 }

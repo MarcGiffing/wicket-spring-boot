@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.development.devutils.diskstorebrowser;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.DefaultPageManagerProvider;
 import org.apache.wicket.devutils.pagestore.PageStorePage;
 import org.apache.wicket.markup.html.pages.BrowserInfoPage;
@@ -34,22 +35,21 @@ import java.io.File;
 @ConditionalOnProperty(prefix = DiskStoreBrowserProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
 @ConditionalOnClass(value = PageStorePage.class)
 @EnableConfigurationProperties({ DiskStoreBrowserProperties.class })
+@RequiredArgsConstructor
 public class DiskStoreBrowserConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private DiskStoreBrowserProperties properties;
+	private final DiskStoreBrowserProperties properties;
 	
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
+	private final WicketEndpointRepository wicketEndpointRepository;
 	
 	@Override
 	public void init(WebApplication webApplication) {
 		webApplication.setPageManagerProvider(new DefaultPageManagerProvider(webApplication) {
 			@Override
 			protected IPageStore newPersistentStore() {
-				StoreSettings storeSettings = application.getStoreSettings();
-				File fileStoreFolder = storeSettings.getFileStoreFolder();
-				Bytes maxSizePerSession = storeSettings.getMaxSizePerSession();
+				var storeSettings = application.getStoreSettings();
+				var fileStoreFolder = storeSettings.getFileStoreFolder();
+				var maxSizePerSession = storeSettings.getMaxSizePerSession();
 				return new DiskPageStore(webApplication.getName(), fileStoreFolder, maxSizePerSession);
 			}
 		});

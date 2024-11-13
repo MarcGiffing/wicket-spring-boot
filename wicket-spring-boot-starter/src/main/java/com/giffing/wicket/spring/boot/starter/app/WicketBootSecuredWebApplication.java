@@ -3,6 +3,9 @@ package com.giffing.wicket.spring.boot.starter.app;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.wicket.Page;
 import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
@@ -42,14 +45,16 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.sett
  * @author Marc Giffing
  *
  */
+@RequiredArgsConstructor
+@Slf4j
 public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication implements WicketBootWebApplication {
-	
-	private final static Logger logger = LoggerFactory.getLogger(WicketBootSecuredWebApplication.class);
 
 	@Autowired
+	@Getter
 	private ApplicationContext applicationContext;
 	
 	@Autowired
+	@Getter
 	private GeneralSettingsProperties generalSettingsProperties;
 
 	/**
@@ -57,6 +62,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	 * if no extension matches the given preconditions.
 	 */
 	@Autowired
+	@Getter
 	private List<WicketApplicationInitConfiguration> configurations = new ArrayList<>();
 	
 	@Autowired
@@ -78,7 +84,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 				.build());
 		
 		for (WicketApplicationInitConfiguration configuration : configurations) {
-			logger.info("init-config: " + configuration.getClass().getName());
+			log.info("init-config: {}", configuration.getClass().getName());
 			configuration.init(this);
 		}
 		
@@ -97,7 +103,7 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 	@SuppressWarnings("unchecked")
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
-		if(classCandidates.getSignInPageCandidates().size() <= 0){
+		if(classCandidates.getSignInPageCandidates().isEmpty()){
 			throw new IllegalStateException("Couldn't find sign in page - please annotate the sign in page with @" + WicketSignInPage.class.getName());
 		}
 		if(classCandidates.getSignInPageCandidates().size() > 1 ){
@@ -108,15 +114,14 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			}
 			throw new IllegalStateException(message);
 		}
-		
-		Class<WebPage> candidateClass = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
-		return candidateClass;
+
+		return classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
-		if(classCandidates.getHomePageCandidates().size() <= 0){
+		if(classCandidates.getHomePageCandidates().isEmpty()){
 			throw new IllegalStateException("Couldn't find home page - please annotate the home page with @" + WicketHomePage.class.getName());
 		}
 		if(classCandidates.getHomePageCandidates().size() > 1 ){
@@ -127,32 +132,8 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 			}
 			throw new IllegalStateException(message);
 		}
-		
-		Class<Page> next = classCandidates.getHomePageCandidates().iterator().next().getCandidate();
-		return next;
+
+		return classCandidates.getHomePageCandidates().iterator().next().getCandidate();
 	}
 
-	public ApplicationContext getApplicationContext() {
-		return applicationContext;
-	}
-
-	public void setApplicationContext(ApplicationContext applicationContext) {
-		this.applicationContext = applicationContext;
-	}
-
-	public GeneralSettingsProperties getGeneralSettingsProperties() {
-		return generalSettingsProperties;
-	}
-
-	public void setGeneralSettingsProperties(GeneralSettingsProperties generalSettingsProperties) {
-		this.generalSettingsProperties = generalSettingsProperties;
-	}
-
-	public List<WicketApplicationInitConfiguration> getConfigurations() {
-		return configurations;
-	}
-
-	public void setConfigurations(List<WicketApplicationInitConfiguration> configurations) {
-		this.configurations = configurations;
-	}
 }

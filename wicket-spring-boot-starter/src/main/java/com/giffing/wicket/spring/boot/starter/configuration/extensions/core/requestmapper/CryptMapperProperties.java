@@ -5,5 +5,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(CryptMapperProperties.PROPERTY_PREFIX)
 public class CryptMapperProperties {
 
-	public static final String PROPERTY_PREFIX = "wicket.core.requestmapper.cryptmapper";
+    public static final String PROPERTY_PREFIX = "wicket.core.requestmapper.cryptmapper";
 }

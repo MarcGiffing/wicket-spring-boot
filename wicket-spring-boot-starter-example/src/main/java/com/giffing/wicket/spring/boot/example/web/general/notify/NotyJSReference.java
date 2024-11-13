@@ -4,10 +4,10 @@ import org.apache.wicket.resource.JQueryPluginResourceReference;
 
 public class NotyJSReference extends JQueryPluginResourceReference {
 
-	public static final NotyJSReference INSTANCE = new NotyJSReference();
+    public static final NotyJSReference INSTANCE = new NotyJSReference();
 
-	public NotyJSReference() {
-		super(NotyJSReference.class, "jquery.noty.js");
-	}
+    public NotyJSReference() {
+        super(NotyJSReference.class, "jquery.noty.js");
+    }
 
 }

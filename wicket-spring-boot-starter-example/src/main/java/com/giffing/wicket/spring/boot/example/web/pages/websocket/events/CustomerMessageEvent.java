@@ -11,9 +11,9 @@ import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 @RequiredArgsConstructor
 public class CustomerMessageEvent implements IWebSocketPushMessage {
 
-	private final String sender;
+    private final String sender;
 
-	private final String message;
+    private final String message;
 
 
 }

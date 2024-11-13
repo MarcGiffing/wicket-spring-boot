@@ -9,14 +9,14 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 @Configuration
 public class WicketEndpointConfiguration {
 
-	@Bean
-	public WicketEndpoint wicketEndpoint() {
-		return new WicketEndpoint(wicketEndpointRepositoryDefault());
-	}
-	
-	@Bean
-	@ConditionalOnMissingBean
-	public WicketEndpointRepository wicketEndpointRepositoryDefault() {
-		return new WicketEndpointRepositoryDefault();
-	}
+    @Bean
+    public WicketEndpoint wicketEndpoint() {
+        return new WicketEndpoint(wicketEndpointRepositoryDefault());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public WicketEndpointRepository wicketEndpointRepositoryDefault() {
+        return new WicketEndpointRepositoryDefault();
+    }
 }

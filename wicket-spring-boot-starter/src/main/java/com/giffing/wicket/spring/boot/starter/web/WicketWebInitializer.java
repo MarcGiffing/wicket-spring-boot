@@ -17,42 +17,42 @@ import java.util.EnumSet;
 
 /**
  * Primary container configuration to configure Wicket requests.
- * 
+ *
  * @author Marc Giffing
  */
 @Configuration
-@Import(value = { WicketWebInitializerAutoConfig.class })
-@EnableConfigurationProperties({ WicketWebInitializerProperties.class })
+@Import(value = {WicketWebInitializerAutoConfig.class})
+@EnableConfigurationProperties({WicketWebInitializerProperties.class})
 public class WicketWebInitializer {
 
-	public static final String WICKET_FILTERNAME = "wicket-filter";
+    public static final String WICKET_FILTERNAME = "wicket-filter";
 
-	@Bean
-	public FilterRegistrationBean<WicketFilter> wicketFilter(
-			WicketWebInitializerConfig wicketWebInitializerConfig,
-			WicketWebInitializerProperties props,
-			WicketEndpointRepository wicketEndpointRepository,
-			WicketBootWebApplication wicketBootWebApplication
-	) {
-		WicketFilter wicketFilter = wicketWebInitializerConfig.createWicketFilter((WebApplication) wicketBootWebApplication);
+    @Bean
+    public FilterRegistrationBean<WicketFilter> wicketFilter(
+            WicketWebInitializerConfig wicketWebInitializerConfig,
+            WicketWebInitializerProperties props,
+            WicketEndpointRepository wicketEndpointRepository,
+            WicketBootWebApplication wicketBootWebApplication
+    ) {
+        var wicketFilter = wicketWebInitializerConfig.createWicketFilter((WebApplication) wicketBootWebApplication);
 
-		FilterRegistrationBean<WicketFilter> filter = new FilterRegistrationBean<>(wicketFilter);
-		filter.setName(WICKET_FILTERNAME);
-		filter.addUrlPatterns(props.getFilterMappingParam());
-		filter.setDispatcherTypes(EnumSet.copyOf( props.getDispatcherTypes() ));
-		filter.setMatchAfter(props.isFilterMatchAfter());
+        var filter = new FilterRegistrationBean<>(wicketFilter);
+        filter.setName(WICKET_FILTERNAME);
+        filter.addUrlPatterns(props.getFilterMappingParam());
+        filter.setDispatcherTypes(EnumSet.copyOf(props.getDispatcherTypes()));
+        filter.setMatchAfter(props.isFilterMatchAfter());
 
-		filter.addInitParameter(WicketFilter.FILTER_MAPPING_PARAM, props.getFilterMappingParam());
-		props.getInitParameters().forEach(filter::addInitParameter);
+        filter.addInitParameter(WicketFilter.FILTER_MAPPING_PARAM, props.getFilterMappingParam());
+        props.getInitParameters().forEach(filter::addInitParameter);
 
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("wicketFilterName", WICKET_FILTERNAME)
-				.withDetail("wicketFilterClass", wicketFilter.getClass())
-				.withDetail("properties", props)
-				.build());
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("wicketFilterName", WICKET_FILTERNAME)
+                .withDetail("wicketFilterClass", wicketFilter.getClass())
+                .withDetail("properties", props)
+                .build());
 
-		return filter;
-	}
+        return filter;
+    }
 
 }
 

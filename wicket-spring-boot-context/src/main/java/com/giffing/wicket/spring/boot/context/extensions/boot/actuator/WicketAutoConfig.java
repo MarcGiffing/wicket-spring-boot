@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import lombok.Getter;
 import org.springframework.util.Assert;
 
+@Getter
 public class WicketAutoConfig implements Serializable {
-
-	private static final long serialVersionUID = 1L;
 
 	private final String key;
 
@@ -29,20 +29,20 @@ public class WicketAutoConfig implements Serializable {
 
 		public Builder() {
 			this.configurationClass = null;
-			this.details = new LinkedHashMap<String, Object>();
+			this.details = new LinkedHashMap<>();
 		}
 
 		public Builder(Class<?> configurationClass) {
 			Assert.notNull(configurationClass, "ConfigurationClass must not be null");
 			this.configurationClass = configurationClass;
-			this.details = new LinkedHashMap<String, Object>();
+			this.details = new LinkedHashMap<>();
 		}
 
 		public Builder(Class<?> configurationClass, Map<String, ?> details) {
 			Assert.notNull(configurationClass, "ConfigurationClass must not be null");
 			Assert.notNull(details, "Details must not be null");
 			this.configurationClass = configurationClass;
-			this.details = new LinkedHashMap<String, Object>(details);
+			this.details = new LinkedHashMap<>(details);
 		}
 
 		public Builder withDetail(String key, Object value) {
@@ -57,12 +57,4 @@ public class WicketAutoConfig implements Serializable {
 
 	}
 	
-	public String getKey() {
-		return key;
-	}
-
-	public Map<String, Object> getDetails() {
-		return details;
-	}
-
 }

@@ -3,10 +3,14 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.csr
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.wicket.protocol.http.ResourceIsolationRequestCycleListener.CsrfAction;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = CsrfAttacksPreventionProperties.PROPERTY_PREFIX)
+@Getter
+@Setter
 public class CsrfAttacksPreventionProperties {
 	
 	public static final String PROPERTY_PREFIX = "wicket.core.csrf";
@@ -45,53 +49,5 @@ public class CsrfAttacksPreventionProperties {
 	 * Enables Wickets CSRF protection
 	 */
 	private boolean enabled = true;
-
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
-	public CsrfAction getDisallowedOutcomeAction() {
-		return disallowedOutcomeAction;
-	}
-
-	public void setDisallowedOutcomeAction(CsrfAction disallowedOutcomeAction) {
-		this.disallowedOutcomeAction = disallowedOutcomeAction;
-	}
-
-	public CsrfAction gtUnknownOutcomeAction() {
-		return unknownOutcomeAction;
-	}
-
-	public void setUnknownOutcomeAction(CsrfAction unknownOutcomeAction) {
-		this.unknownOutcomeAction = unknownOutcomeAction;
-	}
-
-	public int getErrorCode() {
-		return errorCode;
-	}
-
-	public void setErrorCode(int errorCode) {
-		this.errorCode = errorCode;
-	}
-
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-
-	public List<String> getAcceptedOrigins() {
-		return acceptedOrigins;
-	}
-
-	public void setAcceptedOrigins(List<String> acceptedOrigins) {
-		this.acceptedOrigins = acceptedOrigins;
-	}
 
 }

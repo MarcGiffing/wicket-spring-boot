@@ -6,17 +6,17 @@ import org.apache.wicket.protocol.http.WicketFilter;
 
 /**
  * Dynamic configuration support which will be used in {@link WicketWebInitializer}.
- * 
+ * <p>
  * The configuration {@link WicketWebInitializerAutoConfig} is responsible to detect which {@link WicketWebInitializerConfig}
  * should be configured.
- * 
+ *
  * @author Marc Giffing
  */
 public interface WicketWebInitializerConfig {
-	
-	/**
-	 * Returns a {@link WicketFilter} which will be configured in the {@link WicketWebInitializer}
-	 */
-	WicketFilter createWicketFilter(WebApplication application);
-	
+
+    /**
+     * Returns a {@link WicketFilter} which will be configured in the {@link WicketWebInitializer}
+     */
+    WicketFilter createWicketFilter(WebApplication application);
+
 }

@@ -5,6 +5,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = SpringSecurityProperties.PROPERTY_PREFIX)
 public class SpringSecurityProperties {
 
-	public static final String PROPERTY_PREFIX = "wicket.external.spring.security";
-	
+    public static final String PROPERTY_PREFIX = "wicket.external.spring.security";
+
 }

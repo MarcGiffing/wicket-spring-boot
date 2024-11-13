@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.stuff.shiro;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.shiro.spring.boot.autoconfigure.ShiroAutoConfiguration;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
@@ -24,37 +25,36 @@ import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.Wicket
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = ShiroSecurityProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = {
-		AnnotationsShiroAuthorizationStrategy.class,
-		ShiroAutoConfiguration.class,
+        AnnotationsShiroAuthorizationStrategy.class,
+        ShiroAutoConfiguration.class,
 })
-@EnableConfigurationProperties({ ShiroSecurityProperties.class })
-
+@EnableConfigurationProperties({ShiroSecurityProperties.class})
+@RequiredArgsConstructor
 public class ShiroSecurityConfig implements WicketApplicationInitConfiguration {
 
-	@Autowired
-	private WicketClassCandidatesHolder classCandidates;
+    private final WicketClassCandidatesHolder classCandidates;
 
-	@Bean
-	ShiroFilterChainDefinition shiroFilterChainDefinition() {
-		return new DefaultShiroFilterChainDefinition();
-	}
+    @Bean
+    ShiroFilterChainDefinition shiroFilterChainDefinition() {
+        return new DefaultShiroFilterChainDefinition();
+    }
 
-	@Override
-	public void init(WebApplication webApplication) {
-		AnnotationsShiroAuthorizationStrategy authz = new AnnotationsShiroAuthorizationStrategy();
-		webApplication.getSecuritySettings().setAuthorizationStrategy( authz );
+    @Override
+    public void init(WebApplication webApplication) {
+        var authz = new AnnotationsShiroAuthorizationStrategy();
+        webApplication.getSecuritySettings().setAuthorizationStrategy(authz);
 
-		if ( classCandidates.getSignInPageCandidates().size() <= 0 ) {
-			throw new IllegalStateException( "Couln't find sign in page - please annotate the sign in page with @" + WicketSignInPage.class.getName() );
-		}
-		if ( classCandidates.getAccessDeniedPageCandidates().size() <= 0 ) {
-			throw new IllegalStateException( "Couln't find access denied in page - please annotate the sign in page with @" + WicketAccessDeniedPage.class.getName() );
-		}
-		Class<WebPage> signInPage = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
-		Class<Page> accessDeniedPage = classCandidates.getAccessDeniedPageCandidates().iterator().next().getCandidate();
-		webApplication.getSecuritySettings()
-				.setUnauthorizedComponentInstantiationListener( new ShiroUnauthorizedComponentListener( signInPage, accessDeniedPage, authz ) );
+        if (classCandidates.getSignInPageCandidates().isEmpty()) {
+            throw new IllegalStateException("Couln't find sign in page - please annotate the sign in page with @" + WicketSignInPage.class.getName());
+        }
+        if (classCandidates.getAccessDeniedPageCandidates().isEmpty()) {
+            throw new IllegalStateException("Couln't find access denied in page - please annotate the sign in page with @" + WicketAccessDeniedPage.class.getName());
+        }
+        var signInPage = classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
+        var accessDeniedPage = classCandidates.getAccessDeniedPageCandidates().iterator().next().getCandidate();
+        webApplication.getSecuritySettings()
+                .setUnauthorizedComponentInstantiationListener(new ShiroUnauthorizedComponentListener(signInPage, accessDeniedPage, authz));
 
-	}
+    }
 
 }

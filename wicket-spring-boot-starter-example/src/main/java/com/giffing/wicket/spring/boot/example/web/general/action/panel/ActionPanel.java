@@ -9,9 +9,9 @@ import java.util.List;
 
 public class ActionPanel extends Panel {
 
-	public ActionPanel(String id, List<AbstrractActionItem> items) {
-		super(id);
-		add(new BootstrapListView<>("items", items) {
+    public ActionPanel(String id, List<AbstrractActionItem> items) {
+        super(id);
+        add(new BootstrapListView<>("items", items) {
 
             @Override
             protected void populateItem(ListItem<AbstrractActionItem> item) {
@@ -19,7 +19,7 @@ public class ActionPanel extends Panel {
             }
 
         });
-	}
+    }
 
 
 }

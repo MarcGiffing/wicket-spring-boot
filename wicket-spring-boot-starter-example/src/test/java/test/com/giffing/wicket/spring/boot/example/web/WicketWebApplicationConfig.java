@@ -20,35 +20,34 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.
 
 //TODO move to test
 @SpringBootApplication(exclude = {
-		DataSourceAutoConfiguration.class,
-		JpaRepositoriesAutoConfiguration.class,
-		HibernateJpaAutoConfiguration.class,
+        DataSourceAutoConfiguration.class,
+        JpaRepositoriesAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class,
 })
-@ComponentScan(basePackageClasses=SpringBootWebPackageIdentifier.class)
+@ComponentScan(basePackageClasses = SpringBootWebPackageIdentifier.class)
 @EnableTransactionManagement
 public class WicketWebApplicationConfig extends WicketBootSecuredWebApplication {
 
-	@Override
-	protected void init() {
-		super.init();
+    @Override
+    protected void init() {
+        super.init();
+        // Add WicketApplication.properties resource file
+        getResourceSettings().getStringResourceLoaders().add(new ClassStringResourceLoader(WicketApplication.class));
+    }
 
-		// Add WicketApplication.properties resource file
-		getResourceSettings().getStringResourceLoaders().add(new ClassStringResourceLoader(WicketApplication.class));
-	}
+    @Override
+    protected Class<? extends WebPage> getSignInPageClass() {
+        return LoginPage.class;
+    }
 
-	@Override
-	protected Class<? extends WebPage> getSignInPageClass() {
-		return LoginPage.class;
-	}
+    @Override
+    public Class<? extends Page> getHomePage() {
+        return CustomerListPage.class;
+    }
 
-	@Override
-	public Class<? extends Page> getHomePage() {
-		return CustomerListPage.class;
-	}
-	
-	@Override
-	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
-		return SecureWebSession.class;
-	}
-	
+    @Override
+    protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
+        return SecureWebSession.class;
+    }
+
 }

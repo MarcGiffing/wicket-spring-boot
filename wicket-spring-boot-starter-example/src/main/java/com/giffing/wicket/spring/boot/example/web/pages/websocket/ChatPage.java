@@ -49,6 +49,7 @@ public class ChatPage extends BaseAuthenticatedPage {
     private ChatService chatService;
 
     private WebMarkupContainer chatMessageContainer;
+
     private ListView<ChatMessage> messages;
 
     private RequiredTextField<String> messageInput;

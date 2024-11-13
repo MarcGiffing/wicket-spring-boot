@@ -8,6 +8,6 @@ import org.apache.wicket.protocol.ws.api.message.IWebSocketPushMessage;
 @RequiredArgsConstructor
 public class JoinChatEvent implements IWebSocketPushMessage {
 
-	private final String username;
+    private final String username;
 
 }

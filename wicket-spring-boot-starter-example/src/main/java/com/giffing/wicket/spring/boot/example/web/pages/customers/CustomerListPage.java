@@ -259,7 +259,6 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 
             private static ActionItemLink editActionItem(PageParameters params) {
                 return new ActionItemLink(
-                        Model.of("edit"),
                         FontAwesome6IconType.pen_s,
                         new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params)
                 );

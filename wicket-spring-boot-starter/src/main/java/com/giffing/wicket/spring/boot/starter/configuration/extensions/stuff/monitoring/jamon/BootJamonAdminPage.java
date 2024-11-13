@@ -6,10 +6,10 @@ import org.wicketstuff.jamon.component.JamonAdminPage;
 
 public class BootJamonAdminPage extends JamonAdminPage {
 
-	@Override
-	public void renderHead(IHeaderResponse response) {
-		super.renderHead(response);
-		response.render(CssHeaderItem.forReference(JamonCssResourceReference.INSTANCE));
-	}
-	
+    @Override
+    public void renderHead(IHeaderResponse response) {
+        super.renderHead(response);
+        response.render(CssHeaderItem.forReference(JamonCssResourceReference.INSTANCE));
+    }
+
 }

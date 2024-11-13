@@ -1,24 +1,19 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.external.spring.boot.actuator;
 
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
+import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
-import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
-
+@Getter
 public class WicketEndpointRepositoryDefault implements WicketEndpointRepository {
 
-	public List<WicketAutoConfig> wicketAutoConfigurations = new ArrayList<>();
-	
-	public void add(WicketAutoConfig autoconfig) {
-		this.wicketAutoConfigurations.add(autoconfig);
-	}
+    private final List<WicketAutoConfig> configs = new ArrayList<>();
 
-	@Override
-	public List<WicketAutoConfig> getConfigs() {
-		return wicketAutoConfigurations;
-	}
-	
+    public void add(WicketAutoConfig autoconfig) {
+        this.configs.add(autoconfig);
+    }
+
 }

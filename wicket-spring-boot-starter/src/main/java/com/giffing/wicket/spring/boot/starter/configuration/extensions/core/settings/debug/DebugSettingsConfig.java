@@ -1,5 +1,6 @@
 package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.debug;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.settings.DebugSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +14,37 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 
 /**
  * Enables debug settings if the following condition matches.
- * 
+ * <p>
  * 1. The property {@link DebugSettingsProperties#PROPERTY_PREFIX}.enabled has to be true (default = false)
  *
  * @author Marc Giffing
- *
  */
 @ApplicationInitExtension
 @ConditionalOnProperty(prefix = DebugSettingsProperties.PROPERTY_PREFIX, value = "enabled", matchIfMissing = false)
-@EnableConfigurationProperties({ DebugSettingsProperties.class })
+@EnableConfigurationProperties({DebugSettingsProperties.class})
+@RequiredArgsConstructor
 public class DebugSettingsConfig implements WicketApplicationInitConfiguration {
-	
-	@Autowired
-	private DebugSettingsProperties properties;
-	
-	@Autowired
-	private WicketEndpointRepository wicketEndpointRepository;
-	
-	@Override
-	public void init(WebApplication webApplication) {
-		if(properties.isEnabled()){
-			DebugSettings debugSettings = webApplication.getDebugSettings();
-			debugSettings.setDevelopmentUtilitiesEnabled(properties.isDevelopmentUtilitiesEnabled());
-			debugSettings.setAjaxDebugModeEnabled(properties.isAjaxDebugModeEnabled());
-			debugSettings.setComponentUseCheck(properties.isComponentUseCheck());
-			debugSettings.setLinePreciseReportingOnAddComponentEnabled(properties.isLinePreciseReportingOnAddComponentEnabled());
-			debugSettings.setLinePreciseReportingOnNewComponentEnabled(properties.isLinePreciseReportingOnNewComponentEnabled());
-			debugSettings.setOutputMarkupContainerClassName(properties.isOutputMarkupContainerClassName());
-			debugSettings.setComponentPathAttributeName(properties.getComponentPathAttributeName());
-		}
-		
-		wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
-				.withDetail("properties", properties)
-				.build());
-	}
+
+    private final DebugSettingsProperties properties;
+
+    private WicketEndpointRepository wicketEndpointRepository;
+final
+    @Override
+    public void init(WebApplication webApplication) {
+        if (properties.isEnabled()) {
+            DebugSettings debugSettings = webApplication.getDebugSettings();
+            debugSettings.setDevelopmentUtilitiesEnabled(properties.isDevelopmentUtilitiesEnabled());
+            debugSettings.setAjaxDebugModeEnabled(properties.isAjaxDebugModeEnabled());
+            debugSettings.setComponentUseCheck(properties.isComponentUseCheck());
+            debugSettings.setLinePreciseReportingOnAddComponentEnabled(properties.isLinePreciseReportingOnAddComponentEnabled());
+            debugSettings.setLinePreciseReportingOnNewComponentEnabled(properties.isLinePreciseReportingOnNewComponentEnabled());
+            debugSettings.setOutputMarkupContainerClassName(properties.isOutputMarkupContainerClassName());
+            debugSettings.setComponentPathAttributeName(properties.getComponentPathAttributeName());
+        }
+
+        wicketEndpointRepository.add(new WicketAutoConfig.Builder(this.getClass())
+                .withDetail("properties", properties)
+                .build());
+    }
 
 }

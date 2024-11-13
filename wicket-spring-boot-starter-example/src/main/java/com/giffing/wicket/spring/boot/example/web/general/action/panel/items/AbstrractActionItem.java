@@ -4,8 +4,8 @@ import org.apache.wicket.markup.html.panel.Panel;
 
 public abstract class AbstrractActionItem extends Panel {
 
-	protected AbstrractActionItem() {
-		super("item");
-	}
+    protected AbstrractActionItem() {
+        super("item");
+    }
 
 }
