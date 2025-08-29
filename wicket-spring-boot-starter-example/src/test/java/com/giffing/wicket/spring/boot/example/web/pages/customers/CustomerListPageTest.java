@@ -13,7 +13,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -26,7 +26,7 @@ public class CustomerListPageTest extends WicketBaseTest {
 
 	private static final long CUSTOMERS_COUNT = 5;
 
-	@MockBean
+	@MockitoBean
 	private CustomerRepositoryService repository;
 	
 	@Override
