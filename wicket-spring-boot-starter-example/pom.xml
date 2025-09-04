@@ -18,8 +18,8 @@
     <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <wicket-bootstrap.version>7.0.8</wicket-bootstrap.version>
-        <hibernate-processor.version>7.0.0.Beta1</hibernate-processor.version>
+        <wicket-bootstrap.version>7.0.11</wicket-bootstrap.version>
+        <hibernate-processor.version>7.1.0.Final</hibernate-processor.version>
     </properties>
 
     <dependencies>

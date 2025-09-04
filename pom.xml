@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.5</version>
+		<version>3.5.5</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -53,9 +53,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<apache-shiro.version>2.0.1</apache-shiro.version>
-		<wicket.version>10.2.0</wicket.version>
-		<wicketstuff.version>10.0.0</wicketstuff.version>
+		<apache-shiro.version>2.0.5</apache-shiro.version>
+		<wicket.version>10.6.0</wicket.version>
+		<wicketstuff.version>10.6.0</wicketstuff.version>
 	</properties>
 
 	<dependencyManagement>
@@ -92,11 +92,21 @@
 				<artifactId>wicket-extensions</artifactId>
 				<version>${wicket.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.apache.wicket</groupId>
-				<artifactId>wicket-spring</artifactId>
-				<version>${wicket.version}</version>
-			</dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-request</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-spring</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.wicket</groupId>
+                <artifactId>wicket-util</artifactId>
+                <version>${wicket.version}</version>
+            </dependency>
 			<!-- Wicketstuff dependencies -->
 			<dependency>
 				<groupId>org.wicketstuff</groupId>
@@ -158,7 +168,7 @@
 			<dependency>
 				<groupId>de.agilecoders.wicket.webjars</groupId>
 				<artifactId>wicket-webjars</artifactId>
-				<version>4.0.5</version>
+				<version>4.0.11</version>
 			</dependency>
 			<!-- Wicket datastore dependencies -->
 			<dependency>
@@ -245,7 +255,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.2.7</version>
+						<version>3.2.8</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -259,6 +269,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-source-plugin</artifactId>
+                        <version>3.3.1</version>
 						<executions>
 							<execution>
 								<id>attach-sources</id>
@@ -271,6 +282,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.11.3</version>
 						<executions>
 							<execution>
 								<id>attach-javadocs</id>

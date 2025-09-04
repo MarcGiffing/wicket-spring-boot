@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 public class CustomerCreatePageTest extends WicketBaseTest {
 
-	@MockBean
+	@MockitoBean
 	private CustomerRepositoryService repository;
 	
 	@Override

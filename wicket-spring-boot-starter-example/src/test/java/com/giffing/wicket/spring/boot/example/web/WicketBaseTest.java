@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
@@ -44,7 +44,7 @@ public class WicketBaseTest {
 	@Autowired
 	private ApplicationContext applicationContextMock;
 	
-	@SpyBean
+	@MockitoBean
 	private CustomAuthenticationManager customAuthenticationManager;
 
 	@BeforeEach

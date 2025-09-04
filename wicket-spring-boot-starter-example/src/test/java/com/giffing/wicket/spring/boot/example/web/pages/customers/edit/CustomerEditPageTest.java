@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
@@ -24,7 +24,7 @@ public class CustomerEditPageTest extends WicketBaseTest {
 
 	private static final Long CUSTOMERS_COUNT = 5L;
 	
-	@MockBean
+	@MockitoBean
 	private CustomerRepositoryService repository;
 	
 	@Override
@@ -38,7 +38,6 @@ public class CustomerEditPageTest extends WicketBaseTest {
 		}
 		
 	}
-	
 	
 	@Test
 	public void assert_customer_not_exists(){
