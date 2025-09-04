@@ -2,7 +2,7 @@
 
 Current release version:
 
-* 4.1.x - http://wicket.apache.org/[Wicket 10.2] with Spring Boot 3.3.4 - Branch master
+* 4.1.x - http://wicket.apache.org/[Wicket 10.6] with Spring Boot 3.5.x - Branch master
 * 4.0.x - http://wicket.apache.org/[Wicket 10.0] with Spring Boot 3.2.x - Branch master
 
 NOTE: http://search.maven.org/#search|ga|1|com.giffing.wicket.spring.boot
