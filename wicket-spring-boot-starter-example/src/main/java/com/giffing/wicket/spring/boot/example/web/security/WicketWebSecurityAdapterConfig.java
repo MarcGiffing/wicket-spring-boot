@@ -33,13 +33,13 @@ public class WicketWebSecurityAdapterConfig {
 
     @ConditionalOnMissingBean
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
     @ConditionalOnMissingBean
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
                 .securityContext(ctx -> ctx.requireExplicitSave(false))
                 .csrf(AbstractHttpConfigurer::disable)
@@ -51,13 +51,13 @@ public class WicketWebSecurityAdapterConfig {
     }
 
     @Bean
-    public static BCryptPasswordEncoder passwordEncoder() {
+    static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
     //TODO Add Wicket Issue - problem with semicolon in wicket websocket url. Allow semicolon.
-    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
+    HttpFirewall allowUrlEncodedSlashHttpFirewall() {
         StrictHttpFirewall fw = new StrictHttpFirewall();
         fw.setAllowSemicolon(true);
         return fw;
@@ -65,7 +65,7 @@ public class WicketWebSecurityAdapterConfig {
 
     @ConditionalOnMissingBean
     @Bean
-    public UserDetailsService userDetailsService(final PasswordEncoder passwordEncoder) {
+    UserDetailsService userDetailsService(final PasswordEncoder passwordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(
                 User.withUsername("admin")
@@ -81,7 +81,7 @@ public class WicketWebSecurityAdapterConfig {
     }
 
     //@Bean
-    //public WicketSessionResolver springSecurityWicketSessionResolver() {
+    //WicketSessionResolver springSecurityWicketSessionResolver() {
     //	return new SpringSecurityWicketSessionResolver();
     //}
 

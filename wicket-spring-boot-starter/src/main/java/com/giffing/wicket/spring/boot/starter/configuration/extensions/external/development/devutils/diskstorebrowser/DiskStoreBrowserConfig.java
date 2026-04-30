@@ -7,9 +7,6 @@ import org.apache.wicket.markup.html.pages.BrowserInfoPage;
 import org.apache.wicket.pageStore.DiskPageStore;
 import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.settings.StoreSettings;
-import org.apache.wicket.util.lang.Bytes;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -18,8 +15,6 @@ import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtensio
 import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitConfiguration;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
-
-import java.io.File;
 
 /**
  * Mounts the {@link PageStorePage} if the following condition matches

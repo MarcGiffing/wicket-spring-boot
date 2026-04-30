@@ -34,7 +34,7 @@ public class WicketWebInitializerAutoConfig {
     public static class StandardWicketWebInitializerAutoConfiguration {
 
         @Bean
-        public WicketWebInitializerConfig wicketWebInitializerConfig() {
+        WicketWebInitializerConfig wicketWebInitializerConfig() {
             return new StandardWicketWebInitializer();
         }
     }
@@ -51,7 +51,7 @@ public class WicketWebInitializerAutoConfig {
         public static final String REGISTER_SERVER_ENDPOINT_ENABLED = REGISTER_SERVER_ENDPOINT + ".enabled";
 
         @Bean
-        public WicketWebInitializerConfig wicketWebInitializerConfig() {
+        WicketWebInitializerConfig wicketWebInitializerConfig() {
             return new WebSocketWicketWebInitializer();
         }
 
@@ -60,18 +60,18 @@ public class WicketWebInitializerAutoConfig {
          */
         @Bean
         @ConditionalOnProperty(prefix = REGISTER_SERVER_ENDPOINT, value = "enabled", matchIfMissing = true)
-        public WicketServerEndpointConfigRegister wicketServerEndpointConfigRegister() {
+        WicketServerEndpointConfigRegister wicketServerEndpointConfigRegister() {
             return new WicketServerEndpointConfigRegister();
         }
 
         @Bean
         @ConditionalOnMissingBean(WicketSessionResolver.class)
-        public WicketSessionResolver dummyWicketSessionResolver() {
+        WicketSessionResolver dummyWicketSessionResolver() {
             return new DummyWicketSessionResolver();
         }
 
         @Bean
-        public WebSocketMessageSenderDefault webSocketEventHandler(Application application, WicketSessionResolver wicketSessionResolver) {
+        WebSocketMessageSenderDefault webSocketEventHandler(Application application, WicketSessionResolver wicketSessionResolver) {
             return new WebSocketMessageSenderDefault(application, wicketSessionResolver);
         }
 

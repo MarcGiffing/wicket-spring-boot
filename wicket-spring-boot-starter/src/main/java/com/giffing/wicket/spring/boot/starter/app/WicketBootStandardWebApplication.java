@@ -10,8 +10,6 @@ import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
@@ -20,7 +18,6 @@ import com.giffing.wicket.spring.boot.context.extensions.WicketApplicationInitCo
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketAutoConfig;
 import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEndpointRepository;
 import com.giffing.wicket.spring.boot.context.scan.WicketHomePage;
-import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidate;
 import com.giffing.wicket.spring.boot.starter.app.classscanner.candidates.WicketClassCandidatesHolder;
 import com.giffing.wicket.spring.boot.starter.configuration.extensions.core.settings.general.GeneralSettingsProperties;
 
@@ -88,7 +85,6 @@ public class WicketBootStandardWebApplication extends WebApplication implements 
 		return generalSettingsProperties.getConfigurationType();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
 		if(classCandidates.getHomePageCandidates().isEmpty()){

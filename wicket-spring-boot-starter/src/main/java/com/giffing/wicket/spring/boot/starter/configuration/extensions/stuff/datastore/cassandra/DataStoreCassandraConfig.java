@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.wicket.DefaultPageManagerProvider;
 import org.apache.wicket.pageStore.IPageStore;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -12,7 +11,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.wicketstuff.datastores.cassandra.CassandraDataStore;
 import org.wicketstuff.datastores.cassandra.CassandraSettings;
-import org.wicketstuff.datastores.cassandra.ICassandraSettings;
 import org.wicketstuff.datastores.common.SessionQuotaManagingDataStore;
 
 import com.giffing.wicket.spring.boot.context.extensions.ApplicationInitExtension;

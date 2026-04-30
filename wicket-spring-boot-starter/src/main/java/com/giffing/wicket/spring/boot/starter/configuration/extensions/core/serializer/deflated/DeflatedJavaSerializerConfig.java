@@ -2,10 +2,8 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.core.ser
 
 import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.apache.wicket.serialize.ISerializer;
 import org.apache.wicket.serialize.java.DeflatedJavaSerializer;
 import org.apache.wicket.serialize.java.JavaSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 

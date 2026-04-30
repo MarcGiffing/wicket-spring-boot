@@ -7,7 +7,6 @@ import java.time.Duration;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 

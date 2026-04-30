@@ -23,12 +23,12 @@ import com.giffing.wicket.spring.boot.starter.app.WicketBootWebApplication;
 public class SpringSecurityConfig {
 
     @Bean
-    public WicketBootSecuredWebApplication wicketBootWebApplication() {
+    WicketBootSecuredWebApplication wicketBootWebApplication() {
         return new WicketBootSecuredWebApplication();
     }
 
     @Bean
-    public AuthenticatedWebSessionConfig authenticatedWebSessionConfig() {
+    AuthenticatedWebSessionConfig authenticatedWebSessionConfig() {
         return () -> SecureWebSession.class;
     }
 }

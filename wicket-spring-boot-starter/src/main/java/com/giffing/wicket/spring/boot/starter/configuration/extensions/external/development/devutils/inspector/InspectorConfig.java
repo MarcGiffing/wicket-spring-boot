@@ -3,7 +3,6 @@ package com.giffing.wicket.spring.boot.starter.configuration.extensions.external
 import lombok.RequiredArgsConstructor;
 import org.apache.wicket.devutils.inspector.LiveSessionsPage;
 import org.apache.wicket.protocol.http.WebApplication;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 

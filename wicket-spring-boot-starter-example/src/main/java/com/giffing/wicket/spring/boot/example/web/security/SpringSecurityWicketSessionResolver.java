@@ -2,7 +2,6 @@ package com.giffing.wicket.spring.boot.example.web.security;
 
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WicketSessionResolver;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.session.FindByIndexNameSessionRepository;
 import org.springframework.session.Session;
 
