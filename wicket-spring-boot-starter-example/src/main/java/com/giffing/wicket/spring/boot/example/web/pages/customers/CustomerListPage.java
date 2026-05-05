@@ -60,7 +60,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.model.Customer
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameSearchTextField;
 
 @WicketHomePage
-@MountPath("custsomers")
+@MountPath("customers")
 @AuthorizeInstantiation("USER")
 public class CustomerListPage extends BaseAuthenticatedPage {
 
