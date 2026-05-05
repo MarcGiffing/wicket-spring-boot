@@ -1,5 +1,8 @@
 package com.giffing.wicket.spring.boot.starter.web.servlet.websocket;
 
+import java.util.Collection;
+import java.util.Objects;
+
 import org.apache.wicket.Application;
 import org.apache.wicket.protocol.ws.WebSocketSettings;
 import org.apache.wicket.protocol.ws.api.IWebSocketConnection;
@@ -25,11 +28,17 @@ public class WebSocketMessageSenderDefault implements WebSocketMessageBroadcaste
         var webSocketSettings = WebSocketSettings.Holder.get(application);
         var connectionRegistry = webSocketSettings.getConnectionRegistry();
         var connections = connectionRegistry.getConnections(application);
-        log.trace("sending event to {} connections", connections.size());
-        for (IWebSocketConnection connection : connections) {
-            connection.sendMessage(event);
-        }
+        sendMessage(event, connections);
     }
+
+	private void sendMessage(IWebSocketPushMessage event, Collection<IWebSocketConnection> connections) {
+		log.trace("sending event to {} connections", connections.size());
+		connections.stream()
+        .filter(Objects::nonNull)
+        .forEach(connection ->
+       	    connection.sendMessage(event)
+        );
+	}
 
     @Override
     public void sendTo(Object identifier, IWebSocketPushMessage event) {
@@ -41,10 +50,7 @@ public class WebSocketMessageSenderDefault implements WebSocketMessageBroadcaste
         var connectionRegistry = webSocketSettings.getConnectionRegistry();
         wicketSessionResolver.resolve(identifier).forEach(sessionId -> {
             var connections = connectionRegistry.getConnections(application, sessionId);
-            log.trace("sending event to {} connections", connections.size());
-            for (IWebSocketConnection connection : connections) {
-                connection.sendMessage(event);
-            }
+            sendMessage(event, connections);
         });
     }
 }
