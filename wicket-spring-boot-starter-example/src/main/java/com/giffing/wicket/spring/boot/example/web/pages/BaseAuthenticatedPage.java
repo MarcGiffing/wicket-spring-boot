@@ -11,7 +11,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.button.dropdown.MenuHead
 import de.agilecoders.wicket.core.markup.html.bootstrap.navbar.*;
 import de.agilecoders.wicket.core.markup.html.bootstrap.utilities.BackgroundColorBehavior;
 import de.agilecoders.wicket.core.settings.ITheme;
-import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome6IconType;
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome7IconType;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.link.AbstractLink;
@@ -39,12 +39,12 @@ public abstract class BaseAuthenticatedPage extends BasePage {
         navbar.setBrandName(Model.of("Wicket"));
         navbar.addComponents(NavbarComponents.transform(
                 Navbar.ComponentPosition.LEFT,
-                new NavbarButton<Void>(CustomerListPage.class, Model.of("Customers")).setIconType(FontAwesome6IconType.person_s),
-                new NavbarButton<Void>(ChatPage.class, Model.of("Chat")).setIconType(FontAwesome6IconType.rocketchat),
+                new NavbarButton<Void>(CustomerListPage.class, Model.of("Customers")).setIconType(FontAwesome7IconType.person_s),
+                new NavbarButton<Void>(ChatPage.class, Model.of("Chat")).setIconType(FontAwesome7IconType.rocketchat),
                 new NavbarExternalLink(Model.of("https://github.com/MarcGiffing/wicket-spring-boot"))
                         .setLabel(Model.of("Github"))
                         .setTarget(BootstrapExternalLink.Target.blank)
-                        .setIconType(FontAwesome6IconType.upload_s))
+                        .setIconType(FontAwesome7IconType.upload_s))
         );
         var dropdown = new NavbarDropDownButton(Model.of("Themes")) {
 
@@ -70,7 +70,7 @@ public abstract class BaseAuthenticatedPage extends BasePage {
 
                 return subMenu;
             }
-        }.setIconType(FontAwesome6IconType.book_s);
+        }.setIconType(FontAwesome7IconType.book_s);
 
         navbar.addComponents(new ImmutableNavbarComponent(dropdown, Navbar.ComponentPosition.RIGHT));
         return navbar;

@@ -5,9 +5,9 @@ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSessio
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.resource.loader.ClassStringResourceLoader;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.data.jpa.autoconfigure.DataJpaRepositoriesAutoConfiguration;
+import org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration;
+import org.springframework.boot.jdbc.autoconfigure.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -21,7 +21,7 @@ import com.giffing.wicket.spring.boot.starter.configuration.extensions.external.
 //TODO move to test
 @SpringBootApplication(exclude = {
         DataSourceAutoConfiguration.class,
-        JpaRepositoriesAutoConfiguration.class,
+        DataJpaRepositoriesAutoConfiguration.class,
         HibernateJpaAutoConfiguration.class,
 })
 @ComponentScan(basePackageClasses = SpringBootWebPackageIdentifier.class)

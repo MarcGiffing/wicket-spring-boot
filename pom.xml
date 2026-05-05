@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.giffing.wicket.spring.boot.starter</groupId>
 	<artifactId>wicket-spring-boot-starter-parent</artifactId>
-	<version>4.1.1</version>
+	<version>5.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>Wicket Spring Boot Starter Parent</name>
@@ -22,7 +22,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.5</version>
+		<version>4.0.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
@@ -36,7 +36,7 @@
 	<scm>
 		<url>https://github.com/MarcGiffing/wicket-spring-boot/</url>
 		<connection>scm:git:https://github.com/MarcGiffing/wicket-spring-boot.git</connection>
-		<tag>wicket-spring-boot-starter-parent-3.1.2</tag>
+		<tag>wicket-spring-boot-starter-parent-5.0.0</tag>
 	</scm>
 
 	<developers>
@@ -53,9 +53,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<apache-shiro.version>2.0.5</apache-shiro.version>
-		<wicket.version>10.6.0</wicket.version>
-		<wicketstuff.version>10.6.0</wicketstuff.version>
+		<apache-shiro.version>2.1.0</apache-shiro.version>
+		<wicket.version>10.8.0</wicket.version>
+		<wicketstuff.version>10.8.0</wicketstuff.version>
+		<wicket-webjars.version>4.0.14</wicket-webjars.version>
 	</properties>
 
 	<dependencyManagement>
@@ -168,7 +169,7 @@
 			<dependency>
 				<groupId>de.agilecoders.wicket.webjars</groupId>
 				<artifactId>wicket-webjars</artifactId>
-				<version>4.0.11</version>
+				<version>${wicket-webjars.version}</version>
 			</dependency>
 			<!-- Wicket datastore dependencies -->
 			<dependency>
