@@ -71,16 +71,9 @@ public class CustomerRepositoryServiceImpl extends DefaultRepositoryService<Cust
             specs.add(CustomerSpecs.hasActive(filter.isActive()));
         }
 
-        Specification<Customer> spec = null;
-        for (Specification<Customer> specification : specs) {
-            if (spec == null) {
-                spec = Specification.where(specification);
-            } else {
-                spec = spec.and(specification);
-            }
-        }
-
-        return spec;
+        return specs.stream()
+        		.reduce(Specification::and)
+        		.orElse(Specification.unrestricted());
     }
 
     boolean isNotEmpty(String toCheck) {

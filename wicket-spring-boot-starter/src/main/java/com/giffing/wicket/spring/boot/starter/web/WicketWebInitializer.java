@@ -28,7 +28,7 @@ public class WicketWebInitializer {
     public static final String WICKET_FILTERNAME = "wicket-filter";
 
     @Bean
-    public FilterRegistrationBean<WicketFilter> wicketFilter(
+    FilterRegistrationBean<WicketFilter> wicketFilter(
             WicketWebInitializerConfig wicketWebInitializerConfig,
             WicketWebInitializerProperties props,
             WicketEndpointRepository wicketEndpointRepository,

@@ -1,44 +1,55 @@
-<html xmlns:wicket="http://wicket.apache.org">
+<html xmlns:wicket="http://wicket.apache.org" lang="en">
 <body>
 <wicket:extend>
 
-    <header class="jumbotron subhead" id="content">
-        <div class="container">
-            <h1>Customer Create</h1>
-        </div>
-    </header>
+<header class="py-4 bg-light border-bottom mb-4">
+	<div class="container">
+		<h1 class="h3 mb-0">Customer Create</h1>
+	</div>
+</header>
 
-    <div class="container">
-        <form wicket:id="form">
-            <div class="row col-xs-4 col-md-4">
-                <div wicket:id="usernameBorder">
-                    <input type="text" class="form-control" wicket:id="username"/>
-                </div>
-            </div>
-            <div class="row col-xs-4 col-md-4">
-                <div wicket:id="firstnameBorder">
-                    <input type="text" class="form-control" wicket:id="firstname"/>
-                </div>
-            </div>
-            <div class="row col-xs-4 col-md-4">
-                <div wicket:id="lastnameBorder">
-                    <input type="text" class="form-control" wicket:id="lastname"/>
-                </div>
-            </div>
-            <div class="row col-xs-4 col-md-4">
-                <div wicket:id="activeBorder">
-                    <input type="checkbox" class="form-check-input" wicket:id="active"/>
-                </div>
-            </div>
-            <div class="row col-xs-4 col-md-4">
-                <hr>
-            </div>
-            <div class="row col-xs-1 col-md-1">
-                <button type="submit" class="btn btn-primary" wicket:id="submit">Save</button>
-                <button type="submit" class="btn" wicket:id="cancel">Cancel</button>
-            </div>
-        </form>
-    </div>
+<div class="container">
+	<form wicket:id="form">
+
+		<div class="row mb-3">
+			<div class="col-md-12" wicket:id="usernameBorder">
+				<input type="text" class="form-control" wicket:id="username"/>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-12" wicket:id="firstnameBorder">
+				<input type="text" class="form-control" wicket:id="firstname"/>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-12" wicket:id="lastnameBorder">
+				<input type="text" class="form-control" wicket:id="lastname"/>
+			</div>
+		</div>
+
+		<div class="row mb-3">
+			<div class="col-md-12" wicket:id="activeBorder">
+				<div class="form-check">
+					<input type="checkbox" class="form-check-input" wicket:id="active"/>
+					<label wicket:for="active" class="form-check-label">Active</label>
+				</div>
+			</div>
+		</div>
+
+		<hr class="my-3"/>
+
+		<div class="row">
+			<div class="col-md-12 d-flex gap-2">
+				<button type="submit" class="btn btn-primary" wicket:id="submit">Save</button>
+				<button type="submit" class="btn btn-outline-secondary" wicket:id="cancel">Cancel</button>
+			</div>
+		</div>
+
+	</form>
+</div>
+
 </wicket:extend>
 </body>
 </html>

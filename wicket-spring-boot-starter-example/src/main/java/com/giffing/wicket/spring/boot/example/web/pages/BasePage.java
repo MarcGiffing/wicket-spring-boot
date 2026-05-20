@@ -10,7 +10,7 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.html.IeEdgeMetaTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.MetaTag;
 import de.agilecoders.wicket.core.markup.html.bootstrap.html.MobileViewportMetaTag;
 import de.agilecoders.wicket.core.markup.html.references.BootlintHeaderItem;
-import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome6CssReference;
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome7CssReference;
 import org.apache.wicket.MarkupContainer;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -51,7 +51,7 @@ public class BasePage extends GenericWebPage<Void> {
         super.renderHead(response);
 
         response.render(CssHeaderItem.forReference(CustomStylesCssRessourceReference.INSTANCE));
-        response.render(CssHeaderItem.forReference(FontAwesome6CssReference.instance()));
+        response.render(CssHeaderItem.forReference(FontAwesome7CssReference.instance()));
         response.render(JavaScriptHeaderItem.forReference(NotyJSReference.INSTANCE));
         response.render(JavaScriptHeaderItem.forReference(NotyPackagedJSReference.INSTANCE));
         response.render(JavaScriptHeaderItem.forReference(NotyThemeBootstrapJSReference.INSTANCE));

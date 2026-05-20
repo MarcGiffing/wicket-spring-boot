@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Configuration;
 public class WicketBootWebApplicationAutoConfiguration {
 
     @Bean
-    public WicketBootStandardWebApplication wicketBootWebApplication() {
+    WicketBootStandardWebApplication wicketBootWebApplication() {
         return new WicketBootStandardWebApplication();
     }
 

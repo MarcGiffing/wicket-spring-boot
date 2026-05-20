@@ -7,6 +7,7 @@ import com.giffing.wicket.spring.boot.context.extensions.boot.actuator.WicketEnd
 import lombok.RequiredArgsConstructor;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.settings.DebugSettings;
+import org.apache.wicket.settings.DebugSettings.ClassOutputStrategy;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -36,7 +37,11 @@ public class DebugSettingsConfig implements WicketApplicationInitConfiguration {
             debugSettings.setComponentUseCheck(properties.isComponentUseCheck());
             debugSettings.setLinePreciseReportingOnAddComponentEnabled(properties.isLinePreciseReportingOnAddComponentEnabled());
             debugSettings.setLinePreciseReportingOnNewComponentEnabled(properties.isLinePreciseReportingOnNewComponentEnabled());
-            debugSettings.setOutputMarkupContainerClassName(properties.isOutputMarkupContainerClassName());
+            debugSettings.setOutputMarkupContainerClassNameStrategy(
+            		properties.isOutputMarkupContainerClassName()
+            		? ClassOutputStrategy.HTML_COMMENT
+            		: ClassOutputStrategy.NONE
+            );
             debugSettings.setComponentPathAttributeName(properties.getComponentPathAttributeName());
         }
 

@@ -37,7 +37,7 @@ public abstract class WicketBaseIntTest {
 	public static class TestConfig {
 		@Bean
 		@Primary
-		public WebSocketMessageBroadcaster webSocketMessageBroadcaster() {
+		WebSocketMessageBroadcaster webSocketMessageBroadcaster() {
 			return Mockito.mock(WebSocketMessageBroadcaster.class);
 		}
 	}

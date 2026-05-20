@@ -10,7 +10,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.events.Custome
 import com.giffing.wicket.spring.boot.starter.web.servlet.websocket.WebSocketMessageBroadcaster;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.BootstrapBookmarkablePageLink;
 import de.agilecoders.wicket.core.markup.html.bootstrap.button.Buttons;
-import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome6IconType;
+import de.agilecoders.wicket.extensions.markup.html.bootstrap.icon.FontAwesome7IconType;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
@@ -60,7 +60,7 @@ import com.giffing.wicket.spring.boot.example.web.pages.customers.model.Customer
 import com.giffing.wicket.spring.boot.example.web.pages.customers.model.UsernameSearchTextField;
 
 @WicketHomePage
-@MountPath("custsomers")
+@MountPath("customers")
 @AuthorizeInstantiation("USER")
 public class CustomerListPage extends BaseAuthenticatedPage {
 
@@ -87,8 +87,8 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 		customerFilterModel = new CompoundPropertyModel<>(new CustomerFilter());
 		CustomerDataProvider customerDataProvider = new CustomerDataProvider(customerFilterModel);
 		
-		queue(new BootstrapBookmarkablePageLink<Customer>("create", CustomerCreatePage.class, Buttons.Type.Link)
-				.setIconType(FontAwesome6IconType.plus_s)
+		queue(new BootstrapBookmarkablePageLink<Customer>("create", CustomerCreatePage.class, Buttons.Type.Primary)
+				.setIconType(FontAwesome7IconType.plus_s)
 				.setSize(Buttons.Size.Large));
 		
 		queue(new ValidationForm<>("form", customerFilterModel));
@@ -259,13 +259,13 @@ public class CustomerListPage extends BaseAuthenticatedPage {
 
             private static ActionItemLink editActionItem(PageParameters params) {
                 return new ActionItemLink(
-                        FontAwesome6IconType.pen_s,
+                        FontAwesome7IconType.pen_s,
                         new BookmarkablePageLink<Customer>("link", CustomerEditPage.class, params)
                 );
             }
 
             private YesNoLink<Object> deleteActionItem(IModel<Customer> rowModel) {
-                return new YesNoLink<>(FontAwesome6IconType.trash_s) {
+                return new YesNoLink<>(FontAwesome7IconType.trash_s) {
 
                     @Override
                     protected void yesClicked(AjaxRequestTarget target) {

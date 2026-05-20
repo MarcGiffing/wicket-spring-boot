@@ -13,8 +13,6 @@ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -100,7 +98,6 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 		return applicationContext.getBean(AuthenticatedWebSessionConfig.class).getAuthenticatedWebSessionClass();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	protected Class<? extends WebPage> getSignInPageClass() {
 		if(classCandidates.getSignInPageCandidates().isEmpty()){
@@ -118,7 +115,6 @@ public class WicketBootSecuredWebApplication extends AuthenticatedWebApplication
 		return classCandidates.getSignInPageCandidates().iterator().next().getCandidate();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends Page> getHomePage() {
 		if(classCandidates.getHomePageCandidates().isEmpty()){

@@ -1,7 +1,6 @@
 package com.giffing.wicket.spring.boot.example.web.wicket.dataprovider;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.ISortState;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.ISortableDataProvider;

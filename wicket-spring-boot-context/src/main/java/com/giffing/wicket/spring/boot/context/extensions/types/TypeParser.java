@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.wicket.util.lang.Bytes;
 
-import com.giffing.wicket.spring.boot.context.exceptions.WicketSpringBootException;
 import java.time.Duration;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

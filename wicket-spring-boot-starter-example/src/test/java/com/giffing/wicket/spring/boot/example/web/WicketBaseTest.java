@@ -8,7 +8,6 @@ import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +16,6 @@ import org.springframework.security.authentication.TestingAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfig;
 
@@ -28,7 +26,6 @@ import test.com.giffing.wicket.spring.boot.example.web.WicketWebApplicationConfi
  * @author Marc Giffing
  *
  */
-@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = WicketWebApplicationConfig.class)
 @Disabled
 public class WicketBaseTest {

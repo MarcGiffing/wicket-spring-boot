@@ -11,7 +11,6 @@ import jakarta.annotation.PostConstruct;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ResourceLoaderAware;
@@ -39,7 +38,6 @@ public class WicketDependencyVersionChecker implements ResourceLoaderAware {
 
     private final WicketDependencyVersionCheckerProperties props;
 
-    @Autowired
     public WicketDependencyVersionChecker(WicketDependencyVersionCheckerProperties props) {
         this.props = props;
     }

@@ -45,7 +45,7 @@ public class CustomerListIntTest extends WicketBaseIntTest {
         getTester().startPage(CustomerListPage.class);
         getTester().assertRenderedPage(CustomerListPage.class);
 
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings({ "unchecked", "rawtypes" })
         DataTable<Customer, CustomerSort> dataTable = (DataTable) getTester().getComponentFromLastRenderedPage(
                 "filterForm:table");
         assertThat(dataTable.getItemCount(), equalTo(5L));

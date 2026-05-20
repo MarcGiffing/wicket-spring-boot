@@ -1,6 +1,5 @@
 package com.giffing.wicket.spring.boot.example.web.pages.customers.edit;
 
-import com.giffing.wicket.spring.boot.example.model.Customer;
 import com.giffing.wicket.spring.boot.example.repository.services.customer.CustomerRepositoryService;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.CustomerListPage;
 import com.giffing.wicket.spring.boot.example.web.pages.customers.create.CustomerCreatePage;
@@ -8,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AuthorizeInstantiation;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.util.string.StringValue;
 import org.wicketstuff.annotation.mount.MountPath;
 
 import java.text.MessageFormat;
